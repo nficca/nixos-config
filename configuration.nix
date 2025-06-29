@@ -76,12 +76,15 @@
     isNormalUser = true;
     description = "Nic";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.nushell;
+    shell = pkgs.zsh;
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird
     ];
   };
+
+  # Install ZSH
+  programs.zsh.enable = true;
 
   # Install and configure Git
   programs.git.enable = true;

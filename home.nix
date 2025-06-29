@@ -19,10 +19,7 @@ in
   # changes in each release.
   home.stateVersion = "25.05";
 
-  # Install packages that don't have home-manager modules.
-  # I.e. if the package can't be installed via something
-  # like `programs.<name>.enable = true;` then it can
-  # probably be installed as a package in this list.
+  # Install packages
   home.packages = with pkgs; [
     _1password-gui
   ];
@@ -47,6 +44,14 @@ in
   programs.ghostty.settings.theme = "catppuccin-mocha";
   programs.ghostty.settings.background-opacity = 0.85;
   programs.ghostty.settings.background-blur = 10;
+
+  # ZSH
+  programs.zsh.enable = true;
+  programs.zsh.autosuggestion.enable = true;
+
+  # Starship
+  programs.starship.enable = true;
+  programs.starship.enableZshIntegration = true;
 
   # Dropbox
   services.dropbox.enable = true;
