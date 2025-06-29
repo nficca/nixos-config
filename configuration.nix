@@ -76,11 +76,15 @@
     isNormalUser = true;
     description = "Nic";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.fish;
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird
     ];
   };
+
+  # Install nushell
+  programs.fish.enable = true;
 
   # Install and configure Git
   programs.git.enable = true;
