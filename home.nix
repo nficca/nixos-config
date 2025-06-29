@@ -42,6 +42,12 @@ in
   # Github CLI
   programs.gh.enable = true;
 
+  # Ghostty
+  programs.ghostty.enable = true;
+  programs.ghostty.settings.theme = "catppuccin-mocha";
+  programs.ghostty.settings.background-opacity = 0.85;
+  programs.ghostty.settings.background-blur = 10;
+
   # Dropbox
   services.dropbox.enable = true;
 }
