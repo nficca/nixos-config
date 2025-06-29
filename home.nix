@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  username = "nficca";
+  username = "nic";
 in
 {
   # Home Manager needs a bit of information about you and the

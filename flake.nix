@@ -23,7 +23,7 @@
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.nficca = ./home.nix;
+          home-manager.users.nic = ./home.nix;
         }
       ];
     };
