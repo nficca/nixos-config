@@ -41,7 +41,7 @@ in
 
   # Ghostty
   programs.ghostty.enable = true;
-  programs.ghostty.settings.theme = "catppuccin-mocha";
+  programs.ghostty.settings.theme = "GitHub-Dark-High-Contrast";
   programs.ghostty.settings.background-opacity = 0.85;
   programs.ghostty.settings.background-blur = 10;
 
