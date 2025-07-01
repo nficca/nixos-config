@@ -21,8 +21,9 @@ in
 
   # Install packages
   home.packages = with pkgs; [
-    _1password-gui
-    slack
+    _1password-gui # Password manager
+    maestral       # Open source Dropbox client
+    slack          # Team communication
   ];
 
   # Let Home Manager install and manage itself.
@@ -54,7 +55,4 @@ in
   # Starship
   programs.starship.enable = true;
   programs.starship.enableZshIntegration = true;
-
-  # Dropbox
-  services.dropbox.enable = true;
 }
