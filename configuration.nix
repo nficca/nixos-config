@@ -39,9 +39,20 @@
   # You can disable this if you're only using the Wayland session.
   # services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # KDE Plasma
+  # services.displayManager.sddm.enable = true;
+  # services.desktopManager.plasma6.enable = true;
+
+  # Hyprland
+  programs.hyprland.enable = true;
+  programs.hyprland.withUWSM = true;
+  programs.hyprland.xwayland.enable = true;
+  programs.hyprlock.enable = true;
+  services.xserver.enable = true;
+  services.greetd.enable = true;
+  services.greetd.vt = 3;
+  services.greetd.settings.default_session.user = "nic";
+  services.greetd.settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -102,6 +113,10 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
+
+    # Needed when on Hyprland
+    greetd.tuigreet # login screen
+    networkmanager # network connections
   ];
 
   # Set the default editor to vim

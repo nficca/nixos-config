@@ -27,6 +27,32 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # Hyprland configuration
+  programs.wofi.enable = true;
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = pkgs.hyprland;
+    systemd.enable = true;
+    systemd.enableXdgAutostart = true;
+    systemd.variables = [ "--all" ];
+    xwayland.enable = true;
+    settings.exec-once = [
+      "waybar"
+      "wofi --show drun"
+      "ghostty"
+      "nm-applet --indicator"
+    ];
+  };
+  programs.waybar.enable = true;
+  programs.waybar.settings.mainBar = {
+    layer = "top";
+    position = "top";
+    height = 30;
+    modules-left = [ "hyprland/workspaces" ];
+    modules-center = [ "hyprland/window" ];
+    modules-right = [ "pulseaudio" "network" "battery" "tray" ];
+  };
+
   # Chrome
   programs.google-chrome.enable = true;
 
