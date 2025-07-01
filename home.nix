@@ -22,6 +22,7 @@ in
   # Install packages
   home.packages = with pkgs; [
     _1password-gui
+    slack
   ];
 
   # Let Home Manager install and manage itself.
