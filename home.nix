@@ -43,7 +43,7 @@ in
 
   # Ghostty
   programs.ghostty.enable = true;
-  programs.ghostty.settings.background-opacity = 0.85;
+  programs.ghostty.settings.background-opacity = 0.70;
   programs.ghostty.settings.background-blur = 10;
   programs.ghostty.settings.font-family = "JetBrainsMono";
   programs.ghostty.settings.theme = "GitHub-Dark-High-Contrast";
