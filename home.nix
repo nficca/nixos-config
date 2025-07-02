@@ -56,4 +56,7 @@ in
   # Starship
   programs.starship.enable = true;
   programs.starship.enableZshIntegration = true;
+
+  # Neovim
+  programs.neovim.enable = true;
 }
