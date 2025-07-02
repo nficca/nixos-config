@@ -24,6 +24,7 @@ in
     _1password-gui # Password manager
     maestral       # Open source Dropbox client
     slack          # Team communication
+    discord        # Group chat
   ];
 
   # Let Home Manager install and manage itself.
