@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
+  pwd = lib.cleanSource (builtins.dirOf __curPos.file);
   username = "nic";
 in
 {
@@ -8,6 +9,9 @@ in
   # paths it should manage.
   home.username = username;
   home.homeDirectory = "/home/${username}";
+
+  # Home directory symlinks
+  xdg.configFile."nvim".source = pwd + "/nvim";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
