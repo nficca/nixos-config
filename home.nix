@@ -12,6 +12,7 @@ in
   # Symlink dotfiles
   xdg.configFile = {
     nvim.source = "${dotfiles}/nvim";
+    "Code/User/settings.json".source = "${dotfiles}/vscode/settings.json";
   };
 
   # This value determines the Home Manager release that your
@@ -65,4 +66,7 @@ in
 
   # Neovim
   programs.neovim.enable = true;
+
+  # Visual Studio Code
+  programs.vscode.enable = true;
 }
