@@ -1,4 +1,10 @@
-{ config, pkgs, lib, globals, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  globals,
+  ...
+}:
 
 let
   dotfiles = config.lib.file.mkOutOfStoreSymlink "/home/${globals.username}/dev/nficca/nixos-config/dotfiles";
@@ -27,10 +33,10 @@ in
 
   # Install packages
   home.packages = with pkgs; [
-    _1password-gui   # Password manager
-    maestral         # Open source Dropbox client
-    slack            # Team communication
-    discord          # Group chat
+    _1password-gui # Password manager
+    maestral # Open source Dropbox client
+    slack # Team communication
+    discord # Group chat
     nixfmt-rfc-style # Format nix files
   ];
 
