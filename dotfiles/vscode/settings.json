@@ -23,6 +23,10 @@
       "list.errorForeground": "#ff6b6b",
       "list.warningForeground": "#ffbc57",
       "textPreformat.background": "#383838"
-    }
+    },
+    "scrollbar.shadow": "#FFFFFF77",
+    "scrollbarSlider.activeBackground": "#FFFFFF77",
+    "scrollbarSlider.background": "#ffffff77",
+    "scrollbarSlider.hoverBackground": "#FFFFFF77"
   }
 }
