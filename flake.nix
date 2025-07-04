@@ -7,14 +7,21 @@
     # Manage user configuration with home-manager.
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs";  
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
     let
       globals = import ./globals.nix;
-    in {
+    in
+    {
       nixosConfigurations."${globals.host}" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit globals; };
@@ -22,14 +29,15 @@
           ./configuration.nix
 
           # Configure home-manager as a module so that it is applied
-	  # whenever system configuration changes are applied.
-          home-manager.nixosModules.home-manager { 
-	    home-manager.extraSpecialArgs = { inherit globals; };
+          # whenever system configuration changes are applied.
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.extraSpecialArgs = { inherit globals; };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users."${globals.username}" = {
-	      imports = [ ./home.nix ];
-	    };
+              imports = [ ./home.nix ];
+            };
           }
         ];
       };
