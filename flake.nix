@@ -1,31 +1,37 @@
 {
-  description = "A simple NixOS flake";
+  description = "Nic's NixOS Flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
-    # manage user configuration with home-manager
+    # Manage user configuration with home-manager.
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";  
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
-    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./configuration.nix
+  outputs = { self, nixpkgs, home-manager, ... }:
+    let
+      globals = import ./globals.nix;
+    in {
+      nixosConfigurations."${globals.host}" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit globals; };
+        modules = [
+          ./configuration.nix
 
-        # configure home-manager as a module so that
-        # it is applied whenever system configuration
-        # changes are applied
-        home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.nic = ./home.nix;
-        }
-      ];
+          # Configure home-manager as a module so that it is applied
+	  # whenever system configuration changes are applied.
+          home-manager.nixosModules.home-manager { 
+	    home-manager.extraSpecialArgs = { inherit globals; };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users."${globals.username}" = {
+	      imports = [ ./home.nix ];
+	    };
+          }
+        ];
+      };
     };
-  };
 }

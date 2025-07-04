@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, globals, ... }:
 
 {
   imports =
@@ -19,7 +19,7 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
   # hardware.graphics.enable32bBit = true;
 
-  networking.hostName = "desktop"; # Define your hostname.
+  networking.hostName = globals.host; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -76,7 +76,7 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nic = {
+  users.users."${globals.username}" = {
     isNormalUser = true;
     description = "Nic";
     extraGroups = [ "networkmanager" "wheel" ];

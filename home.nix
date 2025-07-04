@@ -1,17 +1,18 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, globals, ... }:
 
 let
-  pwd = lib.cleanSource (builtins.dirOf __curPos.file);
-  username = "nic";
+  dotfiles = config.lib.file.mkOutOfStoreSymlink "/home/${globals.username}/dev/nficca/nixos-config/dotfiles";
 in
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = username;
-  home.homeDirectory = "/home/${username}";
+  home.username = globals.username;
+  home.homeDirectory = "/home/${globals.username}";
 
-  # Home directory symlinks
-  xdg.configFile."nvim".source = pwd + "/nvim";
+  # Symlink dotfiles
+  xdg.configFile = {
+    nvim.source = "${dotfiles}/nvim";
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
