@@ -10,6 +10,11 @@
   "editor.tabSize": 2,
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
+  "files.readonlyInclude": {
+    "**/.cargo/registry/src/**/*.rs": true,
+    "**/.cargo/git/checkouts/**/*.rs": true,
+    "**/lib/rustlib/src/rust/library/**/*.rs": true,
+  },
   "workbench.colorTheme": "GitHub Dark High Contrast",
   "workbench.colorCustomizations": {
     "[GitHub Dark High Contrast]": {
@@ -28,5 +33,8 @@
     "scrollbarSlider.activeBackground": "#FFFFFF77",
     "scrollbarSlider.background": "#ffffff77",
     "scrollbarSlider.hoverBackground": "#FFFFFF77"
+  },
+  "[rust]": {
+    "editor.tabSize": 4
   }
 }
