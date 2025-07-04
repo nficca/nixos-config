@@ -1,4 +1,28 @@
 {
+  "editor.codeLens": false,
+  "editor.cursorWidth": 3,
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontSize": 16,
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "boundary",
+  "editor.semanticHighlighting.enabled": true,
   "editor.tabSize": 2,
-  "files.insertFinalNewline": true
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "workbench.colorTheme": "GitHub Dark High Contrast",
+  "workbench.colorCustomizations": {
+    "[GitHub Dark High Contrast]": {
+      "editorInlayHint.background": "#36363620",
+      "editorInlayHint.foreground": "#ffffff5a",
+      "editorInlayHint.parameterBackground": "#36363620",
+      "editorInlayHint.parameterForeground": "#ffffff5a",
+      "editorInlayHint.typeBackground": "#36363620",
+      "editorInlayHint.typeForeground": "#ffffff5a",
+      "gitDecoration.modifiedResourceForeground": "#ffe357",
+      "list.errorForeground": "#ff6b6b",
+      "list.warningForeground": "#ffbc57",
+      "textPreformat.background": "#383838"
+    }
+  }
 }
