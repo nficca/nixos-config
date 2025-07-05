@@ -36,6 +36,7 @@ in
     maestral # Open source Dropbox client
     slack # Team communication
     discord # Group chat
+    claude-code # Agentic AI assistant
   ];
 
   # Let Home Manager install and manage itself.
