@@ -88,9 +88,6 @@
       "wheel"
     ];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-      neofetch
-    ];
   };
 
   # Install ZSH
@@ -127,8 +124,10 @@
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    vim
-    wget
+    fastfetch # System information tool
+    dua # Disk usage analyzer
+    vim # Text editor
+    wget # Network file downloader
   ];
 
   # Set the default editor to vim
