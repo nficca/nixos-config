@@ -38,7 +38,6 @@ in
     slack # Team communication
     discord # Group chat
     nixfmt-rfc-style # Format nix files
-    rustup # Rust toolchain management
   ];
 
   # Let Home Manager install and manage itself.
