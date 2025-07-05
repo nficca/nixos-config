@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  lib,
   globals,
   ...
 }:
@@ -37,7 +36,6 @@ in
     maestral # Open source Dropbox client
     slack # Team communication
     discord # Group chat
-    nixfmt-rfc-style # Format nix files
   ];
 
   # Let Home Manager install and manage itself.

@@ -9,21 +9,30 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Nix language server support. Useful when editing Nix files
+    # with an editor that supports LSP.
+    nil = {
+      url = "github:oxalica/nil";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
+      nil,
       ...
     }:
     let
       globals = import ./globals.nix;
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
     in
     {
       nixosConfigurations."${globals.host}" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit system;
         specialArgs = { inherit globals; };
         modules = [
           ./configuration.nix
@@ -39,6 +48,15 @@
               imports = [ ./home.nix ];
             };
           }
+        ];
+      };
+
+      # Dev-shell for editing Nix files in this repository with LSP
+      # support and formatting.
+      devShells."${system}".default = pkgs.mkShell {
+        buildInputs = [
+          nil.packages.${system}.default
+          pkgs.nixfmt-rfc-style
         ];
       };
     };
