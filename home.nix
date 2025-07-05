@@ -62,7 +62,7 @@ in
   programs.ghostty.settings.background-opacity = 0.70;
   programs.ghostty.settings.background-blur = 10;
   programs.ghostty.settings.font-family = "JetBrainsMono";
-  programs.ghostty.settings.font-size = 16;
+  programs.ghostty.settings.font-size = 14;
   programs.ghostty.settings.theme = "GitHub-Dark-High-Contrast";
 
   # ZSH
