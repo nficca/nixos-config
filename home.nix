@@ -40,6 +40,7 @@ in
     slack # Team communication
     discord # Group chat
     claude-code # Agentic AI assistant
+    ldtk # 2D level editor
   ];
 
   # Let Home Manager install and manage itself.
