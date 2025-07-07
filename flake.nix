@@ -4,6 +4,12 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
+    # Manage macOS
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Manage user configuration with home-manager.
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -21,6 +27,7 @@
   outputs =
     {
       nixpkgs,
+      nix-darwin,
       home-manager,
       nil,
       ...
@@ -49,6 +56,10 @@
             };
           }
         ];
+      };
+
+      darwinConfigurations."Nics-MacBook-Air" = nix-darwin.lib.darwinSystem {
+        modules = [ ./mac-configuration.nix ];
       };
 
       # Dev-shell for editing Nix files in this repository with LSP
