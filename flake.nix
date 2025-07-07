@@ -16,6 +16,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Pure nix flake utility functions
+    flake-utils.url = "github:numtide/flake-utils";
+
     # Nix language server support. Useful when editing Nix files
     # with an editor that supports LSP.
     nil = {
@@ -29,18 +32,22 @@
       nixpkgs,
       nix-darwin,
       home-manager,
+      flake-utils,
       nil,
       ...
     }:
     let
       globals = import ./globals.nix;
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
-      darwinPkgs = import nixpkgs { system = "aarch64-darwin"; };
+      linuxSystem = "x86_64-linux";
+      darwinSystem = "aarch64-darwin";
+      systems = [
+        linuxSystem
+        darwinSystem
+      ];
     in
     {
       nixosConfigurations."${globals.host}" = nixpkgs.lib.nixosSystem {
-        inherit system;
+        system = linuxSystem;
         specialArgs = { inherit globals; };
         modules = [
           ./hosts/desktop/configuration.nix
@@ -62,22 +69,21 @@
       darwinConfigurations."Nics-MacBook-Air" = nix-darwin.lib.darwinSystem {
         modules = [ ./hosts/air/configuration.nix ];
       };
-
-      # Dev-shell for editing Nix files in this repository with LSP
-      # support and formatting.
-      devShells."${system}".default = pkgs.mkShell {
-        buildInputs = [
-          nil.packages.${system}.default
-          pkgs.nixfmt-rfc-style
-        ];
-      };
-
-      # macOS dev-shell
-      devShells."aarch64-darwin".default = darwinPkgs.mkShell {
-        buildInputs = [
-          nil.packages."aarch64-darwin".default
-          darwinPkgs.nixfmt-rfc-style
-        ];
-      };
-    };
+    }
+    // flake-utils.lib.eachSystemPassThrough systems (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
+        # Dev-shell for editing Nix files in this repository with LSP
+        # support and formatting.
+        devShells."${system}".default = pkgs.mkShell {
+          buildInputs = [
+            nil.packages.${system}.default
+            pkgs.nixfmt-rfc-style
+          ];
+        };
+      }
+    );
 }
