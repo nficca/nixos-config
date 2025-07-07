@@ -36,13 +36,14 @@
       globals = import ./globals.nix;
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
+      darwinPkgs = import nixpkgs { system = "aarch64-darwin"; };
     in
     {
       nixosConfigurations."${globals.host}" = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit globals; };
         modules = [
-          ./configuration.nix
+          ./hosts/desktop/configuration.nix
 
           # Configure home-manager as a module so that it is applied
           # whenever system configuration changes are applied.
@@ -59,7 +60,7 @@
       };
 
       darwinConfigurations."Nics-MacBook-Air" = nix-darwin.lib.darwinSystem {
-        modules = [ ./mac-configuration.nix ];
+        modules = [ ./hosts/air/configuration.nix ];
       };
 
       # Dev-shell for editing Nix files in this repository with LSP
@@ -68,6 +69,14 @@
         buildInputs = [
           nil.packages.${system}.default
           pkgs.nixfmt-rfc-style
+        ];
+      };
+
+      # macOS dev-shell
+      devShells."aarch64-darwin".default = darwinPkgs.mkShell {
+        buildInputs = [
+          nil.packages."aarch64-darwin".default
+          darwinPkgs.nixfmt-rfc-style
         ];
       };
     };
