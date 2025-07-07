@@ -43,21 +43,6 @@ in
     ldtk # 2D level editor
   ];
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-
-  # Chrome
-  programs.google-chrome.enable = true;
-
-  # Git
-  programs.git.enable = true;
-  programs.git.userEmail = "nicficca@gmail.com";
-  programs.git.userName = "Nic Ficca";
-  programs.git.delta.enable = true;
-
-  # Github CLI
-  programs.gh.enable = true;
-
   # Ghostty
   programs.ghostty.enable = true;
   programs.ghostty.settings.background-opacity = 0.70;
@@ -65,17 +50,6 @@ in
   programs.ghostty.settings.font-family = "JetBrainsMono";
   programs.ghostty.settings.font-size = 14;
   programs.ghostty.settings.theme = "GitHub-Dark-High-Contrast";
-
-  # ZSH
-  programs.zsh.enable = true;
-  programs.zsh.autosuggestion.enable = true;
-
-  # Starship
-  programs.starship.enable = true;
-  programs.starship.enableZshIntegration = true;
-
-  # Neovim
-  programs.neovim.enable = true;
 
   # Visual Studio Code
   programs.vscode.enable = true;

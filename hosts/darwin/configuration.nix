@@ -1,18 +1,17 @@
-{ pkgs, ... }:
+{ globals, ... }:
 
 {
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    git
-    vim
+  imports = [
+    ../../modules/configuration.nix
   ];
+
+  users.users.${globals.username}.home = "/Users/nic";
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
-
-  # Enable alternative shell support in nix-darwin.
-  # programs.fish.enable = true;
 
   # TODO: Set Git commit hash for darwin-version.
   system.configurationRevision = null;

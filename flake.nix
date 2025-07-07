@@ -19,6 +19,25 @@
     # Pure nix flake utility functions
     flake-utils.url = "github:numtide/flake-utils";
 
+    # Use homebrew to manage software on Darwin systems.
+    # This is especially useful for managing macOS GUI applications,
+    # as they are often broken or otherwise not available in nixpkgs.
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+    };
+    homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+
     # Nix language server support. Useful when editing Nix files
     # with an editor that supports LSP.
     nil = {
@@ -31,23 +50,27 @@
     {
       nixpkgs,
       nix-darwin,
-      home-manager,
       flake-utils,
+      home-manager,
+      nix-homebrew,
+      homebrew-bundle,
+      homebrew-core,
+      homebrew-cask,
       nil,
       ...
     }:
     let
       globals = import ./globals.nix;
-      linuxSystem = "x86_64-linux";
+      nixosSystem = "x86_64-linux";
       darwinSystem = "aarch64-darwin";
       systems = [
-        linuxSystem
+        nixosSystem
         darwinSystem
       ];
     in
     {
       nixosConfigurations."${globals.host}" = nixpkgs.lib.nixosSystem {
-        system = linuxSystem;
+        system = nixosSystem;
         specialArgs = { inherit globals; };
         modules = [
           ./hosts/desktop/configuration.nix
@@ -60,14 +83,50 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users."${globals.username}" = {
-              imports = [ ./home.nix ];
+              imports = [ ./hosts/nixos/home.nix ];
             };
           }
         ];
       };
 
       darwinConfigurations."Nics-MacBook-Air" = nix-darwin.lib.darwinSystem {
-        modules = [ ./hosts/air/configuration.nix ];
+        specialArgs = { inherit globals; };
+        modules = [
+          ./hosts/darwin/configuration.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              extraSpecialArgs = { inherit globals; };
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users."${globals.username}" = {
+                imports = [ ./hosts/darwin/home.nix ];
+              };
+            };
+          }
+          nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              user = globals.username;
+              enable = true;
+              taps = {
+                "homebrew/homebrew-core" = homebrew-core;
+                "homebrew/homebrew-cask" = homebrew-cask;
+                "homebrew/homebrew-bundle" = homebrew-bundle;
+              };
+              mutableTaps = false;
+              autoMigrate = true;
+            };
+            homebrew = {
+              enable = true;
+              user = globals.username;
+              casks = [
+                "google-chrome"
+              ];
+            };
+          }
+
+        ];
       };
     }
     // flake-utils.lib.eachSystemPassThrough systems (
