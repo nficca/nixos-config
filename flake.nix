@@ -92,7 +92,13 @@
       darwinConfigurations."Nics-MacBook-Air" = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit globals; };
         modules = [
+          # This is the main entry point for nix-darwin (system) configuration.
           ./hosts/darwin/configuration.nix
+
+          # Configure home-manager as a module so that it is applied
+          # whenever system configuration changes are applied.
+          # The additional benefit of this is that we can share some
+          # home-manager configuration between NixOS and Darwin.
           home-manager.darwinModules.home-manager
           {
             home-manager = {
@@ -100,10 +106,18 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               users."${globals.username}" = {
+                # This is the main entry point for home-manager (user) configuration.
                 imports = [ ./hosts/darwin/home.nix ];
               };
             };
           }
+
+          # We need to use nix-homebrew to manage some dependencies.
+          # Typically, this is for installing GUI applications as
+          # homebrew casks, since most GUI applications installed via
+          # nixpkgs/home-manager have issues on macOS; notably they
+          # have difficulty being recognized by Launchpad/Spotlight.
+          # Read more: https://github.com/nix-darwin/nix-darwin/issues/214
           nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
