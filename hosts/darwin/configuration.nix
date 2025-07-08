@@ -5,6 +5,10 @@
     ../../modules/configuration.nix
   ];
 
+  # This appears to be necessary to get home-manager to work properly on
+  # nix-darwin. On NixOS, we add the home directory in the home-manager
+  # module via `home.homeDirectory`, but this will fail the rebuild on
+  # Darwin.
   users.users.${globals.username}.home = "/Users/nic";
 
   # Allow unfree packages
