@@ -12,7 +12,8 @@
     enable = true;
     user = globals.username;
     casks = [
-      "google-chrome"
+      "google-chrome" # Web browser
+      "discord" # Group chat and VoIP application
     ];
   };
 }
