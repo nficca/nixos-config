@@ -1,3 +1,7 @@
+# This module defines system-level configurations.
+# **IMPORTANT**: This module is intended to configure BOTH NixOS and macOS (Darwin).
+# Any attributes defined here should be compatible with both systems.
+
 { globals, pkgs, ... }:
 
 {

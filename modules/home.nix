@@ -1,3 +1,7 @@
+# This module defines user-level configurations via home-manager.
+# **IMPORTANT**: This module is intended to configure BOTH NixOS and macOS (Darwin).
+# Any attributes defined here should be compatible with both systems.
+
 { ... }:
 {
   # This value determines the Home Manager release that your
