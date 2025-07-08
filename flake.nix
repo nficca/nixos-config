@@ -112,12 +112,22 @@
             };
           }
 
-          # We need to use nix-homebrew to manage some dependencies.
-          # Typically, this is for installing GUI applications as
-          # homebrew casks, since most GUI applications installed via
-          # nixpkgs/home-manager have issues on macOS; notably they
-          # have difficulty being recognized by Launchpad/Spotlight.
-          # Read more: https://github.com/nix-darwin/nix-darwin/issues/214
+          # We use nix-homebrew to install and manage homebrew itself.
+          # While nix-darwin has a configurable `homebrew` module, it
+          # does not manage the actual installation of homebrew.
+          # Importantly, it pins the homebrew installation as well as
+          # any declaratively specified taps.
+          #
+          # Why do we still use homebrew despite having nixpkgs?
+          # Unfortunately, many macOS/Darwin GUI applications do not work
+          # properly when installed via nixpkgs. This is largely due to
+          # difficulties with the generated app bundles in nixpkgs which
+          # are either non-existent or don't play nice with the macOS GUI
+          # (Launchpad, Dock, Spotlight, etc.).
+          #
+          # Read more:
+          # - https://github.com/nix-darwin/nix-darwin/issues/214
+          # - https://www.reddit.com/r/NixOS/comments/1lb8utt/nixdarwin_and_gui_applications/
           nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
