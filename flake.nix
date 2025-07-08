@@ -143,15 +143,10 @@
               mutableTaps = false;
               autoMigrate = true;
             };
-            homebrew = {
-              enable = true;
-              user = globals.username;
-              casks = [
-                "google-chrome"
-              ];
-            };
           }
 
+          # This is the main entry point for homebrew (user) configuration.
+          ./hosts/darwin/homebrew.nix
         ];
       };
     }

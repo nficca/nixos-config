@@ -1,4 +1,5 @@
 { globals, ... }:
+
 {
   imports = [
     ../../modules/home.nix
