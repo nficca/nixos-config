@@ -73,6 +73,7 @@
         system = nixosSystem;
         specialArgs = { inherit globals; };
         modules = [
+          # This is the main entry point for NixOS (system) configuration.
           ./hosts/desktop/configuration.nix
 
           # Configure home-manager as a module so that it is applied
@@ -83,6 +84,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users."${globals.username}" = {
+              # This is the main entry point for home-manager (user) configuration.
               imports = [ ./hosts/nixos/home.nix ];
             };
           }
@@ -160,7 +162,16 @@
       in
       {
         # Dev-shell for editing Nix files in this repository with LSP
-        # support and formatting.
+        # support and formatting. You can run the following to launch
+        # the dev-shell:
+        # ```shell
+        # nix develop . -c $SHELL
+        # ```
+        # If you want to launch directly into an editor, you can run:
+        # ```shell
+        # # This is for VSCode but you can use any editor that supports LSP.
+        # nix develop . -c $SHELL -c "code ."
+        # ```
         devShells."${system}".default = pkgs.mkShell {
           buildInputs = [
             nil.packages.${system}.default
