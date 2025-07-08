@@ -2,7 +2,7 @@
 # **IMPORTANT**: This module is intended to configure BOTH NixOS and macOS (Darwin).
 # Any attributes defined here should be compatible with both systems.
 
-{ ... }:
+{ lib, ... }:
 {
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -13,6 +13,9 @@
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "25.05";
+
+  # Include common aliases in all shells.
+  home.shellAliases = import ../aliases { inherit lib; };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

@@ -2,20 +2,17 @@
   config,
   pkgs,
   globals,
-  lib,
   ...
 }:
 
 let
   dotfiles = config.lib.file.mkOutOfStoreSymlink "/home/${globals.username}/dev/nficca/nixos-config/dotfiles";
-  aliases = import ./aliases { inherit lib; };
 in
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = globals.username;
   home.homeDirectory = "/home/${globals.username}";
-  home.shellAliases = aliases;
 
   # Symlink dotfiles
   xdg.configFile = {
