@@ -3,14 +3,17 @@
 {
   users.users."${globals.username}".shell = pkgs.zsh;
 
-  environment.variables = import ../shared/environment-variables.nix;
-
-  environment.systemPackages = import ../shared/packages.nix {
-    inherit pkgs;
+  environment.variables = {
+    EDITOR = "vim";
   };
 
-  fonts.packages = import ../shared/fonts.nix {
-    inherit pkgs;
-  };
+  environment.systemPackages = with pkgs; [
+    dua # Disk usage analyzer
+    vim # Text editor
+    wget # Network file downloader
+  ];
 
+  fonts.packages = with pkgs; [
+    jetbrains-mono
+  ];
 }
