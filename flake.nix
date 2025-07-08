@@ -25,14 +25,15 @@
     nix-homebrew = {
       url = "github:zhaofengli-wip/nix-homebrew";
     };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
+
+    # The core formulae for homebrew.
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
     };
+
+    # An extension of homebrew supporting the administration of GUI
+    # macOS applications.
     homebrew-cask = {
       url = "github:homebrew/homebrew-cask";
       flake = false;
@@ -53,7 +54,6 @@
       flake-utils,
       home-manager,
       nix-homebrew,
-      homebrew-bundle,
       homebrew-core,
       homebrew-cask,
       nil,
@@ -138,7 +138,6 @@
               taps = {
                 "homebrew/homebrew-core" = homebrew-core;
                 "homebrew/homebrew-cask" = homebrew-cask;
-                "homebrew/homebrew-bundle" = homebrew-bundle;
               };
               mutableTaps = false;
               autoMigrate = true;
