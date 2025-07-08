@@ -1,6 +1,7 @@
-# This module defines system-level configurations.
-# **IMPORTANT**: This module is intended to configure BOTH NixOS and macOS (Darwin).
-# Any attributes defined here should be compatible with both systems.
+# This is a shared module intended to contain system-level configuration
+# that is common in both NIxOS and nix-darwin systems. As such, it is
+# recommended that the configurations here are kept minimal so as not to
+# introduce cross-platform incompatibilities.
 
 { globals, pkgs, ... }:
 
