@@ -3,6 +3,11 @@
 # See the relevant options:
 # https://nix-darwin.github.io/nix-darwin/manual/index.html#opt-homebrew.enable
 #
+# *IMPORTANT*: Before deciding to install a pacakge or program via homebrew,
+# please first check if the same package is available in nixpkgs. Homebrew is
+# meant primarly to serve as a backup for packages that are either not available
+# in nixpkgs or are broken, which is not uncommon espcially for GUI macOS apps.
+#
 # It should be noted that this module should be included as a nix-darwin module.
 # While configuring homebrew is its intended purpose, it is effectively a normal
 # nix-darwin module and can configure any nix-darwin options.
