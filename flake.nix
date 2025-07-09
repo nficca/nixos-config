@@ -149,7 +149,7 @@
         ];
       };
     }
-    // flake-utils.lib.eachSystemPassThrough systems (
+    // flake-utils.lib.eachSystem systems (
       system:
       let
         pkgs = import nixpkgs { inherit system; };
@@ -166,7 +166,7 @@
         # # This is for VSCode but you can use any editor that supports LSP.
         # nix develop . -c $SHELL -c "code ."
         # ```
-        devShells."${system}".default = pkgs.mkShell {
+        devShells.default = pkgs.mkShell {
           buildInputs = [
             nil.packages.${system}.default
             pkgs.nixfmt-rfc-style
