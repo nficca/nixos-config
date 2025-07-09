@@ -25,6 +25,7 @@ in
     // {
       # All platforms
       nvim.source = "${dotfiles}/nvim";
+      ghostty.source = "${dotfiles}/ghostty";
     };
 
   # Other home directory symlinks

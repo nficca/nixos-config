@@ -22,6 +22,10 @@
       "google-chrome" # Web browser
       "discord" # Group chat and VoIP application
       "1password" # Password manager
+      "folx" # Download manager and torrent client
+      "slack" # Team communication
+      "steam" # Video game distribution platform
+      "ghostty" # Platform-native terminal emulator
     ];
   };
 }
