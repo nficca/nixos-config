@@ -1,0 +1,44 @@
+# This module manages symlinks for dotfiles and other similar user-level program
+# configurations. It is structured to work across different platforms, specifically
+# macOS and Linux.
+
+{
+  config,
+  lib,
+  pkgs,
+  common,
+  ...
+}:
+
+let
+  homePath = if pkgs.stdenv.isDarwin then "/Users/${common.username}" else "/home/${common.username}";
+  dotfiles = config.lib.file.mkOutOfStoreSymlink "${homePath}/dev/nficca/nixos-config/dotfiles";
+in
+{
+  # XDG_CONFIG_HOME symlinks
+  xdg.configFile =
+    lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
+      # MacOS
+    }
+    // lib.attrsets.optionalAttrs pkgs.stdenv.isLinux {
+      # Linux
+      "Code/User/settings.json".source = "${dotfiles}/vscode/settings.json";
+    }
+    // {
+      # All platforms
+      nvim.source = "${dotfiles}/nvim";
+    };
+
+  # Other symlinks
+  home.file =
+    lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
+      # MacOS
+      "Library/Application Support/Code/User/settings.json".source = "${dotfiles}/vscode/settings.json";
+    }
+    // lib.attrsets.optionalAttrs pkgs.stdenv.isLinux {
+      # Linux
+    }
+    // {
+      # All platforms
+    };
+}

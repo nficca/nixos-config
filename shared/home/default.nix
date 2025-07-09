@@ -8,6 +8,10 @@
 
 { lib, ... }:
 {
+  imports = [
+    ./dotfiles.nix
+  ];
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -19,7 +23,7 @@
   home.stateVersion = "25.05";
 
   # Include common aliases in all shells.
-  home.shellAliases = import ../aliases { inherit lib; };
+  home.shellAliases = import ../../aliases { inherit lib; };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

@@ -1,24 +1,18 @@
 {
-  config,
   pkgs,
   common,
   ...
 }:
 
-let
-  dotfiles = config.lib.file.mkOutOfStoreSymlink "/home/${common.username}/dev/nficca/nixos-config/dotfiles";
-in
 {
+  imports = [
+    ../../shared/home
+  ];
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = common.username;
   home.homeDirectory = "/home/${common.username}";
-
-  # Symlink dotfiles
-  xdg.configFile = {
-    nvim.source = "${dotfiles}/nvim";
-    "Code/User/settings.json".source = "${dotfiles}/vscode/settings.json";
-  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

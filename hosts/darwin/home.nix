@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../shared/home.nix
+    ../../shared/home
   ];
 
   home.username = common.username;
