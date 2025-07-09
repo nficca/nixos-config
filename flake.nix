@@ -74,7 +74,7 @@
         specialArgs = { inherit common; };
         modules = [
           # This is the main entry point for NixOS (system) configuration.
-          ./hosts/desktop/configuration.nix
+          ./hosts/nixos/configuration.nix
 
           # Configure home-manager as a module so that it is applied
           # whenever system configuration changes are applied.

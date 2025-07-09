@@ -7,6 +7,7 @@
 
 {
   users.users."${common.username}".shell = pkgs.zsh;
+  programs.zsh.enable = true;
 
   environment.variables = {
     EDITOR = "vim";
