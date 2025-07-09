@@ -69,7 +69,7 @@
       ];
     in
     {
-      nixosConfigurations."${globals.host}" = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."desktop" = nixpkgs.lib.nixosSystem {
         system = nixosSystem;
         specialArgs = { inherit globals; };
         modules = [
