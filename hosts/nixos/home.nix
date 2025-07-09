@@ -39,4 +39,7 @@
 
   # Visual Studio Code
   programs.vscode.enable = true;
+
+  # Google Chrome
+  programs.google-chrome.enable = true;
 }
