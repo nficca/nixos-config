@@ -32,6 +32,7 @@
     discord # Group chat
     claude-code # Agentic AI assistant
     ldtk # 2D level editor
+    aseprite # Pixel art editor
   ];
 
   # Ghostty
