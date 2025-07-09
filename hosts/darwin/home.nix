@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../modules/home.nix
+    ../../shared/home.nix
   ];
 
   home.username = globals.username;

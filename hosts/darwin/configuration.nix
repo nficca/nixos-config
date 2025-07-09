@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../modules/configuration.nix
+    ../../shared/configuration.nix
   ];
 
   # This appears to be necessary to get home-manager to work properly on
