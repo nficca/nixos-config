@@ -26,6 +26,7 @@
       "slack" # Team communication
       "steam" # Video game distribution platform
       "ghostty" # Platform-native terminal emulator
+      "visual-studio-code" # Open-source code editor
     ];
   };
 }
