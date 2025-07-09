@@ -6,13 +6,11 @@
   config,
   lib,
   pkgs,
-  common,
   ...
 }:
 
 let
-  homePath = if pkgs.stdenv.isDarwin then "/Users/${common.username}" else "/home/${common.username}";
-  dotfiles = config.lib.file.mkOutOfStoreSymlink "${homePath}/dev/nficca/nixos-config/dotfiles";
+  dotfiles = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles";
 in
 {
   # XDG_CONFIG_HOME symlinks
