@@ -1,4 +1,3 @@
 {
-  host = "desktop";
   username = "nic";
 }
