@@ -6,9 +6,11 @@
 # configurations here are kept minimal so as not to introduce cross-platform
 # incompatibilities.
 
-{ lib, ... }:
+{ ... }:
+
 {
   imports = [
+    ./aliases.nix
     ./dotfiles.nix
   ];
 
@@ -21,9 +23,6 @@
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "25.05";
-
-  # Include common aliases in all shells.
-  home.shellAliases = import ../../aliases { inherit lib; };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
