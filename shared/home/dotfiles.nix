@@ -27,7 +27,7 @@ in
       nvim.source = "${dotfiles}/nvim";
     };
 
-  # Other symlinks
+  # Other home directory symlinks
   home.file =
     lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
       # MacOS
