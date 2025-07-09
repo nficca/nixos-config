@@ -1,0 +1,8 @@
+# nixos-rebuild operations can sometimes create a
+# symlink to the build result in the nix store. I'm
+# not sure how intentional this is, but either way
+# it does not need to be checked in.
+#
+# See this issue for more details:
+# https://github.com/NixOS/nixpkgs/issues/12665
+result/
