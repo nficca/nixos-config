@@ -16,6 +16,7 @@
     casks = [
       "google-chrome" # Web browser
       "discord" # Group chat and VoIP application
+      "1password" # Password manager
     ];
   };
 }
