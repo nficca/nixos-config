@@ -1,0 +1,8 @@
+# Ghostty configuration
+# https://ghostty.org/docs/config
+
+background-opacity = 0.70
+background-blur = 10
+font-family = "JetBrains Mono"
+font-size = 18
+theme = "GitHub-Dark-High-Contrast"

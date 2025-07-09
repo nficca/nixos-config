@@ -3,8 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  pkgs,
-  globals,
+  common,
   ...
 }:
 
@@ -12,6 +11,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../shared/configuration.nix
   ];
 
   # Bootloader.
@@ -23,7 +23,7 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
   # hardware.graphics.enable32bBit = true;
 
-  networking.hostName = globals.host; # Define your hostname.
+  networking.hostName = "desktop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -80,25 +80,14 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."${globals.username}" = {
+  users.users."${common.username}" = {
     isNormalUser = true;
     description = "Nic";
     extraGroups = [
       "networkmanager"
       "wheel"
     ];
-    shell = pkgs.zsh;
   };
-
-  # Install ZSH
-  programs.zsh.enable = true;
-
-  # Install and configure Git
-  programs.git.enable = true;
-  programs.git.config.init.defaultBranch = "main";
-
-  # Install firefox.
-  programs.firefox.enable = true;
 
   # Install Steam
   # Ideally this would be done via home-manager or otherwise not
@@ -120,22 +109,6 @@
     "nix-command"
     "flakes"
     "pipe-operators"
-  ];
-
-  # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [
-    fastfetch # System information tool
-    dua # Disk usage analyzer
-    vim # Text editor
-    wget # Network file downloader
-  ];
-
-  # Set the default editor to vim
-  environment.variables.EDITOR = "vim";
-
-  # Install fonts
-  fonts.packages = with pkgs; [
-    jetbrains-mono
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
