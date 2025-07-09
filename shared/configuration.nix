@@ -3,10 +3,10 @@
 # recommended that the configurations here are kept minimal so as not to
 # introduce cross-platform incompatibilities.
 
-{ globals, pkgs, ... }:
+{ common, pkgs, ... }:
 
 {
-  users.users."${globals.username}".shell = pkgs.zsh;
+  users.users."${common.username}".shell = pkgs.zsh;
 
   environment.variables = {
     EDITOR = "vim";

@@ -1,9 +1,9 @@
-{ globals, ... }:
+{ common, ... }:
 
 {
   imports = [
     ../../shared/home.nix
   ];
 
-  home.username = globals.username;
+  home.username = common.username;
 }

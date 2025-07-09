@@ -3,7 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  globals,
+  common,
   ...
 }:
 
@@ -80,7 +80,7 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."${globals.username}" = {
+  users.users."${common.username}" = {
     isNormalUser = true;
     description = "Nic";
     extraGroups = [

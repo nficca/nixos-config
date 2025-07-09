@@ -1,4 +1,4 @@
-{ globals, ... }:
+{ common, ... }:
 
 {
   imports = [
@@ -9,7 +9,7 @@
   # nix-darwin. On NixOS, we add the home directory in the home-manager
   # module via `home.homeDirectory`, but this will fail the rebuild on
   # Darwin.
-  users.users.${globals.username}.home = "/Users/nic";
+  users.users.${common.username}.home = "/Users/nic";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

@@ -7,12 +7,12 @@
 # While configuring homebrew is its intended purpose, it is effectively a normal
 # nix-darwin module and can configure any nix-darwin options.
 
-{ globals, ... }:
+{ common, ... }:
 
 {
   homebrew = {
     enable = true;
-    user = globals.username;
+    user = common.username;
     casks = [
       "google-chrome" # Web browser
       "discord" # Group chat and VoIP application

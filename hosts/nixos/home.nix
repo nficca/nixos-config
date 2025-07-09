@@ -1,18 +1,18 @@
 {
   config,
   pkgs,
-  globals,
+  common,
   ...
 }:
 
 let
-  dotfiles = config.lib.file.mkOutOfStoreSymlink "/home/${globals.username}/dev/nficca/nixos-config/dotfiles";
+  dotfiles = config.lib.file.mkOutOfStoreSymlink "/home/${common.username}/dev/nficca/nixos-config/dotfiles";
 in
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = globals.username;
-  home.homeDirectory = "/home/${globals.username}";
+  home.username = common.username;
+  home.homeDirectory = "/home/${common.username}";
 
   # Symlink dotfiles
   xdg.configFile = {

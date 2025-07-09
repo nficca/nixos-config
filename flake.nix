@@ -60,7 +60,7 @@
       ...
     }:
     let
-      globals = import ./globals.nix;
+      common = import ./common.nix;
       nixosSystem = "x86_64-linux";
       darwinSystem = "aarch64-darwin";
       systems = [
@@ -71,7 +71,7 @@
     {
       nixosConfigurations."desktop" = nixpkgs.lib.nixosSystem {
         system = nixosSystem;
-        specialArgs = { inherit globals; };
+        specialArgs = { inherit common; };
         modules = [
           # This is the main entry point for NixOS (system) configuration.
           ./hosts/desktop/configuration.nix
@@ -80,10 +80,10 @@
           # whenever system configuration changes are applied.
           home-manager.nixosModules.home-manager
           {
-            home-manager.extraSpecialArgs = { inherit globals; };
+            home-manager.extraSpecialArgs = { inherit common; };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users."${globals.username}" = {
+            home-manager.users."${common.username}" = {
               # This is the main entry point for home-manager (user) configuration.
               imports = [ ./hosts/nixos/home.nix ];
             };
@@ -92,7 +92,7 @@
       };
 
       darwinConfigurations."Nics-MacBook-Air" = nix-darwin.lib.darwinSystem {
-        specialArgs = { inherit globals; };
+        specialArgs = { inherit common; };
         modules = [
           # This is the main entry point for nix-darwin (system) configuration.
           ./hosts/darwin/configuration.nix
@@ -104,10 +104,10 @@
           home-manager.darwinModules.home-manager
           {
             home-manager = {
-              extraSpecialArgs = { inherit globals; };
+              extraSpecialArgs = { inherit common; };
               useGlobalPkgs = true;
               useUserPackages = true;
-              users."${globals.username}" = {
+              users."${common.username}" = {
                 # This is the main entry point for home-manager (user) configuration.
                 imports = [ ./hosts/darwin/home.nix ];
               };
@@ -133,7 +133,7 @@
           nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
-              user = globals.username;
+              user = common.username;
               enable = true;
               taps = {
                 "homebrew/homebrew-core" = homebrew-core;
