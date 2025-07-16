@@ -6,3 +6,4 @@ background-blur = 10
 font-family = "JetBrains Mono"
 font-size = 18
 theme = "GitHub-Dark-High-Contrast"
+keybind = shift+enter=text:\n
