@@ -27,6 +27,7 @@
       "steam" # Video game distribution platform
       "ghostty" # Platform-native terminal emulator
       "visual-studio-code" # Open-source code editor
+      "notion" # Note-taking and organization tool
     ];
   };
 }
