@@ -26,6 +26,7 @@ in
       # All platforms
       nvim.source = "${dotfiles}/nvim";
       ghostty.source = "${dotfiles}/ghostty";
+      direnv.source = "${dotfiles}/direnv";
     };
 
   # Other home directory symlinks

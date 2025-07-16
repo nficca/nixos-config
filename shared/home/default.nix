@@ -47,4 +47,7 @@
 
   # Neovim
   programs.neovim.enable = true;
+
+  # Direnv
+  programs.direnv.enable = true;
 }
