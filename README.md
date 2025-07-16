@@ -33,9 +33,10 @@ Both of these outputs include several of other modules that together declarative
 
 ### MacOS
 
-1. Make sure your `hostname` matches what's defined in [flake.nix](./flake.nix) under `darwinConfigurations.<hostname>`, and that your user is `nic`.
+1. Add your hostname (`scutil --get LocalHostName`) to the `darwinHostnames` list in [flake.nix](./flake.nix) if not already present.
 2. Ensure you satisfy the [`nix-darwin` prerequisites](https://github.com/nix-darwin/nix-darwin?tab=readme-ov-file#prerequisites).
 3. Clone this repo to `~/dev/nficca/nixos-config`.
+4. Run `sudo ln -s ~/dev/nficca/nixos-config /etc/nix-darwin`
 4. Run `sudo nix run nix-darwin/master#darwin-rebuild -- switch`.
 5. Then you should be safe to run `sudo darwin-rebuild switch`.
 

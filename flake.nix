@@ -67,6 +67,10 @@
         nixosSystem
         darwinSystem
       ];
+      darwinHostnames = [
+        "Nics-MacBook-Air"
+        "Nics-MacBook-Pro"
+      ];
     in
     {
       nixosConfigurations."desktop" = nixpkgs.lib.nixosSystem {
@@ -91,63 +95,67 @@
         ];
       };
 
-      darwinConfigurations."Nics-MacBook-Air" = nix-darwin.lib.darwinSystem {
-        specialArgs = { inherit common; };
-        modules = [
-          # This is the main entry point for nix-darwin (system) configuration.
-          ./hosts/darwin/configuration.nix
+      darwinConfigurations = nixpkgs.lib.attrsets.genAttrs darwinHostnames (
+        hostname:
 
-          # Configure home-manager as a module so that it is applied
-          # whenever system configuration changes are applied.
-          # The additional benefit of this is that we can share some
-          # home-manager configuration between NixOS and Darwin.
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              extraSpecialArgs = { inherit common; };
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users."${common.username}" = {
-                # This is the main entry point for home-manager (user) configuration.
-                imports = [ ./hosts/darwin/home.nix ];
+        nix-darwin.lib.darwinSystem {
+          specialArgs = { inherit common; };
+          modules = [
+            # This is the main entry point for nix-darwin (system) configuration.
+            ./hosts/darwin/configuration.nix
+
+            # Configure home-manager as a module so that it is applied
+            # whenever system configuration changes are applied.
+            # The additional benefit of this is that we can share some
+            # home-manager configuration between NixOS and Darwin.
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = { inherit common; };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users."${common.username}" = {
+                  # This is the main entry point for home-manager (user) configuration.
+                  imports = [ ./hosts/darwin/home.nix ];
+                };
               };
-            };
-          }
+            }
 
-          # We use nix-homebrew to install and manage homebrew itself.
-          # While nix-darwin has a configurable `homebrew` module, it
-          # does not manage the actual installation of homebrew.
-          # Importantly, it pins the homebrew installation as well as
-          # any declaratively specified taps.
-          #
-          # Why do we still use homebrew despite having nixpkgs?
-          # Unfortunately, many macOS/Darwin GUI applications do not work
-          # properly when installed via nixpkgs. This is largely due to
-          # difficulties with the generated app bundles in nixpkgs which
-          # are either non-existent or don't play nice with the macOS GUI
-          # (Launchpad, Dock, Spotlight, etc.).
-          #
-          # Read more:
-          # - https://github.com/nix-darwin/nix-darwin/issues/214
-          # - https://www.reddit.com/r/NixOS/comments/1lb8utt/nixdarwin_and_gui_applications/
-          nix-homebrew.darwinModules.nix-homebrew
-          {
-            nix-homebrew = {
-              user = common.username;
-              enable = true;
-              taps = {
-                "homebrew/homebrew-core" = homebrew-core;
-                "homebrew/homebrew-cask" = homebrew-cask;
+            # We use nix-homebrew to install and manage homebrew itself.
+            # While nix-darwin has a configurable `homebrew` module, it
+            # does not manage the actual installation of homebrew.
+            # Importantly, it pins the homebrew installation as well as
+            # any declaratively specified taps.
+            #
+            # Why do we still use homebrew despite having nixpkgs?
+            # Unfortunately, many macOS/Darwin GUI applications do not work
+            # properly when installed via nixpkgs. This is largely due to
+            # difficulties with the generated app bundles in nixpkgs which
+            # are either non-existent or don't play nice with the macOS GUI
+            # (Launchpad, Dock, Spotlight, etc.).
+            #
+            # Read more:
+            # - https://github.com/nix-darwin/nix-darwin/issues/214
+            # - https://www.reddit.com/r/NixOS/comments/1lb8utt/nixdarwin_and_gui_applications/
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                user = common.username;
+                enable = true;
+                taps = {
+                  "homebrew/homebrew-core" = homebrew-core;
+                  "homebrew/homebrew-cask" = homebrew-cask;
+                };
+                mutableTaps = false;
+                autoMigrate = true;
               };
-              mutableTaps = false;
-              autoMigrate = true;
-            };
-          }
+            }
 
-          # This is the main entry point for homebrew (user) configuration.
-          ./hosts/darwin/homebrew.nix
-        ];
-      };
+            # This is the main entry point for homebrew (user) configuration.
+            ./hosts/darwin/homebrew.nix
+          ];
+        }
+      );
     }
     // flake-utils.lib.eachSystem systems (
       system:
