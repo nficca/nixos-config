@@ -1,4 +1,4 @@
-{ common, ... }:
+{ common, pkgs, ... }:
 
 {
   imports = [
@@ -6,4 +6,9 @@
   ];
 
   home.username = common.username;
+
+  # Install packages
+  home.packages = with pkgs; [
+    claude-code # Agentic AI assistant
+  ];
 }
