@@ -32,9 +32,10 @@
               openssl
               pkg-config
               bzip2
-              rust-bin.beta.latest.default
+              (rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; })
             ];
           };
+        RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
       }
     );
 }
