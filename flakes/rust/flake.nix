@@ -28,6 +28,9 @@
           with pkgs;
           mkShell {
             name = "rust";
+            packages = [
+              evcxr
+            ];
             buildInputs = [
               openssl
               pkg-config
