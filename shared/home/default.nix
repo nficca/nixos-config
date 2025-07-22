@@ -35,6 +35,10 @@
   programs.starship.enable = true;
   programs.starship.enableZshIntegration = true;
 
+  # FZF
+  programs.fzf.enable = true;
+  programs.fzf.enableZshIntegration = true;
+
   # Git
   programs.git.enable = true;
   programs.git.userEmail = "nicficca@gmail.com";
