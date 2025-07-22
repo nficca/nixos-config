@@ -28,6 +28,7 @@
       "ghostty" # Platform-native terminal emulator
       "visual-studio-code" # Open-source code editor
       "notion" # Note-taking and organization tool
+      "whatsapp" # Messaging and calling
     ];
   };
 }
