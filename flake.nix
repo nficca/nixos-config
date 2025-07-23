@@ -130,28 +130,38 @@
             ./hosts/darwin/homebrew.nix
           ] ++ modules;
         };
+
+      createNixosConfiguration =
+        {
+          modules ? [ ],
+          home-modules ? [ ],
+        }:
+        nixpkgs.lib.nixosSystem {
+          system = nixosSystem;
+          specialArgs = { inherit common; };
+          modules = [
+            # This is the main entry point for NixOS (system) configuration.
+            ./hosts/nixos/configuration.nix
+
+            # Configure home-manager as a module so that it is applied
+            # whenever system configuration changes are applied.
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = { inherit common; };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."${common.username}" = {
+                # This is the main entry point for home-manager (user) configuration.
+                imports = [ ./hosts/nixos/home.nix ] ++ home-modules;
+              };
+            }
+          ] ++ modules;
+        };
+
     in
     {
-      nixosConfigurations."desktop" = nixpkgs.lib.nixosSystem {
-        system = nixosSystem;
-        specialArgs = { inherit common; };
-        modules = [
-          # This is the main entry point for NixOS (system) configuration.
-          ./hosts/nixos/configuration.nix
-
-          # Configure home-manager as a module so that it is applied
-          # whenever system configuration changes are applied.
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.extraSpecialArgs = { inherit common; };
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users."${common.username}" = {
-              # This is the main entry point for home-manager (user) configuration.
-              imports = [ ./hosts/nixos/home.nix ];
-            };
-          }
-        ];
+      nixosConfigurations = {
+        "desktop" = createNixosConfiguration { };
       };
 
       darwinConfigurations = {
