@@ -67,37 +67,12 @@
         nixosSystem
         darwinSystem
       ];
-      darwinHostnames = [
-        "Nics-MacBook-Air"
-        "Nics-MacBook-Pro"
-      ];
-    in
-    {
-      nixosConfigurations."desktop" = nixpkgs.lib.nixosSystem {
-        system = nixosSystem;
-        specialArgs = { inherit common; };
-        modules = [
-          # This is the main entry point for NixOS (system) configuration.
-          ./hosts/nixos/configuration.nix
 
-          # Configure home-manager as a module so that it is applied
-          # whenever system configuration changes are applied.
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.extraSpecialArgs = { inherit common; };
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users."${common.username}" = {
-              # This is the main entry point for home-manager (user) configuration.
-              imports = [ ./hosts/nixos/home.nix ];
-            };
-          }
-        ];
-      };
-
-      darwinConfigurations = nixpkgs.lib.attrsets.genAttrs darwinHostnames (
-        hostname:
-
+      createDarwinConfiguration =
+        {
+          modules ? [ ],
+          home-modules ? [ ],
+        }:
         nix-darwin.lib.darwinSystem {
           specialArgs = { inherit common; };
           modules = [
@@ -116,7 +91,7 @@
                 useUserPackages = true;
                 users."${common.username}" = {
                   # This is the main entry point for home-manager (user) configuration.
-                  imports = [ ./hosts/darwin/home.nix ];
+                  imports = [ ./hosts/darwin/home.nix ] ++ home-modules;
                 };
               };
             }
@@ -153,9 +128,36 @@
 
             # This is the main entry point for homebrew (user) configuration.
             ./hosts/darwin/homebrew.nix
-          ];
-        }
-      );
+          ] ++ modules;
+        };
+    in
+    {
+      nixosConfigurations."desktop" = nixpkgs.lib.nixosSystem {
+        system = nixosSystem;
+        specialArgs = { inherit common; };
+        modules = [
+          # This is the main entry point for NixOS (system) configuration.
+          ./hosts/nixos/configuration.nix
+
+          # Configure home-manager as a module so that it is applied
+          # whenever system configuration changes are applied.
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.extraSpecialArgs = { inherit common; };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users."${common.username}" = {
+              # This is the main entry point for home-manager (user) configuration.
+              imports = [ ./hosts/nixos/home.nix ];
+            };
+          }
+        ];
+      };
+
+      darwinConfigurations = {
+        "Nics-MacBook-Air" = createDarwinConfiguration { };
+        "Nics-MacBook-Pro" = createDarwinConfiguration { };
+      };
     }
     // flake-utils.lib.eachSystem systems (
       system:
