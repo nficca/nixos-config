@@ -16,9 +16,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Pure nix flake utility functions
-    flake-utils.url = "github:numtide/flake-utils";
-
     # Use homebrew to manage software on Darwin systems.
     # This is especially useful for managing macOS GUI applications,
     # as they are often broken or otherwise not available in nixpkgs.
@@ -38,35 +35,20 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-
-    # Nix language server support. Useful when editing Nix files
-    # with an editor that supports LSP.
-    nil = {
-      url = "github:oxalica/nil";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
     {
       nixpkgs,
       nix-darwin,
-      flake-utils,
       home-manager,
       nix-homebrew,
       homebrew-core,
       homebrew-cask,
-      nil,
       ...
     }:
     let
       common = import ./common.nix;
-      nixosSystem = "x86_64-linux";
-      darwinSystem = "aarch64-darwin";
-      systems = [
-        nixosSystem
-        darwinSystem
-      ];
 
       createDarwinConfiguration =
         {
@@ -137,7 +119,7 @@
           home-modules ? [ ],
         }:
         nixpkgs.lib.nixosSystem {
-          system = nixosSystem;
+          system = "x86_64-linux";
           specialArgs = { inherit common; };
           modules = [
             # This is the main entry point for NixOS (system) configuration.
@@ -168,30 +150,5 @@
         "Nics-MacBook-Air" = createDarwinConfiguration { };
         "Nics-MacBook-Pro" = createDarwinConfiguration { };
       };
-    }
-    // flake-utils.lib.eachSystem systems (
-      system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-      in
-      {
-        # Dev-shell for editing Nix files in this repository with LSP
-        # support and formatting. You can run the following to launch
-        # the dev-shell:
-        # ```shell
-        # nix develop . -c $SHELL
-        # ```
-        # If you want to launch directly into an editor, you can run:
-        # ```shell
-        # # This is for VSCode but you can use any editor that supports LSP.
-        # nix develop . -c $SHELL -c "code ."
-        # ```
-        devShells.default = pkgs.mkShell {
-          buildInputs = [
-            nil.packages.${system}.default
-            pkgs.nixfmt-rfc-style
-          ];
-        };
-      }
-    );
+    };
 }
