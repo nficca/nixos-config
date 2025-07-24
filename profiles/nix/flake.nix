@@ -1,5 +1,15 @@
 {
-  description = "Rust development environment";
+  description = ''
+    Nix development environment.
+
+    This flake does not install the nix package manager itself
+    (because how would you use this without already having Nix
+    installed), but provides a useful development environment
+    when working with the Nix language.
+
+    Particularly, this includes the Nix language server, `nil`,
+    as well as the `nixfmt` tool.
+  '';
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -27,6 +37,7 @@
       in
       {
         devShells.default = pkgs.mkShell {
+          name = "nix";
           buildInputs = [
             nil.packages.${system}.default
             pkgs.nixfmt-rfc-style
