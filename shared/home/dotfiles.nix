@@ -27,6 +27,7 @@ in
       nvim.source = "${dotfiles}/nvim";
       ghostty.source = "${dotfiles}/ghostty";
       direnv.source = "${dotfiles}/direnv";
+      "starship.toml".source = "${dotfiles}/starship/starship.toml";
     };
 
   # Other home directory symlinks
