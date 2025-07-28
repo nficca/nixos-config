@@ -10,5 +10,6 @@
   # Install packages
   home.packages = with pkgs; [
     claude-code # Agentic AI assistant
+    jless # JSON viewer
   ];
 }
