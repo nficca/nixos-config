@@ -12,6 +12,7 @@
   imports = [
     ./aliases.nix
     ./dotfiles.nix
+    ./registry.nix
   ];
 
   # This value determines the Home Manager release that your
