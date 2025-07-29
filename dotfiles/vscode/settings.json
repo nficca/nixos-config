@@ -8,6 +8,7 @@
   "editor.renderWhitespace": "boundary",
   "editor.semanticHighlighting.enabled": true,
   "editor.tabSize": 2,
+  "extensions.ignoreRecommendations": true,
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "files.readonlyInclude": {
