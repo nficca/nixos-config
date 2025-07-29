@@ -50,7 +50,7 @@
     let
       common = import ./common.nix;
 
-      createDarwinConfiguration =
+      mkDarwin =
         {
           modules ? [ ],
           home-modules ? [ ],
@@ -58,8 +58,7 @@
         nix-darwin.lib.darwinSystem {
           specialArgs = { inherit common; };
           modules = [
-            # This is the main entry point for nix-darwin (system) configuration.
-            ./hosts/darwin/configuration.nix
+            ./shared/configuration
 
             # Configure home-manager as a module so that it is applied
             # whenever system configuration changes are applied.
@@ -72,8 +71,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users."${common.username}" = {
-                  # This is the main entry point for home-manager (user) configuration.
-                  imports = [ ./hosts/darwin/home.nix ] ++ home-modules;
+                  imports = [ ./shared/home ] ++ home-modules;
                 };
               };
             }
@@ -107,13 +105,11 @@
                 autoMigrate = true;
               };
             }
-
-            # This is the main entry point for homebrew (user) configuration.
-            ./hosts/darwin/homebrew.nix
-          ] ++ modules;
+          ]
+          ++ modules;
         };
 
-      createNixosConfiguration =
+      mkNixos =
         {
           modules ? [ ],
           home-modules ? [ ],
@@ -122,8 +118,7 @@
           system = "x86_64-linux";
           specialArgs = { inherit common; };
           modules = [
-            # This is the main entry point for NixOS (system) configuration.
-            ./hosts/nixos/configuration.nix
+            ./shared/configuration
 
             # Configure home-manager as a module so that it is applied
             # whenever system configuration changes are applied.
@@ -133,22 +128,22 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users."${common.username}" = {
-                # This is the main entry point for home-manager (user) configuration.
-                imports = [ ./hosts/nixos/home.nix ] ++ home-modules;
+                imports = [ ./shared/home ] ++ home-modules;
               };
             }
-          ] ++ modules;
+          ]
+          ++ modules;
         };
 
     in
     {
       nixosConfigurations = {
-        "desktop" = createNixosConfiguration { };
+        "desktop" = mkNixos { };
       };
 
       darwinConfigurations = {
-        "Nics-MacBook-Air" = createDarwinConfiguration { };
-        "Nics-MacBook-Pro" = createDarwinConfiguration { };
+        "Nics-MacBook-Air" = mkDarwin { };
+        "Nics-MacBook-Pro" = mkDarwin { };
       };
     };
 }
