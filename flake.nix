@@ -1,5 +1,5 @@
 {
-  description = "Nic's NixOS Flake";
+  description = "Nic's Nix Configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -50,6 +50,37 @@
     let
       common = import ./common.nix;
 
+      mkNixos =
+        {
+          modules ? [ ],
+          home-modules ? [ ],
+        }:
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit common; };
+          modules = [
+            ./configuration/common.nix
+            ./configuration/nixos.nix
+
+            # Configure home-manager as a module so that it is applied
+            # whenever system configuration changes are applied.
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = { inherit common; };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."${common.username}" = {
+                imports = [
+                  ./home/common.nix
+                  ./home/nixos.nix
+                ]
+                ++ home-modules;
+              };
+            }
+          ]
+          ++ modules;
+        };
+
       mkDarwin =
         {
           modules ? [ ],
@@ -58,7 +89,8 @@
         nix-darwin.lib.darwinSystem {
           specialArgs = { inherit common; };
           modules = [
-            ./shared/configuration
+            ./configuration/common.nix
+            ./configuration/darwin.nix
 
             # Configure home-manager as a module so that it is applied
             # whenever system configuration changes are applied.
@@ -71,7 +103,11 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users."${common.username}" = {
-                  imports = [ ./shared/home ] ++ home-modules;
+                  imports = [
+                    ./home/common.nix
+                    ./home/darwin.nix
+                  ]
+                  ++ home-modules;
                 };
               };
             }
@@ -108,37 +144,10 @@
           ]
           ++ modules;
         };
-
-      mkNixos =
-        {
-          modules ? [ ],
-          home-modules ? [ ],
-        }:
-        nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit common; };
-          modules = [
-            ./shared/configuration
-
-            # Configure home-manager as a module so that it is applied
-            # whenever system configuration changes are applied.
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.extraSpecialArgs = { inherit common; };
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users."${common.username}" = {
-                imports = [ ./shared/home ] ++ home-modules;
-              };
-            }
-          ]
-          ++ modules;
-        };
-
     in
     {
       nixosConfigurations = {
-        "desktop" = mkNixos { };
+        "desktop" = mkNixos { modules = [ ./hosts/desktop/hardware-configuration.nix ]; };
       };
 
       darwinConfigurations = {

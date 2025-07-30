@@ -6,25 +6,14 @@
 # configurations here are kept minimal so as not to introduce cross-platform
 # incompatibilities.
 
-{ pkgs, ... }:
+{ ... }:
 
-let
-  # Import platform-specific configurations.
-  platformImports =
-    if pkgs.stdenv.isDarwin then
-      [ ./systems/darwin.nix ]
-    else if pkgs.stdenv.isLinux then
-      [ ./systems/nixos.nix ]
-    else
-      [ ];
-in
 {
   imports = [
-    ./aliases.nix
-    ./dotfiles.nix
-    ./registry.nix
-  ]
-  ++ platformImports;
+    ./aliases
+    ./dotfiles
+    ./registry
+  ];
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
