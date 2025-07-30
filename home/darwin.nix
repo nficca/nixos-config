@@ -1,10 +1,6 @@
 { common, pkgs, ... }:
 
 {
-  imports = [
-    ../../shared/home
-  ];
-
   home.username = common.username;
 
   # Install packages

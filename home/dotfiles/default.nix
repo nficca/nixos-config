@@ -10,7 +10,7 @@
 }:
 
 let
-  dotfiles = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles";
+  dotfiles = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dev/nficca/nixos-config/home/dotfiles";
 in
 {
   # XDG_CONFIG_HOME symlinks

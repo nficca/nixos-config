@@ -5,19 +5,8 @@
 
 { common, pkgs, ... }:
 
-let
-  platformImports =
-    if pkgs.stdenv.isDarwin then
-      [ ./systems/darwin.nix ]
-    else if pkgs.stdenv.isLinux then
-      [ ./systems/nixos.nix ]
-    else
-      [ ];
-
-  imports = [ ] ++ platformImports;
-in
 {
-  inherit imports;
+  imports = [ ];
 
   users.users."${common.username}".shell = pkgs.zsh;
   programs.zsh.enable = true;
