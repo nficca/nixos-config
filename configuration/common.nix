@@ -3,12 +3,12 @@
 # recommended that the configurations here are kept minimal so as not to
 # introduce cross-platform incompatibilities.
 
-{ common, pkgs, ... }:
+{ username, pkgs, ... }:
 
 {
   imports = [ ];
 
-  users.users."${common.username}".shell = pkgs.zsh;
+  users.users."${username}".shell = pkgs.zsh;
   programs.zsh.enable = true;
 
   environment.variables = {

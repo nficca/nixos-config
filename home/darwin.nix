@@ -1,7 +1,7 @@
-{ common, pkgs, ... }:
+{ username, pkgs, ... }:
 
 {
-  home.username = common.username;
+  home.username = username;
 
   # Install packages
   home.packages = with pkgs; [

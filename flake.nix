@@ -48,16 +48,28 @@
       ...
     }:
     let
-      common = import ./common.nix;
+      # My username is always "nic" on all systems.
+      username = "nic";
+
+      # This is the basic list of homebrew casks that will be installed
+      # on all Darwin systems. Additional casks can be added on a per-host
+      # basis.
+      casks = [
+        "google-chrome" # Web browser
+        "1password" # Password manager
+        "slack" # Team communication
+        "ghostty" # Platform-native terminal emulator
+        "visual-studio-code" # Open-source code editor
+        "whatsapp" # Messaging and calling
+      ];
 
       mkNixos =
         {
           modules ? [ ],
-          home-modules ? [ ],
         }:
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit common; };
+          specialArgs = { inherit username; };
           modules = [
             ./configuration/common.nix
             ./configuration/nixos.nix
@@ -66,15 +78,14 @@
             # whenever system configuration changes are applied.
             home-manager.nixosModules.home-manager
             {
-              home-manager.extraSpecialArgs = { inherit common; };
+              home-manager.extraSpecialArgs = { inherit username; };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users."${common.username}" = {
+              home-manager.users."${username}" = {
                 imports = [
                   ./home/common.nix
                   ./home/nixos.nix
-                ]
-                ++ home-modules;
+                ];
               };
             }
           ]
@@ -83,11 +94,13 @@
 
       mkDarwin =
         {
-          modules ? [ ],
-          home-modules ? [ ],
+          extraCasks ? [ ],
         }:
         nix-darwin.lib.darwinSystem {
-          specialArgs = { inherit common; };
+          specialArgs = {
+            inherit username;
+            casks = casks ++ extraCasks;
+          };
           modules = [
             ./configuration/common.nix
             ./configuration/darwin.nix
@@ -99,15 +112,14 @@
             home-manager.darwinModules.home-manager
             {
               home-manager = {
-                extraSpecialArgs = { inherit common; };
+                extraSpecialArgs = { inherit username; };
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users."${common.username}" = {
+                users."${username}" = {
                   imports = [
                     ./home/common.nix
                     ./home/darwin.nix
-                  ]
-                  ++ home-modules;
+                  ];
                 };
               };
             }
@@ -131,7 +143,7 @@
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
-                user = common.username;
+                user = username;
                 enable = true;
                 taps = {
                   "homebrew/homebrew-core" = homebrew-core;
@@ -141,8 +153,7 @@
                 autoMigrate = true;
               };
             }
-          ]
-          ++ modules;
+          ];
         };
     in
     {
@@ -151,8 +162,18 @@
       };
 
       darwinConfigurations = {
-        "Nics-MacBook-Air" = mkDarwin { };
-        "Nics-MacBook-Pro" = mkDarwin { };
+        "Nics-MacBook-Air" = mkDarwin {
+          extraCasks = [
+            "discord" # Group chat and VoIP application
+            "folx" # Download manager and torrent client
+            "steam" # Video game distribution platform
+          ];
+        };
+        "Nics-MacBook-Pro" = mkDarwin {
+          extraCasks = [
+            "notion" # Note-taking and organization tool
+          ];
+        };
       };
     };
 }
