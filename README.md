@@ -33,7 +33,7 @@ Both of these outputs include several of other modules that together declarative
 
 ### MacOS
 
-1. Add your hostname (`scutil --get LocalHostName`) to the `darwinHostnames` list in [flake.nix](./flake.nix) if not already present.
+1. Add your hostname (`scutil --get LocalHostName`) as another entry to `darwinConfigurations` in [flake.nix](./flake.nix) if not already present.
 2. Ensure you satisfy the [`nix-darwin` prerequisites](https://github.com/nix-darwin/nix-darwin?tab=readme-ov-file#prerequisites).
 3. Clone this repo to `~/dev/nficca/nixos-config`.
 4. Run `sudo ln -s ~/dev/nficca/nixos-config /etc/nix-darwin`
