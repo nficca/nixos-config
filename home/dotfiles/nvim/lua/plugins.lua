@@ -12,30 +12,40 @@ return {
   },
 
   {
-    "ibhagwan/fzf-lua",
-    -- optional for icon support
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    -- or if using mini.icons/mini.nvim
-    -- dependencies = { "echasnovski/mini.icons" },
-    opts = {},
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup {}
+      require("which-key").add({
+        { "t", group = "File Tree" }
+      })
+    end,
     keys = {
-      { "<leader>f", ":FzfLua files<CR>", desc = "Fuzzy-find files (FzfLua)" }
+      { "tt", "<cmd>NvimTreeToggle<CR>", desc = "Toggle file tree" },
+      { "tf", "<cmd>NvimTreeFindFile<CR>", desc = "Open file tree to current buffer" }
     }
   },
 
   {
-    'stevearc/oil.nvim',
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    opts = {},
-    -- Optional dependencies
-    dependencies = { { "echasnovski/mini.icons", opts = {} } },
-    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
-    lazy = false,
+    "dmtrKovalenko/fff.nvim",
+    build = "nix run .#release",
+    opts = {
+      width = 0.9,
+      prompt = '> '
+    },
     keys = {
-      { "<leader>e", ":Oil --float<CR>", desc = "Open file tree (Oil)" }
-    }
+      {
+        "ff",
+        function()
+          require("fff").find_files() -- or find_in_git_root() if you only want git files
+        end,
+        desc = "Open file picker",
+      },
+    },
   },
 
   {
@@ -65,6 +75,9 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",         -- required
       "sindrets/diffview.nvim",        -- optional - Diff integration
+    },
+    keys = {
+      { "<leader>g", "<cmd>Neogit<CR>", desc = "Open Neogit" }
     }
   },
 

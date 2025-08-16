@@ -1,0 +1,4 @@
+# This file contains Ghostty configuration that is
+# specific to Linux systems.
+
+font-size = 14
