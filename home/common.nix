@@ -6,7 +6,7 @@
 # configurations here are kept minimal so as not to introduce cross-platform
 # incompatibilities.
 
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -24,6 +24,10 @@
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "25.05";
+
+  home.packages = with pkgs; [
+    lazygit # Terminal UI for git commands
+  ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
