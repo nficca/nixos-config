@@ -17,15 +17,17 @@ in
   xdg.configFile =
     lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
       # MacOS
+      "ghostty/darwin".source = "${dotfiles}/ghostty/darwin";
     }
     // lib.attrsets.optionalAttrs pkgs.stdenv.isLinux {
       # Linux
       "Code/User/settings.json".source = "${dotfiles}/vscode/settings.json";
+      "ghostty/linux".source = "${dotfiles}/ghostty/linux";
     }
     // {
       # All platforms
       nvim.source = "${dotfiles}/nvim";
-      ghostty.source = "${dotfiles}/ghostty";
+      "ghostty/config".source = "${dotfiles}/ghostty/config";
       direnv.source = "${dotfiles}/direnv";
       "starship.toml".source = "${dotfiles}/starship/starship.toml";
     };

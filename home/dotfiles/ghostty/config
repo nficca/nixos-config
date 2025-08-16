@@ -1,9 +1,26 @@
 # Ghostty configuration
+#
+# This is the default Ghostty configuration.
+# Read more about configuring Ghostty here:
 # https://ghostty.org/docs/config
+
+# In order to support different settings per
+# platform, we can conditionally load the
+# following configuration files based on whether
+# or not it is present.
+# 
+# We want this because some settings, like
+# `font-size` appear differently even with the
+# same value across different platforms.
+# 
+# Read more about splitting between different
+# files here:
+# https://ghostty.org/docs/config#splitting-into-multiple-files
+config-file = ?linux
+config-file = ?darwin
 
 background-opacity = 0.70
 background-blur = 10
 font-family = "JetBrains Mono"
-font-size = 18
 theme = "GitHub-Dark-High-Contrast"
 keybind = shift+enter=text:\n

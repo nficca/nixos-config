@@ -1,0 +1,4 @@
+# This file contains Ghostty configuration that is
+# specific to Darwin (macOS) systems.
+
+font-size = 18
