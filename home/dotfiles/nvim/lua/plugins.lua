@@ -34,6 +34,7 @@ return {
             {
               pattern = "Neogit*",
               callback = function(args)
+                print("Event!", args)
                 vim.cmd("NvimTreeRefresh")
               end
             }
