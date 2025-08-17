@@ -40,7 +40,16 @@ return {
 
   {
     "dmtrKovalenko/fff.nvim",
+
+    -- You can build this via nix or cargo. Uncomment one of the following:
+    -- build = "cargo build --release"
     build = "nix run .#release",
+    -- You may run into a timeout error when Lazy tries to build this plugin.
+    -- I am not sure where exactly that timeout comes from. If it's from Lazy
+    -- itself, there does not appear to be an option to increase this timeout.
+    -- So if this happens, you can try running the build command directly from
+    -- the plugin directory, which should be ~/.local/share/nvim/lazy/fff.nvim.
+    
     opts = {
       width = 0.9,
       prompt = '> '
