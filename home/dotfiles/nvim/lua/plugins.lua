@@ -27,20 +27,7 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
-      require("nvim-tree").setup {
-        on_attach = function(bufnr)
-          vim.api.nvim_create_autocmd(
-            "User",
-            {
-              pattern = "Neogit*",
-              callback = function(args)
-                print("Event!", args)
-                vim.cmd("NvimTreeRefresh")
-              end
-            }
-          )
-        end
-      }
+      require("nvim-tree").setup {}
       require("which-key").add({
         { "<leader>t", group = "File Tree" }
       })
