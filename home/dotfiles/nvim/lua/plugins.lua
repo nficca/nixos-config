@@ -21,12 +21,12 @@ return {
     config = function()
       require("nvim-tree").setup {}
       require("which-key").add({
-        { "t", group = "File Tree" }
+        { "<leader>t", group = "File Tree" }
       })
     end,
     keys = {
-      { "tt", "<cmd>NvimTreeToggle<CR>", desc = "Toggle file tree" },
-      { "tf", "<cmd>NvimTreeFindFile<CR>", desc = "Open file tree to current buffer" }
+      { "<leader>tt", "<cmd>NvimTreeToggle<CR>", desc = "Toggle file tree" },
+      { "<leader>tf", "<cmd>NvimTreeFindFile<CR>", desc = "Open file tree to current buffer" }
     }
   },
 
@@ -39,7 +39,7 @@ return {
     },
     keys = {
       {
-        "ff",
+        "<leader>f",
         function()
           require("fff").find_files() -- or find_in_git_root() if you only want git files
         end,
