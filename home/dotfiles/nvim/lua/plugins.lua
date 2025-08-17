@@ -32,7 +32,7 @@ return {
           vim.api.nvim_create_autocmd(
             "User",
             {
-              pattern = "NeogitStatusRefreshed",
+              pattern = "Neogit*",
               callback = function(args)
                 vim.cmd("NvimTreeRefresh")
               end
