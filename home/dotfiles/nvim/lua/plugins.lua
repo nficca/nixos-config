@@ -34,7 +34,8 @@ return {
     end,
     keys = {
       { "<leader>tt", "<cmd>NvimTreeToggle<CR>", desc = "Toggle file tree" },
-      { "<leader>tf", "<cmd>NvimTreeFindFile<CR>", desc = "Open file tree to current buffer" }
+      { "<leader>tf", "<cmd>NvimTreeFindFile<CR>", desc = "Open file tree to current buffer" },
+      { "<leader>tr", "<cmd>NvimTreeRefresh<CR>", desc = "Refresh file tree" }
     }
   },
 
