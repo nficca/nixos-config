@@ -30,6 +30,7 @@
             name = "rust";
             packages = [
               evcxr
+              rust-analyzer
             ];
             buildInputs = [
               openssl
