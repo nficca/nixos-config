@@ -109,8 +109,6 @@ return {
     }
   },
 
-  { "voldikss/vim-floaterm" },
-
   {
     "neovim/nvim-lspconfig",
     config = function()
