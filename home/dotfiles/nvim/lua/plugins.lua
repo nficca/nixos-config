@@ -15,7 +15,17 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-      require("lualine").setup()
+      require("lualine").setup({
+        sections = {
+          lualine_x = {
+            {
+              'diagnostics',
+              sources = {'nvim_diagnostic'},
+              symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}
+            }
+          }
+        }
+      })
     end
   },
 
@@ -99,5 +109,33 @@ return {
     }
   },
 
-  { "voldikss/vim-floaterm" }
+  { "voldikss/vim-floaterm" },
+
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require('lspconfig').rust_analyzer.setup({})
+    end
+  },
+
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+    },
+    config = function()
+      local cmp = require('cmp')
+      cmp.setup({
+        mapping = {
+          ['<Tab>'] = cmp.mapping.select_next_item(),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+          ['<Esc>'] = cmp.mapping.abort(),
+        },
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+        })
+      })
+    end
+  }
 }
