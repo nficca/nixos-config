@@ -2,10 +2,16 @@
   description = "FOSSA Core development environment";
 
   inputs = {
-    # This pins nixpkgs to the specific commit containing nodejs 18.20.5.
-    # If you want to change this, it might be useful to use https://lazamar.co.uk/nix-versions/
-    # to find the commit that contains the version you want.
-    nixpkgs.url = "github:NixOS/nixpkgs/c792c60b8a97daa7efe41a6e4954497ae410e0c1";
+    # This pins nixpkgs to a commit containing a specific version of nodejs.
+    # If you want to change this version, it might be useful to use
+    # https://lazamar.co.uk/nix-versions/ to find the commit that contains
+    # the version you want.
+    #
+    # You may additionally have to change the specific package of node that
+    # gets installed (in the packages list in the dev shell) in case the version
+    # you're after is not in the main `nodejs` package but in another one like
+    # `nodejs_18` or similar.
+    nixpkgs.url = "github:NixOS/nixpkgs/882842d2a908700540d206baa79efb922ac1c33d";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -27,7 +33,7 @@
         devShells.default = pkgs.mkShell {
           name = "fossa-core";
           packages = with pkgs; [
-            nodejs_18
+            nodejs
           ];
           buildInputs = [ ];
         };
