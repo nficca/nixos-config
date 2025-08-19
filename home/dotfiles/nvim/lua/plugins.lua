@@ -62,8 +62,12 @@ return {
     -- the plugin directory, which should be ~/.local/share/nvim/lazy/fff.nvim.
     
     opts = {
-      width = 0.9,
-      prompt = '> '
+      prompt = '> ',
+      layout = {
+        width = 0.9,
+        height = 0.8,
+        prompt_position = 'top'
+      }
     },
     keys = {
       {
