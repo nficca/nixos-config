@@ -182,5 +182,7 @@ return {
         desc = "Quickfix List (Trouble)",
       },
     },
-  }
+  },
+
+  { "sphamba/smear-cursor.nvim", opts = {} }
 }
