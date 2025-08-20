@@ -187,5 +187,7 @@ return {
     },
   },
 
-  { "sphamba/smear-cursor.nvim", opts = {} }
+  { "sphamba/smear-cursor.nvim", opts = {} },
+
+  { "mg979/vim-visual-multi" }
 }
