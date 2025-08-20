@@ -117,9 +117,8 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      require('lspconfig').rust_analyzer.setup({
-        capabilities = capabilities,
-      })
+      require('lspconfig').rust_analyzer.setup({ capabilities = capabilities })
+      require('lspconfig').nil_ls.setup({ capabilities = capabilities })
       vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
     end
   },
