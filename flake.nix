@@ -153,6 +153,9 @@
                 autoMigrate = true;
               };
             }
+
+            ./programs/spotify.nix
+            ({ ... }: { myPrograms.spotify.enable = true; })
           ];
         };
     in
