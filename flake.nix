@@ -100,6 +100,7 @@
           specialArgs = {
             inherit username;
             casks = casks ++ extraCasks;
+            helpers = import ./helpers.nix { inherit (nixpkgs) lib; };
           };
           modules = [
             ./configuration/common.nix
@@ -154,8 +155,8 @@
               };
             }
 
-            ./programs/spotify.nix
-            ({ ... }: { myPrograms.spotify.enable = true; })
+            ./programs
+            # ({ ... }: { myPrograms.spotify.enable = true; })
           ];
         };
     in
