@@ -18,6 +18,7 @@
 
   environment.systemPackages = with pkgs; [
     dua # Disk usage analyzer
+    git # Version control system
     vim # Text editor
     wget # Network file downloader
   ];
