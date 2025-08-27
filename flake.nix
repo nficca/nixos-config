@@ -158,7 +158,8 @@
     in
     {
       nixosConfigurations = {
-        "desktop" = mkNixos { modules = [ ./hosts/desktop/hardware-configuration.nix ]; };
+        "desktop" = mkNixos { modules = [ ./hosts/deskop ]; };
+        "hetzner" = mkNixos { modules = [ ./hosts/hetzner ]; };
       };
 
       darwinConfigurations = {
