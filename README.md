@@ -26,10 +26,14 @@ Both of these outputs include several of other modules that together declarative
 
 ### NixOS
 
-1. Make sure your `hostname` is `desktop` and user is `nic`.
-2. Clone this repo to `~/dev/nficca/nixos-config`.
-3. Add a symlink: `sudo ln -s ~/dev/nficca/nixos-config /etc/nixos`
-4. `sudo nixos-rebuild switch`
+If you're starting fresh, you'll want to go through the [official guide](https://nixos.wiki/wiki/NixOS_Installation_Guide). However, once you get to the part where you generate a NixOS config, you can instead do the following:
+
+1. Clone this repo to `/home/nic/dev/nficca/nixos-config`.
+2. Run `nixos-install --flake '/home/nic/dev/nficca/nixos_config/flake.nix#<hostname>'`
+
+Where `hostname` is either one of the existing `nixosConfigurations` (see [./flake.nix](./flake.nix)), or a new one that you add. This should install the configuration. Once that's done, restart and you should be booted right into NixOS proper.
+
+After that, you might want to create a symlink. Remove the existing `/etc/nixos` (make a backup first), and then do `sudo ln -s ~/dev/nficca/nixos-config /etc/nixos`.
 
 ### MacOS
 
