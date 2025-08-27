@@ -34,6 +34,9 @@
 
   # ZSH
   programs.zsh.enable = true;
+  programs.zsh.history.size = 25000;
+  programs.zsh.history.expireDuplicatesFirst = true;
+  programs.zsh.history.ignoreAllDups = true;
   programs.zsh.autosuggestion.enable = true;
 
   # Starship
