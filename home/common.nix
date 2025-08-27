@@ -27,6 +27,7 @@
 
   home.packages = with pkgs; [
     lazygit # Terminal UI for git commands
+    _1password-cli # CLI for 1Password
   ];
 
   # Let Home Manager install and manage itself.
