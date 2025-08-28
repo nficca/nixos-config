@@ -30,7 +30,7 @@
 
 let
   # All immediate entries in the directory.
-  entries = builtins.readDir ../../flakes;
+  entries = builtins.readDir ../../../flakes;
 
   # Filter out file entries. Flakes must be in defined in directories.
   flakes = builtins.filter (name: (builtins.getAttr name entries) == "directory") (

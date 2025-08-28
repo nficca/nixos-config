@@ -1,13 +1,8 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+{ username, pkgs, ... }:
 
 {
-  username,
-  ...
-}:
+  imports = [ ];
 
-{
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${username}" = {
     isNormalUser = true;
@@ -16,7 +11,26 @@
       "networkmanager"
       "wheel"
     ];
+    shell = pkgs.zsh;
   };
+
+  programs.zsh.enable = true;
+  programs.zsh.enableCompletion = true;
+
+  environment.variables = {
+    EDITOR = "vim";
+  };
+
+  environment.systemPackages = with pkgs; [
+    dua # Disk usage analyzer
+    git # Version control system
+    vim # Text editor
+    wget # Network file downloader
+  ];
+
+  fonts.packages = with pkgs; [
+    jetbrains-mono
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
