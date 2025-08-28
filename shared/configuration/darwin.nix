@@ -7,7 +7,11 @@
 {
   imports = [ ];
 
-  users.users."${username}".shell = pkgs.zsh;
+  users.users."${username}" = {
+    home = "/Users/nic";
+    shell = pkgs.zsh;
+  };
+
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
 
@@ -25,12 +29,6 @@
   fonts.packages = with pkgs; [
     jetbrains-mono
   ];
-
-  # This appears to be necessary to get home-manager to work properly on
-  # nix-darwin. On NixOS, we add the home directory in the home-manager
-  # module via `home.homeDirectory`, but this will fail the rebuild on
-  # Darwin.
-  users.users.${username}.home = "/Users/nic";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
