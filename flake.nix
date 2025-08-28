@@ -51,28 +51,16 @@
       # My username is always "nic" on all systems.
       username = "nic";
 
-      # This is the basic list of homebrew casks that will be installed
-      # on all Darwin systems. Additional casks can be added on a per-host
-      # basis.
-      casks = [
-        "google-chrome" # Web browser
-        "1password" # Password manager
-        "slack" # Team communication
-        "ghostty" # Platform-native terminal emulator
-        "visual-studio-code" # Open-source code editor
-        "whatsapp" # Messaging and calling
-      ];
-
       mkNixos =
         {
-          modules ? [ ],
+          config_module,
+          home_module,
         }:
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit username; };
           modules = [
-            ./configuration/common.nix
-            ./configuration/nixos.nix
+            config_module
 
             # Configure home-manager as a module so that it is applied
             # whenever system configuration changes are applied.
@@ -82,28 +70,21 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users."${username}" = {
-                imports = [
-                  ./home/common.nix
-                  ./home/nixos.nix
-                ];
+                imports = [ home_module ];
               };
             }
-          ]
-          ++ modules;
+          ];
         };
 
       mkDarwin =
         {
-          extraCasks ? [ ],
+          config_module,
+          home_module,
         }:
         nix-darwin.lib.darwinSystem {
-          specialArgs = {
-            inherit username;
-            casks = casks ++ extraCasks;
-          };
+          specialArgs = { inherit username; };
           modules = [
-            ./configuration/common.nix
-            ./configuration/darwin.nix
+            config_module
 
             # Configure home-manager as a module so that it is applied
             # whenever system configuration changes are applied.
@@ -116,10 +97,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users."${username}" = {
-                  imports = [
-                    ./home/common.nix
-                    ./home/darwin.nix
-                  ];
+                  imports = [ home_module ];
                 };
               };
             }
@@ -158,22 +136,26 @@
     in
     {
       nixosConfigurations = {
-        "desktop" = mkNixos { modules = [ ./hosts/deskop ]; };
-        "hetzner" = mkNixos { modules = [ ./hosts/hetzner ]; };
+        "desktop" = mkNixos {
+          config_module = ./hosts/desktop/configuration.nix;
+          home_module = ./hosts/desktop/home.nix;
+        };
+
+        "hetzner" = mkNixos {
+          config_module = ./hosts/hetzner/configuration.nix;
+          home_module = ./hosts/hetzner/home.nix;
+        };
       };
 
       darwinConfigurations = {
         "Nics-MacBook-Air" = mkDarwin {
-          extraCasks = [
-            "discord" # Group chat and VoIP application
-            "folx" # Download manager and torrent client
-            "steam" # Video game distribution platform
-          ];
+          config_module = ./hosts/air/configuration.nix;
+          home_module = ./hosts/air/home.nix;
         };
+
         "Nics-MacBook-Pro" = mkDarwin {
-          extraCasks = [
-            "notion" # Note-taking and organization tool
-          ];
+          config_module = ./hosts/pro/configuration.nix;
+          home_module = ./hosts/pro/home.nix;
         };
       };
     };

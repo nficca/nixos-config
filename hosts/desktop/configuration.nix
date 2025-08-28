@@ -1,6 +1,11 @@
 { ... }:
 
 {
+  imports = [
+    ./hardware-configuration.nix
+    ../../shared/configuration/nixos.nix
+  ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
