@@ -16,3 +16,6 @@ vim.cmd.colorscheme('github_dark_default');
 vim.opt.termguicolors = true;
 vim.opt.winblend = 10;
 vim.opt.pumblend = 10;
+
+-- line length
+vim.opt.colorcolumn = '80';
