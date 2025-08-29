@@ -31,6 +31,9 @@
     _1password-cli # CLI for 1Password
     jless # JSON viewer
     lazygit # Terminal UI for git commands
+
+    # Language Servers
+    vscode-langservers-extracted
   ];
 
   # Let Home Manager install and manage itself.
