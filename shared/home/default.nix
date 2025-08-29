@@ -34,6 +34,7 @@
 
     # Language Servers
     vscode-langservers-extracted
+    lua-language-server
   ];
 
   # Let Home Manager install and manage itself.

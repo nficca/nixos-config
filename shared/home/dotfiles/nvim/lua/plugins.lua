@@ -12,6 +12,25 @@ return {
   },
 
   {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "master",
+    lazy = false,
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = { "rust", "html", "css", "javascript", "json", "typescript" },
+        auto_install = true,
+        sync_install = false,
+        ignore_install = {},
+        highlight = {
+          enable = true
+        },
+        modules = {},
+      })
+    end
+  },
+
+  {
     "nvim-lualine/lualine.nvim",
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
@@ -26,8 +45,8 @@ return {
           lualine_x = {
             {
               'diagnostics',
-              sources = {'nvim_diagnostic'},
-              symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}
+              sources = { 'nvim_diagnostic' },
+              symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' }
             }
           }
         }
@@ -49,9 +68,9 @@ return {
       })
     end,
     keys = {
-      { "<leader>tt", "<cmd>NvimTreeToggle<CR>", desc = "Toggle file tree" },
+      { "<leader>tt", "<cmd>NvimTreeToggle<CR>",   desc = "Toggle file tree" },
       { "<leader>tf", "<cmd>NvimTreeFindFile<CR>", desc = "Open file tree to current buffer" },
-      { "<leader>tr", "<cmd>NvimTreeRefresh<CR>", desc = "Refresh file tree" }
+      { "<leader>tr", "<cmd>NvimTreeRefresh<CR>",  desc = "Refresh file tree" }
     }
   },
 
@@ -66,7 +85,7 @@ return {
     -- itself, there does not appear to be an option to increase this timeout.
     -- So if this happens, you can try running the build command directly from
     -- the plugin directory, which should be ~/.local/share/nvim/lazy/fff.nvim.
-    
+
     opts = {
       prompt = '> ',
       layout = {
@@ -111,8 +130,8 @@ return {
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "sindrets/diffview.nvim",        -- optional - Diff integration
+      "nvim-lua/plenary.nvim",  -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
     },
     keys = {
       { "<leader>g", "<cmd>Neogit<CR>", desc = "Open Neogit" }
@@ -126,6 +145,33 @@ return {
       local lspconfig = require('lspconfig');
       lspconfig.rust_analyzer.setup({ capabilities = capabilities })
       lspconfig.nil_ls.setup({ capabilities = capabilities })
+      lspconfig.lua_ls.setup({
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            runtime = {
+              -- Tell the language server which version of Lua you're using
+              -- (most likely LuaJIT in the case of Neovim)
+              version = 'LuaJIT',
+            },
+            diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = {
+                'vim',
+                'require'
+              },
+            },
+            workspace = {
+              -- Make the server aware of Neovim runtime files
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+              enable = false,
+            },
+          }
+        }
+      })
       lspconfig.html.setup({ capabilities = capabilities })
       vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
     end
@@ -197,5 +243,19 @@ return {
 
   { "sphamba/smear-cursor.nvim", opts = {} },
 
-  { "mg979/vim-visual-multi" }
+  { "mg979/vim-visual-multi" },
+
+  {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require('nvim-ts-autotag').setup({
+        opts = {
+          -- Defaults
+          enable_close = true,          -- Auto close tags
+          enable_rename = true,         -- Auto rename pairs of tags
+          enable_close_on_slash = false -- Auto close on trailing </
+        }
+      })
+    end
+  }
 }
