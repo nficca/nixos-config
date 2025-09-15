@@ -75,34 +75,20 @@ return {
   },
 
   {
-    "dmtrKovalenko/fff.nvim",
-
-    -- You can build this via nix or cargo. Uncomment one of the following:
-    -- build = "cargo build --release"
-    build = "nix run .#release",
-    -- You may run into a timeout error when Lazy tries to build this plugin.
-    -- I am not sure where exactly that timeout comes from. If it's from Lazy
-    -- itself, there does not appear to be an option to increase this timeout.
-    -- So if this happens, you can try running the build command directly from
-    -- the plugin directory, which should be ~/.local/share/nvim/lazy/fff.nvim.
-
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
+    dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
-      prompt = '> ',
-      layout = {
-        width = 0.9,
-        height = 0.8,
-        prompt_position = 'top'
-      }
-    },
-    keys = {
-      {
-        "<leader>f",
-        function()
-          require("fff").find_files() -- or find_in_git_root() if you only want git files
-        end,
-        desc = "Open file picker",
+      defaults = {
+        layout_strategy = "horizontal",
+        layout_config = { width = 0.9, height = 0.9, prompt_position = "top" },
+        sorting_strategy = "ascending"
       },
     },
+    keys = {
+      { "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Open file picker" },
+      { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Grep text in files" }
+    }
   },
 
   {
