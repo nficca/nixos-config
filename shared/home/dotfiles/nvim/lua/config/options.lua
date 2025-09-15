@@ -18,4 +18,5 @@ vim.opt.winblend = 10;
 vim.opt.pumblend = 10;
 
 -- line length
-vim.opt.colorcolumn = '81';
+vim.opt.textwidth = 80;
+vim.opt.colorcolumn = '+1';
