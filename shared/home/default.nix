@@ -31,6 +31,7 @@
     _1password-cli # CLI for 1Password
     jless # JSON viewer
     lazygit # Terminal UI for git commands
+    maestral # Dropbox client
 
     # Language Servers
     vscode-langservers-extracted
