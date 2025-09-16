@@ -18,6 +18,7 @@
       "discord" # Group chat and VoIP application
       "folx" # Download manager and torrent client
       "steam" # Video game distribution platform
+      "mullvad-vpn" # Privacy-focused VPN
     ];
   };
 }
