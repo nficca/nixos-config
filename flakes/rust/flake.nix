@@ -40,6 +40,9 @@
                 targets = [ "wasm32-unknown-unknown" ];
               })
             ];
+            shellHook = ''
+              export PATH="$HOME/.cargo/bin:$PATH"
+            '';
           };
         RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
       }
