@@ -6,6 +6,9 @@
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
   "editor.renderWhitespace": "boundary",
+  "editor.rulers": [
+    80
+  ],
   "editor.semanticHighlighting.enabled": true,
   "editor.tabSize": 2,
   "extensions.ignoreRecommendations": true,
