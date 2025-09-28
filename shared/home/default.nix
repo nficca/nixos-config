@@ -32,6 +32,7 @@
     jless # JSON viewer
     lazygit # Terminal UI for git commands
     maestral # Dropbox client
+    cmake # Cross-platform build system generator
 
     # Language Servers
     vscode-langservers-extracted
