@@ -33,6 +33,7 @@
     lazygit # Terminal UI for git commands
     maestral # Dropbox client
     cmake # Cross-platform build system generator
+    claude-code # Terminal-based LLM agent
 
     # Language Servers
     vscode-langservers-extracted
