@@ -34,6 +34,7 @@
     maestral # Dropbox client
     cmake # Cross-platform build system generator
     claude-code # Terminal-based LLM agent
+    libclang # C language tools
 
     # Language Servers
     vscode-langservers-extracted
