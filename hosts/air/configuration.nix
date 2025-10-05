@@ -19,6 +19,7 @@
       "folx" # Download manager and torrent client
       "steam" # Video game distribution platform
       "mullvad-vpn" # Privacy-focused VPN
+      "affinity-designer" # Professional graphic design software
     ];
   };
 }
