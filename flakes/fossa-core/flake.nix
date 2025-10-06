@@ -2,16 +2,7 @@
   description = "FOSSA Core development environment";
 
   inputs = {
-    # This pins nixpkgs to a commit containing a specific version of nodejs.
-    # If you want to change this version, it might be useful to use
-    # https://lazamar.co.uk/nix-versions/ to find the commit that contains
-    # the version you want.
-    #
-    # You may additionally have to change the specific package of node that
-    # gets installed (in the packages list in the dev shell) in case the version
-    # you're after is not in the main `nodejs` package but in another one like
-    # `nodejs_18` or similar.
-    nixpkgs.url = "github:NixOS/nixpkgs/882842d2a908700540d206baa79efb922ac1c33d";
+    nixpkgs.url = "github:NixOS/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -25,17 +16,43 @@
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = import nixpkgs {
-          inherit system;
-        };
+        pkgs = import nixpkgs { inherit system; };
+
+        availableNode =
+          if pkgs.lib.hasAttr "nodejs-22_x" pkgs then
+            pkgs.nodejs-22_x
+          else if pkgs.lib.hasAttr "nodejs_22" pkgs then
+            pkgs.nodejs_22
+          else if pkgs.lib.hasAttr "nodejs" pkgs then
+            pkgs.nodejs
+          else
+            null;
+
+        # If the selected package supports overrideAttrs we set version+src; otherwise we just use it as-is.
+        node =
+          if availableNode == null then
+            abort "no nodejs package found in this nixpkgs"
+          else if pkgs.lib.hasAttr "overrideAttrs" availableNode then
+            availableNode.overrideAttrs (old: {
+              version = "22.18.0";
+              src = pkgs.fetchurl {
+                url = "https://nodejs.org/dist/v22.18.0/node-v22.18.0.tar.gz";
+                # fill the sha256 if you want nix to fetch/verify the source.
+                sha256 = "26247ff9a75ac13f6dac7e07dca6172314554dcf20761675c5435f1e84e6c4b2";
+              };
+            })
+          else
+            # last-resort: use the package as-is (likely already the correct major)
+            availableNode;
       in
       {
+        packages.default = node;
+
+        defaultPackage = self.packages.${system}.default;
+
         devShells.default = pkgs.mkShell {
           name = "fossa-core";
-          packages = with pkgs; [
-            nodejs
-          ];
-          buildInputs = [ ];
+          buildInputs = [ node ];
         };
       }
     );
