@@ -76,6 +76,10 @@
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
 
+  # Zoxide
+  programs.zoxide.enable = true;
+  programs.zoxide.enableZshIntegration = true;
+
   # Git
   programs.git.enable = true;
   programs.git.userEmail = "nicficca@gmail.com";
