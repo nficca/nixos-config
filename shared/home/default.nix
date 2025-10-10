@@ -82,6 +82,7 @@
 
   # Git
   programs.git.enable = true;
+  programs.git.lfs.enable = true;
   programs.git.userEmail = "nicficca@gmail.com";
   programs.git.userName = "Nic Ficca";
   programs.git.extraConfig.init.defaultBranch = "main";
