@@ -19,6 +19,7 @@
     "**/.cargo/git/checkouts/**/*.rs": true,
     "**/lib/rustlib/src/rust/library/**/*.rs": true
   },
+  "haskell.formattingProvider": "fourmolu",
   "workbench.colorTheme": "GitHub Dark High Contrast",
   "workbench.colorCustomizations": {
     "[GitHub Dark High Contrast]": {
@@ -42,5 +43,5 @@
   "rust-analyzer.inlayHints.typeHints.enable": false,
   "[rust]": {
     "editor.tabSize": 4
-  }
+  },
 }
