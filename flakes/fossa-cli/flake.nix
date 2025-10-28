@@ -40,6 +40,7 @@
             buildInputs = [
               haskellPackages.lzma
               xz.dev
+              libiconv
               openssl
               pkg-config
               bzip2
