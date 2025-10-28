@@ -36,6 +36,7 @@
               haskell-language-server
               haskellPackages.fourmolu
               haskellPackages.cabal-fmt
+              haskellPackages.hlint
             ];
             buildInputs = [
               haskellPackages.lzma
