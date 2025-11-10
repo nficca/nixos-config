@@ -2,11 +2,10 @@ return {
   "neovim/nvim-lspconfig",
   config = function()
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
-    local lspconfig = require('lspconfig');
-    lspconfig.rust_analyzer.setup({ capabilities = capabilities })
-    lspconfig.nil_ls.setup({ capabilities = capabilities })
-    lspconfig.lua_ls.setup({
-      capabilities = capabilities,
+
+    vim.lsp.config("*", { capabilities = capabilities })
+
+    vim.lsp.config("lua_ls", {
       settings = {
         Lua = {
           runtime = {
@@ -32,8 +31,13 @@ return {
         }
       }
     })
-    lspconfig.html.setup({ capabilities = capabilities })
-    lspconfig.cssls.setup({ capabilities = capabilities })
-    vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
+
+    vim.lsp.enable({
+      "rust_analyzer",
+      "nil_ls",
+      "html",
+      "cssls",
+      "lua_ls"
+    })
   end
 }

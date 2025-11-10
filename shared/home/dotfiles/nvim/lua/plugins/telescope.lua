@@ -13,9 +13,5 @@ return {
         sorting_strategy = "ascending"
       },
     })
-  end,
-  keys = {
-    { "<leader>ff", "<cmd>Telescope frecency workspace=CWD<CR>", desc = "Find files" },
-    { "<leader>fg", "<cmd>Telescope live_grep<CR>",  desc = "Find text in files" }
-  }
+  end
 }
