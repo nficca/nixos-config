@@ -6,15 +6,18 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   config = function()
-    require("nvim-tree").setup {}
+    require("nvim-tree").setup {
+      diagnostics = {
+        enable = true,
+        show_on_dirs = true,
+        show_on_open_dirs = true
+      },
+      modified = {
+        enable = true,
+        show_on_dirs = true,
+        show_on_open_dirs = true
+      },
+    }
   end,
-  keys = {
-    { "<leader>tt", "<cmd>NvimTreeToggle<CR>",  desc = "Toggle file tree" },
-    {
-      "<leader>tf",
-      "<cmd>NvimTreeFindFile<CR>",
-      desc = "Open file tree to current buffer"
-    },
-    { "<leader>tr", "<cmd>NvimTreeRefresh<CR>", desc = "Refresh file tree" }
-  }
 }
+

@@ -20,3 +20,6 @@ vim.opt.pumblend = 10;
 -- line length
 vim.opt.textwidth = 80;
 vim.opt.colorcolumn = '+1';
+
+-- diagnostics
+vim.diagnostic.config({ virtual_lines = true })

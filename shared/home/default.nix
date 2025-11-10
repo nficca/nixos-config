@@ -85,10 +85,13 @@
   # Git
   programs.git.enable = true;
   programs.git.lfs.enable = true;
-  programs.git.userEmail = "nicficca@gmail.com";
-  programs.git.userName = "Nic Ficca";
-  programs.git.extraConfig.init.defaultBranch = "main";
-  programs.git.delta.enable = true;
+  programs.git.settings.user.email = "nicficca@gmail.com";
+  programs.git.settings.user.name = "Nic Ficca";
+  programs.git.settings.init.defaultBranch = "main";
+
+  # Delta
+  programs.delta.enable = true;
+  programs.delta.enableGitIntegration = true;
 
   # Github CLI
   programs.gh.enable = true;
