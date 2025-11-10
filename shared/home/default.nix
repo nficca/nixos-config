@@ -36,9 +36,11 @@
     claude-code # Terminal-based LLM agent
     libclang # C language tools
 
-    # Language Servers
+    ## Common language support packages ##
     vscode-langservers-extracted
     lua-language-server
+    nil
+    nixfmt-rfc-style
   ];
 
   # Let Home Manager install and manage itself.
