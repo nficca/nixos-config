@@ -37,7 +37,8 @@ return {
       "nil_ls",
       "html",
       "cssls",
-      "lua_ls"
+      "lua_ls",
+      "golangci_lint_ls",
     })
   end
 }
