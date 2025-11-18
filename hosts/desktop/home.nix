@@ -18,6 +18,7 @@
     discord # Group chat
     ldtk # 2D level editor
     aseprite # Pixel art editor
+    heaptrack # Heap memory profiler
   ];
 
   # Ghostty
