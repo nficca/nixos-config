@@ -20,6 +20,7 @@
     aseprite # Pixel art editor
     heaptrack # Heap memory profiler
     postgresql # Relational database system
+    mullvad-browser # Privacy-focused web browser
   ];
 
   # Ghostty
