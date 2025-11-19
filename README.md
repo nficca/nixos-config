@@ -32,11 +32,12 @@ declaratively configure their corresponding system.
 
 ## Usage
 
+There are derivations for both NixOS and Darwin (macOS) systems.
+
 > [!WARNING]
-> At the time of writing this, I have yet to actually try building a fresh
-> system from these configurations. It's important to note that these
-> instructions are currently a from-memory reconstruction of the steps needed to
-> get up and running with these configs.
+> This is not a configuration meant for generic use. **If you are not me, then
+> this won't work**. If you like this config, I suggest you pick out the
+> specific parts you like and adapt them for your own config.
 
 ### NixOS
 
@@ -65,10 +66,6 @@ After that, you might want to create a symlink. Remove the existing `/etc/nixos`
    prerequisites](https://github.com/nix-darwin/nix-darwin?tab=readme-ov-file#prerequisites).
 3. Clone this repo to `~/dev/nficca/nixos-config`.
 4. Run `sudo ln -s ~/dev/nficca/nixos-config /etc/nix-darwin`
-4. Run `sudo nix run nix-darwin/master#darwin-rebuild -- switch`.
-5. Then you should be safe to run `sudo darwin-rebuild switch`.
-
-> [!NOTE]
-> Please submit a pull-request to amend these steps with any necessary
-> corrections should they be identified while following the steps.
+5. Run `sudo nix run nix-darwin/master#darwin-rebuild -- switch`.
+6. Then you should be safe to run `sudo darwin-rebuild switch`.
 
