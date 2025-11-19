@@ -25,11 +25,12 @@
 # Where the `flake-name` is the name of the sub-directory in `dev-flakes`
 # containing the flake.
 
-{ lib, dev-flakes, ... }:
+{ lib, dev-flakes ? null, ... }:
 
 let
   # All immediate entries in the dev-flakes input directory.
-  entries = builtins.readDir dev-flakes;
+  # If dev-flakes is not available (e.g., during bootstrap), use empty set.
+  entries = if dev-flakes != null then builtins.readDir dev-flakes else {};
 
   # Filter out file entries. Flakes must be in defined in directories.
   flakes = builtins.filter (name: (builtins.getAttr name entries) == "directory") (

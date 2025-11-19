@@ -20,6 +20,8 @@ packages
 - `nix-darwin` - a collection of modules than can declaratively configure macOS
 - `home-manager` - a collection of modules that can declaritively configure user
 (non-global) packages and dotfiles
+- `dev-flakes` - a private repository containing project-specific development
+flakes
 - and others
 
 The outputs are generated as a function of the inputs. The two most important
@@ -47,16 +49,19 @@ to the part where you generate a NixOS config, you can instead do the following:
 
 1. Clone this repo to `/home/nic/dev/nficca/nixos-config`.
 2. Run `nixos-install --flake
-   '/home/nic/dev/nficca/nixos_config/flake.nix#<hostname>'`
+   '/home/nic/dev/nficca/nixos_config/flake.nix#<hostname>' --override-input
+   dev-flakes path:/home/nic/dev/nficca/nixos-config/.empty`
 
 Where `hostname` is either one of the existing `nixosConfigurations` (see
-[./flake.nix](./flake.nix)), or a new one that you add. This should install the
-configuration. Once that's done, restart and you should be booted right into
-NixOS proper.
+[./flake.nix](./flake.nix)), or a new one that you add. The `--override-input`
+flag allows the build to succeed even without SSH access to the private
+`dev-flakes` repository.
 
-After that, you might want to create a symlink. Remove the existing `/etc/nixos`
-(make a backup first), and then do `sudo ln -s ~/dev/nficca/nixos-config
-/etc/nixos`.
+3. Create a symlink. Remove the existing `/etc/nixos`, and then: `sudo ln -s
+   ~/dev/nficca/nixos-config`.
+4. Update the flake to use the real dev-flakes: `nix flake update dev-flakes`.
+5. Now you should be all set and can rebuild when desired: `nixos-rebuild
+   switch`
 
 ### MacOS
 
@@ -66,6 +71,19 @@ After that, you might want to create a symlink. Remove the existing `/etc/nixos`
    prerequisites](https://github.com/nix-darwin/nix-darwin?tab=readme-ov-file#prerequisites).
 3. Clone this repo to `~/dev/nficca/nixos-config`.
 4. Run `sudo ln -s ~/dev/nficca/nixos-config /etc/nix-darwin`
-5. Run `sudo nix run nix-darwin/master#darwin-rebuild -- switch`.
-6. Then you should be safe to run `sudo darwin-rebuild switch`.
+5. Run the initial build with the empty dev-flakes fallback:
 
+```bash
+sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake ~/dev/nficca/nixos-config --override-input dev-flakes path:./.empty
+```
+
+The `--override-input` flag allows the build to succeed even without SSH access
+to the private `dev-flakes` repository.
+
+6. Once that's done, you can update the flake to use the real dev-flakes:
+
+```bash
+cd ~/dev/nficca/nixos-config
+nix flake update dev-flakes
+sudo darwin-rebuild switch
+```

@@ -1,0 +1,3 @@
+# Empty directory used as fallback for dev-flakes input during bootstrap
+# When SSH keys aren't available yet, use: 
+# --override-input dev-flakes path:./.empty
