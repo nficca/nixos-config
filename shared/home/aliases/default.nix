@@ -3,7 +3,9 @@
 {
   home.shellAliases = {
     # Git
+    ga = "git add";
     gaa = "git add --all";
+    gap = "git add --patch";
     gc = "git commit --verbose";
     gcb = "git checkout -b";
     gco = "git checkout";
