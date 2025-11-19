@@ -19,6 +19,7 @@
     ldtk # 2D level editor
     aseprite # Pixel art editor
     heaptrack # Heap memory profiler
+    postgresql # Relational database system
   ];
 
   # Ghostty
