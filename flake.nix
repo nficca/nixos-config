@@ -35,6 +35,12 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+
+    # Private development flakes for project-specific environments.
+    dev-flakes = {
+      url = "git+ssh://git@github.com/nficca/nixos-flakes.git";
+      flake = false;
+    };
   };
 
   outputs =
@@ -45,6 +51,7 @@
       nix-homebrew,
       homebrew-core,
       homebrew-cask,
+      dev-flakes,
       ...
     }:
     let
@@ -66,7 +73,7 @@
             # whenever system configuration changes are applied.
             home-manager.nixosModules.home-manager
             {
-              home-manager.extraSpecialArgs = { inherit username; };
+              home-manager.extraSpecialArgs = { inherit username dev-flakes; };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users."${username}" = {
@@ -93,7 +100,7 @@
             home-manager.darwinModules.home-manager
             {
               home-manager = {
-                extraSpecialArgs = { inherit username; };
+                extraSpecialArgs = { inherit username dev-flakes; };
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users."${username}" = {

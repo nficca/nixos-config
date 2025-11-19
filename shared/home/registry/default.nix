@@ -1,11 +1,11 @@
 # This module creates a user-level flakes registry based on the flakes
-# defined in the `flakes` directory.
+# defined in the `dev-flakes` input.
 #
-# The flakes directory should contain one directory for each flake,
-# where the name of the directory is the name of the flake. E.g.
+# The `dev-flakes` input should be a directory containing one subdirectory for
+# each flake, where the name of the directory is the name of the flake. E.g.
 #
 # ```
-# flakes
+# dev-flakes
 # ├── haskell
 # │   ├── flake.lock
 # │   └── flake.nix
@@ -22,15 +22,14 @@
 # ```
 # nix develop <flake-name>
 # ```
-# Where the `flake-name` is the name of the sub-directory in `flakes/`
-# containing the flake. E.g., `nix develop rust` will enter the rust
-# development environment defined in `flakes/rust/flake.nix`.
+# Where the `flake-name` is the name of the sub-directory in `dev-flakes`
+# containing the flake.
 
-{ config, lib, ... }:
+{ lib, dev-flakes, ... }:
 
 let
-  # All immediate entries in the directory.
-  entries = builtins.readDir ../../../flakes;
+  # All immediate entries in the dev-flakes input directory.
+  entries = builtins.readDir dev-flakes;
 
   # Filter out file entries. Flakes must be in defined in directories.
   flakes = builtins.filter (name: (builtins.getAttr name entries) == "directory") (
@@ -46,7 +45,7 @@ let
     };
     to = {
       type = "path";
-      path = "${config.home.homeDirectory}/dev/nficca/nixos-config/flakes/${name}";
+      path = "${dev-flakes}/${name}";
     };
   };
 in

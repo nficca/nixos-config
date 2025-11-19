@@ -17,6 +17,22 @@
         "type": "github"
       }
     },
+    "dev-flakes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1763562999,
+        "narHash": "sha256-eUR94Ne5PpNHobXPKqkqBZT7p2KCrAnnaTvBf0X4/qk=",
+        "ref": "refs/heads/main",
+        "rev": "8fcbdb06861d02b0f1c5013196e965a879397803",
+        "revCount": 2,
+        "type": "git",
+        "url": "ssh://git@github.com/nficca/nixos-flakes.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/nficca/nixos-flakes.git"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -126,6 +142,7 @@
     },
     "root": {
       "inputs": {
+        "dev-flakes": "dev-flakes",
         "home-manager": "home-manager",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",

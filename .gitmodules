@@ -1,3 +1,0 @@
-[submodule "flakes"]
-	path = flakes
-	url = git@github.com:nficca/nixos-flakes.git
