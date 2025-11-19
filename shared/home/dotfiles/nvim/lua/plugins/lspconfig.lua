@@ -39,6 +39,7 @@ return {
       "cssls",
       "lua_ls",
       "golangci_lint_ls",
+      "gopls",
     })
   end
 }
