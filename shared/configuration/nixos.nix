@@ -10,6 +10,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "podman"
     ];
     shell = pkgs.zsh;
   };
@@ -41,6 +42,16 @@
     "flakes"
     "pipe-operators"
   ];
+
+  # Manage containers, pods, and images with podman.
+  # A drop-in replacement for docker.
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+
+    # Required for containers under podman-compose to be able to communicate
+    defaultNetwork.settings.dns_enabled = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
