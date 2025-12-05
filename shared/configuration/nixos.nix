@@ -27,6 +27,7 @@
     git # Version control system
     vim # Text editor
     wget # Network file downloader
+    perf # Linux profiling with performance counters
   ];
 
   fonts.packages = with pkgs; [
