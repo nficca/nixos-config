@@ -21,6 +21,7 @@
     heaptrack # Heap memory profiler
     postgresql # Relational database system
     mullvad-browser # Privacy-focused web browser
+    podman-compose # Docker-compose with podman
   ];
 
   # Ghostty
