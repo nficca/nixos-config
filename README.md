@@ -90,33 +90,28 @@ sudo darwin-rebuild switch
 
 ## Wireguard
 
-If you have a wireguard interface configuration, I've found that the easiest way
-to set it up is to do this is the following:
+If you want to connect to a VPN via Wireguard, I've found that the easiest way
+to set this up is to do this is the following, assuming you already have the
+config file for the Wireguard interface:
 
-1. Copy the config file to `/etc/wireguard` like so:
+1. Copy the config file somewhere on the machine. I like:  `/etc/wireguard`:
 ```sh
 sudo mkdir -p /etc/wireguard
 sudo chmod 700 /etc/wireguard
 sudo cp my-interface.conf /etc/wireguard/my-interface.conf
 sudo chmod 600 /etc/wireguard/my-interface.conf
 ```
-2. Then, in the appropriate NixOS host's `configuration.nix`:
+2. Then make sure `networkmanager` and `wireguard` are enabled in the relevant
+   host's `configuration.nix`:
 ```nix
-{ config, pkgs, ... }:
-
-{
-  networking.wg-quick.interfaces."my-interface" = {
-    configFile = "/etc/wireguard/my-interface.conf";
-    autostart = false; # set true if you want it always on
-  };
-}
+networking.networkmanager.enable = true;
+networking.wireguard.enable = true;
 ```
-3. Finally, make sure you have `wg-quick` installed (it's in `wireguard-tools`),
-   and after reloading the nix system, you should be able to do the following:
+3. After doing a `sudo nixos-rebuild switch`, you can run the following import
+   the interface:
 ```sh
-# boot up the interface
-wg-quick up my-interface
-
-# shut down the interface
-wg-quick down my-interface
+sudo nmcli connection import type wireguard file /etc/wireguard/my-interface.conf
 ```
+
+You should now be connected to the interface, and can disconnect and reconnect
+via the network manager interface or CLI.
