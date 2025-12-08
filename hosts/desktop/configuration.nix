@@ -71,9 +71,24 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Enable VPN
+  # Enable Mullvad VPN; this is a paid private VPN service for personal use.
+  # See: https://mullvad.net/en
   services.mullvad-vpn.enable = true;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
+
+  # Configure wireguard network interfaces.
+  networking.wg-quick.interfaces = {
+    # This is the configuration I use for my work at FOSSA.
+    fossa = {
+      # If you are me, you can find this config file in my employee 1Password
+      # vault. If you are not me, or if you are me but you don't work at FOSSA
+      # anymore, you should just delete this interface.
+      configFile = "/etc/wireguard/fossa.conf";
+      # Don't automatically start the interface on boot.
+      # We can manually start it when needed via `wg-quick up fossa`.
+      autostart = false;
+    };
+  };
 
   # Install Steam
   # Ideally this would be done via home-manager or otherwise not

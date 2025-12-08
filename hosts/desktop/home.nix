@@ -22,6 +22,7 @@
     postgresql # Relational database system
     mullvad-browser # Privacy-focused web browser
     podman-compose # Docker-compose with podman
+    wireguard-tools # Tools for WireGuard VPN
   ];
 
   # Ghostty

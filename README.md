@@ -87,3 +87,36 @@ cd ~/dev/nficca/nixos-config
 nix flake update dev-flakes
 sudo darwin-rebuild switch
 ```
+
+## Wireguard
+
+If you have a wireguard interface configuration, I've found that the easiest way
+to set it up is to do this is the following:
+
+1. Copy the config file to `/etc/wireguard` like so:
+```sh
+sudo mkdir -p /etc/wireguard
+sudo chmod 700 /etc/wireguard
+sudo cp my-interface.conf /etc/wireguard/my-interface.conf
+sudo chmod 600 /etc/wireguard/my-interface.conf
+```
+2. Then, in the appropriate NixOS host's `configuration.nix`:
+```nix
+{ config, pkgs, ... }:
+
+{
+  networking.wg-quick.interfaces."my-interface" = {
+    configFile = "/etc/wireguard/my-interface.conf";
+    autostart = false; # set true if you want it always on
+  };
+}
+```
+3. Finally, make sure you have `wg-quick` installed (it's in `wireguard-tools`),
+   and after reloading the nix system, you should be able to do the following:
+```sh
+# boot up the interface
+wg-quick up my-interface
+
+# shut down the interface
+wg-quick down my-interface
+```
