@@ -23,6 +23,7 @@
     mullvad-browser # Privacy-focused web browser
     podman-compose # Docker-compose with podman
     wireguard-tools # Tools for WireGuard VPN
+    pgcli # Postgres client interface
   ];
 
   # Ghostty
