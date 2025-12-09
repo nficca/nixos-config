@@ -24,6 +24,7 @@
     podman-compose # Docker-compose with podman
     wireguard-tools # Tools for WireGuard VPN
     pgcli # Postgres client interface
+    kdePackages.ktorrent # BitTorrent client
   ];
 
   # Ghostty
