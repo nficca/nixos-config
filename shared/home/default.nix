@@ -70,6 +70,15 @@
     export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
   '';
 
+  programs.zsh.plugins = [
+    # Use vi features in zsh
+    {
+      name = "vi-mode";
+      src = pkgs.zsh-vi-mode;
+      file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+    }
+  ];
+
   # Starship
   programs.starship.enable = true;
   programs.starship.enableZshIntegration = true;
