@@ -14,17 +14,17 @@
   # Install packages
   home.packages = with pkgs; [
     _1password-gui # Password manager
-    slack # Team communication
-    discord # Group chat
-    ldtk # 2D level editor
     aseprite # Pixel art editor
+    discord # Group chat
     heaptrack # Heap memory profiler
-    postgresql # Relational database system
-    mullvad-browser # Privacy-focused web browser
-    podman-compose # Docker-compose with podman
-    wireguard-tools # Tools for WireGuard VPN
-    pgcli # Postgres client interface
     kdePackages.ktorrent # BitTorrent client
+    ldtk # 2D level editor
+    mullvad-browser # Privacy-focused web browser
+    pgcli # Postgres client interface
+    podman-compose # Docker-compose with podman
+    postgresql # Relational database system
+    slack # Team communication
+    wireguard-tools # Tools for WireGuard VPN
   ];
 
   # Ghostty
