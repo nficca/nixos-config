@@ -87,6 +87,9 @@
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
 
+  # Ripgrep
+  programs.ripgrep.enable = true;
+
   # Zoxide
   programs.zoxide.enable = true;
   programs.zoxide.enableZshIntegration = true;
