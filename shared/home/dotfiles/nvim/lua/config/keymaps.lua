@@ -47,3 +47,4 @@ vim.keymap.set("n", "<leader>fr", "<cmd>Telescope lsp_references<CR>", { desc = 
 
 -- Tree sitter keymaps --
 -- Tree sitter keymaps are in the plugin configuration for treesitter.
+
