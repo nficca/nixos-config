@@ -1,4 +1,12 @@
+-- WhichKey shows you available keybindings as a popup
+local which_key = require("which-key")
+vim.keymap.set("n", "<leader>?", function()
+  which_key.show({ global = false })
+end, { desc = "Show local keymaps" })
+
 -- Language server keymaps --
+which_key.add({ "<leader>l", group = "Language server tools"})
+
 vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Jump to definition" })
 vim.keymap.set("n", "<leader>lf", function()
@@ -6,6 +14,8 @@ vim.keymap.set("n", "<leader>lf", function()
 end, { desc = "Format code" })
 
 -- Diagnostics keymaps --
+which_key.add({ "<leader>x", group = "Diagnostics" })
+
 -- Toggles diagnostics between:
 --   - separate lines (virtual_lines)
 --   - inline text (virtual_text)
@@ -37,6 +47,7 @@ vim.keymap.set("n", "<leader>xt", toggle_diagnostics, { desc = "Toggle inline di
 vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle Trouble" })
 
 -- Neogit keymaps --
+-- which_key.add({ "<leader>g", group = "Git" })
 vim.keymap.set("n", "<leader>g", "<cmd>Neogit<CR>", { desc = "Git" })
 
 -- Oil keymaps (file tree editor) --
@@ -49,6 +60,8 @@ end
 vim.keymap.set("n", "<leader>o", oil_open_float, { desc = "Open Oil (file tree editor)" })
 
 -- Telescope keymaps --
+which_key.add({ "<leader>f", group = "Find things" })
+
 local frecency = require("telescope").extensions.frecency
 local telescope = require("telescope.builtin")
 
