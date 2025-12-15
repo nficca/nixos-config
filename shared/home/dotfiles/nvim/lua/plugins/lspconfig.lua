@@ -22,7 +22,7 @@ return {
           },
           workspace = {
             library = vim.list_extend(
-              -- Make the server aware of Neovim runtime files
+            -- Make the server aware of Neovim runtime files
               vim.api.nvim_get_runtime_file("", true),
               -- Lazy plugins are installed into the standard nvim data path
               -- under the `/lazy` directory. LuaLS should be made aware of them
@@ -33,6 +33,21 @@ return {
           -- Do not send telemetry data containing a randomized but unique identifier
           telemetry = {
             enable = false,
+          },
+        }
+      }
+    })
+
+    vim.lsp.config("rust_analyzer", {
+      settings = {
+        ["rust-analyzer"] = {
+          inlayHints = {
+            bindingModeHints = { enable = true },
+            chainingHints = { enable = true },
+            closureReturnTypeHints = { enable = "always" },
+            lifetimeElisionHints = { enable = "always" },
+            typeHints = { enable = true },
+            parameterHints = { enable = true },
           },
         }
       }

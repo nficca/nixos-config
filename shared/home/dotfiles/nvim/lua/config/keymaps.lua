@@ -12,6 +12,9 @@ vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Jump to defi
 vim.keymap.set("n", "<leader>lf", function()
   vim.lsp.buf.format({ async = true })
 end, { desc = "Format code" })
+vim.keymap.set("n", "<leader>lh", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle inlay hints" })
 
 -- Diagnostics keymaps --
 which_key.add({ "<leader>x", group = "Diagnostics" })
