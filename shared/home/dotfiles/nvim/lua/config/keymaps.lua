@@ -71,6 +71,7 @@ end
 
 telescope_keymap("ff", function() frecency.frecency { workspace = "CWD" } end, "Find files")
 telescope_keymap("fs", telescope.live_grep, "Find text in files")
+telescope_keymap("fb", function() telescope.buffers({ sort_lastused = true}) end, "Find opened buffers")
 telescope_keymap("fr", telescope.lsp_references, "Find references of symbol")
 telescope_keymap("fg", telescope.git_status, "Find changed files in git")
 telescope_keymap("ft", telescope.treesitter, "Find treesitter symbols")
