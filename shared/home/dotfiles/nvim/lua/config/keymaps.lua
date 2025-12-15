@@ -42,8 +42,9 @@ vim.keymap.set("n", "<leader>tr", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh 
 
 -- Telescope keymaps --
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope frecency workspace=CWD<CR>",  { desc = "Find files" })
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Find text in files" })
+vim.keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<CR>", { desc = "Find text in files" })
 vim.keymap.set("n", "<leader>fr", "<cmd>Telescope lsp_references<CR>", { desc = "Find references of current word under cursor" })
+vim.keymap.set("n", "<leader>fg", "<cmd>Telescope git_status<CR>", { desc = "Find changed files in git" })
 
 -- Tree sitter keymaps --
 -- Tree sitter keymaps are in the plugin configuration for treesitter.
