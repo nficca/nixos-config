@@ -22,4 +22,4 @@ vim.opt.textwidth = 80;
 vim.opt.colorcolumn = '+1';
 
 -- diagnostics
-vim.diagnostic.config({ virtual_lines = true })
+vim.diagnostic.config({ virtual_text = true })

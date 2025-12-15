@@ -1,3 +1,15 @@
+-- Language server keymaps --
+vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
+vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Jump to definition" })
+vim.keymap.set("n", "<leader>lf", function()
+  vim.lsp.buf.format({ async = true })
+end, { desc = "Format code" })
+
+-- Diagnostics keymaps --
+-- Toggles diagnostics between:
+--   - separate lines (virtual_lines)
+--   - inline text (virtual_text)
+--   - none
 local toggle_diagnostics = function()
   local cfg = vim.diagnostic.config()
 
@@ -10,8 +22,8 @@ local toggle_diagnostics = function()
   local enable_text = false
 
   if not (cfg.virtual_lines or cfg.virtual_text) then
-    enable_lines = true
-    enable_text = false
+    enable_lines = false
+    enable_text = true
   elseif cfg.virtual_lines then
     enable_lines = false
     enable_text = true
@@ -21,31 +33,34 @@ local toggle_diagnostics = function()
   vim.diagnostic.config({ virtual_text = enable_text })
 end
 
--- Language server keymaps --
-vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
-vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Jump to definition" })
-vim.keymap.set("n", "<leader>lf", function()
-  vim.lsp.buf.format({ async = true })
-end, { desc = "Format code" })
-
--- Diagnostics keymaps --
 vim.keymap.set("n", "<leader>xt", toggle_diagnostics, { desc = "Toggle inline diagnostics" })
 vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle Trouble" })
 
--- Git keymaps --
+-- Neogit keymaps --
 vim.keymap.set("n", "<leader>g", "<cmd>Neogit<CR>", { desc = "Git" })
 
--- File tree keymaps --
-vim.keymap.set("n", "<leader>tt", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file tree" })
-vim.keymap.set("n", "<leader>tf", "<cmd>NvimTreeFindFile<CR>", { desc = "Open current buffer in file tree" })
-vim.keymap.set("n", "<leader>tr", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file tree" })
+-- Oil keymaps (file tree editor) --
+local function oil_open_float()
+  require("oil").open_float(nil, { preview = { vertical = true } }, function()
+    print("Opened Oil. Use g? to see available keymaps.")
+  end)
+end
+
+vim.keymap.set("n", "<leader>o", oil_open_float, { desc = "Open Oil (file tree editor)" })
 
 -- Telescope keymaps --
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope frecency workspace=CWD<CR>",  { desc = "Find files" })
-vim.keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<CR>", { desc = "Find text in files" })
-vim.keymap.set("n", "<leader>fr", "<cmd>Telescope lsp_references<CR>", { desc = "Find references of current word under cursor" })
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope git_status<CR>", { desc = "Find changed files in git" })
+local frecency = require("telescope").extensions.frecency
+local telescope = require("telescope.builtin")
+
+local function telescope_keymap(km, fn, desc)
+  vim.keymap.set("n", "<leader>" .. km, fn, { desc = desc })
+end
+
+telescope_keymap("ff", function() frecency.frecency { workspace = "CWD" } end, "Find files")
+telescope_keymap("fs", telescope.live_grep, "Find text in files")
+telescope_keymap("fr", telescope.lsp_references, "Find references of symbol")
+telescope_keymap("fg", telescope.git_status, "Find changed files in git")
+telescope_keymap("ft", telescope.treesitter, "Find treesitter symbols")
 
 -- Tree sitter keymaps --
 -- Tree sitter keymaps are in the plugin configuration for treesitter.
-
