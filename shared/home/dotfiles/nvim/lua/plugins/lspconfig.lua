@@ -21,8 +21,14 @@ return {
             },
           },
           workspace = {
-            -- Make the server aware of Neovim runtime files
-            library = vim.api.nvim_get_runtime_file("", true),
+            library = vim.list_extend(
+              -- Make the server aware of Neovim runtime files
+              vim.api.nvim_get_runtime_file("", true),
+              -- Lazy plugins are installed into the standard nvim data path
+              -- under the `/lazy` directory. LuaLS should be made aware of them
+              -- too.
+              { vim.fn.stdpath("data") .. "/lazy" }
+            ),
           },
           -- Do not send telemetry data containing a randomized but unique identifier
           telemetry = {
