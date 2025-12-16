@@ -22,6 +22,9 @@
     "nix": true
   },
   "languages": {
+    "Rust": {
+      "tab_size": 4
+    },
     "Nix": {
       "show_whitespaces": "boundary",
       "ensure_final_newline_on_save": true,
