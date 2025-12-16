@@ -15,5 +15,8 @@
     gp = "git push";
     gpsup = "git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)";
     gst = "git status";
+
+    # The Zed CLI is called `zeditor` in the nix package. Prefer `zed`.
+    zed = "zeditor";
   };
 }

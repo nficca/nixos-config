@@ -37,6 +37,15 @@
   # Visual Studio Code
   programs.vscode.enable = true;
 
+  # Zed
+  programs.zed-editor = {
+    enable = true;
+    extensions = [
+      "nix"
+      "lua"
+    ];
+  };
+
   # Google Chrome
   programs.google-chrome.enable = true;
 }
