@@ -1,9 +1,17 @@
 {
+  "base_keymap": "VSCode",
+  "minimap": {
+    "show": "never"
+  },
+  "buffer_font_family": "JetBrains Mono",
+  "show_whitespaces": "boundary",
+  "wrap_guides": [80],
+  "tab_size": 2,
   "extend_comment_on_newline": true,
   "ensure_final_newline_on_save": true,
   "icon_theme": "Zed (Default)",
   "ui_font_size": 16,
-  "buffer_font_size": 15,
+  "buffer_font_size": 16.0,
   "theme": {
     "mode": "dark",
     "light": "One Light",
@@ -15,6 +23,10 @@
   },
   "languages": {
     "Nix": {
+      "show_whitespaces": "boundary",
+      "ensure_final_newline_on_save": true,
+      "wrap_guides": [80],
+      "tab_size": 2,
       "language_servers": ["nil", "!nixd"],
       "formatter": {
         "external": {
@@ -23,6 +35,9 @@
       }
     },
     "Lua": {
+      "show_whitespaces": "boundary",
+      "ensure_final_newline_on_save": true,
+      "wrap_guides": [80],
       "language_servers": ["lua-language-server"],
       "formatter": "language_server",
       "tab_size": 2
