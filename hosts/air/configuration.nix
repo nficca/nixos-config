@@ -9,17 +9,17 @@
     enable = true;
     user = username;
     casks = [
-      "google-chrome" # Web browser
       "1password" # Password manager
-      "slack" # Team communication
-      "ghostty" # Platform-native terminal emulator
-      "visual-studio-code" # Open-source code editor
-      "whatsapp" # Messaging and calling
+      "affinity-designer" # Professional graphic design software
       "discord" # Group chat and VoIP application
       "folx" # Download manager and torrent client
-      "steam" # Video game distribution platform
+      "ghostty" # Platform-native terminal emulator
+      "google-chrome" # Web browser
       "mullvad-vpn" # Privacy-focused VPN
-      "affinity-designer" # Professional graphic design software
+      "slack" # Team communication
+      "steam" # Video game distribution platform
+      "visual-studio-code" # Open-source code editor
+      "whatsapp" # Messaging and calling
     ];
   };
 }
