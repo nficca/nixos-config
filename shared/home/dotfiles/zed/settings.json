@@ -7,7 +7,7 @@
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "One Dark"
+    "dark": "Github Dark High Contrast"
   },
   "auto_install_extensions": {
     "lua": true,
