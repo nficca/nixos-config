@@ -30,6 +30,7 @@ in
       "ghostty/config".source = "${dotfiles}/ghostty/config";
       direnv.source = "${dotfiles}/direnv";
       "starship.toml".source = "${dotfiles}/starship/starship.toml";
+      zed.source = "${dotfiles}/zed";
     };
 
   # Other home directory symlinks
