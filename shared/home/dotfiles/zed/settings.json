@@ -5,7 +5,9 @@
   },
   "buffer_font_family": "JetBrains Mono",
   "show_whitespaces": "boundary",
-  "wrap_guides": [80],
+  "wrap_guides": [
+    80
+  ],
   "tab_size": 2,
   "extend_comment_on_newline": true,
   "ensure_final_newline_on_save": true,
@@ -28,9 +30,14 @@
     "Nix": {
       "show_whitespaces": "boundary",
       "ensure_final_newline_on_save": true,
-      "wrap_guides": [80],
+      "wrap_guides": [
+        80
+      ],
       "tab_size": 2,
-      "language_servers": ["nil", "!nixd"],
+      "language_servers": [
+        "nil",
+        "!nixd"
+      ],
       "formatter": {
         "external": {
           "command": "nixfmt"
@@ -40,8 +47,12 @@
     "Lua": {
       "show_whitespaces": "boundary",
       "ensure_final_newline_on_save": true,
-      "wrap_guides": [80],
-      "language_servers": ["lua-language-server"],
+      "wrap_guides": [
+        80
+      ],
+      "language_servers": [
+        "lua-language-server"
+      ],
       "formatter": "language_server",
       "tab_size": 2
     }
@@ -54,10 +65,15 @@
             "version": "LuaJIT"
           },
           "diagnostics": {
-            "globals": ["vim", "require"]
+            "globals": [
+              "vim",
+              "require"
+            ]
           },
           "workspace": {
-            "library": ["~/.local/share/nvim/lazy"]
+            "library": [
+              "~/.local/share/nvim/lazy"
+            ]
           },
           "telemtry": {
             "enable": false
