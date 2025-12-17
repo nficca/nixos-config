@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, lib, ... }:
 
 {
   home.shellAliases = {
@@ -15,7 +15,8 @@
     gp = "git push";
     gpsup = "git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)";
     gst = "git status";
-
+  }
+  // lib.attrsets.optionalAttrs pkgs.stdenv.isLinux {
     # The Zed CLI is called `zeditor` in the nix package. Prefer `zed`.
     zed = "zeditor";
   };
