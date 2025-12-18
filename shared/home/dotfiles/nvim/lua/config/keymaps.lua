@@ -65,14 +65,13 @@ vim.keymap.set("n", "<leader>o", oil_open_float, { desc = "Open Oil (file tree e
 -- Telescope keymaps --
 which_key.add({ "<leader>f", group = "Find things" })
 
-local frecency = require("telescope").extensions.frecency
 local telescope = require("telescope.builtin")
 
 local function telescope_keymap(km, fn, desc)
   vim.keymap.set("n", "<leader>" .. km, fn, { desc = desc })
 end
 
-telescope_keymap("ff", function() frecency.frecency { workspace = "CWD" } end, "Find files")
+telescope_keymap("ff", telescope.find_files, "Find files")
 telescope_keymap("ft", telescope.live_grep, "Find text (regex)")
 telescope_keymap("fT", function()
   telescope.live_grep({
