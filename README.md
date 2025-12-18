@@ -115,3 +115,20 @@ sudo nmcli connection import type wireguard file /etc/wireguard/my-interface.con
 
 You should now be connected to the interface, and can disconnect and reconnect
 via the network manager interface or CLI.
+
+## Troubleshooting
+
+### Permission denied for dev-flakes
+
+If you encounter an error indicating that you don't have access to
+ssh://git@github.com/nficca/nixos-flakes.git, it could be one of a few issues.
+First, if you aren't me, then this isn't gonna work for you at all. Remove or
+comment out the dev-flakes input. If you _are_ me and you know that you have
+your git credentials sorted (i.e. you can clone that repo just fine), then you
+might need to let nix prefetch the flake by itself first. You can do that like
+so:
+
+```sh
+nix flake prefetch git+ssh://git@github.com/nficca/nixos-flakes.git
+```
+
