@@ -73,11 +73,18 @@ local function telescope_keymap(km, fn, desc)
 end
 
 telescope_keymap("ff", function() frecency.frecency { workspace = "CWD" } end, "Find files")
-telescope_keymap("fs", telescope.live_grep, "Find text in files")
+telescope_keymap("ft", telescope.live_grep, "Find text (regex)")
+telescope_keymap("fT", function()
+  telescope.live_grep({
+    additional_args = function(_opts)
+      return { "--fixed-strings" }
+    end,
+  })
+end, "Find text (literal)")
 telescope_keymap("fb", function() telescope.buffers({ sort_lastused = true}) end, "Find opened buffers")
 telescope_keymap("fr", telescope.lsp_references, "Find references of symbol")
-telescope_keymap("fg", telescope.git_status, "Find changed files in git")
-telescope_keymap("ft", telescope.treesitter, "Find treesitter symbols")
+telescope_keymap("fg", telescope.git_status, "Find git changes")
+telescope_keymap("fs", telescope.treesitter, "Find symbols")
 
 -- Tree sitter keymaps --
 -- Tree sitter keymaps are in the plugin configuration for treesitter.
