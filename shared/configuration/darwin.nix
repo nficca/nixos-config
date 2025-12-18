@@ -24,6 +24,7 @@
     git # Version control system
     vim # Text editor
     wget # Network file downloader
+    gnumake # Widely used build automation tool
   ];
 
   fonts.packages = with pkgs; [

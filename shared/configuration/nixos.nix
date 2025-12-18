@@ -28,6 +28,8 @@
     vim # Text editor
     wget # Network file downloader
     perf # Linux profiling with performance counters
+    gnumake # Widely used build automation tool
+    gcc # GNU compiler collection
   ];
 
   fonts.packages = with pkgs; [
