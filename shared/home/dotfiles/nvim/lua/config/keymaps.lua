@@ -89,5 +89,7 @@ telescope_keymap("fr", telescope.lsp_references, "Find references of symbol")
 telescope_keymap("fg", telescope.git_status, "Find git changes")
 telescope_keymap("fs", telescope.treesitter, "Find symbols")
 
+telescope_keymap("F", telescope.resume, "Resume previous search")
+
 -- Tree sitter keymaps --
 -- Tree sitter keymaps are in the plugin configuration for treesitter.
