@@ -16,6 +16,7 @@
       "visual-studio-code" # Open-source code editor
       "whatsapp" # Messaging and calling
       "notion" # Note-taking and organization tool
+      "zed" # High-performance code editor
     ];
   };
 }
