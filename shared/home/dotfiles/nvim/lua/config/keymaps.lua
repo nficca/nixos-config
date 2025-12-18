@@ -71,7 +71,11 @@ local function telescope_keymap(km, fn, desc)
   vim.keymap.set("n", "<leader>" .. km, fn, { desc = desc })
 end
 
-telescope_keymap("ff", telescope.find_files, "Find files")
+telescope_keymap("ff", function()
+  telescope.find_files({
+    find_command = { "rg", "--files", "--sortr=accessed" }
+  })
+end, "Find files (sort by modified)")
 telescope_keymap("ft", telescope.live_grep, "Find text (regex)")
 telescope_keymap("fT", function()
   telescope.live_grep({
