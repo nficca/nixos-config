@@ -48,4 +48,7 @@
 
   # Google Chrome
   programs.google-chrome.enable = true;
+
+  # Kubernetes CLI
+  programs.k9s.enable = true;
 }
