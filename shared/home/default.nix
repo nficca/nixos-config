@@ -13,6 +13,7 @@
     ./aliases
     ./dotfiles
     ./registry
+    ./scripts
   ];
 
   # This value determines the Home Manager release that your
