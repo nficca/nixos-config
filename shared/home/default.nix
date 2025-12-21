@@ -28,6 +28,10 @@
   home.username = username;
 
   home.packages = with pkgs; [
+    # Modern helper utility for nix commands.
+    # See: https://github.com/nix-community/nh
+    nh
+
     _1password-cli # CLI for 1Password
     jless # JSON viewer
     lazygit # Terminal UI for git commands
