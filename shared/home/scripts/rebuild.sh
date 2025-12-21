@@ -27,14 +27,17 @@ main() {
   
   local cmd
   local hostname
+  local flake_output_key
 
   case "$(uname)" in
     Darwin)
       cmd="darwin-rebuild"
+      flake_output_key="darwinConfigurations"
       hostname=$(scutil --get LocalHostName)
       ;;
     Linux)
       cmd="nixos-rebuild"
+      flake_output_key="nixosConfigurations"
       hostname=$(hostname)
       ;;
     *)
@@ -43,8 +46,20 @@ main() {
       ;;
   esac
 
-  echo "Hello from rebuild! Your hostname: ${hostname}"
-  echo "We will be doing a ${cmd} ${subcommand} and comparing HEAD to ${last_commit}"
+  local derivation_path="${flake_output_key}.${hostname}.config.system.build.toplevel"
+
+  echo "Rebuilding nix-system"
+  echo "  hostname: ${hostname}"
+  echo "  rebuild command: ${cmd} ${subcommand}"
+
+  # Do the system rebuild.
+  sudo ${cmd} ${subcommand}
+
+  # Use nix store diff-closures to show package changes
+  # See: https://nix.dev/manual/nix/2.18/command-ref/new-cli/nix3-store-diff-closures
+  nix store diff-closures \
+    ".?ref=${last_commit}#${derivation_path}" \
+    ".?ref=HEAD#${derivation_path}"
 }
 
 # Run main function
