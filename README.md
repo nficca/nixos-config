@@ -88,6 +88,27 @@ nix flake update dev-flakes
 sudo darwin-rebuild switch
 ```
 
+## NH
+
+NH is "a modern helper utility that aims to consolidate and reimplement some of
+the commands and interfaces from various tools within the Nix/NixOS ecosystem."
+
+This configuration installs `nh`, which is often nicer to work with than nix
+commands directly. See [the usage section of the `nh`
+README](http://github.com/nix-community/nh?tab=readme-ov-file#usage) for more
+details.
+
+A notable example is the helper for rebuilds:
+```sh
+# On NixOS
+nh os switch . --ask
+
+# On Darwin
+nh darwin switch . --ask
+```
+This will build the current system flake, show the package differences, and
+prompt to the user before switching to it.
+
 ## Wireguard
 
 If you want to connect to a VPN via Wireguard, I've found that the easiest way
