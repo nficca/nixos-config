@@ -37,7 +37,7 @@ let
     builtins.attrNames entries
   );
 
-  # Create a registry entry for each a flake of the given name.
+  # Create a registry entry for each flake of the given name.
   # See: https://nix.dev/manual/nix/latest/command-ref/new-cli/nix3-registry#registry-format
   mkEntry = name: {
     from = {
