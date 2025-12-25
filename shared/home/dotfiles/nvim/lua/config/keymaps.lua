@@ -16,6 +16,13 @@ vim.keymap.set("n", "<leader>lh", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "Toggle inlay hints" })
 
+-- Hoversplit allow for LSP hover text in a split window
+-- Since it's LSP related, its keymaps can share the same prefix
+local hoversplit = require("hoversplit")
+which_key.add({ "<leader>ls", group = "Toggle LSP splits"})
+vim.keymap.set("n", "<leader>lsv", hoversplit.vsplit_remain_focused, { desc = "Toggle LSP split (vertical)" })
+vim.keymap.set("n", "<leader>lsh", hoversplit.split_remain_focused, { desc = "Toggle LSP split (horizontal)" })
+
 -- Diagnostics keymaps --
 which_key.add({ "<leader>x", group = "Diagnostics" })
 
