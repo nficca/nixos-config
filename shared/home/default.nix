@@ -33,6 +33,7 @@
     nh
 
     _1password-cli # CLI for 1Password
+    xh # Tool for sending HTTP requests
     jless # JSON viewer
     lazygit # Terminal UI for git commands
     maestral # Dropbox client
