@@ -1,69 +1,86 @@
 {
-    "base_keymap": "VSCode",
-    "minimap": {
-        "show": "never",
+  "show_edit_predictions": false,
+  "base_keymap": "VSCode",
+  "minimap": {
+    "show": "never"
+  },
+  "buffer_font_family": "JetBrains Mono",
+  "show_whitespaces": "boundary",
+  "wrap_guides": [
+    80
+  ],
+  "tab_size": 4,
+  "extend_comment_on_newline": true,
+  "ensure_final_newline_on_save": true,
+  "icon_theme": "Zed (Default)",
+  "ui_font_size": 16,
+  "buffer_font_size": 16.0,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Github Dark High Contrast"
+  },
+  "auto_install_extensions": {
+    "lua": true,
+    "nix": true
+  },
+  "languages": {
+    "Rust": {
+      "tab_size": 4
     },
-    "buffer_font_family": "JetBrains Mono",
-    "show_whitespaces": "boundary",
-    "wrap_guides": [80],
-    "tab_size": 4,
-    "extend_comment_on_newline": true,
-    "ensure_final_newline_on_save": true,
-    "icon_theme": "Zed (Default)",
-    "ui_font_size": 16,
-    "buffer_font_size": 16.0,
-    "theme": {
-        "mode": "dark",
-        "light": "One Light",
-        "dark": "Github Dark High Contrast",
+    "Nix": {
+      "show_whitespaces": "boundary",
+      "ensure_final_newline_on_save": true,
+      "wrap_guides": [
+        80
+      ],
+      "tab_size": 2,
+      "language_servers": [
+        "nil",
+        "!nixd"
+      ],
+      "formatter": {
+        "external": {
+          "command": "nixfmt"
+        }
+      }
     },
-    "auto_install_extensions": {
-        "lua": true,
-        "nix": true,
-    },
-    "languages": {
-        "Rust": {
-            "tab_size": 4,
-        },
-        "Nix": {
-            "show_whitespaces": "boundary",
-            "ensure_final_newline_on_save": true,
-            "wrap_guides": [80],
-            "tab_size": 2,
-            "language_servers": ["nil", "!nixd"],
-            "formatter": {
-                "external": {
-                    "command": "nixfmt",
-                },
-            },
-        },
+    "Lua": {
+      "show_whitespaces": "boundary",
+      "ensure_final_newline_on_save": true,
+      "wrap_guides": [
+        80
+      ],
+      "language_servers": [
+        "lua-language-server"
+      ],
+      "formatter": "language_server",
+      "tab_size": 2
+    }
+  },
+  "lsp": {
+    "lua-language-server": {
+      "settings": {
         "Lua": {
-            "show_whitespaces": "boundary",
-            "ensure_final_newline_on_save": true,
-            "wrap_guides": [80],
-            "language_servers": ["lua-language-server"],
-            "formatter": "language_server",
-            "tab_size": 2,
-        },
-    },
-    "lsp": {
-        "lua-language-server": {
-            "settings": {
-                "Lua": {
-                    "runtime": {
-                        "version": "LuaJIT",
-                    },
-                    "diagnostics": {
-                        "globals": ["vim", "require"],
-                    },
-                    "workspace": {
-                        "library": ["~/.local/share/nvim/lazy"],
-                    },
-                    "telemtry": {
-                        "enable": false,
-                    },
-                },
-            },
-        },
-    },
+          "runtime": {
+            "version": "LuaJIT"
+          },
+          "diagnostics": {
+            "globals": [
+              "vim",
+              "require"
+            ]
+          },
+          "workspace": {
+            "library": [
+              "~/.local/share/nvim/lazy"
+            ]
+          },
+          "telemtry": {
+            "enable": false
+          }
+        }
+      }
+    }
+  }
 }
