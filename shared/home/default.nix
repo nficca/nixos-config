@@ -40,6 +40,7 @@
     cmake # Cross-platform build system generator
     claude-code # Terminal-based LLM agent
     libclang # C language tools
+    jq # Flexible CLI JSON processor
 
     ## Common language support packages ##
     vscode-langservers-extracted
