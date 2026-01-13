@@ -46,6 +46,14 @@
     "pipe-operators"
   ];
 
+  # Create /bin/bash symlink for scripts that use #!/bin/bash shebang
+  system.activationScripts.binbash = {
+    text = ''
+      mkdir -p /bin
+      ln -sf ${pkgs.bash}/bin/bash /bin/bash
+    '';
+  };
+
   # Manage containers, pods, and images with podman.
   # A drop-in replacement for docker.
   virtualisation.podman = {
