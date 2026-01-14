@@ -49,6 +49,13 @@ return {
             typeHints = { enable = true },
             parameterHints = { enable = true },
           },
+          workspace = {
+            symbol = {
+              search = {
+                kind = "all_symbols"
+              }
+            }
+          }
         }
       }
     })

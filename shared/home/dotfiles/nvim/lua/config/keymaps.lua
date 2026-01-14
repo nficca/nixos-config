@@ -94,7 +94,8 @@ end, "Find text (literal)")
 telescope_keymap("fb", function() telescope.buffers({ sort_lastused = true}) end, "Find opened buffers")
 telescope_keymap("fr", telescope.lsp_references, "Find references of symbol")
 telescope_keymap("fg", telescope.git_status, "Find git changes")
-telescope_keymap("fs", telescope.treesitter, "Find symbols")
+telescope_keymap("fs", telescope.lsp_dynamic_workspace_symbols, "Find symbols")
+telescope_keymap("fj", telescope.jumplist, "Find jumplist entries")
 
 telescope_keymap("F", telescope.resume, "Resume previous search")
 
