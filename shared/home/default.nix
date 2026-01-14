@@ -35,6 +35,7 @@
     _1password-cli # CLI for 1Password
     xh # Tool for sending HTTP requests
     jless # JSON viewer
+    tree # Depth-indented directory listing
     lazygit # Terminal UI for git commands
     maestral # Dropbox client
     cmake # Cross-platform build system generator
