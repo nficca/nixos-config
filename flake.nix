@@ -41,6 +41,9 @@
       url = "git+ssh://git@github.com/nficca/nixos-flakes.git";
       flake = false;
     };
+
+    # Wallpaper daemon for Wayland
+    awww.url = "git+https://codeberg.org/LGFae/awww";
   };
 
   outputs =
@@ -52,6 +55,7 @@
       homebrew-core,
       homebrew-cask,
       dev-flakes,
+      awww,
       ...
     }:
     let
@@ -80,7 +84,7 @@
             # whenever system configuration changes are applied.
             home-manager.nixosModules.home-manager
             {
-              home-manager.extraSpecialArgs = { inherit username dev-flakes; };
+              home-manager.extraSpecialArgs = { inherit username dev-flakes awww; };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users."${username}" = {

@@ -260,6 +260,15 @@ layout {
         // top 64
         // bottom 64
     }
+
+    // Set transparent workspace background so wallpaper shows through
+    background-color "transparent"
+}
+
+// Make wallpaper stationary and place it in the backdrop
+layer-rule {
+    match namespace="^wallpaper$"
+    place-within-backdrop true
 }
 
 // Add lines like this to spawn processes at startup.
@@ -269,6 +278,10 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
+
+// Start wallpaper daemon and rotation script
+spawn-at-startup "awww-daemon"
+spawn-sh-at-startup "bash ~/.config/niri/rotate-wallpaper.sh"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
