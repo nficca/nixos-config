@@ -32,13 +32,16 @@
       postgresql # Relational database system
       saml2aws # CLI tool for getting AWS creds via SAML IDP
       slack # Team communication
-      swaylock-effects # Screen locker for wayland
+      swayidle # Idle management daemon for wayland
       waybar # Wayland status bar
       wireguard-tools # Tools for WireGuard VPN
     ])
     ++ [
       awww.packages.${pkgs.stdenv.hostPlatform.system}.awww # Wallpaper daemon for wayland
     ];
+
+  # Screen locker
+  programs.hyprlock.enable = true;
 
   # Ghostty
   programs.ghostty.enable = true;
