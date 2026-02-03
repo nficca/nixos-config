@@ -43,9 +43,6 @@
     libclang # C language tools
     jq # Flexible CLI JSON processor
 
-    ## Overlayed packages ##
-    fossa-cli # Dependency analysis tool
-
     ## Common language support packages ##
     vscode-langservers-extracted
     lua-language-server

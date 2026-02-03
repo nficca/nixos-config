@@ -17,6 +17,7 @@
     aseprite # Pixel art editor
     awscli # Unified tool to manage AWS services
     discord # Group chat
+    fossa-cli # Dependency analysis tool
     heaptrack # Heap memory profiler
     kdePackages.ktorrent # BitTorrent client
     kubectl # Kubernetes CLI
