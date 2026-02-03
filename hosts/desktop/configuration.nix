@@ -47,6 +47,11 @@
   # Enable Niri window compositor as an alternative
   programs.niri.enable = true;
 
+  # Install xwayland-satellite for X11 app support in Niri
+  environment.systemPackages = with pkgs; [
+    xwayland-satellite
+  ];
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
