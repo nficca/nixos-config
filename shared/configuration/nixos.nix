@@ -34,6 +34,7 @@
 
   fonts.packages = with pkgs; [
     jetbrains-mono
+    font-awesome
   ];
 
   # Allow unfree packages
