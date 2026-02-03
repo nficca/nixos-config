@@ -30,6 +30,7 @@
     postgresql # Relational database system
     saml2aws # CLI tool for getting AWS creds via SAML IDP
     slack # Team communication
+    swaylock-effects # Screen locker for wayland
     waybar # Wayland status bar
     wireguard-tools # Tools for WireGuard VPN
   ];
