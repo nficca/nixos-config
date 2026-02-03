@@ -18,6 +18,7 @@
     awscli # Unified tool to manage AWS services
     discord # Group chat
     fossa-cli # Dependency analysis tool
+    fuzzel # Wayland application launcher
     heaptrack # Heap memory profiler
     kdePackages.ktorrent # BitTorrent client
     kubectl # Kubernetes CLI
@@ -29,6 +30,7 @@
     postgresql # Relational database system
     saml2aws # CLI tool for getting AWS creds via SAML IDP
     slack # Team communication
+    waybar # Wayland status bar
     wireguard-tools # Tools for WireGuard VPN
   ];
 

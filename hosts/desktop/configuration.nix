@@ -44,6 +44,9 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+  # Enable Niri window compositor as an alternative
+  programs.niri.enable = true;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";

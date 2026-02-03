@@ -23,6 +23,8 @@ in
       # Linux
       "Code/User/settings.json".source = "${dotfiles}/vscode/settings.json";
       "ghostty/linux".source = "${dotfiles}/ghostty/linux";
+      "niri/config.kdl".source = "${dotfiles}/niri/config.kdl";
+      waybar.source = "${dotfiles}/waybar";
     }
     // {
       # All platforms
