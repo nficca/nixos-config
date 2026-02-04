@@ -27,6 +27,7 @@
       kubectx # Fast way to switch between clusters and namespaces in kubectl
       ldtk # 2D level editor
       mullvad-browser # Privacy-focused web browser
+      networkmanagerapplet # NetworkManager GUI (nm-connection-editor)
       pavucontrol # PulseAudio volume control
       pgcli # Postgres client interface
       podman-compose # Docker-compose with podman
@@ -64,4 +65,20 @@
 
   # Kubernetes CLI
   programs.k9s.enable = true;
+
+  # Auto-start nm-applet for network management in system tray
+  systemd.user.services.nm-applet = {
+    Unit = {
+      Description = "NetworkManager Applet";
+      After = [ "graphical-session.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
 }
