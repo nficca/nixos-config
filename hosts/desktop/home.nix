@@ -66,6 +66,24 @@
   # Kubernetes CLI
   programs.k9s.enable = true;
 
+  # Cursor theme configuration
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    name = "WhiteSur-cursors";
+    package = pkgs.whitesur-cursors;
+    size = 24;
+  };
+
+  # GTK configuration
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "WhiteSur-light";
+      package = pkgs.whitesur-icon-theme;
+    };
+  };
+
   # Auto-start nm-applet for network management in system tray
   systemd.user.services.nm-applet = {
     Unit = {
@@ -76,6 +94,7 @@
     Service = {
       ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
       Restart = "on-failure";
+      Environment = "PATH=${pkgs.networkmanagerapplet}/bin";
     };
     Install = {
       WantedBy = [ "graphical-session.target" ];
