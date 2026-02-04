@@ -27,6 +27,7 @@
       kubectx # Fast way to switch between clusters and namespaces in kubectl
       ldtk # 2D level editor
       mullvad-browser # Privacy-focused web browser
+      pavucontrol # PulseAudio volume control
       pgcli # Postgres client interface
       podman-compose # Docker-compose with podman
       postgresql # Relational database system
