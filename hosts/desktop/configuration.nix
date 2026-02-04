@@ -41,11 +41,19 @@
   # You can disable this if you're only using the Wayland session.
   # services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # Use ly login manager (TUI display manager)
+  services.displayManager.ly.enable = true;
 
-  # Enable Niri window compositor as an alternative
+  # You should enable at least one desktop environment or compositor.
+  #
+  # KDE Plasma is a fully-fledged desktop environment that includes a window
+  # compositor, taskbar, and many more standard applications. It's a good option
+  # to get everything you need out of the box.
+  #
+  # Niri is a scrollable-tiling Wayland compositor. It's just the compositor,
+  # so everything else must be installed separately. This is a good option when
+  # you want to fully customize your desktop.
+  services.desktopManager.plasma6.enable = false;
   programs.niri.enable = true;
 
   # Install xwayland-satellite for X11 app support in Niri
