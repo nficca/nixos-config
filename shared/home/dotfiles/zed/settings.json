@@ -4,7 +4,7 @@
   "minimap": {
     "show": "never"
   },
-  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
   "show_whitespaces": "boundary",
   "wrap_guides": [
     80

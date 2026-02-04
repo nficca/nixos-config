@@ -25,6 +25,7 @@ in
       "ghostty/linux".source = "${dotfiles}/ghostty/linux";
       niri.source = "${dotfiles}/niri";
       waybar.source = "${dotfiles}/waybar";
+      swaync.source = "${dotfiles}/swaync";
     }
     // {
       # All platforms

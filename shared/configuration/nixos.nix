@@ -33,8 +33,7 @@
   ];
 
   fonts.packages = with pkgs; [
-    jetbrains-mono
-    font-awesome
+    nerd-fonts.jetbrains-mono
   ];
 
   # Allow unfree packages

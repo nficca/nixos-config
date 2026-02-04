@@ -21,6 +21,6 @@ config-file = ?darwin
 
 background-opacity = 0.80
 background-blur = 10
-font-family = "JetBrains Mono"
+font-family = "JetBrainsMono Nerd Font"
 theme = "GitHub Dark High Contrast"
 keybind = shift+enter=text:\n

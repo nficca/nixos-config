@@ -1,7 +1,7 @@
 {
   "editor.codeLens": false,
   "editor.cursorWidth": 3,
-  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
   "editor.fontSize": 16,
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,

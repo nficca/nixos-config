@@ -35,12 +35,29 @@
       saml2aws # CLI tool for getting AWS creds via SAML IDP
       slack # Team communication
       swayidle # Idle management daemon for wayland
+      swaynotificationcenter # Notification daemon
       waybar # Wayland status bar
       wireguard-tools # Tools for WireGuard VPN
     ])
     ++ [
       awww.packages.${pkgs.stdenv.hostPlatform.system}.awww # Wallpaper daemon for wayland
     ];
+
+  # Auto-start SwayNotificationCenter
+  systemd.user.services.swaync = {
+    Unit = {
+      Description = "Sway Notification Center";
+      After = [ "graphical-session.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.swaynotificationcenter}/bin/swaync";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
 
   # Screen locker
   programs.hyprlock.enable = true;
