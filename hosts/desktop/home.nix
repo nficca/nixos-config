@@ -43,22 +43,6 @@
       awww.packages.${pkgs.stdenv.hostPlatform.system}.awww # Wallpaper daemon for wayland
     ];
 
-  # Auto-start SwayNotificationCenter
-  systemd.user.services.swaync = {
-    Unit = {
-      Description = "Sway Notification Center";
-      After = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-    Service = {
-      ExecStart = "${pkgs.swaynotificationcenter}/bin/swaync";
-      Restart = "on-failure";
-    };
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
-  };
-
   # Screen locker
   programs.hyprlock.enable = true;
 
@@ -101,20 +85,58 @@
     };
   };
 
-  # Auto-start nm-applet for network management in system tray
-  systemd.user.services.nm-applet = {
-    Unit = {
-      Description = "NetworkManager Applet";
-      After = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
+  # Define user services that should be managed by systemd.
+  # 
+  # In home-manager, systemd user services are defined using the same schema as
+  # systemd unit files. That is, the [Unit], [Service], and [Install] sections
+  # in unit files correlate to the attributes of the same name here. Note that
+  # the attributes must follow the same capitalization and naming conventions
+  # used in systemd unit files. More details can be found in the
+  # systemd.service(5) manpage: `man systemd.service`.
+  #
+  # To interact with user-specific systemd services, use the `--user` flag with
+  # the `systemctl` command. For example, to check the status of a user service:
+  #
+  # $ systemctl --user status my-cool-user-service
+  #
+  # To view logs for a specific user service, use `journalctl` with the
+  # `--user-unit` option:
+  #
+  # $ journalctl --user-unit my-cool-user-service
+  #
+  # To list all active user units:
+  #
+  # $ systemctl --user list-units
+  systemd.user.services = {
+    swaync = {
+      Unit = {
+        Description = "Sway Notification Center";
+        After = [ "graphical-session.target" ];
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.swaynotificationcenter}/bin/swaync";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
     };
-    Service = {
-      ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
-      Restart = "on-failure";
-      Environment = "PATH=${pkgs.networkmanagerapplet}/bin";
-    };
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
+
+    nm-applet = {
+      Unit = {
+        Description = "NetworkManager Applet";
+        After = [ "graphical-session.target" ];
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+        Restart = "on-failure";
+        Environment = "PATH=${pkgs.networkmanagerapplet}/bin";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
     };
   };
 }
