@@ -276,9 +276,6 @@ layer-rule {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "waybar"
-
 // Start wallpaper daemon and rotation script
 spawn-at-startup "awww-daemon"
 spawn-sh-at-startup "bash ~/.config/niri/rotate-wallpaper.sh"

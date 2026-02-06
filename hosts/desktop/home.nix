@@ -138,5 +138,20 @@
         WantedBy = [ "graphical-session.target" ];
       };
     };
+
+    waybar = {
+      Unit = {
+        Description = "Waybar status bar";
+        After = [ "graphical-session.target" ];
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.waybar}/bin/waybar";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
   };
 }
