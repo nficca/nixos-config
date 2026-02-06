@@ -31,13 +31,6 @@
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
-  # Disable USB autosuspend for all Bluetooth devices to prevent timeouts.
-  # This fixes the issue where Bluetooth adapters become unresponsive.
-  services.udev.extraRules = ''
-    # All Bluetooth devices (USB class 0xe0, subclass 0x01, protocol 0x01)
-    ACTION=="add", SUBSYSTEM=="usb", ATTR{bDeviceClass}=="e0", ATTR{bDeviceSubClass}=="01", ATTR{bDeviceProtocol}=="01", TEST=="power/control", ATTR{power/control}="on"
-  '';
-
   # Set your time zone.
   time.timeZone = "America/Toronto";
 
