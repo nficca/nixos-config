@@ -37,7 +37,6 @@
     jless # JSON viewer
     tree # Depth-indented directory listing
     lazygit # Terminal UI for git commands
-    maestral # Dropbox client
     cmake # Cross-platform build system generator
     claude-code # Terminal-based LLM agent
     libclang # C language tools

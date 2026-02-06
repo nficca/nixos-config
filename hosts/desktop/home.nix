@@ -19,6 +19,7 @@
       aseprite # Pixel art editor
       awscli # Unified tool to manage AWS services
       discord # Group chat
+      dropbox # Dropbox client
       fossa-cli # Dependency analysis tool
       fuzzel # Wayland application launcher
       heaptrack # Heap memory profiler
@@ -151,6 +152,19 @@
       };
       Install = {
         WantedBy = [ "graphical-session.target" ];
+      };
+    };
+
+    dropbox = {
+      Unit = {
+        Description = "Dropbox";
+      };
+      Service = {
+        ExecStart = "${pkgs.dropbox}/bin/dropbox";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
       };
     };
   };

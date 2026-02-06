@@ -171,9 +171,7 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  # Open ports in the firewall for Dropbox LAN sync
+  networking.firewall.allowedTCPPorts = [ 17500 ];
+  networking.firewall.allowedUDPPorts = [ 17500 ];
 }
