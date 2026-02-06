@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
@@ -42,7 +42,49 @@
   # services.xserver.enable = true;
 
   # Use ly login manager (TUI display manager)
-  services.displayManager.ly.enable = true;
+  services.displayManager.ly = {
+    enable = true;
+    # Patch the xsession-wrapper to recognize niri as systemd-aware.
+    #
+    # NixOS display managers (including ly) use xsession-wrapper as a
+    # universal session entry point for both X11 and Wayland sessions.
+    # The wrapper handles environment setup, imports variables into
+    # systemd, and checks if the session is systemd-aware. Without this
+    # patch, the wrapper determines that niri (our Wayland compositor) is
+    # not systemd-aware and triggers nixos-fake-graphical-session.target.
+    # This is bad because that target BindsTo graphical-session.target,
+    # causing it to start immediately at login, before niri.service is
+    # ready. This bypasses the Before= ordering constraint in
+    # niri.service, resulting in autostart applications and other
+    # graphical services launching before the compositor is running,
+    # which causes them to fail.
+    #
+    # Read more about this here:
+    # https://github.com/YaLTeR/niri/issues/3177#issuecomment-3765266141
+    #
+    # Implementation: We use pkgs.runCommand to create a patched version
+    # of the xsession-wrapper script. The original wrapper checks if
+    # XDG_CURRENT_DESKTOP matches a hardcoded list of systemd-aware
+    # sessions in a bash case statement. We use substituteInPlace to add
+    # "|niri" to that pattern, making niri recognized as systemd-aware.
+    # The --replace-fail flag ensures the build fails if the pattern
+    # changes upstream, alerting us to update the patch.
+    settings.setup_cmd =
+      let
+        xsession-wrapper =
+          pkgs.runCommand "xsession-wrapper-fixed"
+            {
+              src = config.services.displayManager.sessionData.wrapper;
+            }
+            ''
+              cp --preserve=mode $src $out
+              substituteInPlace $out --replace-fail \
+                "KDE|GNOME|Pantheon|X-NIXOS-SYSTEMD-AWARE" \
+                "KDE|GNOME|Pantheon|X-NIXOS-SYSTEMD-AWARE|niri"
+            '';
+      in
+      "${xsession-wrapper}";
+  };
 
   # You should enable at least one desktop environment or compositor.
   #
