@@ -16,15 +16,7 @@ vim.keymap.set("n", "<leader>lh", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "Toggle inlay hints" })
 
--- Hoversplit allow for LSP hover text in a split window
--- Since it's LSP related, its keymaps can share the same prefix
-local hoversplit = require("hoversplit")
-which_key.add({ "<leader>ls", group = "Toggle LSP splits"})
-vim.keymap.set("n", "<leader>lsv", hoversplit.vsplit_remain_focused, { desc = "Toggle LSP split (vertical)" })
-vim.keymap.set("n", "<leader>lsh", hoversplit.split_remain_focused, { desc = "Toggle LSP split (horizontal)" })
-
--- Diagnostics keymaps --
-which_key.add({ "<leader>x", group = "Diagnostics" })
+which_key.add({ "<leader>lx", group = "Diagnostics"})
 
 -- Toggles diagnostics between:
 --   - separate lines (virtual_lines)
@@ -53,8 +45,16 @@ local toggle_diagnostics = function()
   vim.diagnostic.config({ virtual_text = enable_text })
 end
 
-vim.keymap.set("n", "<leader>xt", toggle_diagnostics, { desc = "Toggle inline diagnostics" })
-vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle Trouble" })
+vim.keymap.set("n", "<leader>lxt", toggle_diagnostics, { desc = "Toggle inline diagnostics" })
+vim.keymap.set("n", "<leader>lxx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle Trouble diagnostics" })
+
+-- Hoversplit allow for LSP hover text in a split window
+-- Since it's LSP related, its keymaps can share the same prefix
+local hoversplit = require("hoversplit")
+which_key.add({ "<leader>ls", group = "Toggle LSP splits"})
+vim.keymap.set("n", "<leader>lsv", hoversplit.vsplit_remain_focused, { desc = "Toggle LSP split (vertical)" })
+vim.keymap.set("n", "<leader>lsh", hoversplit.split_remain_focused, { desc = "Toggle LSP split (horizontal)" })
+
 
 -- Neogit keymaps --
 -- which_key.add({ "<leader>g", group = "Git" })
@@ -98,6 +98,31 @@ telescope_keymap("fs", telescope.lsp_dynamic_workspace_symbols, "Find symbols")
 telescope_keymap("fj", telescope.jumplist, "Find jumplist entries")
 
 telescope_keymap("F", telescope.resume, "Resume previous search")
+
+-- Clipboard and Register keymaps --
+
+-- System clipboard yank (copy)
+vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+vim.keymap.set("n", "<leader>y", '"+yy', { desc = "Yank line to system clipboard" })
+
+-- System clipboard paste
+vim.keymap.set({"n", "v"}, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+vim.keymap.set({"n", "v"}, "<leader>P", '"+P', { desc = "Paste before from system clipboard" })
+
+-- Delete without yanking (black-hole register)
+vim.keymap.set({"n", "v"}, "<leader>d", '"_d', { desc = "Delete without yanking" })
+vim.keymap.set("n", "<leader>dd", '"_dd', { desc = "Delete line without yanking" })
+
+-- Change without yanking (black-hole register)
+vim.keymap.set({"n", "v"}, "<leader>c", '"_c', { desc = "Change without yanking" })
+vim.keymap.set("n", "<leader>cc", '"_cc', { desc = "Change line without yanking" })
+
+-- Safe visual paste (preserves yank register)
+vim.keymap.set("v", "<leader>vp", '"_dP', { desc = "Paste without overwriting register" })
+
+-- Cut to system clipboard (delete + yank)
+vim.keymap.set({"n", "v"}, "<leader>x", '"+d', { desc = "Cut to system clipboard" })
+vim.keymap.set("n", "<leader>xx", '"+dd', { desc = "Cut line to system clipboard" })
 
 -- Tree sitter keymaps --
 -- Tree sitter keymaps are in the plugin configuration for treesitter.

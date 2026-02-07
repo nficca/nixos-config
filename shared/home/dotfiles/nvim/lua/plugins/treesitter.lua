@@ -59,7 +59,10 @@ return {
           },
         },
         swap = {
-          enable = true,
+          -- These swap keymaps conflict with other keymaps I'm using more
+          -- often. Disabling them for now, but this can be revisited later if I
+          -- decide I want this.
+          enable = false,
           swap_next = {
             ["<leader>na"] = "@parameter.inner", -- swap parameters/argument with next
             ["<leader>n:"] = "@property.outer",  -- swap object property with next
