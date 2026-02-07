@@ -111,7 +111,7 @@ input {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 8
+    gaps 12
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -182,7 +182,7 @@ layout {
         // You can use any CSS linear-gradient tool on the web to set these up.
         // Changing the color space is also supported, check the wiki for more info.
         //
-        // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
+        active-gradient from="#4069db" to="#40db69" angle=45
 
         // You can also color the gradient relative to the entire view
         // of the workspace, rather than relative to just the window itself.
@@ -249,6 +249,14 @@ layout {
         color "#0007"
     }
 
+    tab-indicator {
+        // off
+        on
+        gap 5
+        width 5
+        length total-proportion=0.8
+    }
+
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
     // You can think of them as a kind of outer gaps. They are set in logical pixels.
     // Left and right struts will cause the next window to the side to always be visible.
@@ -298,6 +306,13 @@ hotkey-overlay {
 // After enabling or disabling this, you need to restart the apps for this to take effect.
 prefer-no-csd
 
+// We don't want the active window border/focus ring to draw with a background
+// because this it'll show up under semi-transparent windows. Note that this
+// works best when `prefer-no-csd` is enabled.
+window-rule {
+    draw-border-with-background false
+}
+
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
 // The path is formatted with strftime(3) to give you the screenshot date and time.
@@ -340,12 +355,39 @@ window-rule {
     open-floating true
 }
 
-// We don't want the active window border/focus ring to draw with a background
-// because this it'll show up under semi-transparent windows. Note that this
-// works best when `prefer-no-csd` is enabled.
+// Open the Google meet Picture-in-Picture preview as floating by default.
 window-rule {
-    draw-border-with-background false
+    // The key here is the title. As a tab, the title is something like:
+    // "Meet - xxx-xxxx-xxx - Google Chrome"
+    // But the picture-in-picture window is subtly different:
+    // "Meet - xxx-xxxx-xxx"
+    // The only difference we can key on here is the lack of the " - Google
+    // Chrome" prefix.
+    match app-id="google-chrome" title=r#"^Meet - [\w\-]+$"#
+    open-floating true
+    open-focused false
+    default-floating-position x=12 y=12 relative-to="bottom-right"
+    default-column-width { fixed 600; }
+    default-window-height { fixed 400; }
 }
+
+// The bluetooth manager that pops up when clicking the blueman icon in the tray
+// should be floating and stick to the top right area.
+window-rule {
+    // The full app-id is ".blueman-manager-wrapped"
+    match app-id="blueman-manager"
+    open-floating true
+    default-floating-position x=12 y=12 relative-to="top-right"
+    default-column-width { fixed 600; }
+    default-window-height { fixed 400; }
+}
+
+// 1password should be hidden from screen-capture.
+window-rule {
+    match app-id="1password"
+    block-out-from "screen-capture"
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
