@@ -68,6 +68,7 @@ return {
       "lua_ls",
       "golangci_lint_ls",
       "gopls",
+      "jsonls",
     })
   end
 }
