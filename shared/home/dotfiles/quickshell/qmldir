@@ -1,0 +1,5 @@
+singleton Time 1.0 Time.qml
+singleton Niri 1.0 Niri.qml
+Bar 1.0 Bar.qml
+ClockWidget 1.0 ClockWidget.qml
+WorkspacesWidget 1.0 WorkspacesWidget.qml

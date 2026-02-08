@@ -2,7 +2,7 @@
   username,
   pkgs,
   awww,
-  quickshell,
+  qml-niri,
   ...
 }:
 
@@ -44,7 +44,7 @@
     ])
     ++ [
       awww.packages.${pkgs.stdenv.hostPlatform.system}.awww # Wallpaper daemon for wayland
-      quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default # QML-based shell compositor
+      qml-niri.packages.${pkgs.stdenv.hostPlatform.system}.quickshell # QML-based shell compositor
     ];
 
   # Screen locker

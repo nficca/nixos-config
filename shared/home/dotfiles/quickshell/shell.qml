@@ -1,16 +1,8 @@
 import Quickshell
 import QtQuick
 
+pragma ComponentBehavior: Bound
 
-PanelWindow {
-  anchors {
-    left: true
-    bottom: true
-    right: true
-  }
-
-  Text {
-    anchors.centerIn: parent
-    text: "Hello!"
-  }
+Scope {
+    Bar {}
 }

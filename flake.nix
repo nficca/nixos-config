@@ -50,6 +50,13 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # A QML plugin for interacting with the niri Wayland compositor
+    qml-niri = {
+      url = "github:imiric/qml-niri/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.quickshell.follows = "quickshell";
+    };
   };
 
   outputs =
@@ -62,7 +69,7 @@
       homebrew-cask,
       dev-flakes,
       awww,
-      quickshell,
+      qml-niri,
       ...
     }:
     let
@@ -91,7 +98,14 @@
             # whenever system configuration changes are applied.
             home-manager.nixosModules.home-manager
             {
-              home-manager.extraSpecialArgs = { inherit username dev-flakes awww quickshell; };
+              home-manager.extraSpecialArgs = {
+                inherit
+                  username
+                  dev-flakes
+                  awww
+                  qml-niri
+                  ;
+              };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users."${username}" = {
