@@ -23,6 +23,7 @@
       fossa-cli # Dependency analysis tool
       fuzzel # Wayland application launcher
       heaptrack # Heap memory profiler
+      ironbar # Customizable status bar for Wayland compositors
       kdePackages.ktorrent # BitTorrent client
       kubectl # Kubernetes CLI
       kubectx # Fast way to switch between clusters and namespaces in kubectl
@@ -37,7 +38,6 @@
       slack # Team communication
       swayidle # Idle management daemon for wayland
       swaynotificationcenter # Notification daemon
-      waybar # Wayland status bar
       wireguard-tools # Tools for WireGuard VPN
     ])
     ++ [
@@ -80,6 +80,10 @@
   # GTK configuration
   gtk = {
     enable = true;
+    theme = {
+      name = "WhiteSur-light";
+      package = pkgs.whitesur-gtk-theme;
+    };
     iconTheme = {
       name = "WhiteSur-light";
       package = pkgs.whitesur-icon-theme;
@@ -140,14 +144,14 @@
       };
     };
 
-    waybar = {
+    ironbar = {
       Unit = {
-        Description = "Waybar status bar";
+        Description = "Ironbar status bar";
         After = [ "graphical-session.target" ];
         PartOf = [ "graphical-session.target" ];
       };
       Service = {
-        ExecStart = "${pkgs.waybar}/bin/waybar";
+        ExecStart = "${pkgs.ironbar}/bin/ironbar";
         Restart = "on-failure";
       };
       Install = {

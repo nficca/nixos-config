@@ -1,0 +1,84 @@
+:root {
+    --bg: rgba(250, 250, 250, 0.8);
+    --fg: rgba(0, 0, 0, 1);
+    --hl: rgba(240, 240, 240, 1);
+    --hl-pressed: rgba(220, 220, 220, 1);
+}
+
+window {
+    background: transparent;
+}
+
+#bar,
+popover contents,
+arrow,
+calendar {
+    background-color: var(--bg);
+}
+
+#bar {
+    border-bottom: 3px solid var(--hl);
+}
+
+#bar label {
+    color: var(--fg);
+}
+
+#bar popover {
+    background: transparent;
+}
+
+#bar popover contents {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#bar button,
+#bar modelbutton {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+#bar button:hover,
+#bar modelbutton:hover {
+    background: var(--hl);
+}
+
+#bar button:active,
+#bar modelbutton:active {
+    background: var(--hl-pressed);
+}
+
+#bar popover button:disabled,
+#bar popover modelbutton:disabled {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.popup-clock .calendar-clock {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.power-menu-header {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.power-menu-divider {
+    line-height: 0;
+    height: 0;
+    margin-top: -16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.power-menu-button:hover {
+    background: var(--hl);
+}
+
+.power-menu-button:active {
+    background: var(--hl-pressed);
+}
