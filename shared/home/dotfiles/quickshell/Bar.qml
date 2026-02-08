@@ -40,6 +40,17 @@ Scope {
 
                 ClockWidget {}
             }
+
+            // Right
+            RowLayout {
+                anchors {
+                    right: parent.right
+                    rightMargin: 25
+                    verticalCenter: parent.verticalCenter
+                }
+
+                SystemTrayWidget {}
+            }
         }
     }
 }
