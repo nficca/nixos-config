@@ -10,16 +10,27 @@ Row {
             id: workspaceItem
             required property var modelData
 
-            width: 100
-            height: 30
+            width: 12
+            height: 12
+            radius: 6
 
-            Text {
-                anchors.centerIn: parent
-                text: "Workspace " + workspaceItem.modelData.index + (workspaceItem.modelData.isFocused ? " (focused)" : "")
+            color: workspaceItem.modelData.isFocused ? Colors.active : Colors.inactive
+            opacity: workspaceItem.modelData.isFocused ? 1.0 : 0.6
+            scale: workspaceItem.modelData.isFocused ? 1.3 : (mouseArea.containsMouse ? 1.1 : 1.0)
+
+            Behavior on scale {
+                NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+            }
+
+            Behavior on opacity {
+                NumberAnimation { duration: 150 }
             }
 
             MouseArea {
+                id: mouseArea
                 anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
                 onClicked: Niri.focusWorkspaceById(workspaceItem.modelData.id)
             }
         }

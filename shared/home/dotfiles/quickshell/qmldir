@@ -1,3 +1,4 @@
+singleton Colors 1.0 Colors.qml
 singleton Time 1.0 Time.qml
 singleton Niri 1.0 Niri.qml
 Bar 1.0 Bar.qml

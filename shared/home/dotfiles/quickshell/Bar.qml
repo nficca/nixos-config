@@ -25,6 +25,7 @@ Scope {
                 anchors {
                     left: parent.left
                     leftMargin: 25
+                    verticalCenter: parent.verticalCenter
                 }
 
                 WorkspacesWidget {}
