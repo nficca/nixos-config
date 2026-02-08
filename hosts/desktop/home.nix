@@ -93,6 +93,13 @@
     };
   };
 
+  # Qt configuration
+  # qt = {
+  #   enable = true;
+  #   platformTheme.name = "qtct";
+  #   style.name = "breeze";
+  # };
+
   # Define user services that should be managed by systemd.
   # 
   # In home-manager, systemd user services are defined using the same schema as
