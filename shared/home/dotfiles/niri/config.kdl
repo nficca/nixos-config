@@ -383,6 +383,13 @@ window-rule {
     default-window-height { fixed 400; }
 }
 
+// Quickshell power menu should be floating and positioned at top-right
+window-rule {
+    match title="quickshell-power-menu"
+    open-floating true
+    default-column-width { fixed 200; }
+}
+
 // 1password should be hidden from screen-capture.
 window-rule {
     match app-id="1password"

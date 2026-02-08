@@ -6,8 +6,9 @@ QtObject {
         colorGroup: SystemPalette.Active
     }
 
-    readonly property color background: "#2e3440"
-    readonly property color foreground: "#d8dee9"
-    readonly property color active: "#88c0d0"
-    readonly property color inactive: "#4c566a"
+    readonly property color background: "#eceff4"
+    readonly property color backgroundAlt: "#e5e9f0"
+    readonly property color foreground: "#2e3440"
+    readonly property color active: "#5e81ac"
+    readonly property color inactive: "#d8dee9"
 }

@@ -2,6 +2,8 @@ import QtQuick
 
 Row {
     spacing: 8
+    leftPadding: 10
+    rightPadding: 10
 
     Repeater {
         model: Niri.workspaces

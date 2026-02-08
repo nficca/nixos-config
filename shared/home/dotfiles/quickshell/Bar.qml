@@ -18,13 +18,14 @@ Scope {
             }
 
             implicitHeight: 30
+            color: Colors.background
 
 
             // Left
             RowLayout {
                 anchors {
                     left: parent.left
-                    leftMargin: 25
+                    leftMargin: 5 
                     verticalCenter: parent.verticalCenter
                 }
 
@@ -45,11 +46,12 @@ Scope {
             RowLayout {
                 anchors {
                     right: parent.right
-                    rightMargin: 25
+                    rightMargin: 5
                     verticalCenter: parent.verticalCenter
                 }
 
                 SystemTrayWidget {}
+                PowerMenuWidget {}
             }
         }
     }
