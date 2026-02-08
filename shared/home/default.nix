@@ -47,6 +47,7 @@
     lua-language-server
     nil
     nixfmt
+    kdePackages.qtdeclarative
   ];
 
   # Let Home Manager install and manage itself.

@@ -26,6 +26,7 @@ in
       niri.source = "${dotfiles}/niri";
       swaync.source = "${dotfiles}/swaync";
       ironbar.source = "${dotfiles}/ironbar";
+      quickshell.source = "${dotfiles}/quickshell";
     }
     // {
       # All platforms

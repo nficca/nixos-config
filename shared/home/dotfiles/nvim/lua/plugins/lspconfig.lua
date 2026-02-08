@@ -60,6 +60,10 @@ return {
       }
     })
 
+    vim.lsp.config("qmlls", {
+      cmd = { "qmlls", "-E" }
+    })
+
     vim.lsp.enable({
       "rust_analyzer",
       "nil_ls",
@@ -69,6 +73,7 @@ return {
       "golangci_lint_ls",
       "gopls",
       "jsonls",
+      "qmlls",
     })
   end
 }

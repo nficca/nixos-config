@@ -44,6 +44,12 @@
 
     # Wallpaper daemon for Wayland
     awww.url = "git+https://codeberg.org/LGFae/awww";
+
+    # Quickshell - QML-based shell compositor
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -56,6 +62,7 @@
       homebrew-cask,
       dev-flakes,
       awww,
+      quickshell,
       ...
     }:
     let
@@ -84,7 +91,7 @@
             # whenever system configuration changes are applied.
             home-manager.nixosModules.home-manager
             {
-              home-manager.extraSpecialArgs = { inherit username dev-flakes awww; };
+              home-manager.extraSpecialArgs = { inherit username dev-flakes awww quickshell; };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users."${username}" = {
