@@ -28,6 +28,7 @@
       kubectl # Kubernetes CLI
       kubectx # Fast way to switch between clusters and namespaces in kubectl
       ldtk # 2D level editor
+      libnotify # Simple library for testing desktop notifications
       mullvad-browser # Privacy-focused web browser
       networkmanagerapplet # NetworkManager GUI (nm-connection-editor)
       pavucontrol # PulseAudio volume control
