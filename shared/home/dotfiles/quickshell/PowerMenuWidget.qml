@@ -43,17 +43,17 @@ Item {
     }
 
     Rectangle {
-        width: 26
-        height: 26
+        width: 30
+        height: 30
         anchors.centerIn: parent
         color: Colors.active
-        radius: 13
+        radius: 15
         scale: mouseArea.pressed ? 0.9 : (mouseArea.containsMouse ? 1.1 : 1.0)
 
         Text {
             anchors.centerIn: parent
             text: "⏻"
-            font.pixelSize: 16
+            font.pixelSize: 18
             color: Colors.background
         }
 

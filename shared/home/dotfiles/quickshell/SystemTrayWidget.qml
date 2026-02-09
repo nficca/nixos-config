@@ -12,8 +12,8 @@ Row {
             id: trayItem
             required property var modelData
 
-            width: 24
-            height: 24
+            width: 32
+            height: 32
 
             Image {
                 anchors.fill: parent

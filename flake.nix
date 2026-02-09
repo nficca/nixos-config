@@ -53,7 +53,7 @@
 
     # A QML plugin for interacting with the niri Wayland compositor
     qml-niri = {
-      url = "github:imiric/qml-niri/main";
+      url = "github:nficca/qml-niri/main";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.quickshell.follows = "quickshell";
     };

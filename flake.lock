@@ -253,15 +253,15 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1766224085,
-        "narHash": "sha256-hZbaqww++6dh2324Us3h868BZWDAzZViiB4c6/i/BDo=",
-        "owner": "imiric",
+        "lastModified": 1770601808,
+        "narHash": "sha256-Py3VtZLI8W+4hUnM4cnW/khA5y45PCSPVDk+wvfsH6U=",
+        "owner": "nficca",
         "repo": "qml-niri",
-        "rev": "39e9c83d908318032ccd5330b1ad77764b498eb8",
+        "rev": "1d5413ba8ee054dc7a12389f47fbdd8e00e4c136",
         "type": "github"
       },
       "original": {
-        "owner": "imiric",
+        "owner": "nficca",
         "ref": "main",
         "repo": "qml-niri",
         "type": "github"

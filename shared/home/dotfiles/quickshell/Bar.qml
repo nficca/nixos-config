@@ -17,7 +17,7 @@ Scope {
                 right: true
             }
 
-            implicitHeight: 30
+            implicitHeight: 40
             color: Colors.background
 
 
@@ -39,7 +39,7 @@ Scope {
                     verticalCenter: parent.verticalCenter
                 }
 
-                ClockWidget {}
+                FocusedWindowWidget {}
             }
 
             // Right
@@ -51,6 +51,7 @@ Scope {
                 }
 
                 SystemTrayWidget {}
+                ClockWidget {}
                 PowerMenuWidget {}
             }
         }
