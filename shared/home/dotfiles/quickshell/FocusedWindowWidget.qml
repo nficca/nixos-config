@@ -15,7 +15,7 @@ Row {
 
     Text {
         anchors.verticalCenter: parent.verticalCenter
-        text: Niri.focusedWindow?.iconPath ?? ""
+        text: Niri.focusedWindow?.title ?? ""
         font.pixelSize: 14
         color: Colors.foreground
         elide: Text.ElideRight
