@@ -358,12 +358,13 @@ window-rule {
 // Open the Google meet Picture-in-Picture preview as floating by default.
 window-rule {
     // The key here is the title. As a tab, the title is something like:
-    // "Meet - xxx-xxxx-xxx - Google Chrome"
-    // But the picture-in-picture window is subtly different:
-    // "Meet - xxx-xxxx-xxx"
-    // The only difference we can key on here is the lack of the " - Google
-    // Chrome" prefix.
-    match app-id="google-chrome" title=r#"^Meet - [\w\-]+$"#
+    // "Meet - Analysis Standup - Google Chrome" or "Meet - abc-wxyz-def - Google Chrome"
+    // But the picture-in-picture window is:
+    // "Meet - Analysis Standup" or "Meet - abc-wxyz-def"
+    // This regex matches titles starting with "Meet -" that don't contain
+    // " - " (space-dash-space) after the initial "Meet - ".
+    // Hyphens in meeting IDs like "abc-wxyz-def" are fine since they're not surrounded by spaces.
+    match app-id="google-chrome" title=r#"^Meet - (?:[^-]|-[^ ])*$"#
     open-floating true
     open-focused false
     default-floating-position x=12 y=12 relative-to="bottom-right"
