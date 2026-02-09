@@ -23,7 +23,7 @@ Scope {
     }
 
     PanelWindow {
-        visible: Notifications.activeNotifications.length > 0
+        visible: Notifications.visiblePopupNotifications.length > 0
         color: "transparent"
         implicitWidth: 400
 
@@ -42,11 +42,11 @@ Scope {
             spacing: 10
 
             Repeater {
-                model: Math.min(5, Notifications.activeNotifications.length)
+                model: Math.min(5, Notifications.visiblePopupNotifications.length)
 
                 delegate: NotificationPopup {
                     required property int index
-                    notification: Notifications.activeNotifications[index]
+                    notification: Notifications.visiblePopupNotifications[index]
                 }
             }
         }

@@ -7,6 +7,7 @@ Item {
     property var notification: null
     property bool isHovered: false
     property int elapsed: 0
+    property bool explicitDismiss: false
 
     readonly property var timeouts: [-1, 10000, -1, 5000]
     readonly property int timeout: notification ? timeouts[notification.urgency] || 10000 : 0
@@ -17,7 +18,7 @@ Item {
 
     implicitWidth: 400
     implicitHeight: notification?.closed ? 0 : container.height
-    visible: notification && !notification.closed
+    visible: notification && notification.popupVisible && !notification.closed
 
     Behavior on implicitHeight {
         NumberAnimation {
@@ -26,7 +27,8 @@ Item {
         }
     }
 
-    function dismiss() {
+    function dismiss(isExplicit) {
+        popup.explicitDismiss = isExplicit;
         exitAnimation.start();
     }
 
@@ -87,8 +89,13 @@ Item {
         }
         ScriptAction {
             script: {
-                if (popup.notification)
-                    popup.notification.close();
+                if (popup.notification) {
+                    if (popup.explicitDismiss) {
+                        popup.notification.close();
+                    } else {
+                        popup.notification.hidePopup();
+                    }
+                }
             }
         }
     }
@@ -100,7 +107,7 @@ Item {
         onTriggered: {
             popup.elapsed += interval;
             if (popup.elapsed >= popup.timeout)
-                popup.dismiss();
+                popup.dismiss(false);
         }
     }
 
@@ -283,7 +290,7 @@ Item {
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: popup.dismiss()
+                    onClicked: popup.dismiss(true)
                 }
             }
 
@@ -302,7 +309,7 @@ Item {
                     background.border.color = popup.borderColor;
                 }
 
-                onClicked: popup.dismiss()
+                onClicked: popup.dismiss(true)
             }
         }
     }

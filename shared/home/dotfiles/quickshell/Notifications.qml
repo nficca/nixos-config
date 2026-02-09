@@ -13,6 +13,7 @@ QtObject {
     property int notificationsVersion: 0
 
     readonly property var activeNotifications: notifications.filter(n => !n.closed)
+    readonly property var visiblePopupNotifications: notifications.filter(n => !n.closed && n.popupVisible)
 
     function wrapActions(qmlActions) {
         // QML action objects become invalid after creation,
@@ -78,6 +79,7 @@ QtObject {
         property bool resident: false
         property int timestamp: Date.now()
         property bool closed: false
+        property bool popupVisible: true
         property bool hasAnimated: false
         property var actions: []
 
@@ -133,6 +135,13 @@ QtObject {
                 return;
             notif.closed = true;
             notif.notification?.dismiss();
+            root.notificationsVersion++;
+        }
+
+        function hidePopup() {
+            if (!notif.popupVisible)
+                return;
+            notif.popupVisible = false;
             root.notificationsVersion++;
         }
 
