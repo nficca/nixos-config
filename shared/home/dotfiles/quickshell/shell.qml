@@ -20,6 +20,7 @@ Scope {
     PanelWindow {
         visible: Notifications.activeNotifications.length > 0
         color: "transparent"
+        width: 400
 
         screen: Quickshell.screens[0]
         anchors {

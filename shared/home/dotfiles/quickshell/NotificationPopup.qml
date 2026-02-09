@@ -8,8 +8,6 @@ Item {
     property var notification: null
 
     property bool isHovered: false
-    property real dragX: 0
-    property bool isDragging: false
     property int timeout: notification ? getTimeout() : 0
     property int elapsed: 0
 
@@ -105,18 +103,9 @@ Item {
         }
     }
 
-    property var snapBackAnimation: PropertyAnimation {
-        target: container
-        property: "x"
-        to: 0
-        duration: 150
-        easing.type: Easing.OutQuad
-    }
-
-    // Auto-dismiss timer
     property var dismissTimer: Timer {
         interval: 100
-        running: timeout > 0 && !isHovered && !isDragging && visible
+        running: timeout > 0 && !isHovered && visible
         repeat: true
 
         onTriggered: {
@@ -175,6 +164,7 @@ Item {
                     right: parent.right
                     top: parent.top
                     margins: 12
+                    rightMargin: 32
                 }
                 spacing: 8
 
@@ -193,7 +183,7 @@ Item {
                     }
 
                     Column {
-                        width: parent.width - appIcon.width - parent.spacing - closeButton.width - 12
+                        width: parent.width - (appIcon.visible ? appIcon.width + parent.spacing : 0)
                         spacing: 4
 
                         // Summary (title)
@@ -215,33 +205,6 @@ Item {
                             wrapMode: Text.Wrap
                             textFormat: Text.RichText
                             visible: notification.body !== ""
-                        }
-                    }
-
-                    // Close button
-                    Rectangle {
-                        id: closeButton
-                        width: 20
-                        height: 20
-                        radius: 10
-                        color: closeMouseArea.pressed ? Colors.active :
-                               closeMouseArea.containsMouse ? Colors.backgroundAlt :
-                               "transparent"
-
-                        Text {
-                            anchors.centerIn: parent
-                            text: "×"
-                            color: Colors.text
-                            font.pixelSize: 16
-                            font.bold: true
-                        }
-
-                        MouseArea {
-                            id: closeMouseArea
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: dismiss()
                         }
                     }
                 }
@@ -295,14 +258,43 @@ Item {
                 }
             }
 
-            // Main click area
+            // Close button (positioned absolutely in top-right)
+            Rectangle {
+                id: closeButton
+                anchors {
+                    right: parent.right
+                    top: parent.top
+                    margins: 8
+                }
+                width: 20
+                height: 20
+                radius: 10
+                color: closeMouseArea.pressed ? Colors.active :
+                       closeMouseArea.containsMouse ? Colors.backgroundAlt :
+                       "transparent"
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "×"
+                    color: Colors.text
+                    font.pixelSize: 16
+                    font.bold: true
+                }
+
+                MouseArea {
+                    id: closeMouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: dismiss()
+                }
+            }
+
+            // Main interaction area
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                drag.target: container
-                drag.axis: Drag.XAxis
-                drag.minimumX: -container.width
-                drag.maximumX: container.width
+                acceptedButtons: Qt.RightButton
 
                 onEntered: {
                     isHovered = true
@@ -310,45 +302,11 @@ Item {
                 }
 
                 onExited: {
-                    if (!isDragging) {
-                        isHovered = false
-                        background.border.color = getBorderColor()
-                    }
+                    isHovered = false
+                    background.border.color = getBorderColor()
                 }
 
-                onClicked: {
-                    if (!isDragging) {
-                        dismiss()
-                    }
-                }
-
-                onPressed: {
-                    isDragging = false
-                    dragX = container.x
-                }
-
-                onPositionChanged: {
-                    if (Math.abs(container.x) > 10) {
-                        isDragging = true
-                    }
-                    dragX = container.x
-                }
-
-                onReleased: {
-                    // Swipe to dismiss threshold: 35% of width
-                    if (Math.abs(dragX) > container.width * 0.35) {
-                        dismiss()
-                    } else {
-                        // Snap back
-                        snapBackAnimation.start()
-                    }
-
-                    isDragging = false
-                    if (!containsMouse) {
-                        isHovered = false
-                        background.border.color = getBorderColor()
-                    }
-                }
+                onClicked: dismiss()
             }
         }
     }
