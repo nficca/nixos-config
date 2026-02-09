@@ -11,4 +11,9 @@ QtObject {
     readonly property color foreground: "#2e3440"
     readonly property color active: "#5e81ac"
     readonly property color inactive: "#d8dee9"
+    readonly property color text: "#2e3440"
+    readonly property color textSecondary: "#4c566a"
+    readonly property color border: "#d8dee9"
+    readonly property color urgent: "#bf616a"
+    readonly property color low: "#a3be8c"
 }

@@ -51,6 +51,7 @@ Scope {
                 }
 
                 SystemTrayWidget {}
+                NotificationWidget {}
                 ClockWidget {}
                 PowerMenuWidget {}
             }

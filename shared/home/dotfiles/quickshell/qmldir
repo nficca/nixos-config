@@ -1,9 +1,12 @@
 singleton Colors 1.0 Colors.qml
 singleton Time 1.0 Time.qml
 singleton Niri 1.0 Niri.qml
+singleton Notifications 1.0 Notifications.qml
 Bar 1.0 Bar.qml
 ClockWidget 1.0 ClockWidget.qml
 WorkspacesWidget 1.0 WorkspacesWidget.qml
 SystemTrayWidget 1.0 SystemTrayWidget.qml
 PowerMenuWidget 1.0 PowerMenuWidget.qml
 FocusedWindowWidget 1.0 FocusedWindowWidget.qml
+NotificationWidget 1.0 NotificationWidget.qml
+NotificationPopup 1.0 NotificationPopup.qml
