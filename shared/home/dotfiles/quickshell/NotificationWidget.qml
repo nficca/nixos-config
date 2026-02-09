@@ -1,5 +1,3 @@
-import Quickshell
-import Quickshell.Widgets
 import QtQuick
 import QtQuick.Controls
 
@@ -18,10 +16,7 @@ Item {
         radius: 15
         anchors.centerIn: parent
 
-        color: mouseArea.pressed ? Colors.active :
-               mouseArea.containsMouse ? Colors.backgroundAlt :
-               Notifications.dndEnabled ? Colors.inactive :
-               Colors.background
+        color: mouseArea.pressed ? Colors.active : mouseArea.containsMouse ? Colors.backgroundAlt : Notifications.dndEnabled ? Colors.inactive : Colors.background
 
         border.width: 1
         border.color: Notifications.dndEnabled ? Colors.inactive : Colors.border
@@ -50,7 +45,7 @@ Item {
 
         // Count badge
         Rectangle {
-            visible: activeCount > 0
+            visible: root.activeCount > 0
             anchors {
                 right: parent.right
                 top: parent.top
@@ -66,7 +61,7 @@ Item {
 
             Text {
                 anchors.centerIn: parent
-                text: activeCount > 9 ? "9+" : activeCount.toString()
+                text: root.activeCount > 9 ? "9+" : root.activeCount.toString()
                 color: Colors.text
                 font.pixelSize: 9
                 font.bold: true
@@ -80,14 +75,13 @@ Item {
             cursorShape: Qt.PointingHandCursor
 
             onClicked: {
-                Notifications.toggleDnd()
+                Notifications.toggleDnd();
             }
 
             ToolTip {
                 visible: mouseArea.containsMouse
                 delay: 800
-                text: Notifications.dndEnabled ? "DND Mode" :
-                      activeCount > 0 ? activeCount + " notification" + (activeCount > 1 ? "s" : "") : "No notifications"
+                text: Notifications.dndEnabled ? "DND Mode" : root.activeCount > 0 ? root.activeCount + " notification" + (root.activeCount > 1 ? "s" : "") : "No notifications"
                 y: parent.height + 5
             }
         }

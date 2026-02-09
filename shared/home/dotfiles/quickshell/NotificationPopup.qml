@@ -1,128 +1,115 @@
-import Quickshell
-import Quickshell.Widgets
+pragma ComponentBehavior: Bound
 import QtQuick
 
 Item {
     id: popup
 
     property var notification: null
-
     property bool isHovered: false
-    property int timeout: notification ? getTimeout() : 0
     property int elapsed: 0
 
-    width: 400
-    height: (notification && notification.closed) ? 0 : (notification ? container.height : 0)
-    visible: notification !== null && !notification.closed
-    enabled: notification !== null
+    readonly property var timeouts: [-1, 10000, -1, 5000]
+    readonly property int timeout: notification ? timeouts[notification.urgency] || 10000 : 0
 
-    Behavior on height {
+    readonly property color borderColor: !notification ? Colors.border : notification.urgency === 2 ? Colors.urgent : Colors.border
+
+    readonly property color progressColor: !notification ? Colors.active : notification.urgency === 2 ? Colors.urgent : notification.urgency === 0 ? Colors.low : Colors.active
+
+    implicitWidth: 400
+    implicitHeight: notification?.closed ? 0 : container.height
+    visible: notification && !notification.closed
+
+    Behavior on implicitHeight {
         NumberAnimation {
             duration: 150
             easing.type: Easing.OutQuad
         }
     }
 
-    function getTimeout() {
-        if (!notification) return 0
-        if (notification.urgency === 2) return -1 // Critical
-        if (notification.urgency === 0) return 5000 // Low
-        return 10000 // Normal
-    }
-
-    function getBorderColor() {
-        if (!notification) return Colors.border
-        return (notification.urgency === 2) ? Colors.urgent : Colors.border
-    }
-
-    function getProgressColor() {
-        if (!notification) return Colors.active
-        if (notification.urgency === 2) return Colors.urgent
-        if (notification.urgency === 0) return Colors.low
-        return Colors.active
-    }
-
     function dismiss() {
-        exitAnimation.start()
+        exitAnimation.start();
     }
 
-    // Entry animation
     Component.onCompleted: {
-        if (notification) {
-            notification.hasAnimated = true
-            entryAnimation.start()
+        if (popup.notification) {
+            popup.notification.hasAnimated = true;
+            entryAnimation.start();
         }
     }
 
-    property var entryAnimation: SequentialAnimation {
-        PropertyAnimation {
-            target: container
-            property: "x"
-            from: 80
-            to: 0
-            duration: 180
-            easing.type: Easing.OutQuad
-        }
-        PropertyAnimation {
-            target: container
-            property: "opacity"
-            from: 0
-            to: 1
-            duration: 180
-            easing.type: Easing.OutQuad
-        }
-        PropertyAnimation {
-            target: container
-            property: "scale"
-            from: 0.9
-            to: 1.0
-            duration: 180
-            easing.type: Easing.OutQuad
-        }
-    }
-
-    property var exitAnimation: ParallelAnimation {
-        PropertyAnimation {
-            target: container
-            property: "opacity"
-            from: 1
-            to: 0
-            duration: 120
-            easing.type: Easing.OutQuad
-        }
-        PropertyAnimation {
-            target: container
-            property: "scale"
-            from: 1.0
-            to: 0.8
-            duration: 120
-            easing.type: Easing.OutQuad
-        }
-        onFinished: {
-            notification.close()
-        }
-    }
-
-    property var dismissTimer: Timer {
-        interval: 100
-        running: timeout > 0 && !isHovered && visible
-        repeat: true
-
-        onTriggered: {
-            elapsed += interval
-            if (elapsed >= timeout) {
-                dismiss()
+    SequentialAnimation {
+        id: entryAnimation
+        ParallelAnimation {
+            PropertyAnimation {
+                target: container
+                property: "x"
+                from: 80
+                to: 0
+                duration: 180
+                easing.type: Easing.OutQuad
             }
+            PropertyAnimation {
+                target: container
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: 180
+                easing.type: Easing.OutQuad
+            }
+            PropertyAnimation {
+                target: container
+                property: "scale"
+                from: 0.9
+                to: 1.0
+                duration: 180
+                easing.type: Easing.OutQuad
+            }
+        }
+    }
+
+    SequentialAnimation {
+        id: exitAnimation
+        ParallelAnimation {
+            PropertyAnimation {
+                target: container
+                property: "opacity"
+                to: 0
+                duration: 120
+                easing.type: Easing.OutQuad
+            }
+            PropertyAnimation {
+                target: container
+                property: "scale"
+                to: 0.8
+                duration: 120
+                easing.type: Easing.OutQuad
+            }
+        }
+        ScriptAction {
+            script: {
+                if (popup.notification)
+                    popup.notification.close();
+            }
+        }
+    }
+
+    Timer {
+        interval: 100
+        running: popup.timeout > 0 && !popup.isHovered && popup.visible
+        repeat: true
+        onTriggered: {
+            popup.elapsed += interval;
+            if (popup.elapsed >= popup.timeout)
+                popup.dismiss();
         }
     }
 
     Item {
         id: container
-        width: 400
+        width: parent.width
         height: contentColumn.height + 24
         opacity: 0
         scale: 0.9
-        x: 0
 
         Rectangle {
             id: background
@@ -130,11 +117,10 @@ Item {
             color: Colors.background
             radius: 8
             border.width: 1
-            border.color: getBorderColor()
+            border.color: popup.borderColor
 
-            // Progress bar at bottom
             Rectangle {
-                visible: timeout > 0
+                visible: popup.timeout > 0
                 anchors {
                     left: parent.left
                     right: parent.right
@@ -151,9 +137,9 @@ Item {
                         top: parent.top
                         bottom: parent.bottom
                     }
-                    width: timeout > 0 ? parent.width * (1 - elapsed / timeout) : 0
+                    width: popup.timeout > 0 ? parent.width * (1 - popup.elapsed / popup.timeout) : 0
                     radius: 2
-                    color: getProgressColor()
+                    color: popup.progressColor
                 }
             }
 
@@ -172,85 +158,100 @@ Item {
                     width: parent.width
                     spacing: 12
 
-                    // App icon
                     Image {
                         id: appIcon
-                        visible: notification.appIcon !== ""
-                        source: notification.appIcon
+                        visible: source !== ""
+                        source: {
+                            if (!popup.notification?.appIcon)
+                                return "";
+                            const icon = popup.notification.appIcon;
+                            if (icon.startsWith("/") || icon.startsWith("file://")) {
+                                return icon;
+                            }
+                            return `image://icon/${icon}`;
+                        }
                         width: 32
                         height: 32
                         fillMode: Image.PreserveAspectFit
+                        asynchronous: true
+                        cache: true
+
+                        onStatusChanged: {
+                            if (status === Image.Error) {
+                                visible = false;
+                            }
+                        }
                     }
 
                     Column {
                         width: parent.width - (appIcon.visible ? appIcon.width + parent.spacing : 0)
                         spacing: 4
 
-                        // Summary (title)
                         Text {
                             width: parent.width
-                            text: notification.summary
+                            text: popup.notification?.summary ?? ""
                             color: Colors.text
                             font.pixelSize: 14
                             font.bold: true
                             wrapMode: Text.Wrap
                         }
 
-                        // Body text
                         Text {
                             width: parent.width
-                            text: notification.body
+                            text: popup.notification?.body ?? ""
                             color: Colors.textSecondary
                             font.pixelSize: 12
                             wrapMode: Text.Wrap
                             textFormat: Text.RichText
-                            visible: notification.body !== ""
+                            visible: text !== ""
                         }
                     }
                 }
 
-                // Notification image
                 Image {
-                    visible: notification.image !== ""
-                    source: notification.image
+                    visible: popup.notification?.image
+                    source: popup.notification?.image ?? ""
                     width: parent.width
                     fillMode: Image.PreserveAspectFit
                     height: Math.min(sourceSize.height, 200)
+                    asynchronous: true
                 }
 
-                // Action buttons
                 Row {
-                    visible: notification.actions && notification.actions.length > 0
+                    visible: popup.notification?.actions?.length > 0
                     width: parent.width
                     spacing: 8
 
                     Repeater {
-                        model: notification.actions || []
+                        model: popup.notification?.actions ?? []
 
-                        Rectangle {
+                        delegate: Rectangle {
+                            id: actionDelegate
+                            required property var modelData
+
                             width: 80
                             height: 28
                             radius: 6
-                            color: actionMouseArea.pressed ? Colors.active :
-                                   actionMouseArea.containsMouse ? Colors.backgroundAlt :
-                                   Colors.background
+                            color: mouseArea.pressed ? Colors.active : mouseArea.containsMouse ? Colors.backgroundAlt : Colors.background
                             border.width: 1
                             border.color: Colors.border
 
                             Text {
                                 anchors.centerIn: parent
-                                text: modelData.text
+                                text: actionDelegate.modelData?.text ?? "Action"
                                 color: Colors.text
                                 font.pixelSize: 11
                             }
 
                             MouseArea {
-                                id: actionMouseArea
+                                id: mouseArea
                                 anchors.fill: parent
                                 hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
                                 onClicked: {
-                                    notification.invokeAction(modelData.identifier)
+                                    if (actionDelegate.modelData?.identifier) {
+                                        popup.notification.invokeAction(actionDelegate.modelData.identifier);
+                                    }
                                 }
                             }
                         }
@@ -258,9 +259,7 @@ Item {
                 }
             }
 
-            // Close button (positioned absolutely in top-right)
             Rectangle {
-                id: closeButton
                 anchors {
                     right: parent.right
                     top: parent.top
@@ -269,9 +268,7 @@ Item {
                 width: 20
                 height: 20
                 radius: 10
-                color: closeMouseArea.pressed ? Colors.active :
-                       closeMouseArea.containsMouse ? Colors.backgroundAlt :
-                       "transparent"
+                color: closeArea.pressed ? Colors.active : closeArea.containsMouse ? Colors.backgroundAlt : "transparent"
 
                 Text {
                     anchors.centerIn: parent
@@ -282,31 +279,30 @@ Item {
                 }
 
                 MouseArea {
-                    id: closeMouseArea
+                    id: closeArea
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: dismiss()
+                    onClicked: popup.dismiss()
                 }
             }
 
-            // Main interaction area
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
                 acceptedButtons: Qt.RightButton
 
                 onEntered: {
-                    isHovered = true
-                    background.border.color = Colors.active
+                    popup.isHovered = true;
+                    background.border.color = Colors.active;
                 }
 
                 onExited: {
-                    isHovered = false
-                    background.border.color = getBorderColor()
+                    popup.isHovered = false;
+                    background.border.color = popup.borderColor;
                 }
 
-                onClicked: dismiss()
+                onClicked: popup.dismiss()
             }
         }
     }

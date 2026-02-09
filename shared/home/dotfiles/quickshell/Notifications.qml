@@ -1,143 +1,152 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 
-import Quickshell
-import Quickshell.Services.Notifications
 import QtQuick
 
 QtObject {
     id: root
 
-    readonly property int historyDuration: 24 * 60 * 60 * 1000 // 24 hours in milliseconds
+    readonly property int historyDuration: 24 * 60 * 60 * 1000
 
     property bool dndEnabled: false
     property var notifications: []
     property int notificationsVersion: 0
 
-    property var activeNotifications: {
-        notificationsVersion;
-        return notifications.filter(n => !n.closed)
+    readonly property var activeNotifications: notifications.filter(n => !n.closed)
+
+    function wrapActions(qmlActions) {
+        // QML action objects become invalid after creation,
+        // so we must bind their invoke() methods immediately
+        const wrapped = [];
+        for (let i = 0; i < qmlActions.length; i++) {
+            const action = qmlActions[i];
+            wrapped.push({
+                identifier: action.identifier,
+                text: action.text,
+                invoke: action.invoke.bind(action)
+            });
+        }
+        return wrapped;
     }
 
     property var cleanupTimer: Timer {
-        interval: 3600000 // 1 hour
+        interval: 3600000
         running: true
         repeat: true
-
         onTriggered: {
-            const now = Date.now()
-            const oldLength = root.notifications.length
-
-            root.notifications = root.notifications.filter(n => {
-                return (now - n.timestamp) < root.historyDuration
-            })
-
-            const removed = oldLength - root.notifications.length
-            if (removed > 0) {
-                console.log(`🗑️  Cleaned up ${removed} old notification(s)`)
-                root.notificationsVersion++
+            const cutoff = Date.now() - root.historyDuration;
+            const oldLen = root.notifications.length;
+            root.notifications = root.notifications.filter(n => n.timestamp >= cutoff);
+            if (root.notifications.length < oldLen) {
+                root.notificationsVersion++;
             }
         }
     }
 
-    // Add notification from NotificationServer
     function addNotification(notification) {
-        // Check DND mode
-        if (dndEnabled && notification.urgency < 2) {
-            console.log("🔕 DND active - suppressing notification:", notification.summary)
-            return
-        }
+        if (root.dndEnabled && notification.urgency < 2)
+            return;
+        root.notifications = [root.notifComponent.createObject(root, {
+                notification
+            }), ...root.notifications].slice(0, 100);
 
-        // Create wrapper
-        const notif = notifComponent.createObject(root, {
-            notification: notification
-        })
-
-        // Add to list (prepend - newest first)
-        root.notifications = [notif, ...root.notifications]
-
-        // Enforce cap
-        if (root.notifications.length > 100) {
-            root.notifications = root.notifications.slice(0, 100)
-            console.log("⚠️  Notification cap reached, trimming old entries")
-        }
-
-        // Trigger reactive updates
-        root.notificationsVersion++
-
-        console.log(`🔔 New notification: ${notification.summary} (urgency: ${notification.urgency})`)
+        root.notificationsVersion++;
     }
 
-    // Toggle DND mode
     function toggleDnd() {
-        dndEnabled = !dndEnabled
-        console.log(dndEnabled ? "🔕 DND enabled" : "🔔 DND disabled")
+        root.dndEnabled = !root.dndEnabled;
     }
 
-    // Clear all active notifications
     function clearAll() {
-        activeNotifications.forEach(n => n.close())
-        console.log("🗑️  Cleared all active notifications")
+        root.activeNotifications.forEach(n => n.close());
     }
 
-    // Clear all notifications from a specific app
     function clearApp(appName) {
-        const cleared = activeNotifications.filter(n => n.appName === appName)
-        cleared.forEach(n => n.close())
-        console.log(`🗑️  Cleared ${cleared.length} notification(s) from ${appName}`)
+        root.activeNotifications.filter(n => n.appName === appName).forEach(n => n.close());
     }
 
-    // Notif wrapper component
-    property var notifComponent: Component {
-        QtObject {
-            id: notif
+    component Notif: QtObject {
+        id: notif
+        required property var notification
 
-            required property var notification
+        property string summary: ""
+        property string body: ""
+        property string appName: ""
+        property string appIcon: ""
+        property int urgency: 0
+        property string image: ""
+        property bool resident: false
+        property int timestamp: Date.now()
+        property bool closed: false
+        property bool hasAnimated: false
+        property var actions: []
 
-            // Cached properties
-            property string summary: notification.summary
-            property string body: notification.body
-            property string appName: notification.appName
-            property string appIcon: notification.appIcon
-            property int urgency: notification.urgency
-            property var actions: notification.actions
-            property string image: notification.image
-            property int timestamp: Date.now()
-            property bool closed: false
-            property bool hasAnimated: false
+        Component.onCompleted: {
+            if (!notif.notification)
+                return;
+            notif.summary = notif.notification.summary;
+            notif.body = notif.notification.body;
+            notif.appName = notif.notification.appName;
+            notif.appIcon = notif.notification.appIcon;
+            notif.urgency = notif.notification.urgency;
+            notif.image = notif.notification.image;
+            notif.resident = notif.notification.resident;
 
-            // Close notification
-            function close() {
-                if (!closed) {
-                    closed = true
-                    if (notification && typeof notification.close === "function") {
-                        notification.close()
-                    }
-                    root.notificationsVersion++ // Trigger reactive updates
-                }
+            if (notif.notification.actions?.length > 0) {
+                notif.actions = root.wrapActions(notif.notification.actions);
             }
+        }
 
-            // Invoke action by ID
-            function invokeAction(actionId) {
-                const action = actions.find(a => a.identifier === actionId)
-                if (action) {
-                    action.invoke()
-                    console.log(`🔘 Invoked action: ${actionId} for notification: ${summary}`)
+        property Connections conn: Connections {
+            target: notif.notification
 
-                    // Close popup unless notification is resident
-                    if (!notification.resident) {
-                        close()
-                    }
-                }
+            function onClosed() {
+                notif.closed = true;
             }
-
-            // Listen for external close events
-            property var conn: Connections {
-                target: notification
-
-                function onClosed() {
-                    notif.closed = true
+            function onSummaryChanged() {
+                notif.summary = notif.notification.summary;
+            }
+            function onBodyChanged() {
+                notif.body = notif.notification.body;
+            }
+            function onAppNameChanged() {
+                notif.appName = notif.notification.appName;
+            }
+            function onAppIconChanged() {
+                notif.appIcon = notif.notification.appIcon;
+            }
+            function onImageChanged() {
+                notif.image = notif.notification.image;
+            }
+            function onUrgencyChanged() {
+                notif.urgency = notif.notification.urgency;
+            }
+            function onActionsChanged() {
+                if (notif.notification.actions?.length > 0) {
+                    notif.actions = root.wrapActions(notif.notification.actions);
                 }
             }
         }
+
+        function close() {
+            if (notif.closed)
+                return;
+            notif.closed = true;
+            notif.notification?.dismiss();
+            root.notificationsVersion++;
+        }
+
+        function invokeAction(actionId) {
+            const action = notif.actions.find(a => a.identifier === actionId);
+            if (action?.invoke) {
+                action.invoke();
+                if (!notif.resident)
+                    notif.close();
+            }
+        }
+    }
+
+    property Component notifComponent: Component {
+        Notif {}
     }
 }
