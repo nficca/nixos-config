@@ -147,6 +147,13 @@ Item {
                     width: popup.timeout > 0 ? parent.width * (1 - popup.elapsed / popup.timeout) : 0
                     radius: 2
                     color: popup.progressColor
+
+                    Behavior on width {
+                        NumberAnimation {
+                            duration: 100
+                            easing.type: Easing.Linear
+                        }
+                    }
                 }
             }
 
