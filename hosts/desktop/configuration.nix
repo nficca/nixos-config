@@ -10,6 +10,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Fix Intel Bluetooth HCI reset timeout issue
+  # See: https://github.com/bluez/bluez/issues/1263
+  boot.kernelParams = [ "btintel.enable_hci_reset=0" ];
+
   # The following is AMD GPU configuration per
   # https://nixos.wiki/wiki/AMD_GPU
   boot.initrd.kernelModules = [ "amdgpu" ];
