@@ -26,6 +26,7 @@ Scope {
         visible: Notifications.visiblePopupNotifications.length > 0
         color: "transparent"
         implicitWidth: 400
+        implicitHeight: notificationColumn.implicitHeight
 
         screen: Quickshell.screens[0]
         anchors {
@@ -39,6 +40,7 @@ Scope {
         }
 
         Column {
+            id: notificationColumn
             spacing: 10
 
             Repeater {
