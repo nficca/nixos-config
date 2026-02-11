@@ -10,3 +10,4 @@ PowerMenuWidget 1.0 PowerMenuWidget.qml
 FocusedWindowWidget 1.0 FocusedWindowWidget.qml
 NotificationWidget 1.0 NotificationWidget.qml
 NotificationPopup 1.0 NotificationPopup.qml
+PopupTip 1.0 PopupTip.qml

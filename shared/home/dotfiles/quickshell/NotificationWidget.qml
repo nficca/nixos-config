@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 
 Item {
     id: root
@@ -77,13 +76,13 @@ Item {
             onClicked: {
                 Notifications.toggleDnd();
             }
+        }
 
-            ToolTip {
-                visible: mouseArea.containsMouse
-                delay: 800
-                text: Notifications.dndEnabled ? "DND Mode" : root.activeCount > 0 ? root.activeCount + " notification" + (root.activeCount > 1 ? "s" : "") : "No notifications"
-                y: parent.height + 5
-            }
+        PopupTip {
+            anchors.fill: parent
+            text: root.activeCount > 0 ? root.activeCount + " notification" + (root.activeCount > 1 ? "s" : "") : "No notifications"
+            active: mouseArea.containsMouse
+            offsetY: height + 10
         }
     }
 }
