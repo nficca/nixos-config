@@ -47,6 +47,7 @@
     lua-language-server
     nil
     nixfmt
+    typescript-language-server
     kdePackages.qtdeclarative
   ];
 

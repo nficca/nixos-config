@@ -74,6 +74,7 @@ return {
       "gopls",
       "jsonls",
       "qmlls",
+      "ts_ls",
     })
   end
 }
