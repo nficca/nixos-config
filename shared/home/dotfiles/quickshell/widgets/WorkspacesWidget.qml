@@ -1,4 +1,5 @@
 import QtQuick
+import ".."
 
 Row {
     spacing: 8
