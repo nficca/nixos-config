@@ -24,6 +24,7 @@ in
       "Code/User/settings.json".source = "${dotfiles}/vscode/settings.json";
       "ghostty/linux".source = "${dotfiles}/ghostty/linux";
       niri.source = "${dotfiles}/niri";
+      hypr.source = "${dotfiles}/hypr";
       swaync.source = "${dotfiles}/swaync";
       ironbar.source = "${dotfiles}/ironbar";
       quickshell.source = "${dotfiles}/quickshell";

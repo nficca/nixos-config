@@ -95,12 +95,16 @@
   # KDE Plasma is a fully-fledged desktop environment that includes a window
   # compositor, taskbar, and many more standard applications. It's a good option
   # to get everything you need out of the box.
-  #
-  # Niri is a scrollable-tiling Wayland compositor. It's just the compositor,
-  # so everything else must be installed separately. This is a good option when
-  # you want to fully customize your desktop.
   services.desktopManager.plasma6.enable = false;
+  # Niri is a scrollable-tiling Wayland compositor. It's just the compositor,
+  # so everything else must be installed separately.
   programs.niri.enable = true;
+  # Hyprland is a modern Wayland compositor with dynamic tiling and powerful
+  # plugins. It's also just a compositor.
+  programs.hyprland.enable = true;
+
+  # Hint electon apps to use wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Install xwayland-satellite for X11 app support in Niri
   environment.systemPackages = with pkgs; [
