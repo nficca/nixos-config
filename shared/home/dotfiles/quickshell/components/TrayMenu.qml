@@ -23,32 +23,46 @@ Item {
     property bool menuWasOpen: false
     property bool menuReady: false
     property bool animatingOut: false
+    property real menuOpacity: 0
+    property var pendingOpen: null
+
+    function applyMenuOpen(handle, anchor) {
+        var anchorPos = anchor.mapToItem(null, 0, 0);
+        root.menuX = anchorPos.x + anchor.width / 2 - root.menuWidth / 2;
+        root.menuY = anchorPos.y + anchor.height + 5;
+        root.menuWindow = anchor.QsWindow.window;
+
+        menuStack.clear();
+        menuStack.push(menuLevelComponent.createObject(menuStack, {
+            menuHandle: handle
+        }));
+
+        root.menuOpacity = 1;
+    }
 
     Connections {
         target: TrayMenuState
         function onOpenRequested(handle, anchor) {
-            // Hide popup while we update position to prevent flash at old location
-            root.menuReady = false
-
-            var anchorPos = anchor.mapToItem(null, 0, 0)
-            var targetX = anchorPos.x + anchor.width / 2 - root.menuWidth / 2
-            var targetY = anchorPos.y + anchor.height + 5
-            var targetWindow = anchor.QsWindow.window
-
-            root.menuX = targetX
-            root.menuY = targetY
-            root.menuWindow = targetWindow
-
-            menuStack.clear()
-            menuStack.push(menuLevelComponent.createObject(menuStack, { menuHandle: handle }))
-
-            root.menuWasOpen = true
-            root.menuReady = true
+            if (root.menuWasOpen && root.menuReady) {
+                // Switching menus - animate out, then update position
+                root.pendingOpen = {
+                    handle: handle,
+                    anchor: anchor
+                };
+                root.menuOpacity = 0;
+                switchTimer.start();
+            } else {
+                // Fresh open - update position immediately
+                root.applyMenuOpen(handle, anchor);
+                root.menuWasOpen = true;
+                root.menuReady = true;
+            }
         }
 
         function onCloseRequested() {
-            root.animatingOut = true
-            closeTimer.start()
+            root.animatingOut = true;
+            root.menuOpacity = 0;
+            closeTimer.start();
         }
     }
 
@@ -56,9 +70,20 @@ Item {
         id: closeTimer
         interval: root.animationDuration
         onTriggered: {
-            root.animatingOut = false
-            root.menuWasOpen = false
-            root.menuReady = false
+            root.animatingOut = false;
+            root.menuWasOpen = false;
+            root.menuReady = false;
+        }
+    }
+
+    Timer {
+        id: switchTimer
+        interval: root.animationDuration
+        onTriggered: {
+            if (root.pendingOpen) {
+                root.applyMenuOpen(root.pendingOpen.handle, root.pendingOpen.anchor);
+                root.pendingOpen = null;
+            }
         }
     }
 
@@ -106,7 +131,7 @@ Item {
             border.width: 1
             radius: root.borderRadius
 
-            opacity: TrayMenuState.menuOpen ? 1 : 0
+            opacity: root.menuOpacity
             scale: TrayMenuState.menuOpen ? 1 : 0.95
             transformOrigin: Item.Top
 
@@ -124,7 +149,6 @@ Item {
                 }
             }
 
-
             StackView {
                 id: menuStack
                 anchors.fill: parent
@@ -132,10 +156,26 @@ Item {
                 clip: true
 
                 // Disable default animations to prevent flicker
-                pushEnter: Transition { NumberAnimation { duration: 0 } }
-                pushExit: Transition { NumberAnimation { duration: 0 } }
-                popEnter: Transition { NumberAnimation { duration: 0 } }
-                popExit: Transition { NumberAnimation { duration: 0 } }
+                pushEnter: Transition {
+                    NumberAnimation {
+                        duration: 0
+                    }
+                }
+                pushExit: Transition {
+                    NumberAnimation {
+                        duration: 0
+                    }
+                }
+                popEnter: Transition {
+                    NumberAnimation {
+                        duration: 0
+                    }
+                }
+                popExit: Transition {
+                    NumberAnimation {
+                        duration: 0
+                    }
+                }
             }
         }
     }
@@ -312,23 +352,25 @@ Item {
                                     cursorShape: itemLoader.modelData.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
 
                                     onClicked: {
-                                        if (!itemLoader.modelData.enabled) return
-
+                                        if (!itemLoader.modelData.enabled)
+                                            return;
                                         if (itemLoader.modelData.hasChildren) {
                                             // Push submenu
                                             menuStack.push(menuLevelComponent.createObject(menuStack, {
                                                 menuHandle: itemLoader.modelData
-                                            }))
+                                            }));
                                         } else {
                                             // Trigger action and close menu
-                                            itemLoader.modelData.triggered()
-                                            TrayMenuState.close()
+                                            itemLoader.modelData.triggered();
+                                            TrayMenuState.close();
                                         }
                                     }
                                 }
 
                                 Behavior on color {
-                                    ColorAnimation { duration: 50 }
+                                    ColorAnimation {
+                                        duration: 50
+                                    }
                                 }
                             }
                         }
