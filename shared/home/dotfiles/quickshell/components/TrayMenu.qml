@@ -16,11 +16,38 @@ Item {
     readonly property int borderRadius: 6
     readonly property int animationDuration: 100
 
+    // Position tracking for menu
+    property real menuX: 0
+    property real menuY: 0
+    property var menuWindow: null
+    property bool menuWasOpen: false
+    property bool menuReady: false
+
     Connections {
         target: TrayMenuState
         function onOpenRequested(handle, anchor) {
+            // Hide popup while we update position to prevent flash at old location
+            root.menuReady = false
+
+            var anchorPos = anchor.mapToItem(null, 0, 0)
+            var targetX = anchorPos.x + anchor.width / 2 - root.menuWidth / 2
+            var targetY = anchorPos.y + anchor.height + 5
+            var targetWindow = anchor.QsWindow.window
+
+            root.menuX = targetX
+            root.menuY = targetY
+            root.menuWindow = targetWindow
+
             menuStack.clear()
             menuStack.push(menuLevelComponent.createObject(menuStack, { menuHandle: handle }))
+
+            root.menuWasOpen = true
+            root.menuReady = true
+        }
+
+        function onCloseRequested() {
+            root.menuWasOpen = false
+            root.menuReady = false
         }
     }
 
@@ -49,10 +76,10 @@ Item {
     // Menu popup
     PopupWindow {
         id: menuPopup
-        visible: TrayMenuState.menuOpen && TrayMenuState.anchorItem
-        anchor.window: TrayMenuState.anchorItem ? TrayMenuState.anchorItem.QsWindow.window : null
-        anchor.rect.x: TrayMenuState.anchorItem ? TrayMenuState.anchorItem.mapToItem(null, 0, 0).x + TrayMenuState.anchorItem.width / 2 - width / 2 : 0
-        anchor.rect.y: TrayMenuState.anchorItem ? TrayMenuState.anchorItem.mapToItem(null, 0, 0).y + TrayMenuState.anchorItem.height + 5 : 0
+        visible: TrayMenuState.menuOpen && root.menuReady
+        anchor.window: root.menuWindow
+        anchor.rect.x: root.menuX
+        anchor.rect.y: root.menuY
         color: "transparent"
 
         implicitWidth: menuContent.width
@@ -68,21 +95,10 @@ Item {
             border.width: 1
             radius: root.borderRadius
 
-            opacity: TrayMenuState.menuOpen ? 1 : 0
+            opacity: 1
             scale: TrayMenuState.menuOpen ? 1 : 0.95
             transformOrigin: Item.Top
 
-            Behavior on opacity {
-                NumberAnimation { duration: root.animationDuration }
-            }
-
-            Behavior on scale {
-                NumberAnimation { duration: root.animationDuration; easing.type: Easing.OutQuad }
-            }
-
-            Behavior on height {
-                NumberAnimation { duration: root.animationDuration; easing.type: Easing.OutQuad }
-            }
 
             StackView {
                 id: menuStack

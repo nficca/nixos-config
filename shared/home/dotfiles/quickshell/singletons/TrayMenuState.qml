@@ -10,10 +10,6 @@ QtObject {
     signal closeRequested()
 
     function open(handle, anchor) {
-        // If switching between menus, close first to avoid visual glitches
-        if (menuOpen) {
-            menuOpen = false
-        }
         menuHandle = handle
         anchorItem = anchor
         menuOpen = true
