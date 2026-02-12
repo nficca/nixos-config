@@ -14,7 +14,7 @@ Item {
     readonly property int iconSize: 16
     readonly property int fontSize: 13
     readonly property int borderRadius: 6
-    readonly property int animationDuration: 100
+    readonly property int animationDuration: 120
 
     // Position tracking for menu
     property real menuX: 0
@@ -22,6 +22,7 @@ Item {
     property var menuWindow: null
     property bool menuWasOpen: false
     property bool menuReady: false
+    property bool animatingOut: false
 
     Connections {
         target: TrayMenuState
@@ -46,6 +47,16 @@ Item {
         }
 
         function onCloseRequested() {
+            root.animatingOut = true
+            closeTimer.start()
+        }
+    }
+
+    Timer {
+        id: closeTimer
+        interval: root.animationDuration
+        onTriggered: {
+            root.animatingOut = false
             root.menuWasOpen = false
             root.menuReady = false
         }
@@ -76,7 +87,7 @@ Item {
     // Menu popup
     PopupWindow {
         id: menuPopup
-        visible: TrayMenuState.menuOpen && root.menuReady
+        visible: (TrayMenuState.menuOpen || root.animatingOut) && root.menuReady
         anchor.window: root.menuWindow
         anchor.rect.x: root.menuX
         anchor.rect.y: root.menuY
@@ -95,9 +106,23 @@ Item {
             border.width: 1
             radius: root.borderRadius
 
-            opacity: 1
+            opacity: TrayMenuState.menuOpen ? 1 : 0
             scale: TrayMenuState.menuOpen ? 1 : 0.95
             transformOrigin: Item.Top
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: root.animationDuration
+                    easing.type: Easing.OutQuad
+                }
+            }
+
+            Behavior on scale {
+                NumberAnimation {
+                    duration: root.animationDuration
+                    easing.type: Easing.OutQuad
+                }
+            }
 
 
             StackView {
