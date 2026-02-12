@@ -101,9 +101,21 @@ telescope_keymap("F", telescope.resume, "Resume previous search")
 
 -- Clipboard and Register keymaps --
 
+-- Yank keymaps --
+which_key.add({ "<leader>y", group = "Yank/Copy" })
+
 -- System clipboard yank (copy)
-vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
-vim.keymap.set("n", "<leader>y", '"+yy', { desc = "Yank line to system clipboard" })
+vim.keymap.set("v", "<leader>yy", '"+y', { desc = "Yank to system clipboard" })
+vim.keymap.set("n", "<leader>yy", '"+yy', { desc = "Yank line to system clipboard" })
+
+-- Gitlinker (copy git permalink)
+local gitlinker = require("gitlinker")
+vim.keymap.set("n", "<leader>yg", function()
+  gitlinker.get_buf_range_url("n")
+end, { desc = "Copy git permalink" })
+vim.keymap.set("v", "<leader>yg", function()
+  gitlinker.get_buf_range_url("v")
+end, { desc = "Copy git permalink (selection)" })
 
 -- System clipboard paste
 vim.keymap.set({"n", "v"}, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
