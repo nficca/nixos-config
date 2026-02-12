@@ -24,7 +24,6 @@
       fossa-cli # Dependency analysis tool
       fuzzel # Wayland application launcher
       heaptrack # Heap memory profiler
-      ironbar # Customizable status bar for Wayland compositors
       kdePackages.ktorrent # BitTorrent client
       kubectl # Kubernetes CLI
       kubectx # Fast way to switch between clusters and namespaces in kubectl
@@ -39,7 +38,6 @@
       saml2aws # CLI tool for getting AWS creds via SAML IDP
       slack # Team communication
       swayidle # Idle management daemon for wayland
-      swaynotificationcenter # Notification daemon
       wireguard-tools # Tools for WireGuard VPN
     ])
     ++ [
@@ -123,21 +121,6 @@
   #
   # $ systemctl --user list-units
   systemd.user.services = {
-    swaync = {
-      Unit = {
-        Description = "Sway Notification Center";
-        After = [ "graphical-session.target" ];
-        PartOf = [ "graphical-session.target" ];
-      };
-      Service = {
-        ExecStart = "${pkgs.swaynotificationcenter}/bin/swaync";
-        Restart = "on-failure";
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-    };
-
     nm-applet = {
       Unit = {
         Description = "NetworkManager Applet";
@@ -154,14 +137,14 @@
       };
     };
 
-    ironbar = {
+    quickshell = {
       Unit = {
-        Description = "Ironbar status bar";
+        Description = "Quickshell";
         After = [ "graphical-session.target" ];
         PartOf = [ "graphical-session.target" ];
       };
       Service = {
-        ExecStart = "${pkgs.ironbar}/bin/ironbar";
+        ExecStart = "${qml-niri.packages.${pkgs.stdenv.hostPlatform.system}.quickshell}/bin/quickshell";
         Restart = "on-failure";
       };
       Install = {
