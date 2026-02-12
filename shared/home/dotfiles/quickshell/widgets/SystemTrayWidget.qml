@@ -1,7 +1,6 @@
 import QtQuick
 import Quickshell
 import Quickshell.Services.SystemTray
-import ".."
 
 Row {
     spacing: 8
@@ -13,14 +12,20 @@ Row {
             id: trayItem
             required property var modelData
 
-            width: 32
-            height: 32
+            width: 24
+            height: 24
 
             Image {
                 anchors.fill: parent
+
+                // Request a higher resolution icon from the source
+                // so there's more detail when scaling down to display size.
+                sourceSize: Qt.size(48, 48)
                 source: trayItem.modelData.icon
+
                 fillMode: Image.PreserveAspectFit
                 smooth: true
+                mipmap: true
             }
 
             QsMenuAnchor {
