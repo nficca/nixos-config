@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 import Quickshell
+import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
 import ".."
@@ -9,8 +10,13 @@ Scope {
         model: Quickshell.screens
 
         PanelWindow {
+            id: barWindow
             required property var modelData
             screen: modelData
+
+            // Use Overlay layer so bar receives clicks over the tray menu click catcher
+            WlrLayershell.layer: WlrLayer.Overlay
+            WlrLayershell.exclusiveZone: implicitHeight
 
             anchors {
                 top: true
@@ -21,6 +27,12 @@ Scope {
             implicitHeight: 40
             color: Colors.background
 
+            // Close tray menu when clicking anywhere on bar.
+            // TapHandler is used instead of MouseArea to avoid blocking hover events
+            // which would prevent child items from changing the cursor shape.
+            TapHandler {
+                onTapped: TrayMenuState.close()
+            }
 
             // Left
             RowLayout {

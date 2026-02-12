@@ -1,9 +1,15 @@
 import QtQuick
-import Quickshell
 import Quickshell.Services.SystemTray
+import ".."
 
 Row {
+    id: root
     spacing: 8
+
+    // Single shared menu for all tray items
+    TrayMenu {
+        id: trayMenu
+    }
 
     Repeater {
         model: SystemTray.items
@@ -28,12 +34,6 @@ Row {
                 mipmap: true
             }
 
-            QsMenuAnchor {
-                id: menuAnchor
-                menu: trayItem.modelData.menu
-                anchor.item: trayItem
-            }
-
             MouseArea {
                 anchors.fill: parent
                 acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
@@ -45,7 +45,7 @@ Row {
                         trayItem.modelData.activate();
                     } else if (mouse.button === Qt.RightButton) {
                         if (trayItem.modelData.hasMenu) {
-                            menuAnchor.open();
+                            TrayMenuState.open(trayItem.modelData.menu, trayItem);
                         }
                     } else if (mouse.button === Qt.MiddleButton) {
                         trayItem.modelData.secondaryActivate();

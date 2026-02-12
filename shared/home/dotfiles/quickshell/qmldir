@@ -2,6 +2,7 @@ singleton Colors 1.0 singletons/Colors.qml
 singleton Time 1.0 singletons/Time.qml
 singleton Niri 1.0 singletons/Niri.qml
 singleton Notifications 1.0 singletons/Notifications.qml
+singleton TrayMenuState 1.0 singletons/TrayMenuState.qml
 Bar 1.0 components/Bar.qml
 ClockWidget 1.0 widgets/ClockWidget.qml
 WorkspacesWidget 1.0 widgets/WorkspacesWidget.qml
@@ -11,3 +12,4 @@ FocusedWindowWidget 1.0 widgets/FocusedWindowWidget.qml
 NotificationWidget 1.0 widgets/NotificationWidget.qml
 NotificationPopup 1.0 components/NotificationPopup.qml
 PopupTip 1.0 components/PopupTip.qml
+TrayMenu 1.0 components/TrayMenu.qml
