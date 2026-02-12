@@ -106,6 +106,7 @@
   # Git
   programs.git.enable = true;
   programs.git.lfs.enable = true;
+  programs.git.ignores = [ "/.worktrees" ];
   programs.git.settings.user.email = "nicficca@gmail.com";
   programs.git.settings.user.name = "Nic Ficca";
   programs.git.settings.init.defaultBranch = "main";
