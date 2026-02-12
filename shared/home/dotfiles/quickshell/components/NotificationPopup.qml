@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 import QtQuick
+import Quickshell
 import ".."
 
 Item {
@@ -14,8 +15,37 @@ Item {
     readonly property int timeout: notification ? timeouts[notification.urgency] || 10000 : 0
 
     readonly property color borderColor: !notification ? Colors.border : notification.urgency === 2 ? Colors.urgent : Colors.border
-
     readonly property color progressColor: !notification ? Colors.active : notification.urgency === 2 ? Colors.urgent : notification.urgency === 0 ? Colors.low : Colors.active
+
+    readonly property string normalizedAppIcon: normalizePath(notification?.appIcon ?? "")
+    readonly property string normalizedImage: normalizePath(notification?.image ?? "")
+    readonly property bool imagesMatch: normalizedAppIcon !== "" && normalizedImage !== "" && normalizedAppIcon === normalizedImage
+
+    // The icon is high-priority. Try the content image if there's no icon.
+    readonly property string iconSource: {
+        const icon = normalizedAppIcon || normalizedImage;
+        if (!icon)
+            return "";
+        return Quickshell.iconPath(icon);
+    }
+
+    // Don't show content image when:
+    // - The icon is missing since we'll use the image as the icon
+    // - The icon and the image are the same since we don't want to repeat it
+    readonly property string imageSource: !notification?.appIcon || imagesMatch ? "" : notification?.image
+
+    function normalizePath(value) {
+        if (value.startsWith("image://icon/"))
+            return value.substring(13);
+        if (value.startsWith("file://"))
+            return value.substring(7);
+        return value;
+    }
+
+    function dismiss(isExplicit) {
+        popup.explicitDismiss = isExplicit;
+        exitAnimation.start();
+    }
 
     implicitWidth: 400
     implicitHeight: notification?.closed ? 0 : container.height
@@ -26,11 +56,6 @@ Item {
             duration: 150
             easing.type: Easing.OutQuad
         }
-    }
-
-    function dismiss(isExplicit) {
-        popup.explicitDismiss = isExplicit;
-        exitAnimation.start();
     }
 
     Component.onCompleted: {
@@ -176,15 +201,7 @@ Item {
                     Image {
                         id: appIcon
                         visible: source !== ""
-                        source: {
-                            if (!popup.notification?.appIcon)
-                                return "";
-                            const icon = popup.notification.appIcon;
-                            if (icon.startsWith("/") || icon.startsWith("file://")) {
-                                return icon;
-                            }
-                            return `image://icon/${icon}`;
-                        }
+                        source: popup.iconSource
                         width: 32
                         height: 32
                         fillMode: Image.PreserveAspectFit
@@ -224,8 +241,8 @@ Item {
                 }
 
                 Image {
-                    visible: popup.notification?.image
-                    source: popup.notification?.image ?? ""
+                    visible: source !== ""
+                    source: popup.imageSource
                     width: parent.width
                     fillMode: Image.PreserveAspectFit
                     height: Math.min(sourceSize.height, 200)
