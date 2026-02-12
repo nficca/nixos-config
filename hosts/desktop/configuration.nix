@@ -48,31 +48,31 @@
   # Use ly login manager (TUI display manager)
   services.displayManager.ly = {
     enable = true;
-    # Patch the xsession-wrapper to recognize niri as systemd-aware.
+    # Patch the xsession-wrapper to recognize other window compositors as
+    # systemd-aware.
     #
-    # NixOS display managers (including ly) use xsession-wrapper as a
-    # universal session entry point for both X11 and Wayland sessions.
-    # The wrapper handles environment setup, imports variables into
-    # systemd, and checks if the session is systemd-aware. Without this
-    # patch, the wrapper determines that niri (our Wayland compositor) is
-    # not systemd-aware and triggers nixos-fake-graphical-session.target.
-    # This is bad because that target BindsTo graphical-session.target,
-    # causing it to start immediately at login, before niri.service is
-    # ready. This bypasses the Before= ordering constraint in
-    # niri.service, resulting in autostart applications and other
-    # graphical services launching before the compositor is running,
-    # which causes them to fail.
+    # NixOS display managers (including ly) use xsession-wrapper as a universal
+    # session entry point for both X11 and Wayland sessions. The wrapper handles
+    # environment setup, imports variables into systemd, and checks if the
+    # session is systemd-aware. Without this patch, the wrapper determines that
+    # our Wayland compositor (e.g. hyprland, niri, etc.) is not systemd-aware
+    # and triggers nixos-fake-graphical-session.target. This is bad because that
+    # target BindsTo graphical-session.target, causing it to start immediately
+    # at login, before the compositor service is ready. This bypasses the
+    # Before= ordering constraint in the compositor service, resulting in
+    # autostart applications and other graphical services launching before the
+    # compositor is running, which causes them to fail.
     #
     # Read more about this here:
     # https://github.com/YaLTeR/niri/issues/3177#issuecomment-3765266141
     #
-    # Implementation: We use pkgs.runCommand to create a patched version
-    # of the xsession-wrapper script. The original wrapper checks if
-    # XDG_CURRENT_DESKTOP matches a hardcoded list of systemd-aware
-    # sessions in a bash case statement. We use substituteInPlace to add
-    # "|niri" to that pattern, making niri recognized as systemd-aware.
-    # The --replace-fail flag ensures the build fails if the pattern
-    # changes upstream, alerting us to update the patch.
+    # Implementation: We use pkgs.runCommand to create a patched version of the
+    # xsession-wrapper script. The original wrapper checks if
+    # XDG_CURRENT_DESKTOP matches a hardcoded list of systemd-aware sessions in
+    # a bash case statement. We use substituteInPlace to add whichever
+    # compositors we might want to use to that pattern so that they are
+    # recognized as systemd-aware. The --replace-fail flag ensures the build
+    # fails if the pattern changes upstream, alerting us to update the patch.
     settings.setup_cmd =
       let
         xsession-wrapper =
@@ -84,7 +84,7 @@
               cp --preserve=mode $src $out
               substituteInPlace $out --replace-fail \
                 "KDE|GNOME|Pantheon|X-NIXOS-SYSTEMD-AWARE" \
-                "KDE|GNOME|Pantheon|X-NIXOS-SYSTEMD-AWARE|niri"
+                "KDE|GNOME|Pantheon|X-NIXOS-SYSTEMD-AWARE|niri|Hyprland"
             '';
       in
       "${xsession-wrapper}";
@@ -101,13 +101,19 @@
   programs.niri.enable = true;
   # Hyprland is a modern Wayland compositor with dynamic tiling and powerful
   # plugins. It's also just a compositor.
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    # Use UWSM (Universal Wayland Session Manager) for proper systemd integration.
+    # This ensures graphical-session.target starts/stops correctly on
+    # login/logout.
+    withUWSM = true;
+  };
 
   # Hint electon apps to use wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  # Install xwayland-satellite for X11 app support in Niri
   environment.systemPackages = with pkgs; [
+    # Install xwayland-satellite for X11 app support in Niri
     xwayland-satellite
   ];
 
