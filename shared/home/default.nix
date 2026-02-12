@@ -38,7 +38,8 @@
     tree # Depth-indented directory listing
     lazygit # Terminal UI for git commands
     cmake # Cross-platform build system generator
-    claude-code # Terminal-based LLM agent
+    claude-code # Agentic coding tool for the terminal
+    opencode # Open-source agentic coding tool for the terminal
     libclang # C language tools
     jq # Flexible CLI JSON processor
 
