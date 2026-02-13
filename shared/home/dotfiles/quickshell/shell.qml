@@ -54,5 +54,9 @@ Scope {
         }
     }
 
+    // Global overlay for system tray context menus (not in SystemTrayWidget
+    // because it creates full-screen PanelWindow overlays)
+    TrayMenu {}
+
     Bar {}
 }

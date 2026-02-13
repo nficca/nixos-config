@@ -6,11 +6,6 @@ Row {
     id: root
     spacing: 8
 
-    // Single shared menu for all tray items
-    TrayMenu {
-        id: trayMenu
-    }
-
     Repeater {
         model: SystemTray.items
 
