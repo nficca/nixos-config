@@ -113,10 +113,16 @@
   programs.git.settings.user.email = "nicficca@gmail.com";
   programs.git.settings.user.name = "Nic Ficca";
   programs.git.settings.init.defaultBranch = "main";
+  programs.git.includes = [{ path = "~/.config/git/themes.gitconfig"; }];
 
   # Delta
   programs.delta.enable = true;
   programs.delta.enableGitIntegration = true;
+  programs.delta.options = {
+    # All features are defined in ~/.config/git/themes.gitconfig, which should
+    # be symlinked from share/home/dotfiles/git/themes.gitconfig.
+    features = "weeping-willow";
+  };
 
   # Github CLI
   programs.gh.enable = true;

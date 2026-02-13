@@ -34,6 +34,7 @@ in
       direnv.source = "${dotfiles}/direnv";
       "starship.toml".source = "${dotfiles}/starship/starship.toml";
       zed.source = "${dotfiles}/zed";
+      "git/themes.gitconfig".source = "${dotfiles}/git/themes.gitconfig";
     };
 
   # Other home directory symlinks
