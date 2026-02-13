@@ -39,6 +39,7 @@
       slack # Team communication
       swayidle # Idle management daemon for wayland
       wireguard-tools # Tools for WireGuard VPN
+      wl-clipboard-rs # Command-line copy/paste utilities for Wayland
     ])
     ++ [
       awww.packages.${pkgs.stdenv.hostPlatform.system}.awww # Wallpaper daemon for wayland
