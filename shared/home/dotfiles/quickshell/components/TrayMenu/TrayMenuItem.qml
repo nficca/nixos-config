@@ -17,7 +17,7 @@ Rectangle {
 
     width: parent?.width ?? 0
     height: itemHeight
-    color: itemMouseArea.containsMouse && menuItem.enabled ? Colors.backgroundAlt : "transparent"
+    color: itemMouseArea.containsMouse && menuItem.enabled ? Appearance.colors.backgroundAlt : "transparent"
     radius: 4
     opacity: menuItem.enabled ? 1 : 0.5
 
@@ -50,7 +50,7 @@ Rectangle {
             width: parent.width - root.iconSize - root.itemSpacing - (root.menuItem.hasChildren ? 20 : 0)
             text: root.menuItem.text || ""
             font.pixelSize: root.fontSize
-            color: Colors.text
+            color: Appearance.colors.text
             elide: Text.ElideRight
         }
 
@@ -60,7 +60,7 @@ Rectangle {
             visible: root.menuItem.hasChildren
             text: "\u203a"
             font.pixelSize: root.fontSize + 4
-            color: Colors.textSecondary
+            color: Appearance.colors.textSecondary
         }
     }
 

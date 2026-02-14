@@ -43,8 +43,8 @@ Item {
             id: content
             width: label.implicitWidth + 16
             height: label.implicitHeight + 8
-            color: Colors.backgroundAlt
-            border.color: Colors.border
+            color: Appearance.colors.backgroundAlt
+            border.color: Appearance.colors.border
             border.width: 1
             radius: 4
 
@@ -52,7 +52,7 @@ Item {
                 id: label
                 anchors.centerIn: parent
                 text: root.text
-                color: Colors.text
+                color: Appearance.colors.text
                 font.pixelSize: 12
             }
         }

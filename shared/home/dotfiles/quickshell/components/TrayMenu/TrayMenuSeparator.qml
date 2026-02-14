@@ -14,6 +14,6 @@ Item {
         anchors.centerIn: parent
         width: parent.width - (root.itemPadding * 2)
         height: 1
-        color: Colors.border
+        color: Appearance.colors.border
     }
 }

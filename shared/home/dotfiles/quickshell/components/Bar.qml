@@ -25,7 +25,7 @@ Scope {
             }
 
             implicitHeight: 40
-            color: Colors.background
+            color: Appearance.colors.background
 
             // Close tray menu when clicking anywhere on bar.
             // TapHandler is used instead of MouseArea to avoid blocking hover events

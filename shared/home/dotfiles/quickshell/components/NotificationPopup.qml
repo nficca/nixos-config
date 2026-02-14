@@ -14,8 +14,8 @@ Item {
     readonly property var timeouts: [-1, 10000, -1, 5000]
     readonly property int timeout: notification ? timeouts[notification.urgency] || 10000 : 0
 
-    readonly property color borderColor: !notification ? Colors.border : notification.urgency === 2 ? Colors.urgent : Colors.border
-    readonly property color progressColor: !notification ? Colors.active : notification.urgency === 2 ? Colors.urgent : notification.urgency === 0 ? Colors.low : Colors.active
+    readonly property color borderColor: !notification ? Appearance.colors.border : notification.urgency === 2 ? Appearance.colors.urgent : Appearance.colors.border
+    readonly property color progressColor: !notification ? Appearance.colors.active : notification.urgency === 2 ? Appearance.colors.urgent : notification.urgency === 0 ? Appearance.colors.low : Appearance.colors.active
 
     readonly property string normalizedAppIcon: normalizePath(notification?.appIcon ?? "")
     readonly property string normalizedImage: normalizePath(notification?.image ?? "")
@@ -147,7 +147,7 @@ Item {
         Rectangle {
             id: background
             anchors.fill: parent
-            color: Colors.background
+            color: Appearance.colors.background
             radius: 8
             border.width: 1
             border.color: popup.borderColor
@@ -162,7 +162,7 @@ Item {
                 }
                 height: 3
                 radius: 2
-                color: Colors.backgroundAlt
+                color: Appearance.colors.backgroundAlt
 
                 Rectangle {
                     anchors {
@@ -222,7 +222,7 @@ Item {
                         Text {
                             width: parent.width
                             text: popup.notification?.summary ?? ""
-                            color: Colors.text
+                            color: Appearance.colors.text
                             font.pixelSize: 14
                             font.bold: true
                             wrapMode: Text.Wrap
@@ -231,7 +231,7 @@ Item {
                         Text {
                             width: parent.width
                             text: popup.notification?.body ?? ""
-                            color: Colors.textSecondary
+                            color: Appearance.colors.textSecondary
                             font.pixelSize: 12
                             wrapMode: Text.Wrap
                             textFormat: Text.RichText
@@ -264,14 +264,14 @@ Item {
                             width: 80
                             height: 28
                             radius: 6
-                            color: mouseArea.pressed ? Colors.active : mouseArea.containsMouse ? Colors.backgroundAlt : Colors.background
+                            color: mouseArea.pressed ? Appearance.colors.active : mouseArea.containsMouse ? Appearance.colors.backgroundAlt : Appearance.colors.background
                             border.width: 1
-                            border.color: Colors.border
+                            border.color: Appearance.colors.border
 
                             Text {
                                 anchors.centerIn: parent
                                 text: actionDelegate.modelData?.text ?? "Action"
-                                color: Colors.text
+                                color: Appearance.colors.text
                                 font.pixelSize: 11
                             }
 
@@ -300,12 +300,12 @@ Item {
                 width: 20
                 height: 20
                 radius: 10
-                color: closeArea.pressed ? Colors.active : closeArea.containsMouse ? Colors.backgroundAlt : "transparent"
+                color: closeArea.pressed ? Appearance.colors.active : closeArea.containsMouse ? Appearance.colors.backgroundAlt : "transparent"
 
                 Text {
                     anchors.centerIn: parent
                     text: "×"
-                    color: Colors.text
+                    color: Appearance.colors.text
                     font.pixelSize: 16
                     font.bold: true
                 }
@@ -326,7 +326,7 @@ Item {
 
                 onEntered: {
                     popup.isHovered = true;
-                    background.border.color = Colors.active;
+                    background.border.color = Appearance.colors.active;
                 }
 
                 onExited: {

@@ -21,7 +21,7 @@ Item {
         width: 30
         height: 30
         anchors.centerIn: parent
-        color: Colors.active
+        color: Appearance.colors.active
         radius: 15
         scale: mouseArea.pressed ? 0.9 : (mouseArea.containsMouse ? 1.1 : 1.0)
 
@@ -29,7 +29,7 @@ Item {
             anchors.centerIn: parent
             text: "⏻"
             font.pixelSize: 18
-            color: Colors.background
+            color: Appearance.colors.background
         }
 
         Behavior on scale {
@@ -58,8 +58,8 @@ Item {
 
         Rectangle {
             anchors.fill: parent
-            color: Colors.background
-            border.color: Colors.inactive
+            color: Appearance.colors.background
+            border.color: Appearance.colors.inactive
             border.width: 1
             radius: root.buttonRadius
         }
@@ -88,8 +88,8 @@ Item {
 
                     width: contentColumn.width
                     height: root.buttonHeight
-                    color: mouseArea.containsMouse ? (isCancel ? Colors.inactive : Colors.active) : (isCancel ? "transparent" : Colors.backgroundAlt)
-                    border.color: isCancel ? Colors.inactive : "transparent"
+                    color: mouseArea.containsMouse ? (isCancel ? Appearance.colors.inactive : Appearance.colors.active) : (isCancel ? "transparent" : Appearance.colors.backgroundAlt)
+                    border.color: isCancel ? Appearance.colors.inactive : "transparent"
                     border.width: isCancel ? 1 : 0
                     radius: root.buttonRadius
 
@@ -97,7 +97,7 @@ Item {
                         anchors.centerIn: parent
                         text: label
                         font.pixelSize: root.buttonFontSize
-                        color: mouseArea.containsMouse && !isCancel ? Colors.background : Colors.foreground
+                        color: mouseArea.containsMouse && !isCancel ? Appearance.colors.background : Appearance.colors.foreground
                     }
 
                     MouseArea {

@@ -29,7 +29,7 @@ Row {
         anchors.verticalCenter: parent.verticalCenter
         text: Niri.focusedWindow?.title ?? ""
         font.pixelSize: 14
-        color: Colors.foreground
+        color: Appearance.colors.foreground
         elide: Text.ElideRight
     }
 }

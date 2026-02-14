@@ -142,8 +142,8 @@ Item {
             id: menuContent
             width: root.menuWidth
             height: menuStack.currentItem ? menuStack.currentItem.implicitHeight + (root.menuPadding * 2) : 50
-            color: Colors.background
-            border.color: Colors.border
+            color: Appearance.colors.background
+            border.color: Appearance.colors.border
             border.width: 1
             radius: root.borderRadius
 

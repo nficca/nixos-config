@@ -1,6 +1,5 @@
 singleton Appearance 1.0 services/Appearance.qml
 Anim 1.0 components/Anim.qml
-singleton Colors 1.0 services/Colors.qml
 singleton Time 1.0 services/Time.qml
 singleton Niri 1.0 services/Niri.qml
 singleton Notifications 1.0 services/Notifications.qml

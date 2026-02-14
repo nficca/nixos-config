@@ -17,7 +17,7 @@ Row {
             height: 12
             radius: 6
 
-            color: workspaceItem.modelData.isFocused ? Colors.active : Colors.inactive
+            color: workspaceItem.modelData.isFocused ? Appearance.colors.active : Appearance.colors.inactive
             opacity: workspaceItem.modelData.isFocused ? 1.0 : 0.6
             scale: workspaceItem.modelData.isFocused ? 1.3 : (mouseArea.containsMouse ? 1.1 : 1.0)
 

@@ -14,7 +14,7 @@ Rectangle {
 
     width: parent?.width ?? 0
     height: itemHeight
-    color: backMouseArea.containsMouse ? Colors.backgroundAlt : "transparent"
+    color: backMouseArea.containsMouse ? Appearance.colors.backgroundAlt : "transparent"
     radius: 4
 
     Row {
@@ -27,14 +27,14 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             text: "\u2190"
             font.pixelSize: root.fontSize
-            color: Colors.text
+            color: Appearance.colors.text
         }
 
         Text {
             anchors.verticalCenter: parent.verticalCenter
             text: "Back"
             font.pixelSize: root.fontSize
-            color: Colors.text
+            color: Appearance.colors.text
         }
     }
 

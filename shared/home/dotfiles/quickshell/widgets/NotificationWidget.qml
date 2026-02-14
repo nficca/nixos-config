@@ -16,10 +16,10 @@ Item {
         radius: 15
         anchors.centerIn: parent
 
-        color: mouseArea.pressed ? Colors.active : mouseArea.containsMouse ? Colors.backgroundAlt : Notifications.dndEnabled ? Colors.inactive : Colors.background
+        color: mouseArea.pressed ? Appearance.colors.active : mouseArea.containsMouse ? Appearance.colors.backgroundAlt : Notifications.dndEnabled ? Appearance.colors.inactive : Appearance.colors.background
 
         border.width: 1
-        border.color: Notifications.dndEnabled ? Colors.inactive : Colors.border
+        border.color: Notifications.dndEnabled ? Appearance.colors.inactive : Appearance.colors.border
 
         scale: mouseArea.pressed ? 0.95 : mouseArea.containsMouse ? 1.05 : 1.0
 
@@ -55,14 +55,14 @@ Item {
             width: 16
             height: 16
             radius: 8
-            color: Colors.urgent
+            color: Appearance.colors.urgent
             border.width: 2
-            border.color: Colors.background
+            border.color: Appearance.colors.background
 
             Text {
                 anchors.centerIn: parent
                 text: root.activeCount > 9 ? "9+" : root.activeCount.toString()
-                color: Colors.text
+                color: Appearance.colors.text
                 font.pixelSize: 9
                 font.bold: true
             }
