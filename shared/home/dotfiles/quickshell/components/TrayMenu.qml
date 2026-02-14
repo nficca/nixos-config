@@ -16,6 +16,8 @@ Item {
     readonly property int fontSize: 13
     readonly property int borderRadius: 6
     readonly property int animationDuration: 120
+    readonly property int menuOffsetY: 5
+    readonly property int itemSpacing: 8
 
     // Position tracking for menu
     property real menuX: 0
@@ -27,9 +29,12 @@ Item {
     property var pendingOpen: null
 
     function applyMenuOpen(handle, anchor) {
+        if (!anchor)
+            return;
+
         var anchorPos = anchor.mapToItem(null, 0, 0);
         root.menuX = anchorPos.x + anchor.width / 2 - root.menuWidth / 2;
-        root.menuY = anchorPos.y + anchor.height + 5;
+        root.menuY = anchorPos.y + anchor.height + root.menuOffsetY;
         root.menuWindow = anchor.QsWindow.window;
 
         menuStack.clear();
@@ -219,6 +224,23 @@ Item {
                 menu: menuLevel.menuHandle
             }
 
+            // Separator component - reused for back-button separator and menu item separators
+            Component {
+                id: separatorComponent
+
+                Item {
+                    width: parent.width
+                    height: 9
+
+                    Rectangle {
+                        anchors.centerIn: parent
+                        width: parent.width - (root.itemPadding * 2)
+                        height: 1
+                        color: Colors.border
+                    }
+                }
+            }
+
             Column {
                 id: contentColumn
                 width: parent.width
@@ -240,7 +262,7 @@ Item {
                             anchors.fill: parent
                             anchors.leftMargin: root.itemPadding
                             anchors.rightMargin: root.itemPadding
-                            spacing: 8
+                            spacing: root.itemSpacing
 
                             Text {
                                 anchors.verticalCenter: parent.verticalCenter
@@ -272,18 +294,7 @@ Item {
                     active: menuStack.depth > 1
                     width: parent.width
                     height: active ? 9 : 0
-
-                    sourceComponent: Item {
-                        width: parent.width
-                        height: 9
-
-                        Rectangle {
-                            anchors.centerIn: parent
-                            width: parent.width - (root.itemPadding * 2)
-                            height: 1
-                            color: Colors.border
-                        }
-                    }
+                    sourceComponent: separatorComponent
                 }
 
                 // Menu items
@@ -299,22 +310,7 @@ Item {
 
                         sourceComponent: modelData.isSeparator ? separatorComponent : menuItemComponent
 
-                        Component {
-                            id: separatorComponent
-
-                            Item {
-                                width: parent.width
-                                height: 9
-
-                                Rectangle {
-                                    anchors.centerIn: parent
-                                    width: parent.width - (root.itemPadding * 2)
-                                    height: 1
-                                    color: Colors.border
-                                }
-                            }
-                        }
-
+                        // Menu item component - defined inside delegate to access itemLoader.modelData
                         Component {
                             id: menuItemComponent
 
@@ -329,7 +325,7 @@ Item {
                                     anchors.fill: parent
                                     anchors.leftMargin: root.itemPadding
                                     anchors.rightMargin: root.itemPadding
-                                    spacing: 8
+                                    spacing: root.itemSpacing
 
                                     // Icon
                                     Item {
@@ -351,7 +347,7 @@ Item {
                                     // Label
                                     Text {
                                         anchors.verticalCenter: parent.verticalCenter
-                                        width: parent.width - root.iconSize - 8 - (itemLoader.modelData.hasChildren ? 20 : 0)
+                                        width: parent.width - root.iconSize - root.itemSpacing - (itemLoader.modelData.hasChildren ? 20 : 0)
                                         text: itemLoader.modelData.text || ""
                                         font.pixelSize: root.fontSize
                                         color: Colors.text

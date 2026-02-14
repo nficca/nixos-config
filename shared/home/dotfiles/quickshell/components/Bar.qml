@@ -31,7 +31,11 @@ Scope {
             // TapHandler is used instead of MouseArea to avoid blocking hover events
             // which would prevent child items from changing the cursor shape.
             TapHandler {
-                onTapped: TrayMenuState.close()
+                onTapped: {
+                    if (TrayMenuState.menuOpen) {
+                        TrayMenuState.close();
+                    }
+                }
             }
 
             // Left
