@@ -254,7 +254,8 @@ layout {
         on
         gap 5
         width 5
-        length total-proportion=0.8
+        length total-proportion=0.2
+        corner-radius 12
     }
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
@@ -408,9 +409,7 @@ window-rule {
     // block-out-from "screencast"
 }
 
-// Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
+window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
 }
