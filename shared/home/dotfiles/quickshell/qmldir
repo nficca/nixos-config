@@ -1,4 +1,5 @@
 singleton Appearance 1.0 services/Appearance.qml
+singleton PopoutState 1.0 services/PopoutState.qml
 Anim 1.0 components/Anim.qml
 singleton Time 1.0 services/Time.qml
 singleton Niri 1.0 services/Niri.qml
