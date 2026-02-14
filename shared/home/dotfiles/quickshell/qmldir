@@ -13,6 +13,6 @@ NotificationWidget 1.0 widgets/NotificationWidget.qml
 NotificationPopup 1.0 components/NotificationPopup.qml
 PopupTip 1.0 components/PopupTip.qml
 TrayMenu 1.0 components/TrayMenu.qml
-TrayMenuBackButton 1.0 components/TrayMenuBackButton.qml
-TrayMenuItem 1.0 components/TrayMenuItem.qml
-TrayMenuSeparator 1.0 components/TrayMenuSeparator.qml
+TrayMenuBackButton 1.0 components/TrayMenu/TrayMenuBackButton.qml
+TrayMenuItem 1.0 components/TrayMenu/TrayMenuItem.qml
+TrayMenuSeparator 1.0 components/TrayMenu/TrayMenuSeparator.qml
