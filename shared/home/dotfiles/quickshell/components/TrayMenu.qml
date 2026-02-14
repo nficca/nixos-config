@@ -23,10 +23,6 @@ Item {
     property real menuX: 0
     property real menuY: 0
     property var menuWindow: null
-    property bool menuWasOpen: false
-    property bool menuReady: false
-    property bool animatingOut: false
-    property var pendingOpen: null
 
     function applyMenuOpen(handle, anchor) {
         if (!anchor)
@@ -45,26 +41,17 @@ Item {
 
     Connections {
         target: TrayMenuState
-        function onOpenRequested(handle, anchor) {
-            if (root.menuWasOpen && root.menuReady) {
-                // Switching menus - animate out, then update position
-                root.pendingOpen = {
-                    handle: handle,
-                    anchor: anchor
-                };
-                switchAnimation.start();
-            } else {
-                // Fresh open - update position immediately
-                root.applyMenuOpen(handle, anchor);
-                root.menuWasOpen = true;
-                root.menuReady = true;
-                openAnimation.start();
-            }
+        function onOpenAnimationRequested() {
+            root.applyMenuOpen(TrayMenuState.menuHandle, TrayMenuState.anchorItem);
+            openAnimation.start();
         }
 
-        function onCloseRequested() {
-            root.animatingOut = true;
+        function onCloseAnimationRequested() {
             closeAnimation.start();
+        }
+
+        function onSwitchAnimationRequested() {
+            switchAnimation.start();
         }
     }
 
@@ -77,6 +64,10 @@ Item {
             to: 1
             duration: root.animationDuration
             easing.type: Easing.OutQuad
+        }
+
+        ScriptAction {
+            script: TrayMenuState.onOpenComplete()
         }
     }
 
@@ -92,11 +83,7 @@ Item {
         }
 
         ScriptAction {
-            script: {
-                root.animatingOut = false;
-                root.menuWasOpen = false;
-                root.menuReady = false;
-            }
+            script: TrayMenuState.onCloseComplete()
         }
     }
 
@@ -112,20 +99,14 @@ Item {
         }
 
         ScriptAction {
-            script: {
-                if (root.pendingOpen) {
-                    root.applyMenuOpen(root.pendingOpen.handle, root.pendingOpen.anchor);
-                    root.pendingOpen = null;
-                    openAnimation.start();
-                }
-            }
+            script: TrayMenuState.onSwitchComplete()
         }
     }
 
     // Click-outside catcher - catches clicks outside the bar to close menu
     PanelWindow {
         id: clickCatcher
-        visible: TrayMenuState.menuOpen
+        visible: TrayMenuState.state === TrayMenuState.stateOpen
         color: "transparent"
 
         // Top layer is below bar (Overlay) so bar receives clicks in its area
@@ -147,7 +128,7 @@ Item {
     // Menu popup
     PopupWindow {
         id: menuPopup
-        visible: (TrayMenuState.menuOpen || root.animatingOut) && root.menuReady
+        visible: TrayMenuState.isVisible
         anchor.window: root.menuWindow
         anchor.rect.x: root.menuX
         anchor.rect.y: root.menuY
@@ -167,7 +148,7 @@ Item {
             radius: root.borderRadius
 
             opacity: 0
-            scale: TrayMenuState.menuOpen ? 1 : 0.95
+            scale: TrayMenuState.state !== TrayMenuState.stateClosed && TrayMenuState.state !== TrayMenuState.stateClosing ? 1 : 0.95
             transformOrigin: Item.Top
 
             Behavior on scale {
