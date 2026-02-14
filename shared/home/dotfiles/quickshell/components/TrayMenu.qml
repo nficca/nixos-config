@@ -24,7 +24,6 @@ Item {
     property bool menuWasOpen: false
     property bool menuReady: false
     property bool animatingOut: false
-    property real menuOpacity: 0
     property var pendingOpen: null
 
     function applyMenuOpen(handle, anchor) {
@@ -37,8 +36,6 @@ Item {
         menuStack.push(menuLevelComponent.createObject(menuStack, {
             menuHandle: handle
         }));
-
-        root.menuOpacity = 1;
     }
 
     Connections {
@@ -50,40 +47,72 @@ Item {
                     handle: handle,
                     anchor: anchor
                 };
-                root.menuOpacity = 0;
-                switchTimer.start();
+                switchAnimation.start();
             } else {
                 // Fresh open - update position immediately
                 root.applyMenuOpen(handle, anchor);
                 root.menuWasOpen = true;
                 root.menuReady = true;
+                openAnimation.start();
             }
         }
 
         function onCloseRequested() {
             root.animatingOut = true;
-            root.menuOpacity = 0;
-            closeTimer.start();
+            closeAnimation.start();
         }
     }
 
-    Timer {
-        id: closeTimer
-        interval: root.animationDuration
-        onTriggered: {
-            root.animatingOut = false;
-            root.menuWasOpen = false;
-            root.menuReady = false;
+    SequentialAnimation {
+        id: openAnimation
+
+        NumberAnimation {
+            target: menuContent
+            property: "opacity"
+            to: 1
+            duration: root.animationDuration
+            easing.type: Easing.OutQuad
         }
     }
 
-    Timer {
-        id: switchTimer
-        interval: root.animationDuration
-        onTriggered: {
-            if (root.pendingOpen) {
-                root.applyMenuOpen(root.pendingOpen.handle, root.pendingOpen.anchor);
-                root.pendingOpen = null;
+    SequentialAnimation {
+        id: closeAnimation
+
+        NumberAnimation {
+            target: menuContent
+            property: "opacity"
+            to: 0
+            duration: root.animationDuration
+            easing.type: Easing.OutQuad
+        }
+
+        ScriptAction {
+            script: {
+                root.animatingOut = false;
+                root.menuWasOpen = false;
+                root.menuReady = false;
+            }
+        }
+    }
+
+    SequentialAnimation {
+        id: switchAnimation
+
+        NumberAnimation {
+            target: menuContent
+            property: "opacity"
+            to: 0
+            duration: root.animationDuration
+            easing.type: Easing.OutQuad
+        }
+
+        ScriptAction {
+            script: {
+                if (root.pendingOpen) {
+                    root.applyMenuOpen(root.pendingOpen.handle, root.pendingOpen.anchor);
+                    root.pendingOpen = null;
+                    openAnimation.start();
+                }
             }
         }
     }
@@ -132,16 +161,9 @@ Item {
             border.width: 1
             radius: root.borderRadius
 
-            opacity: root.menuOpacity
+            opacity: 0
             scale: TrayMenuState.menuOpen ? 1 : 0.95
             transformOrigin: Item.Top
-
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: root.animationDuration
-                    easing.type: Easing.OutQuad
-                }
-            }
 
             Behavior on scale {
                 NumberAnimation {
