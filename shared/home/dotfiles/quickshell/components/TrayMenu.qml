@@ -224,23 +224,6 @@ Item {
                 menu: menuLevel.menuHandle
             }
 
-            // Separator component - reused for back-button separator and menu item separators
-            Component {
-                id: separatorComponent
-
-                Item {
-                    width: parent.width
-                    height: 9
-
-                    Rectangle {
-                        anchors.centerIn: parent
-                        width: parent.width - (root.itemPadding * 2)
-                        height: 1
-                        color: Colors.border
-                    }
-                }
-            }
-
             Column {
                 id: contentColumn
                 width: parent.width
@@ -252,40 +235,12 @@ Item {
                     width: parent.width
                     height: active ? root.itemHeight : 0
 
-                    sourceComponent: Rectangle {
-                        width: parent.width
-                        height: root.itemHeight
-                        color: backMouseArea.containsMouse ? Colors.backgroundAlt : "transparent"
-                        radius: 4
-
-                        Row {
-                            anchors.fill: parent
-                            anchors.leftMargin: root.itemPadding
-                            anchors.rightMargin: root.itemPadding
-                            spacing: root.itemSpacing
-
-                            Text {
-                                anchors.verticalCenter: parent.verticalCenter
-                                text: "\u2190"
-                                font.pixelSize: root.fontSize
-                                color: Colors.text
-                            }
-
-                            Text {
-                                anchors.verticalCenter: parent.verticalCenter
-                                text: "Back"
-                                font.pixelSize: root.fontSize
-                                color: Colors.text
-                            }
-                        }
-
-                        MouseArea {
-                            id: backMouseArea
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: menuStack.pop()
-                        }
+                    sourceComponent: TrayMenuBackButton {
+                        itemHeight: root.itemHeight
+                        itemPadding: root.itemPadding
+                        fontSize: root.fontSize
+                        itemSpacing: root.itemSpacing
+                        onBackClicked: menuStack.pop()
                     }
                 }
 
@@ -294,7 +249,10 @@ Item {
                     active: menuStack.depth > 1
                     width: parent.width
                     height: active ? 9 : 0
-                    sourceComponent: separatorComponent
+
+                    sourceComponent: TrayMenuSeparator {
+                        itemPadding: root.itemPadding
+                    }
                 }
 
                 // Menu items
@@ -310,86 +268,30 @@ Item {
 
                         sourceComponent: modelData.isSeparator ? separatorComponent : menuItemComponent
 
-                        // Menu item component - defined inside delegate to access itemLoader.modelData
+                        Component {
+                            id: separatorComponent
+
+                            TrayMenuSeparator {
+                                itemPadding: root.itemPadding
+                            }
+                        }
+
                         Component {
                             id: menuItemComponent
 
-                            Rectangle {
-                                width: parent.width
-                                height: root.itemHeight
-                                color: itemMouseArea.containsMouse && itemLoader.modelData.enabled ? Colors.backgroundAlt : "transparent"
-                                radius: 4
-                                opacity: itemLoader.modelData.enabled ? 1 : 0.5
+                            TrayMenuItem {
+                                menuItem: itemLoader.modelData
+                                itemHeight: root.itemHeight
+                                itemPadding: root.itemPadding
+                                iconSize: root.iconSize
+                                fontSize: root.fontSize
+                                itemSpacing: root.itemSpacing
 
-                                Row {
-                                    anchors.fill: parent
-                                    anchors.leftMargin: root.itemPadding
-                                    anchors.rightMargin: root.itemPadding
-                                    spacing: root.itemSpacing
-
-                                    // Icon
-                                    Item {
-                                        width: root.iconSize
-                                        height: root.iconSize
-                                        anchors.verticalCenter: parent.verticalCenter
-
-                                        Image {
-                                            anchors.fill: parent
-                                            source: itemLoader.modelData.icon || ""
-                                            sourceSize: Qt.size(root.iconSize, root.iconSize)
-                                            visible: itemLoader.modelData.icon && itemLoader.modelData.icon !== ""
-                                            fillMode: Image.PreserveAspectFit
-                                            smooth: true
-                                            mipmap: true
-                                        }
-                                    }
-
-                                    // Label
-                                    Text {
-                                        anchors.verticalCenter: parent.verticalCenter
-                                        width: parent.width - root.iconSize - root.itemSpacing - (itemLoader.modelData.hasChildren ? 20 : 0)
-                                        text: itemLoader.modelData.text || ""
-                                        font.pixelSize: root.fontSize
-                                        color: Colors.text
-                                        elide: Text.ElideRight
-                                    }
-
-                                    // Submenu arrow
-                                    Text {
-                                        anchors.verticalCenter: parent.verticalCenter
-                                        visible: itemLoader.modelData.hasChildren
-                                        text: "\u203a"
-                                        font.pixelSize: root.fontSize + 4
-                                        color: Colors.textSecondary
-                                    }
-                                }
-
-                                MouseArea {
-                                    id: itemMouseArea
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    cursorShape: itemLoader.modelData.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
-
-                                    onClicked: {
-                                        if (!itemLoader.modelData.enabled)
-                                            return;
-                                        if (itemLoader.modelData.hasChildren) {
-                                            // Push submenu
-                                            menuStack.push(menuLevelComponent.createObject(menuStack, {
-                                                menuHandle: itemLoader.modelData
-                                            }));
-                                        } else {
-                                            // Trigger action and close menu
-                                            itemLoader.modelData.triggered();
-                                            TrayMenuState.close();
-                                        }
-                                    }
-                                }
-
-                                Behavior on color {
-                                    ColorAnimation {
-                                        duration: 50
-                                    }
+                                onTriggered: TrayMenuState.close()
+                                onSubmenuRequested: handle => {
+                                    menuStack.push(menuLevelComponent.createObject(menuStack, {
+                                        menuHandle: handle
+                                    }));
                                 }
                             }
                         }
