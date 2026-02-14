@@ -84,7 +84,7 @@ Rectangle {
 
     Behavior on color {
         ColorAnimation {
-            duration: Anim.hover
+            duration: Appearance.anim.hover
         }
     }
 }
