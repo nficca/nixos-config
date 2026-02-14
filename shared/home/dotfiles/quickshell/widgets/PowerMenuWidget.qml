@@ -13,7 +13,7 @@ Item {
     readonly property int buttonHeight: 36
     readonly property int buttonRadius: 8
     readonly property int buttonFontSize: 14
-    readonly property int animationDuration: 150
+    readonly property int animationDuration: Anim.smooth
     readonly property int menuPadding: 10
     readonly property int menuSpacing: 8
     readonly property int menuWidth: 200
@@ -60,7 +60,7 @@ Item {
 
         Behavior on scale {
             NumberAnimation {
-                duration: 100
+                duration: Anim.fast
                 easing.type: Easing.OutQuad
             }
         }

@@ -25,14 +25,14 @@ Item {
 
         Behavior on scale {
             NumberAnimation {
-                duration: 150
+                duration: Anim.smooth
                 easing.type: Easing.OutQuad
             }
         }
 
         Behavior on color {
             ColorAnimation {
-                duration: 150
+                duration: Anim.smooth
             }
         }
 

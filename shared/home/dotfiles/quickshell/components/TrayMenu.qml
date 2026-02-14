@@ -15,7 +15,7 @@ Item {
     readonly property int iconSize: 16
     readonly property int fontSize: 13
     readonly property int borderRadius: 6
-    readonly property int animationDuration: 120
+    readonly property int animationDuration: Anim.normal
     readonly property int menuOffsetY: 5
     readonly property int itemSpacing: 8
 

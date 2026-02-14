@@ -22,11 +22,11 @@ Row {
             scale: workspaceItem.modelData.isFocused ? 1.3 : (mouseArea.containsMouse ? 1.1 : 1.0)
 
             Behavior on scale {
-                NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+                NumberAnimation { duration: Anim.smooth; easing.type: Easing.InOutQuad }
             }
 
             Behavior on opacity {
-                NumberAnimation { duration: 150 }
+                NumberAnimation { duration: Anim.smooth }
             }
 
             MouseArea {

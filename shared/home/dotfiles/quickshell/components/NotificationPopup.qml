@@ -53,7 +53,7 @@ Item {
 
     Behavior on implicitHeight {
         NumberAnimation {
-            duration: 150
+            duration: Anim.smooth
             easing.type: Easing.OutQuad
         }
     }
@@ -73,7 +73,7 @@ Item {
                 property: "x"
                 from: 80
                 to: 0
-                duration: 180
+                duration: Anim.smooth
                 easing.type: Easing.OutQuad
             }
             PropertyAnimation {
@@ -81,7 +81,7 @@ Item {
                 property: "opacity"
                 from: 0
                 to: 1
-                duration: 180
+                duration: Anim.smooth
                 easing.type: Easing.OutQuad
             }
             PropertyAnimation {
@@ -89,7 +89,7 @@ Item {
                 property: "scale"
                 from: 0.9
                 to: 1.0
-                duration: 180
+                duration: Anim.smooth
                 easing.type: Easing.OutQuad
             }
         }
@@ -102,14 +102,14 @@ Item {
                 target: container
                 property: "opacity"
                 to: 0
-                duration: 120
+                duration: Anim.normal
                 easing.type: Easing.OutQuad
             }
             PropertyAnimation {
                 target: container
                 property: "scale"
                 to: 0.8
-                duration: 120
+                duration: Anim.normal
                 easing.type: Easing.OutQuad
             }
         }
@@ -176,7 +176,7 @@ Item {
 
                     Behavior on width {
                         NumberAnimation {
-                            duration: 100
+                            duration: Anim.fast
                             easing.type: Easing.Linear
                         }
                     }
