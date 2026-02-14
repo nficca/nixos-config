@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-import Quickshell.Io
 import ".."
 
 Item {
@@ -17,31 +16,6 @@ Item {
     readonly property int menuPadding: 10
     readonly property int menuSpacing: 8
     readonly property int menuWidth: 200
-
-    Process {
-        id: lockProcess
-        command: ["hyprlock"]
-    }
-
-    Process {
-        id: logoutProcess
-        command: ["niri", "msg", "action", "quit"]
-    }
-
-    Process {
-        id: suspendProcess
-        command: ["systemctl", "suspend"]
-    }
-
-    Process {
-        id: rebootProcess
-        command: ["systemctl", "reboot"]
-    }
-
-    Process {
-        id: shutdownProcess
-        command: ["systemctl", "poweroff"]
-    }
 
     Rectangle {
         width: 30
@@ -133,11 +107,11 @@ Item {
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
                             root.menuOpen = false;
-                            if (processId === "lock") lockProcess.running = true;
-                            else if (processId === "logout") logoutProcess.running = true;
-                            else if (processId === "suspend") suspendProcess.running = true;
-                            else if (processId === "reboot") rebootProcess.running = true;
-                            else if (processId === "shutdown") shutdownProcess.running = true;
+                            if (processId === "lock") SystemActions.lock();
+                            else if (processId === "logout") SystemActions.logout();
+                            else if (processId === "suspend") SystemActions.suspend();
+                            else if (processId === "reboot") SystemActions.reboot();
+                            else if (processId === "shutdown") SystemActions.shutdown();
                         }
                     }
 

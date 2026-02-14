@@ -32,7 +32,7 @@ Scope {
             // which would prevent child items from changing the cursor shape.
             TapHandler {
                 onTapped: {
-                    if (TrayMenuState.menuOpen) {
+                    if (TrayMenuState.isVisible) {
                         TrayMenuState.close();
                     }
                 }

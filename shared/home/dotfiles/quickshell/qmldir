@@ -1,9 +1,10 @@
-singleton Anim 1.0 singletons/Anim.qml
-singleton Colors 1.0 singletons/Colors.qml
-singleton Time 1.0 singletons/Time.qml
-singleton Niri 1.0 singletons/Niri.qml
-singleton Notifications 1.0 singletons/Notifications.qml
-singleton TrayMenuState 1.0 singletons/TrayMenuState.qml
+singleton Anim 1.0 services/Anim.qml
+singleton Colors 1.0 services/Colors.qml
+singleton Time 1.0 services/Time.qml
+singleton Niri 1.0 services/Niri.qml
+singleton Notifications 1.0 services/Notifications.qml
+singleton TrayMenuState 1.0 services/TrayMenuState.qml
+singleton SystemActions 1.0 services/SystemActions.qml
 Bar 1.0 components/Bar.qml
 ClockWidget 1.0 widgets/ClockWidget.qml
 WorkspacesWidget 1.0 widgets/WorkspacesWidget.qml
