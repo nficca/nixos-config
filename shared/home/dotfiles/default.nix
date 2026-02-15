@@ -26,7 +26,6 @@ in
       niri.source = "${dotfiles}/niri";
       hypr.source = "${dotfiles}/hypr";
       quickshell.source = "${dotfiles}/quickshell";
-      ags.source = "${dotfiles}/ags";
     }
     // {
       # All platforms

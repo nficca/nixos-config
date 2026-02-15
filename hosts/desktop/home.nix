@@ -3,32 +3,13 @@
   pkgs,
   awww,
   qml-niri,
-  ags,
   ...
 }:
 
 {
   imports = [
     ../../shared/home
-    ags.homeManagerModules.default
   ];
-
-  programs.ags = {
-    enable = true;
-    configDir = null; # Managed via dotfiles symlink
-    extraPackages = with ags.packages.${pkgs.system}; [
-      io
-      astal4
-      battery
-      bluetooth
-      mpris
-      network
-      niri
-      notifd
-      tray
-      wireplumber
-    ];
-  };
 
   home.homeDirectory = "/home/${username}";
 

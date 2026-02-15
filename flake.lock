@@ -1,49 +1,5 @@
 {
   "nodes": {
-    "ags": {
-      "inputs": {
-        "astal": [
-          "astal-niri"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1764289441,
-        "narHash": "sha256-ak+lgFiYE5PHByN1/BRkO5JP498hno6Ix24C1Qf/vec=",
-        "owner": "aylur",
-        "repo": "ags",
-        "rev": "e169694390548dfd38ff40f1ef2163d6c3ffe3ea",
-        "type": "github"
-      },
-      "original": {
-        "owner": "aylur",
-        "repo": "ags",
-        "type": "github"
-      }
-    },
-    "astal-niri": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1765341517,
-        "narHash": "sha256-4WAab6GmBTjpkm1I6vaWAiFdnuDCo7wMXLegGCXbuSs=",
-        "owner": "sameoldlab",
-        "repo": "astal",
-        "rev": "8ebaca7f913ea2c1af48a5adb424a0122d4a8cb1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "sameoldlab",
-        "ref": "feat/niri",
-        "repo": "astal",
-        "type": "github"
-      }
-    },
     "awww": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -333,8 +289,6 @@
     },
     "root": {
       "inputs": {
-        "ags": "ags",
-        "astal-niri": "astal-niri",
         "awww": "awww",
         "dev-flakes": "dev-flakes",
         "home-manager": "home-manager",
