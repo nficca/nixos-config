@@ -57,6 +57,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.quickshell.follows = "quickshell";
     };
+
+    # Astal - niri feature branch
+    astal-niri = {
+      url = "github:sameoldlab/astal/feat/niri";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # AGS - Astal scaffolding CLI
+    ags = {
+      url = "github:aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.astal.follows = "astal-niri";
+    };
   };
 
   outputs =
@@ -70,6 +83,7 @@
       dev-flakes,
       awww,
       qml-niri,
+      ags,
       ...
     }:
     let
@@ -104,6 +118,7 @@
                   dev-flakes
                   awww
                   qml-niri
+                  ags
                   ;
               };
               home-manager.useGlobalPkgs = true;
