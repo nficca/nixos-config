@@ -1,5 +1,6 @@
 {
   "cmp-nvim-lsp": { "branch": "main", "commit": "cbc7b02bb99fae35cb42f514762b89b5126651ef" },
+  "conform.nvim": { "branch": "master", "commit": "c2526f1cde528a66e086ab1668e996d162c75f4f" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "github-theme": { "branch": "main", "commit": "c106c9472154d6b2c74b74565616b877ae8ed31d" },
   "gitlinker.nvim": { "branch": "master", "commit": "cc59f732f3d043b626c8702cb725c82e54d35c25" },

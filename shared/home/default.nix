@@ -49,6 +49,7 @@
     nil
     nixfmt
     typescript-language-server
+    nodePackages.prettier
     kdePackages.qtdeclarative
   ];
 

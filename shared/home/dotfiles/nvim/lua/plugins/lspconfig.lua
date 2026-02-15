@@ -75,6 +75,7 @@ return {
       "jsonls",
       "qmlls",
       "ts_ls",
+      "eslint",
     })
   end
 }
