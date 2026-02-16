@@ -3,7 +3,8 @@ return {
   config = function()
     require("hoversplit").setup({
       -- Configure keybindings in the keymaps.lua file instead
-      key_bindings_disabled = true
+      key_bindings_disabled = true,
+      split_position = "below"
     })
   end
 }
