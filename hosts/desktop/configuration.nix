@@ -46,6 +46,24 @@
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
+  # Disable USB autosuspend for Intel Bluetooth adapter (8087:0a2a)
+  #
+  # The kernel param above (btusb.enable_autosuspend=0) disables autosuspend at
+  # the driver level, but the USB subsystem has its own runtime power management
+  # that can still suspend the device. These udev rules disable that by setting:
+  #
+  #   power/autosuspend="-1"  Disable autosuspend delay (-1 = never suspend)
+  #   power/control="on"      Keep device powered on (vs "auto" which allows suspend)
+  #
+  # The vendor/product IDs (8087:0a2a) identify the Intel Bluetooth adapter.
+  # Find yours with: lsusb | grep -i bluetooth
+  #
+  # See: https://www.kernel.org/doc/Documentation/usb/power-management.txt
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="8087", ATTR{idProduct}=="0a2a", ATTR{power/autosuspend}="-1"
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="8087", ATTR{idProduct}=="0a2a", ATTR{power/control}="on"
+  '';
+
   # Set your time zone.
   time.timeZone = "America/Toronto";
 
