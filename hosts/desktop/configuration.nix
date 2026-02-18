@@ -10,9 +10,20 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Fix Intel Bluetooth HCI reset timeout issue
-  # See: https://github.com/bluez/bluez/issues/1263
-  boot.kernelParams = [ "btintel.enable_hci_reset=0" ];
+  # Disable USB autosuspend for Bluetooth.
+  #
+  # Sometimes Bluetooth dies while actively using it. The kernel tries an HCI
+  # reset to recover, but it fails and the only fix is a reboot. This param
+  # disables USB autosuspend for the Bluetooth controller - which shouldn't
+  # technically cause this issue, but may somehow be related.
+  #
+  # Verify with: cat /sys/module/btusb/parameters/enable_autosuspend  # should be N
+  #
+  # References:
+  # - Issue: https://github.com/bluez/bluez/issues/1263
+  # - Param docs: https://www.kernelconfig.io/config_bt_hcibtusb_autosuspend
+  # - Kernel source code: https://github.com/torvalds/linux/blob/23b0f90ba871f096474e1c27c3d14f455189d2d9/drivers/bluetooth/btusb.c#L35
+  boot.kernelParams = [ "btusb.enable_autosuspend=0" ];
 
   # The following is AMD GPU configuration per
   # https://nixos.wiki/wiki/AMD_GPU
