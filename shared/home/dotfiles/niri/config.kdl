@@ -429,11 +429,6 @@ binds {
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 
-    // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
-    // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
-    // For example, this is a standard bind to toggle the screen reader (orca).
-    Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
-
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
@@ -665,6 +660,10 @@ binds {
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
+
+    // Region selection screenshot using grim + slurp + wl-clipboard
+    Mod+S hotkey-overlay-title="Screenshot region (save)" { spawn-sh "grim -g \"$(slurp)\""; }
+    Mod+Shift+S hotkey-overlay-title="Screenshot region (copy)" { spawn-sh "grim -g \"$(slurp)\" - | wl-copy"; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here

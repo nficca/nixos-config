@@ -23,6 +23,7 @@
       dropbox # Dropbox client
       fossa-cli # Dependency analysis tool
       fuzzel # Wayland application launcher
+      grim # Screenshot utility for Wayland
       heaptrack # Heap memory profiler
       kdePackages.ktorrent # BitTorrent client
       kubectl # Kubernetes CLI
@@ -37,6 +38,7 @@
       postgresql # Relational database system
       saml2aws # CLI tool for getting AWS creds via SAML IDP
       slack # Team communication
+      slurp # Region selection for Wayland screenshots
       swayidle # Idle management daemon for wayland
       wireguard-tools # Tools for WireGuard VPN
       wl-clipboard-rs # Command-line copy/paste utilities for Wayland
