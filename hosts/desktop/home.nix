@@ -89,8 +89,8 @@
       package = pkgs.whitesur-gtk-theme;
     };
     iconTheme = {
-      name = "WhiteSur-light";
-      package = pkgs.whitesur-icon-theme;
+      name = "Papirus-Light";
+      package = pkgs.papirus-icon-theme;
     };
   };
 
