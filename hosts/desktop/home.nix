@@ -40,6 +40,7 @@
       slack # Team communication
       slurp # Region selection for Wayland screenshots
       swayidle # Idle management daemon for wayland
+      unzip # Extraction utility for zip archives
       wireguard-tools # Tools for WireGuard VPN
       wl-clipboard-rs # Command-line copy/paste utilities for Wayland
     ])
