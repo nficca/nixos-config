@@ -42,6 +42,16 @@
       flake = false;
     };
 
+    # Scrollable-tiling Wayland compositor.
+    niri = {
+      # Currently using the `wip/branch` branch of niri for its background blur
+      # support. See https://github.com/niri-wm/niri/pull/3483.
+      url = "github:niri-wm/niri/wip/branch";
+      inputs.nixpkgs.follows = "nixpkgs";
+      # https://github.com/niri-wm/niri/blob/2dc6f4482c4eeed75ea8b133d89cad8658d38429/flake.nix#L8-L9
+      inputs.rust-overlay.follows = "";
+    };
+
     # Wallpaper daemon for Wayland
     awww.url = "git+https://codeberg.org/LGFae/awww";
 
@@ -63,6 +73,7 @@
       dev-flakes,
       awww,
       astal-config,
+      niri,
       ...
     }:
     let
@@ -76,7 +87,7 @@
         }:
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit username; };
+          specialArgs = { inherit username niri; };
           modules = [
             config_module
 

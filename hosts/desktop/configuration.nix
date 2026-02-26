@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  niri,
+  ...
+}:
 
 {
   imports = [
@@ -127,7 +132,10 @@
   services.desktopManager.plasma6.enable = false;
   # Niri is a scrollable-tiling Wayland compositor. It's just the compositor,
   # so everything else must be installed separately.
-  programs.niri.enable = true;
+  programs.niri = {
+    enable = true;
+    package = niri.packages.${pkgs.stdenv.hostPlatform.system}.niri;
+  };
   # Hyprland is a modern Wayland compositor with dynamic tiling and powerful
   # plugins. It's also just a compositor.
   programs.hyprland = {
