@@ -6,32 +6,37 @@
 }:
 
 let
-  version = "3.15.5";
+  # Use nix-prefetch-url to get the sha256 values for each download after
+  # updating this version.
+  #
+  # Example:
+  # $ nix-prefetch-url https://github.com/fossas/fossa-cli/releases/download/v3.16.0/fossa_3.16.0_linux_amd64.tar.gz
+  version = "3.16.0";
 
   packageData = {
     "x86_64-linux" = {
       inherit version;
       os = "linux";
       arch = "amd64";
-      sha256 = "0y57vyzi6q1949zyfkmai6ppjd5lzx4mam34bdbzxz6ribg0rl2g";
+      sha256 = "1kzrl748d6rp3qp2lq8aan483ny5bcayfjfx6lw0160ibwlg5r4n";
     };
     "aarch64-linux" = {
       inherit version;
       os = "linux";
       arch = "arm64";
-      sha256 = "0px2z02pbf8s2qc3v6cf8wiygdxmw2sfrdrabww8qqisfc1wxhpl";
+      sha256 = "166hp2nx53af7r2l4axsgxxmkhnvmcvcf5b8pn13z939xw6db81h";
     };
     "x86_64-darwin" = {
       inherit version;
       os = "darwin";
       arch = "amd64";
-      sha256 = "0i59742w68fb5h646wnqxih445zf4akg8r0fybrgszwpwymss1kr";
+      sha256 = "1lgia6c7jxcniclz4zwdx35mziji72rb3mwmw7k0al57p4h5qiyp";
     };
     "aarch64-darwin" = {
       inherit version;
       os = "darwin";
       arch = "arm64";
-      sha256 = "10fqzz2yfx1n2bdww61p1yj8id3d7hqrnm8f2wq1lihsznhrrxdh";
+      sha256 = "0mh0vzn0q838b5lcli01896k70w7blz19lj93n195nysg3hp900m";
     };
   };
 
