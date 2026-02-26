@@ -6,7 +6,3 @@
 # See this issue for more details:
 # https://github.com/NixOS/nixpkgs/issues/12665
 result
-
-# Quickshell replaces this with a machine-specific symlink at runtime.
-# Read docs/quickshell.md for more info.
-shared/home/dotfiles/quickshell/.qmlls.ini

@@ -45,19 +45,11 @@
     # Wallpaper daemon for Wayland
     awww.url = "git+https://codeberg.org/LGFae/awww";
 
-    # Quickshell - QML-based shell compositor
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+    # My personal desktop shell config powered by Astal and AGS.
+    astal-config = {
+      url = "github:nficca/astal-config";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # A QML plugin for interacting with the niri Wayland compositor
-    qml-niri = {
-      url = "github:nficca/qml-niri/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell";
-    };
-
   };
 
   outputs =
@@ -70,7 +62,7 @@
       homebrew-cask,
       dev-flakes,
       awww,
-      qml-niri,
+      astal-config,
       ...
     }:
     let
@@ -104,7 +96,7 @@
                   username
                   dev-flakes
                   awww
-                  qml-niri
+                  astal-config
                   ;
               };
               home-manager.useGlobalPkgs = true;

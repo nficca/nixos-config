@@ -2,7 +2,7 @@
   username,
   pkgs,
   awww,
-  qml-niri,
+  astal-config,
   ...
 }:
 
@@ -46,7 +46,7 @@
     ])
     ++ [
       awww.packages.${pkgs.stdenv.hostPlatform.system}.awww # Wallpaper daemon for wayland
-      qml-niri.packages.${pkgs.stdenv.hostPlatform.system}.quickshell # QML-based shell compositor
+      astal-config.packages.${pkgs.stdenv.hostPlatform.system}.default # Desktop shell using Astal and AGS
     ];
 
   # Screen locker
@@ -141,14 +141,14 @@
       };
     };
 
-    quickshell = {
+    astal-shell = {
       Unit = {
-        Description = "Quickshell";
+        Description = "Astal Shell";
         After = [ "graphical-session.target" ];
         PartOf = [ "graphical-session.target" ];
       };
       Service = {
-        ExecStart = "${qml-niri.packages.${pkgs.stdenv.hostPlatform.system}.quickshell}/bin/quickshell";
+        ExecStart = "${astal-config.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/astal-shell";
         Restart = "on-failure";
       };
       Install = {

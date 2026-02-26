@@ -25,7 +25,6 @@ in
       "ghostty/linux".source = "${dotfiles}/ghostty/linux";
       niri.source = "${dotfiles}/niri";
       hypr.source = "${dotfiles}/hypr";
-      quickshell.source = "${dotfiles}/quickshell";
     }
     // {
       # All platforms
