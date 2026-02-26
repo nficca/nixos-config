@@ -3,6 +3,10 @@
 # This is the default Ghostty configuration.
 # Read more about configuring Ghostty here:
 # https://ghostty.org/docs/config
+#
+# After a change, you can reload the config by doing:
+#   - Ctrl + Shift + , (on Linux)
+#   - Cmd + Shift + , (on macOS)
 
 # In order to support different settings per
 # platform, we can conditionally load the
