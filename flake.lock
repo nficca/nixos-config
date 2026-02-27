@@ -79,11 +79,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772130863,
-        "narHash": "sha256-jMCBpMJPgJTVV3lxYVrbJqLe3W6z4v8fksKTPRR2lsQ=",
+        "lastModified": 1772230664,
+        "narHash": "sha256-R8n0hjgYd14WcM9IDzqSbSgoRjAdZZn9JqBaGrd9vN8=",
         "owner": "nficca",
         "repo": "astal-config",
-        "rev": "1e4581042a8cfc961658266191f278080a8b7368",
+        "rev": "a7d8e0347d145275aad01863935c1606fa38fab2",
         "type": "github"
       },
       "original": {
