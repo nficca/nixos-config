@@ -65,17 +65,18 @@ return {
     })
 
     vim.lsp.enable({
-      "rust_analyzer",
-      "nil_ls",
-      "html",
+      "clangd",
       "cssls",
-      "lua_ls",
+      "eslint",
       "golangci_lint_ls",
       "gopls",
+      "html",
       "jsonls",
+      "lua_ls",
+      "nil_ls",
       "qmlls",
+      "rust_analyzer",
       "ts_ls",
-      "eslint",
     })
   end
 }

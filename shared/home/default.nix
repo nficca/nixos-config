@@ -33,24 +33,24 @@
     nh
 
     _1password-cli # CLI for 1Password
-    xh # Tool for sending HTTP requests
-    jless # JSON viewer
-    tree # Depth-indented directory listing
-    lazygit # Terminal UI for git commands
-    cmake # Cross-platform build system generator
     claude-code # Agentic coding tool for the terminal
-    opencode # Open-source agentic coding tool for the terminal
-    libclang # C language tools
+    cmake # Cross-platform build system generator
+    jless # JSON viewer
     jq # Flexible CLI JSON processor
+    lazygit # Terminal UI for git commands
+    opencode # Open-source agentic coding tool for the terminal
+    tree # Depth-indented directory listing
+    xh # Tool for sending HTTP requests
 
     ## Common language support packages ##
-    vscode-langservers-extracted
+    clang-tools
+    kdePackages.qtdeclarative
     lua-language-server
     nil
     nixfmt
-    typescript-language-server
     nodePackages.prettier
-    kdePackages.qtdeclarative
+    typescript-language-server
+    vscode-langservers-extracted
   ];
 
   # Let Home Manager install and manage itself.
