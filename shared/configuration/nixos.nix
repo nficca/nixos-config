@@ -24,12 +24,13 @@
 
   environment.systemPackages = with pkgs; [
     dua # Disk usage analyzer
+    file # Show the type of a file
+    gcc # GNU compiler collection
     git # Version control system
+    gnumake # Widely used build automation tool
+    perf # Linux profiling with performance counters
     vim # Text editor
     wget # Network file downloader
-    perf # Linux profiling with performance counters
-    gnumake # Widely used build automation tool
-    gcc # GNU compiler collection
   ];
 
   fonts.packages = with pkgs; [
