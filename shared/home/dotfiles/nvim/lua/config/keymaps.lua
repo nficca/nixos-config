@@ -24,25 +24,13 @@ which_key.add({ "<leader>lx", group = "Diagnostics" })
 --   - none
 local toggle_diagnostics = function()
   local cfg = vim.diagnostic.config()
+  if not cfg then return end
 
-  if not cfg then
-    print("Could not find diagnostic config")
-    return
-  end
-
-  local enable_lines = false
-  local enable_text = false
-
-  if not (cfg.virtual_lines or cfg.virtual_text) then
-    enable_lines = false
-    enable_text = true
-  elseif cfg.virtual_lines then
-    enable_lines = false
-    enable_text = true
-  end
-
-  vim.diagnostic.config({ virtual_lines = enable_lines })
-  vim.diagnostic.config({ virtual_text = enable_text })
+  -- Cycle: none → text → lines → none
+  vim.diagnostic.config({
+    virtual_text = not cfg.virtual_lines and not cfg.virtual_text,
+    virtual_lines = not not cfg.virtual_text,
+  })
 end
 
 vim.keymap.set("n", "<leader>lxt", toggle_diagnostics, { desc = "Toggle inline diagnostics" })
