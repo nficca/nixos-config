@@ -28,6 +28,7 @@
     gcc # GNU compiler collection
     git # Version control system
     gnumake # Widely used build automation tool
+    musl # Better libc implementation
     perf # Linux profiling with performance counters
     vim # Text editor
     wget # Network file downloader

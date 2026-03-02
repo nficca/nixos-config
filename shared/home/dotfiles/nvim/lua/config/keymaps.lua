@@ -16,7 +16,8 @@ vim.keymap.set("n", "<leader>lh", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "Toggle inlay hints" })
 
-which_key.add({ "<leader>lx", group = "Diagnostics" })
+-- Diagnostics keymaps --
+which_key.add({ "<leader>d", group = "Diagnostics" })
 
 -- Toggles diagnostics between:
 --   - separate lines (virtual_lines)
@@ -33,8 +34,9 @@ local toggle_diagnostics = function()
   })
 end
 
-vim.keymap.set("n", "<leader>lxt", toggle_diagnostics, { desc = "Toggle inline diagnostics" })
-vim.keymap.set("n", "<leader>lxx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle Trouble diagnostics" })
+vim.keymap.set("n", "<leader>di", toggle_diagnostics, { desc = "Toggle inline diagnostics" })
+vim.keymap.set("n", "<leader>do", vim.diagnostic.open_float, { desc = "Open in float" })
+vim.keymap.set("n", "<leader>dt", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle Trouble" })
 
 -- Hoversplit allow for LSP hover text in a split window
 -- Since it's LSP related, its keymaps can share the same prefix
@@ -86,9 +88,7 @@ telescope_keymap("fj", telescope.jumplist, "Find jumplist entries")
 telescope_keymap("F", telescope.resume, "Resume previous search")
 
 -- Clipboard and Register keymaps --
-
--- Yank keymaps --
-which_key.add({ "<leader>y", group = "Yank/Copy" })
+which_key.add({ "<leader>y", group = "System clipboard copy options" })
 
 local function truncate(text, max_len)
   max_len = max_len or 50
@@ -103,12 +103,12 @@ end
 vim.keymap.set("v", "<leader>yy", function()
   vim.cmd('normal! "+y')
   print("Yanked: " .. truncate(vim.fn.getreg("+")))
-end, { desc = "Yank to system clipboard" })
+end, { desc = "Copy lines" })
 
 vim.keymap.set("n", "<leader>yy", function()
   vim.cmd('normal! "+yy')
   print("Yanked: " .. truncate(vim.fn.getreg("+")))
-end, { desc = "Yank line to system clipboard" })
+end, { desc = "Copy line" })
 
 -- Copy git remote permalink to system clipboard
 local gitlinker = require("gitlinker")
@@ -147,17 +147,6 @@ end, { desc = "Copy file:line-range" })
 -- System clipboard paste
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "Paste before from system clipboard" })
-
--- Delete without yanking (black-hole register)
-vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yanking" })
-vim.keymap.set("n", "<leader>dd", '"_dd', { desc = "Delete line without yanking" })
-
--- Change without yanking (black-hole register)
-vim.keymap.set({ "n", "v" }, "<leader>c", '"_c', { desc = "Change without yanking" })
-vim.keymap.set("n", "<leader>cc", '"_cc', { desc = "Change line without yanking" })
-
--- Safe visual paste (preserves yank register)
-vim.keymap.set("v", "<leader>vp", '"_dP', { desc = "Paste without overwriting register" })
 
 -- Tree sitter keymaps --
 -- Tree sitter keymaps are in the plugin configuration for treesitter.
