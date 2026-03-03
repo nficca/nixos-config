@@ -50,6 +50,7 @@
     nixfmt
     nodePackages.prettier
     typescript-language-server
+    valgrind
     vscode-langservers-extracted
   ];
 
