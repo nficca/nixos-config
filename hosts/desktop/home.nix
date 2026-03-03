@@ -39,6 +39,7 @@
       saml2aws # CLI tool for getting AWS creds via SAML IDP
       slack # Team communication
       slurp # Region selection for Wayland screenshots
+      spotify # Play music from the Spotify music service
       swayidle # Idle management daemon for wayland
       unzip # Extraction utility for zip archives
       wireguard-tools # Tools for WireGuard VPN
