@@ -36,6 +36,7 @@
       pgcli # Postgres client interface
       podman-compose # Docker-compose with podman
       postgresql # Relational database system
+      prismlauncher # Open-source minecraft launcher
       saml2aws # CLI tool for getting AWS creds via SAML IDP
       slack # Team communication
       slurp # Region selection for Wayland screenshots
@@ -104,7 +105,7 @@
   # };
 
   # Define user services that should be managed by systemd.
-  # 
+  #
   # In home-manager, systemd user services are defined using the same schema as
   # systemd unit files. That is, the [Unit], [Service], and [Install] sections
   # in unit files correlate to the attributes of the same name here. Note that
