@@ -66,6 +66,7 @@ return {
 
     vim.lsp.enable({
       "clangd",
+      "cmake",
       "cssls",
       "eslint",
       "golangci_lint_ls",

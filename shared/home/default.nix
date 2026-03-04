@@ -44,6 +44,7 @@
 
     ## Common language support packages ##
     clang-tools
+    cmake-language-server
     kdePackages.qtdeclarative
     lua-language-server
     nil
