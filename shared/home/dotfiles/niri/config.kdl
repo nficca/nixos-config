@@ -111,7 +111,7 @@ input {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 12
+    gaps 8
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -253,9 +253,10 @@ layout {
         // off
         on
         gap 5
-        width 5
-        length total-proportion=0.2
+        width 8
+        length total-proportion=0.9
         corner-radius 12
+        place-within-column
     }
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
