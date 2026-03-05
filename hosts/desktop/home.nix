@@ -34,6 +34,7 @@
       networkmanagerapplet # NetworkManager GUI (nm-connection-editor)
       pavucontrol # PulseAudio volume control
       pgcli # Postgres client interface
+      playerctl # CLI media player control
       podman-compose # Docker-compose with podman
       postgresql # Relational database system
       prismlauncher # Open-source minecraft launcher
