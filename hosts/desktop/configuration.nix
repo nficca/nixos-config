@@ -146,6 +146,20 @@
     withUWSM = true;
   };
 
+  # XDG Desktop Portal provides a D-Bus API that apps use to interact with the
+  # desktop (e.g. file chooser dialogs, "show in folder"). Portal backends
+  # implement this API for specific desktop environments. The config below sets
+  # the preferred backend per portal interface.
+  # See: https://www.mankier.com/5/portals.conf
+  xdg.portal = {
+    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+    config = {
+      niri = {
+        "org.freedesktop.impl.portal.FileChooser" = "kde";
+      };
+    };
+  };
+
   # Hint electon apps to use wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 

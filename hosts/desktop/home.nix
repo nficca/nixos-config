@@ -25,6 +25,7 @@
       fuzzel # Wayland application launcher
       grim # Screenshot utility for Wayland
       heaptrack # Heap memory profiler
+      kdePackages.dolphin # File manager
       kdePackages.ktorrent # BitTorrent client
       kubectl # Kubernetes CLI
       kubectx # Fast way to switch between clusters and namespaces in kubectl
@@ -51,6 +52,13 @@
       awww.packages.${pkgs.stdenv.hostPlatform.system}.awww # Wallpaper daemon for wayland
       astal-config.packages.${pkgs.stdenv.hostPlatform.system}.default # Desktop shell using Astal and AGS
     ];
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = "org.kde.dolphin.desktop";
+    };
+  };
 
   # Screen locker
   programs.hyprlock.enable = true;
