@@ -117,8 +117,8 @@
             ''
               cp --preserve=mode $src $out
               substituteInPlace $out --replace-fail \
-                "KDE|GNOME|Pantheon|X-NIXOS-SYSTEMD-AWARE" \
-                "KDE|GNOME|Pantheon|X-NIXOS-SYSTEMD-AWARE|niri|Hyprland"
+                "KDE|GNOME|Pantheon|Hyprland|X-NIXOS-SYSTEMD-AWARE" \
+                "KDE|GNOME|Pantheon|Hyprland|niri|X-NIXOS-SYSTEMD-AWARE"
             '';
       in
       "${xsession-wrapper}";
