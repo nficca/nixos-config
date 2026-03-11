@@ -88,6 +88,9 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  # Run a basic Minecraft server
+  services.my-nix-minecraft.servers.vanilla.enable = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

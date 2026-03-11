@@ -60,6 +60,12 @@
       url = "github:nficca/astal-config";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # My personal configuration for running Minecraft servers.
+    my-nix-minecraft = {
+      url = "git+ssh://git@github.com/nficca/my-nix-minecraft.git?ref=main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -74,6 +80,7 @@
       awww,
       astal-config,
       niri,
+      my-nix-minecraft,
       ...
     }:
     let
@@ -97,6 +104,8 @@
                 (import ./overlays)
               ];
             }
+
+            my-nix-minecraft.nixosModules.default
 
             # Configure home-manager as a module so that it is applied
             # whenever system configuration changes are applied.
