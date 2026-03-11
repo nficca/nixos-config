@@ -30,6 +30,9 @@
   # - Kernel source code: https://github.com/torvalds/linux/blob/23b0f90ba871f096474e1c27c3d14f455189d2d9/drivers/bluetooth/btusb.c#L35
   boot.kernelParams = [ "btusb.enable_autosuspend=0" ];
 
+  # Use the latest available kernel for up-to-date hardware support.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # The following is AMD GPU configuration per
   # https://nixos.wiki/wiki/AMD_GPU
   boot.initrd.kernelModules = [ "amdgpu" ];
