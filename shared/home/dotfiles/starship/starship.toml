@@ -1,3 +1,6 @@
 [nix_shell]
 symbol = '❄️ '
 format = 'in [$symbol($name)]($style) '
+
+[gcloud]
+disabled = true
