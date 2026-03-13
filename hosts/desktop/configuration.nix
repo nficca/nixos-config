@@ -30,8 +30,10 @@
   # - Kernel source code: https://github.com/torvalds/linux/blob/23b0f90ba871f096474e1c27c3d14f455189d2d9/drivers/bluetooth/btusb.c#L35
   boot.kernelParams = [ "btusb.enable_autosuspend=0" ];
 
-  # Use the latest available kernel for up-to-date hardware support.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Pin to kernel 6.12 to test whether the kernel jump (6.12 → 6.18/6.19)
+  # is causing RX 9070 XT hard freezes.
+  # See: ~/Dropbox/rx-9070-xt-crash-investigation.md
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   # The following is AMD GPU configuration per
   # https://nixos.wiki/wiki/AMD_GPU
