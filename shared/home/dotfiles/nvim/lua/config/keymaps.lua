@@ -87,6 +87,23 @@ telescope_keymap("fj", telescope.jumplist, "Find jumplist entries")
 
 telescope_keymap("F", telescope.resume, "Resume previous search")
 
+-- Terminal keymaps
+vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm direction=float<CR>", { desc = "Open terminal" })
+vim.keymap.set("n", "<leader>T", function()
+  local term = require("toggleterm.terminal").get_or_create_term()
+  local directory = vim.fn.expand("%:p:h")
+
+  if not term:is_open() then
+    term:open(nil, "float")
+  end
+
+  term:change_dir(directory)
+
+  if not term:is_focused() then
+    term:focus()
+  end
+end, { desc = "Open terminal in current directory" })
+
 -- Clipboard and Register keymaps --
 which_key.add({ "<leader>y", group = "System clipboard copy options" })
 
