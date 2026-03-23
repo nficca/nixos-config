@@ -9,6 +9,7 @@ which_key.add({ "<leader>l", group = "Language server tools" })
 
 vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Jump to definition" })
+vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition, { desc = "Jump to type definition" })
 vim.keymap.set("n", "<leader>lf", function()
   require("conform").format({ async = true, lsp_format = "fallback" })
 end, { desc = "Format code" })
