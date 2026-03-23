@@ -90,6 +90,10 @@
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
 
+  # tmux
+  programs.tmux.enable = true;
+  programs.tmux.terminal = "xterm-256color";
+
   # Ripgrep
   programs.ripgrep.enable = true;
 
