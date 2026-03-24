@@ -4,8 +4,6 @@ return {
   config = function()
     -- See all settings:
     -- https://github.com/akinsho/toggleterm.nvim
-    require("toggleterm").setup({
-      shell = vim.fn.exepath("zsh")
-    })
+    require("toggleterm").setup({})
   end
 }
