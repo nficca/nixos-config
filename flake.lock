@@ -255,11 +255,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773255497,
-        "narHash": "sha256-TdBXVzgOF3sGW+qdO+KTn7A/azjiAfg21QeJujkj+R0=",
+        "lastModified": 1774623077,
+        "narHash": "sha256-gGPatzvGlcKXQUFZmn11fvXfmskZ1Ee3wcuUZHaJDXQ=",
         "ref": "main",
-        "rev": "398a9fbf7ea7caadee29522899780fe7013f94d0",
-        "revCount": 3,
+        "rev": "fa7760583180e9dbc7d893791a1b1d77e3529b69",
+        "revCount": 5,
         "type": "git",
         "url": "ssh://git@github.com/nficca/my-nix-minecraft.git"
       },

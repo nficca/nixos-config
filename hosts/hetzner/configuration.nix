@@ -4,6 +4,7 @@
 
 {
   username,
+  pkgs,
   ...
 }:
 
@@ -89,7 +90,20 @@
   services.openssh.enable = true;
 
   # Run a basic Minecraft server
-  services.my-nix-minecraft.servers.vanilla.enable = true;
+  services.my-nix-minecraft.servers.vanilla = {
+    enable = true;
+    symlinks = {
+      "world/datapacks" = pkgs.runCommand "datapacks" {} ''
+        mkdir -p $out
+        for f in ${pkgs.fetchzip {
+          url = "https://vanillatweaks.net/download/VanillaTweaks_d259703_UNZIP_ME.zip";
+          hash = "sha256-9V84Wi9IEq3AQ/iPmvwYBegrdpH1ibsc2YZabWWgvlg=";
+        }}/*; do
+          ln -s "$f" $out/
+        done
+      '';
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
