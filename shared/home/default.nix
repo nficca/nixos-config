@@ -113,6 +113,9 @@
   programs.git.settings.init.defaultBranch = "main";
   programs.git.includes = [ { path = "~/.config/git/themes.gitconfig"; } ];
 
+  # Mergiraf
+  programs.mergiraf.enable = true;
+
   # Delta
   programs.delta.enable = true;
   programs.delta.enableGitIntegration = true;
