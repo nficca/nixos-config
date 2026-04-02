@@ -49,7 +49,7 @@
     lua-language-server
     nil
     nixfmt
-    nodePackages.prettier
+    prettier
     typescript-language-server
     valgrind
     vscode-langservers-extracted
