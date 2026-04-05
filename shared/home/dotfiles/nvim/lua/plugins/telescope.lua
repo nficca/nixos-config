@@ -11,8 +11,13 @@ return {
     telescope.load_extension("fzf")
     telescope.setup({
       defaults = {
-        layout_strategy = "horizontal",
-        layout_config = { prompt_position = "top" },
+        layout_strategy = "vertical",
+        layout_config = {
+          prompt_position = "top",
+          mirror = true,
+          height = 0.9,
+          width = 0.9,
+        },
         sorting_strategy = "ascending"
       },
       extensions = {
