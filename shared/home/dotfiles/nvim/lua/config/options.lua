@@ -12,8 +12,8 @@ vim.opt.tabstop = 4;
 vim.opt.shiftwidth = 4;
 
 -- colorscheme
-vim.cmd.colorscheme('github_dark_default');
 vim.opt.termguicolors = true;
+vim.cmd.colorscheme('github_dark_default');
 vim.opt.winblend = 10;
 vim.opt.pumblend = 10;
 
