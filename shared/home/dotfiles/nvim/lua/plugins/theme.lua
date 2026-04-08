@@ -4,7 +4,8 @@ return {
   config = function()
     require("github-theme").setup({
       options = {
-        transparent = true
+        transparent = true,
+        lazy = false
       }
     })
   end
