@@ -7,6 +7,7 @@ return {
   config = function()
     require("nvim-treesitter.configs").setup({
       ensure_installed = {
+        "bash",
         "c",
         "cmake",
         "cpp",
@@ -15,6 +16,8 @@ return {
         "javascript",
         "json",
         "lua",
+        "nix",
+        "go",
         "qmljs",
         "rust",
         "typescript",
