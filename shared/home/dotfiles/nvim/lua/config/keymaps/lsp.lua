@@ -1,0 +1,11 @@
+return function(map)
+  map("n", "<leader>lr", vim.lsp.buf.rename, "Rename symbol")
+  map("n", "<leader>ld", vim.lsp.buf.definition, "Jump to definition")
+  map("n", "<leader>lt", vim.lsp.buf.type_definition, "Jump to type definition")
+  map("n", "<leader>lf", function()
+    require("conform").format({ async = true, lsp_format = "fallback" })
+  end, "Format code")
+  map("n", "<leader>lh", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+  end, "Toggle inlay hints")
+end
