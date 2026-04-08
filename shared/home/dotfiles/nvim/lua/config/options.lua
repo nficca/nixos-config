@@ -1,25 +1,25 @@
 -- line numbers
-vim.opt.number = true;
-vim.opt.relativenumber = true;
+vim.opt.number = true
+vim.opt.relativenumber = true
 
 -- whitespace
-vim.opt.list = true;
-vim.opt.listchars = { tab = '→ ', leadmultispace = '·', trail = '·' };
+vim.opt.list = true
+vim.opt.listchars = { tab = '→ ', leadmultispace = '·', trail = '·' }
 
 -- tabs
-vim.opt.expandtab = true;
-vim.opt.tabstop = 4;
-vim.opt.shiftwidth = 4;
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 -- colorscheme
-vim.opt.termguicolors = true;
-vim.cmd.colorscheme('github_dark_default');
-vim.opt.winblend = 10;
-vim.opt.pumblend = 10;
+vim.opt.termguicolors = true
+vim.cmd.colorscheme('github_dark_default')
+vim.opt.winblend = 10
+vim.opt.pumblend = 10
 
 -- line length
-vim.opt.textwidth = 80;
-vim.opt.colorcolumn = '+1';
+vim.opt.textwidth = 80
+vim.opt.colorcolumn = '+1'
 vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#6B5252" })
 
 -- diagnostics
