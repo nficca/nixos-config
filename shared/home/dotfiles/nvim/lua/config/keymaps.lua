@@ -42,7 +42,7 @@ vim.keymap.set("n", "<leader>dt", "<cmd>Trouble diagnostics toggle<cr>", { desc 
 -- Hoversplit allow for LSP hover text in a split window
 -- Since it's LSP related, its keymaps can share the same prefix
 local hoversplit = require("hoversplit")
-vim.keymap.set("n", "<leader>lh", hoversplit.split_remain_focused, { desc = "Toggle LSP split (horizontal)" })
+vim.keymap.set("n", "<leader>h", hoversplit.split_remain_focused, { desc = "Toggle hoversplit" })
 
 
 -- Neogit keymaps --
