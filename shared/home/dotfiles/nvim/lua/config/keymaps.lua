@@ -69,7 +69,7 @@ end
 
 telescope_keymap("ff", function()
   telescope.find_files({
-    find_command = { "rg", "--files", "--sortr=accessed" }
+    find_command = { "rg", "--files", "--sortr=modified" }
   })
 end, "Find files (sort by modified)")
 telescope_keymap("ft", telescope.live_grep, "Find text (regex)")
