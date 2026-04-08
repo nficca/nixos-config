@@ -20,6 +20,7 @@ which_key.add({ "<leader>l", group = "Language server tools" })
 which_key.add({ "<leader>d", group = "Diagnostics" })
 which_key.add({ "<leader>f", group = "Find things" })
 which_key.add({ "<leader>y", group = "System clipboard copy options" })
+which_key.add({ "<leader>g", group = "Git" })
 
 -- WhichKey shows you available keybindings as a popup
 map("n", "<leader>?", function()
