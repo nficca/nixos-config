@@ -98,13 +98,6 @@
           modules = [
             config_module
 
-            # Configure nixpkgs with overlays
-            {
-              nixpkgs.overlays = [
-                (import ./overlays)
-              ];
-            }
-
             my-nix-minecraft.nixosModules.default
 
             # Configure home-manager as a module so that it is applied
@@ -137,13 +130,6 @@
           specialArgs = { inherit username; };
           modules = [
             config_module
-
-            # Configure nixpkgs with overlays
-            {
-              nixpkgs.overlays = [
-                (import ./overlays)
-              ];
-            }
 
             # Configure home-manager as a module so that it is applied
             # whenever system configuration changes are applied.

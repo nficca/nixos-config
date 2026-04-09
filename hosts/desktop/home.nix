@@ -20,7 +20,6 @@
       awscli # Unified tool to manage AWS services
       discord # Group chat
       dropbox # Dropbox client
-      fossa-cli # Dependency analysis tool
       fuzzel # Wayland application launcher
       grim # Screenshot utility for Wayland
       heaptrack # Heap memory profiler
