@@ -16,7 +16,6 @@
   # Install packages
   home.packages =
     (with pkgs; [
-      _1password-gui # Password manager
       aseprite # Pixel art editor
       awscli # Unified tool to manage AWS services
       discord # Group chat
