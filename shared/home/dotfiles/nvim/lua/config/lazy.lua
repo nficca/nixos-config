@@ -32,4 +32,13 @@ require("lazy").setup({
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
+  performance = {
+    rtp = {
+      -- lazy.nvim resets the rtp after processing its plugin spec, which drops
+      -- plugins that home-manager installs into `site/pack/hm/start/*` (e.g.
+      -- nvim-treesitter and its grammars). Re-add them here so `require()`
+      -- for those plugins continues to work after lazy.setup returns.
+      paths = vim.fn.glob(vim.fn.stdpath("data") .. "/site/pack/hm/start/*", false, true),
+    },
+  },
 })

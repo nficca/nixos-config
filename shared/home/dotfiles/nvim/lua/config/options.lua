@@ -22,5 +22,10 @@ vim.opt.textwidth = 80
 vim.opt.colorcolumn = '+1'
 vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#6B5252" })
 
+-- folds
+-- Treesitter folds are enabled per-buffer in config/treesitter.lua. Start with
+-- every fold open; `zc` / `zM` still work to collapse things manually.
+vim.opt.foldlevelstart = 99
+
 -- diagnostics
 vim.diagnostic.config({ virtual_text = true })

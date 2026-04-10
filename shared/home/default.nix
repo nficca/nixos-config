@@ -115,6 +115,7 @@
 
   # Mergiraf
   programs.mergiraf.enable = true;
+  programs.mergiraf.enableGitIntegration = true;
 
   # Delta
   programs.delta.enable = true;
@@ -137,6 +138,29 @@
 
   # Neovim
   programs.neovim.enable = true;
+  programs.neovim.withRuby = false;
+  programs.neovim.withPython3 = false;
+  programs.neovim.plugins = with pkgs.vimPlugins; [
+    (nvim-treesitter.withPlugins (p: with p; [
+      bash
+      c
+      cmake
+      cpp
+      css
+      go
+      html
+      javascript
+      json
+      lua
+      markdown
+      markdown_inline
+      nix
+      qmljs
+      rust
+      typescript
+    ]))
+    nvim-treesitter-textobjects
+  ];
 
   # Direnv
   programs.direnv.enable = true;

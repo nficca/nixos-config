@@ -1,4 +1,5 @@
 {
+  config,
   username,
   pkgs,
   awww,
@@ -105,6 +106,9 @@
       name = "Papirus-Light";
       package = pkgs.papirus-icon-theme;
     };
+    # Apply the same theme to GTK4 apps. The home-manager default for this
+    # changes to `null` (libadwaita defaults) in stateVersion 26.05.
+    gtk4.theme = config.gtk.theme;
   };
 
   # Qt configuration
