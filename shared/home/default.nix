@@ -38,7 +38,6 @@
     jless # JSON viewer
     jq # Flexible CLI JSON processor
     lazygit # Terminal UI for git commands
-    opencode # Open-source agentic coding tool for the terminal
     tree # Depth-indented directory listing
     xh # Tool for sending HTTP requests
 
