@@ -11,6 +11,7 @@
 {
   imports = [
     ../../shared/home
+    ./firefox-profile-handler.nix
   ];
 
   home.homeDirectory = "/home/${username}";
