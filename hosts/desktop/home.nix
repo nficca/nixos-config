@@ -2,6 +2,7 @@
   config,
   username,
   pkgs,
+  ghostty,
   awww,
   astal-config,
   ...
@@ -63,7 +64,10 @@
   programs.hyprlock.enable = true;
 
   # Ghostty
-  programs.ghostty.enable = true;
+  programs.ghostty = {
+    enable = true;
+    package = ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  };
 
   # Visual Studio Code
   programs.vscode.enable = true;

@@ -42,11 +42,16 @@
       flake = false;
     };
 
+    # GPU-accelerated terminal emulator.
+    # Ghostty is slow to release new versions in nixpkgs, so we use the flake
+    # to build from main and get timely protocol support (e.g. ext-background-effect-v1).
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
+
     # Scrollable-tiling Wayland compositor.
     niri = {
-      # Currently using the `wip/branch` branch of niri for its background blur
-      # support. See https://github.com/niri-wm/niri/pull/3483.
-      url = "github:niri-wm/niri/wip/branch";
+      url = "github:niri-wm/niri";
       inputs.nixpkgs.follows = "nixpkgs";
       # https://github.com/niri-wm/niri/blob/2dc6f4482c4eeed75ea8b133d89cad8658d38429/flake.nix#L8-L9
       inputs.rust-overlay.follows = "";
@@ -77,6 +82,7 @@
       homebrew-core,
       homebrew-cask,
       dev-flakes,
+      ghostty,
       awww,
       astal-config,
       niri,
@@ -108,6 +114,7 @@
                 inherit
                   username
                   dev-flakes
+                  ghostty
                   awww
                   astal-config
                   ;
