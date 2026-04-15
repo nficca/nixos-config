@@ -142,15 +142,6 @@
     enable = true;
     package = niri.packages.${pkgs.stdenv.hostPlatform.system}.niri;
   };
-  # Hyprland is a modern Wayland compositor with dynamic tiling and powerful
-  # plugins. It's also just a compositor.
-  programs.hyprland = {
-    enable = true;
-    # Use UWSM (Universal Wayland Session Manager) for proper systemd integration.
-    # This ensures graphical-session.target starts/stops correctly on
-    # login/logout.
-    withUWSM = true;
-  };
 
   # XDG Desktop Portal provides a D-Bus API that apps use to interact with the
   # desktop (e.g. file chooser dialogs, "show in folder"). Portal backends
