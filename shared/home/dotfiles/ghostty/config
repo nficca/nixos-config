@@ -23,7 +23,7 @@
 config-file = ?linux
 config-file = ?darwin
 
-background-opacity = 0.80
+background-opacity = 0.70
 background-blur = 10
 font-family = "JetBrainsMono Nerd Font"
 theme = "GitHub Dark High Contrast"
