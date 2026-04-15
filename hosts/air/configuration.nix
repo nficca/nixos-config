@@ -18,9 +18,7 @@
       "mullvad-vpn" # Privacy-focused VPN
       "slack" # Team communication
       "steam" # Video game distribution platform
-      "visual-studio-code" # Open-source code editor
       "whatsapp" # Messaging and calling
-      "zed" # High-performance code editor
     ];
   };
 }

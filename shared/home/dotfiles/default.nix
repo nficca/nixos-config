@@ -21,7 +21,6 @@ in
     }
     // lib.attrsets.optionalAttrs pkgs.stdenv.isLinux {
       # Linux
-      "Code/User/settings.json".source = "${dotfiles}/vscode/settings.json";
       "ghostty/linux".source = "${dotfiles}/ghostty/linux";
       niri.source = "${dotfiles}/niri";
       hypr.source = "${dotfiles}/hypr";
@@ -32,7 +31,6 @@ in
       "ghostty/config".source = "${dotfiles}/ghostty/config";
       direnv.source = "${dotfiles}/direnv";
       "starship.toml".source = "${dotfiles}/starship/starship.toml";
-      zed.source = "${dotfiles}/zed";
       "git/themes.gitconfig".source = "${dotfiles}/git/themes.gitconfig";
     };
 
@@ -40,7 +38,6 @@ in
   home.file =
     lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
       # MacOS
-      "Library/Application Support/Code/User/settings.json".source = "${dotfiles}/vscode/settings.json";
     }
     // lib.attrsets.optionalAttrs pkgs.stdenv.isLinux {
       # Linux
