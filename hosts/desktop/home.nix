@@ -69,9 +69,6 @@
     package = ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default;
   };
 
-  # Google Chrome
-  programs.google-chrome.enable = true;
-
   # Firefox
   programs.firefox.enable = true;
 

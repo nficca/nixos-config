@@ -9,8 +9,8 @@
     enable = true;
     user = username;
     casks = [
-      "google-chrome" # Web browser
       "1password" # Password manager
+      "firefox" # Web browser
       "slack" # Team communication
       "ghostty" # Platform-native terminal emulator
       "whatsapp" # Messaging and calling

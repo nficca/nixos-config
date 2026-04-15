@@ -357,18 +357,6 @@ window-rule {
     open-floating true
 }
 
-// Open Chrome Picture-in-Picture windows as floating by default.
-// Regular Chrome tabs have titles ending in " - Google Chrome", but PiP windows don't.
-window-rule {
-    match app-id="google-chrome"
-    exclude title=" - Google Chrome$"
-    open-floating true
-    open-focused false
-    default-floating-position x=12 y=12 relative-to="bottom-right"
-    default-column-width { fixed 600; }
-    default-window-height { fixed 400; }
-}
-
 // The bluetooth manager that pops up when clicking the blueman icon in the tray
 // should be floating and stick to the top right area.
 window-rule {
