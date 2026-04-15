@@ -19,7 +19,6 @@
     (with pkgs; [
       aseprite # Pixel art editor
       awscli # Unified tool to manage AWS services
-      discord # Group chat
       dropbox # Dropbox client
       fuzzel # Wayland application launcher
       grim # Screenshot utility for Wayland
@@ -44,6 +43,7 @@
       spotify # Play music from the Spotify music service
       swayidle # Idle management daemon for wayland
       unzip # Extraction utility for zip archives
+      vesktop # Alternative Discord client
       wireguard-tools # Tools for WireGuard VPN
       wl-clipboard-rs # Command-line copy/paste utilities for Wayland
     ])
