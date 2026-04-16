@@ -132,11 +132,11 @@
     "dev-flakes": {
       "flake": false,
       "locked": {
-        "lastModified": 1775760282,
-        "narHash": "sha256-t6bCjRtsckoTafqqEY0oFi3pLb192nI4UfI9BOIq878=",
+        "lastModified": 1776353827,
+        "narHash": "sha256-CxcMh3oQFOYHL7YM2Ts8nxZMsat2mhSNWTcGTbiTK0k=",
         "ref": "refs/heads/main",
-        "rev": "e9685212e573f3a7dcbf92e7a7a7fa403841803a",
-        "revCount": 21,
+        "rev": "16ecfd10782dd5a60e67297a92bd87874b248550",
+        "revCount": 22,
         "type": "git",
         "url": "ssh://git@github.com/nficca/nixos-flakes.git"
       },
