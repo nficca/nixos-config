@@ -39,6 +39,16 @@
   # The following is AMD GPU configuration per
   # https://nixos.wiki/wiki/AMD_GPU
   boot.initrd.kernelModules = [ "amdgpu" ];
+
+  # Disable suspend/hibernate on this desktop. The RX 9070 XT has unreliable
+  # S3 resume on kernel 6.12 (MODE1 GPU resets, SMU version mismatches), and
+  # amdgpu suspend/resume bugs are a known cross-kernel issue.
+  # See: https://github.com/NixOS/nixpkgs/issues/223690
+  # systemd.targets.sleep.enable = false;
+  # systemd.targets.suspend.enable = false;
+  # systemd.targets.hibernate.enable = false;
+  # systemd.targets.hybrid-sleep.enable = false;
+
   # hardware.graphics.enable32bBit = true;
 
   networking.hostName = "desktop"; # Define your hostname.
