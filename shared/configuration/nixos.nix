@@ -38,6 +38,17 @@
     nerd-fonts.jetbrains-mono
   ];
 
+  # Claude Code reads managed settings from /etc/claude-code/managed-settings.json.
+  # Unlike ~/.claude/settings.json, this file is never modified at runtime, and
+  # its values take the highest precedence over all other settings.
+  # https://code.claude.com/docs/en/server-managed-settings
+  environment.etc."claude-code/managed-settings.json" = {
+    text = builtins.toJSON {
+      attribution.commit = "";
+      attribution.pr = "";
+    };
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
