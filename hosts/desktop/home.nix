@@ -22,7 +22,6 @@
       aseprite # Pixel art editor
       awscli # Unified tool to manage AWS services
       dropbox # Dropbox client
-      fuzzel # Wayland application launcher
       grim # Screenshot utility for Wayland
       heaptrack # Heap memory profiler
       kdePackages.dolphin # File manager
@@ -72,6 +71,50 @@
 
   # Firefox
   programs.firefox.enable = true;
+  xdg.desktopEntries.firefox-work = {
+    name = "Firefox (Work)";
+    exec = "firefox -P work";
+    icon = "firefox";
+    type = "Application";
+    categories = [
+      "Network"
+      "WebBrowser"
+    ];
+  };
+
+  # Application launcher
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      main = {
+        font = "monospace:size=14";
+        anchor = "top";
+        y-margin = 8;
+        width = 40;
+        lines = 10;
+        icon-theme = "Papirus-Light";
+        prompt = "\"❯ \"";
+        match-mode = "fzf";
+      };
+      border = {
+        width = 2;
+        radius = 12;
+      };
+      colors = {
+        background = "ffffffee";
+        text = "333333ff";
+        prompt = "3569dbff";
+        input = "333333ff";
+        match = "0095ffff";
+        selection = "3569db33";
+        selection-text = "222222ff";
+        selection-match = "0095ffff";
+        border = "3569dbff";
+        counter = "999999ff";
+        placeholder = "999999ff";
+      };
+    };
+  };
 
   # Kubernetes CLI
   programs.k9s.enable = true;
