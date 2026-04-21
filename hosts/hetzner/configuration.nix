@@ -13,6 +13,8 @@
     ./hardware-configuration.nix
     ../../shared/configuration/nixos.nix
     ./nginx.nix
+    ./calibre-web.nix
+    ./substack-fetch.nix
   ];
 
   # Use the GRUB 2 boot loader.
