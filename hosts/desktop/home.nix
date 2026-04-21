@@ -3,8 +3,6 @@
   username,
   pkgs,
   ghostty,
-  awww,
-  astal-config,
   ...
 }:
 
@@ -42,16 +40,11 @@
       slack # Team communication
       slurp # Region selection for Wayland screenshots
       spotify # Play music from the Spotify music service
-      # swayidle # Idle management daemon for wayland — replaced by DMS
       unzip # Extraction utility for zip archives
       vesktop # Alternative Discord client
       wireguard-tools # Tools for WireGuard VPN
       wl-clipboard-rs # Command-line copy/paste utilities for Wayland
-    ])
-    ++ [
-      # awww.packages.${pkgs.stdenv.hostPlatform.system}.awww # Wallpaper daemon for wayland — replaced by DMS
-      # astal-config.packages.${pkgs.stdenv.hostPlatform.system}.default # Desktop shell using Astal and AGS — replaced by DMS
-    ];
+    ]);
 
   # DankMaterialShell desktop environment (shell, launcher, wallpapers, lock, idle).
   # The home-manager module handles quickshell, the systemd service, and packages.
@@ -66,9 +59,6 @@
       "inode/directory" = "org.kde.dolphin.desktop";
     };
   };
-
-  # Screen locker — replaced by DMS lock screen
-  # programs.hyprlock.enable = true;
 
   # Ghostty
   programs.ghostty = {
@@ -88,40 +78,6 @@
       "WebBrowser"
     ];
   };
-
-  # Application launcher — replaced by DMS spotlight
-  # programs.fuzzel = {
-  #   enable = true;
-  #   settings = {
-  #     main = {
-  #       font = "monospace:size=14";
-  #       anchor = "top";
-  #       y-margin = 8;
-  #       width = 40;
-  #       lines = 10;
-  #       icon-theme = "Papirus-Light";
-  #       prompt = "\"❯ \"";
-  #       match-mode = "fzf";
-  #     };
-  #     border = {
-  #       width = 2;
-  #       radius = 12;
-  #     };
-  #     colors = {
-  #       background = "ffffffee";
-  #       text = "333333ff";
-  #       prompt = "3569dbff";
-  #       input = "333333ff";
-  #       match = "0095ffff";
-  #       selection = "3569db33";
-  #       selection-text = "222222ff";
-  #       selection-match = "0095ffff";
-  #       border = "3569dbff";
-  #       counter = "999999ff";
-  #       placeholder = "999999ff";
-  #     };
-  #   };
-  # };
 
   # Kubernetes CLI
   programs.k9s.enable = true;
@@ -196,22 +152,6 @@
         WantedBy = [ "graphical-session.target" ];
       };
     };
-
-    # Astal shell — replaced by DMS shell
-    # astal-shell = {
-    #   Unit = {
-    #     Description = "Astal Shell";
-    #     After = [ "graphical-session.target" ];
-    #     PartOf = [ "graphical-session.target" ];
-    #   };
-    #   Service = {
-    #     ExecStart = "${astal-config.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/astal-shell";
-    #     Restart = "on-failure";
-    #   };
-    #   Install = {
-    #     WantedBy = [ "graphical-session.target" ];
-    #   };
-    # };
 
     dropbox = {
       Unit = {

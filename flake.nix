@@ -57,15 +57,6 @@
       inputs.rust-overlay.follows = "";
     };
 
-    # Wallpaper daemon for Wayland
-    awww.url = "git+https://codeberg.org/LGFae/awww";
-
-    # My personal desktop shell config powered by Astal and AGS.
-    astal-config = {
-      url = "github:nficca/astal-config";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # DankMaterialShell — integrated desktop environment (greeter, shell, launcher,
     # wallpapers, lock screen, idle management).
     dms = {
@@ -90,8 +81,6 @@
       homebrew-cask,
       dev-flakes,
       ghostty,
-      awww,
-      astal-config,
       niri,
       dms,
       my-nix-minecraft,
@@ -124,8 +113,6 @@
                   username
                   dev-flakes
                   ghostty
-                  awww
-                  astal-config
                   ;
               };
               home-manager.useGlobalPkgs = true;

@@ -23,6 +23,7 @@ in
       # Linux
       "ghostty/linux".source = "${dotfiles}/ghostty/linux";
       niri.source = "${dotfiles}/niri";
+      DankMaterialShell.source = "${dotfiles}/DankMaterialShell";
     }
     // {
       # All platforms

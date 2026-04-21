@@ -275,28 +275,10 @@ layout {
     background-color "transparent"
 }
 
-// Make wallpaper stationary and place it in the backdrop
-layer-rule {
-    match namespace="^wallpaper$"
-    place-within-backdrop true
-}
-
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
-
-// DMS shell is started via systemd user service (dms.service), not spawn-at-startup.
-
-// awww wallpaper daemon — replaced by DMS wallpaper handling
-// spawn-at-startup "awww-daemon"
-// spawn-sh-at-startup "bash ~/.config/niri/rotate-wallpaper.sh"
-
-// swayidle + hyprlock — replaced by DMS idle management and lock screen
-// spawn-sh-at-startup "swayidle -w timeout 600 'niri msg action power-off-monitors' timeout 900 'hyprlock'"
-
-// To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
-// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
