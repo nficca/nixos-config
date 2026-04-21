@@ -66,6 +66,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # DankMaterialShell — integrated desktop environment (greeter, shell, launcher,
+    # wallpapers, lock screen, idle management).
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # My personal configuration for running Minecraft servers.
     my-nix-minecraft = {
       url = "git+ssh://git@github.com/nficca/my-nix-minecraft.git?ref=main";
@@ -86,6 +93,7 @@
       awww,
       astal-config,
       niri,
+      dms,
       my-nix-minecraft,
       ...
     }:
@@ -104,6 +112,7 @@
           modules = [
             config_module
 
+            dms.nixosModules.greeter
             my-nix-minecraft.nixosModules.default
 
             # Configure home-manager as a module so that it is applied
@@ -122,7 +131,10 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users."${username}" = {
-                imports = [ home_module ];
+                imports = [
+                  home_module
+                  dms.homeModules.default
+                ];
               };
             }
           ];
