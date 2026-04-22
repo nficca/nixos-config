@@ -21,6 +21,17 @@ in
     };
   };
 
+  # The NixOS module's ExecStartPre writes config_port to the database but
+  # doesn't set config_external_port. Behind a reverse proxy, calibre-web
+  # uses this to generate correct URLs (e.g. for Kobo sync downloads).
+  systemd.services.calibre-web.serviceConfig.ExecStartPre = let
+    appDb = "/var/lib/calibre-web/app.db";
+  in pkgs.lib.mkAfter [
+    (pkgs.writeShellScript "calibre-web-set-external-port" ''
+      ${pkgs.sqlite}/bin/sqlite3 ${appDb} "UPDATE settings SET config_external_port = 443"
+    '')
+  ];
+
   # The calibre-web module's ExecStartPre asserts that metadata.db exists
   # in the library path and fails if it's missing. This oneshot service
   # initializes an empty library on first boot so calibre-web can start.
