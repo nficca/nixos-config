@@ -69,6 +69,12 @@
       url = "git+ssh://git@github.com/nficca/my-nix-minecraft.git?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # CLI tool that converts an RSS feed into a clean EPUB with articles as chapters.
+    rss-to-epub = {
+      url = "github:nficca/rss-to-epub";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -84,6 +90,7 @@
       niri,
       dms,
       my-nix-minecraft,
+      rss-to-epub,
       ...
     }:
     let
@@ -97,7 +104,7 @@
         }:
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit username niri; };
+          specialArgs = { inherit username niri rss-to-epub; };
           modules = [
             config_module
 

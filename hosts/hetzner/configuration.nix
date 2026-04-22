@@ -14,7 +14,7 @@
     ../../shared/configuration/nixos.nix
     ./nginx.nix
     ./calibre-web.nix
-    ./substack-fetch.nix
+    ./rss-feeds.nix
   ];
 
   # Use the GRUB 2 boot loader.
