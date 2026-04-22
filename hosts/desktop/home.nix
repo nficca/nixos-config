@@ -15,8 +15,9 @@
   home.homeDirectory = "/home/${username}";
 
   # Install packages
-  home.packages =
-    (with pkgs; [
+  home.packages = (
+    with pkgs;
+    [
       aseprite # Pixel art editor
       awscli # Unified tool to manage AWS services
       dropbox # Dropbox client
@@ -44,7 +45,8 @@
       vesktop # Alternative Discord client
       wireguard-tools # Tools for WireGuard VPN
       wl-clipboard-rs # Command-line copy/paste utilities for Wayland
-    ]);
+    ]
+  );
 
   # DankMaterialShell desktop environment (shell, launcher, wallpapers, lock, idle).
   # The home-manager module handles quickshell, the systemd service, and packages.
@@ -95,11 +97,11 @@
   gtk = {
     enable = true;
     theme = {
-      name = "WhiteSur-Light";
+      name = "WhiteSur-Dark";
       package = pkgs.whitesur-gtk-theme;
     };
     iconTheme = {
-      name = "Papirus-Light";
+      name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
     # Apply the same theme to GTK4 apps. The home-manager default for this
