@@ -6,6 +6,8 @@ let
   rss-to-epub-pkg = rss-to-epub.packages.${pkgs.system}.default;
 
   # RSS feeds to fetch. Add new feeds by appending URLs.
+  # Substack feeds: https://<name>.substack.com/feed
+  # Any valid RSS or Atom feed URL will work.
   feeds = [
     "https://seanfennessey.substack.com/feed"
   ];
@@ -47,11 +49,13 @@ let
           continue
         fi
 
-        # Look up existing Calibre book ID for this feed
+        # We track feed slug -> Calibre book ID in a JSON file so that
+        # subsequent runs replace the EPUB (via add_format) instead of
+        # creating duplicate books (via add). This preserves any metadata
+        # edits or reading state in Calibre-Web.
         BOOK_ID=$(jq -r --arg slug "$SLUG" '.[$slug] // ""' "$BOOK_IDS_FILE")
 
         if [ -z "$BOOK_ID" ]; then
-          # First time: add new book to Calibre
           OUTPUT=$(calibredb add --library-path="$LIBRARY" "$EPUB_FILE" 2>&1) || true
           NEW_ID=$(echo "$OUTPUT" | grep -o 'Added book ids: [0-9]*' | grep -o '[0-9]*')
           if [ -n "$NEW_ID" ]; then
@@ -85,6 +89,8 @@ in
       "calibre-library-init.service"
     ];
     wants = [ "network-online.target" ];
+    # Calibre's CLI tools link against Qt, which tries to connect to a
+    # display server on startup. This tells Qt there's no screen.
     environment.QT_QPA_PLATFORM = "offscreen";
     serviceConfig = {
       Type = "oneshot";
