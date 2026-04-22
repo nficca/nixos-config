@@ -159,7 +159,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 4
+        width 2
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -252,8 +252,8 @@ layout {
     tab-indicator {
         // off
         on
-        gap 5
-        width 8
+        gap 3
+        width 5
         length total-proportion=0.9
         corner-radius 12
         place-within-column
