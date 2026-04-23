@@ -275,6 +275,13 @@ layout {
     background-color "transparent"
 }
 
+// Allow notification click-to-focus for apps that send xdg-activation tokens
+// with invalid serials (most apps via DMS/Quickshell do this).
+// https://github.com/niri-wm/niri/wiki/Configuration:-Debug-Options#honor-xdg-activation-with-invalid-serial
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
+
 blur {
     passes 3
     offset 2.0
