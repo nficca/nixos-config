@@ -343,7 +343,16 @@
   "notificationHistorySaveLow": true,
   "notificationHistorySaveNormal": true,
   "notificationHistorySaveCritical": true,
-  "notificationRules": [],
+  "notificationRules": [
+    {
+      "enabled": true,
+      "field": "desktopEntry",
+      "pattern": "com.mitchellh.ghostty",
+      "matchType": "exact",
+      "action": "no_history",
+      "urgency": "low"
+    }
+  ],
   "osdAlwaysShowValue": false,
   "osdPosition": 5,
   "osdVolumeEnabled": true,
