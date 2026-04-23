@@ -375,11 +375,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776887960,
-        "narHash": "sha256-zTXHunwSky6vtgDETM42TNqFBRJxu9O8nv/vwqALBLk=",
+        "lastModified": 1776952173,
+        "narHash": "sha256-XF7uJPQAW86RhgA6mLrjz857+o341Dt+KJWIb2V+yZA=",
         "owner": "nficca",
         "repo": "rss-to-epub",
-        "rev": "9caeafbdb9d14604c376ec72f7f344d946fd5fdc",
+        "rev": "bfd48f42069fb38c8355452c08fc4164100c6067",
         "type": "github"
       },
       "original": {
