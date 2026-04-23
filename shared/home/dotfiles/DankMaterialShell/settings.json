@@ -412,17 +412,15 @@
         "focusedWindow"
       ],
       "centerWidgets": [
-        "music",
-        "clock",
-        "weather"
+        "clock"
       ],
       "rightWidgets": [
         {
-          "id": "systemTray",
+          "id": "music",
           "enabled": true
         },
         {
-          "id": "vpn",
+          "id": "systemTray",
           "enabled": true
         },
         {
@@ -443,6 +441,10 @@
         },
         {
           "id": "battery",
+          "enabled": true
+        },
+        {
+          "id": "vpn",
           "enabled": true
         },
         {
