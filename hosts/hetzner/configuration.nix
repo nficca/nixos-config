@@ -13,8 +13,6 @@
     ./hardware-configuration.nix
     ../../shared/configuration/nixos.nix
     ./nginx.nix
-    ./calibre-web.nix
-    ./rss-feeds.nix
   ];
 
   # Use the GRUB 2 boot loader.
