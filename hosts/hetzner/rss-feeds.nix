@@ -1,7 +1,10 @@
-{ pkgs, rss-to-epub, ... }:
+{ config, pkgs, rss-to-epub, ... }:
 
 let
-  libraryPath = "/var/lib/calibre-web/library";
+  cfg = config.services.calibre-web;
+  dataDir =
+    if builtins.substring 0 1 cfg.dataDir == "/" then cfg.dataDir else "/var/lib/${cfg.dataDir}";
+  libraryPath = "${dataDir}/library";
 
   rss-to-epub-pkg = rss-to-epub.packages.${pkgs.system}.default;
 
@@ -18,9 +21,11 @@ let
       rss-to-epub-pkg
       pkgs.calibre
       pkgs.jq
+      pkgs.sqlite
     ];
     text = ''
       LIBRARY="${libraryPath}"
+      APP_DB="${dataDir}/app.db"
       STATE_DIR="/var/lib/rss-feeds"
       BOOK_IDS_FILE="$STATE_DIR/book-ids.json"
       WORK_DIR="$(mktemp -d)"
@@ -71,6 +76,11 @@ let
           # Update existing book with new EPUB
           if calibredb add_format --library-path="$LIBRARY" "$BOOK_ID" "$EPUB_FILE" 2>&1; then
             echo "Updated book: $SLUG (ID: $BOOK_ID)"
+            # Remove any existing KEPUB so calibre-web's kepubify
+            # reconverts from the fresh EPUB on next Kobo sync.
+            calibredb remove_format --library-path="$LIBRARY" "$BOOK_ID" KEPUB 2>/dev/null || true
+            # Clear Kobo sync state so calibre-web re-delivers the book.
+            sqlite3 "$APP_DB" "DELETE FROM kobo_synced_books WHERE book_id = $BOOK_ID;"
           else
             echo "WARNING: Failed to update $SLUG (ID: $BOOK_ID)"
           fi
@@ -103,6 +113,7 @@ in
       NoNewPrivileges = true;
       ReadWritePaths = [
         libraryPath
+        dataDir
         "/var/lib/rss-feeds"
       ];
     };
