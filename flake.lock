@@ -55,6 +55,26 @@
         "type": "github"
       }
     },
+    "dms-plugin-registry": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777041352,
+        "narHash": "sha256-aQ5QsWtbuiPMMGH+oWf+NaW+Go7hahqOWoLp/0V1Z3Q=",
+        "owner": "AvengeMedia",
+        "repo": "dms-plugin-registry",
+        "rev": "622f25235ec0969479c1d03247ef15c8bc07cee9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AvengeMedia",
+        "repo": "dms-plugin-registry",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -356,6 +376,7 @@
       "inputs": {
         "dev-flakes": "dev-flakes",
         "dms": "dms",
+        "dms-plugin-registry": "dms-plugin-registry",
         "ghostty": "ghostty",
         "home-manager": "home-manager_2",
         "homebrew-cask": "homebrew-cask",

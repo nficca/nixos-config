@@ -53,6 +53,11 @@
   programs.dank-material-shell = {
     enable = true;
     systemd.enable = true;
+    # After installing a plugin, it must be manually enabled in
+    # DMS Settings > Plugins.
+    plugins = {
+      calculator.enable = true;
+    };
   };
 
   xdg.mimeApps = {

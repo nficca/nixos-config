@@ -64,6 +64,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Plugin registry for DankMaterialShell.
+    # See: https://danklinux.com/docs/dankmaterialshell/nixos#plugins
+    dms-plugin-registry = {
+      url = "github:AvengeMedia/dms-plugin-registry";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # My personal configuration for running Minecraft servers.
     my-nix-minecraft = {
       url = "git+ssh://git@github.com/nficca/my-nix-minecraft.git?ref=main";
@@ -83,6 +90,7 @@
       ghostty,
       niri,
       dms,
+      dms-plugin-registry,
       my-nix-minecraft,
       ...
     }:
@@ -121,6 +129,7 @@
                 imports = [
                   home_module
                   dms.homeModules.default
+                  dms-plugin-registry.homeModules.default
                 ];
               };
             }
