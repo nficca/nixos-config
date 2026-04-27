@@ -38,6 +38,7 @@
     jless # JSON viewer
     jq # Flexible CLI JSON processor
     lazygit # Terminal UI for git commands
+    pv # Pipeline progress monitoring
     tree # Depth-indented directory listing
     xh # Tool for sending HTTP requests
 
