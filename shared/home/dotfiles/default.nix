@@ -45,5 +45,7 @@ in
     }
     // {
       # All platforms
+      ".claude/settings.json".source = "${dotfiles}/claude/settings.json";
+      ".claude/statusline.sh".source = "${dotfiles}/claude/statusline.sh";
     };
 }

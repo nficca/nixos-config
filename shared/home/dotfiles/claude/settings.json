@@ -1,0 +1,25 @@
+{
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "slack@claude-plugins-official": true,
+    "sre-tools@fossa-claude-skills": true
+  },
+  "extraKnownMarketplaces": {
+    "fossa-claude-skills": {
+      "source": {
+        "source": "github",
+        "repo": "fossas/claude-skills"
+      }
+    }
+  },
+  "effortLevel": "high",
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "refreshInterval": 10
+  }
+}
