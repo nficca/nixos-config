@@ -38,7 +38,6 @@
       postgresql # Relational database system
       prismlauncher # Open-source minecraft launcher
       saml2aws # CLI tool for getting AWS creds via SAML IDP
-      slack # Team communication
       slurp # Region selection for Wayland screenshots
       spotify # Play music from the Spotify music service
       unzip # Extraction utility for zip archives

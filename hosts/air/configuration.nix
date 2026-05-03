@@ -16,7 +16,6 @@
       "folx" # Download manager and torrent client
       "ghostty" # Platform-native terminal emulator
       "mullvad-vpn" # Privacy-focused VPN
-      "slack" # Team communication
       "steam" # Video game distribution platform
       "whatsapp" # Messaging and calling
     ];
