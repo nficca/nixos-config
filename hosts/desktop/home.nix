@@ -88,6 +88,19 @@
   # Kubernetes CLI
   programs.k9s.enable = true;
 
+  # OBS Studio. Screen capture goes through the PipeWire screencast portal (the
+  # "Screen Capture (PipeWire)" source) since niri is not a wlroots compositor,
+  # so wlrobs does not apply here. The portal backend is configured at the
+  # system level in configuration.nix.
+  # See: https://wiki.nixos.org/wiki/OBS_Studio
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-pipewire-audio-capture
+      obs-vaapi
+    ];
+  };
+
   # Cursor theme configuration
   home.pointerCursor = {
     gtk.enable = true;

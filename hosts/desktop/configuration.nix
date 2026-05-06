@@ -40,6 +40,17 @@
   # https://nixos.wiki/wiki/AMD_GPU
   boot.initrd.kernelModules = [ "amdgpu" ];
 
+  # v4l2loopback for OBS Studio's virtual camera. Exposes a /dev/video device
+  # that OBS can write to, which apps like Zoom/Meet/Discord/Firefox then see
+  # as a regular webcam. exclusive_caps=1 is required for Chromium-based apps
+  # to recognise the device.
+  # See: https://wiki.nixos.org/wiki/OBS_Studio#Virtual_Camera_Support
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+  boot.kernelModules = [ "v4l2loopback" ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  '';
+
   # Disable suspend/hibernate on this desktop. The RX 9070 XT has unreliable
   # S3 resume on kernel 6.12 (MODE1 GPU resets, SMU version mismatches), and
   # amdgpu suspend/resume bugs are a known cross-kernel issue.
@@ -122,10 +133,17 @@
   # the preferred backend per portal interface.
   # See: https://www.mankier.com/5/portals.conf
   xdg.portal = {
-    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+    extraPortals = [
+      pkgs.kdePackages.xdg-desktop-portal-kde
+      # ScreenCast on niri is delegated to the GNOME portal backend (used by
+      # OBS PipeWire screen capture, browser screen-sharing, etc).
+      # See: https://github.com/YaLTeR/niri/wiki/Important-Software#xdg-desktop-portal
+      pkgs.xdg-desktop-portal-gnome
+    ];
     config = {
       niri = {
         "org.freedesktop.impl.portal.FileChooser" = "kde";
+        "org.freedesktop.impl.portal.ScreenCast" = "gnome";
       };
     };
   };
