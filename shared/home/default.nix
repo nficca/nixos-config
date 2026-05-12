@@ -50,6 +50,7 @@
     nil
     nixfmt
     prettier
+    ruby-lsp
     typescript-language-server
     valgrind
     vscode-langservers-extracted
@@ -156,6 +157,7 @@
       markdown_inline
       nix
       qmljs
+      ruby
       rust
       typescript
     ]))

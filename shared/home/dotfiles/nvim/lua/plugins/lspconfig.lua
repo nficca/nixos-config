@@ -76,6 +76,7 @@ return {
       "lua_ls",
       "nil_ls",
       "qmlls",
+      "ruby_lsp",
       "rust_analyzer",
       "ts_ls",
     })
