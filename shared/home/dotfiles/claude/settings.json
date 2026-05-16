@@ -11,7 +11,8 @@
     "gopls-lsp@claude-plugins-official": true,
     "clangd-lsp@claude-plugins-official": true,
     "slack@claude-plugins-official": true,
-    "sre-tools@fossa-claude-skills": true
+    "sre-tools@fossa-claude-skills": true,
+    "analysis-tools@fossa-claude-skills": true
   },
   "extraKnownMarketplaces": {
     "fossa-claude-skills": {
