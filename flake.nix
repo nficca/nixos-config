@@ -108,6 +108,7 @@
           specialArgs = { inherit username niri; };
           modules = [
             config_module
+            ./modules/nixos
 
             dms.nixosModules.greeter
             my-nix-minecraft.nixosModules.default
@@ -128,6 +129,7 @@
               home-manager.users."${username}" = {
                 imports = [
                   home_module
+                  ./modules/home
                   dms.homeModules.default
                   dms-plugin-registry.homeModules.default
                 ];
@@ -157,7 +159,10 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users."${username}" = {
-                  imports = [ home_module ];
+                  imports = [
+                    home_module
+                    ./modules/home
+                  ];
                 };
               };
             }

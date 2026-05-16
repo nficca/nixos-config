@@ -33,7 +33,6 @@
     nh
 
     _1password-cli # CLI for 1Password
-    claude-code # Agentic coding tool for the terminal
     cmake # Cross-platform build system generator
     jless # JSON viewer
     jq # Flexible CLI JSON processor
@@ -138,31 +137,10 @@
   programs.gh.enable = true;
 
   # Neovim
-  programs.neovim.enable = true;
-  programs.neovim.withRuby = false;
-  programs.neovim.withPython3 = false;
-  programs.neovim.plugins = with pkgs.vimPlugins; [
-    (nvim-treesitter.withPlugins (p: with p; [
-      bash
-      c
-      cmake
-      cpp
-      css
-      go
-      html
-      javascript
-      json
-      lua
-      markdown
-      markdown_inline
-      nix
-      qmljs
-      ruby
-      rust
-      typescript
-    ]))
-    nvim-treesitter-textobjects
-  ];
+  myModules.neovim.enable = true;
+
+  # Claude Code
+  myModules.claude-code.enable = true;
 
   # Direnv
   programs.direnv.enable = true;

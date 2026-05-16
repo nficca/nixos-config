@@ -28,24 +28,10 @@ in
     }
     // {
       # All platforms
-      nvim.source = "${dotfiles}/nvim";
       "ghostty/config".source = "${dotfiles}/ghostty/config";
       direnv.source = "${dotfiles}/direnv";
       "starship.toml".source = "${dotfiles}/starship/starship.toml";
       "git/themes.gitconfig".source = "${dotfiles}/git/themes.gitconfig";
     };
 
-  # Other home directory symlinks
-  home.file =
-    lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
-      # MacOS
-    }
-    // lib.attrsets.optionalAttrs pkgs.stdenv.isLinux {
-      # Linux
-    }
-    // {
-      # All platforms
-      ".claude/settings.json".source = "${dotfiles}/claude/settings.json";
-      ".claude/statusline.sh".source = "${dotfiles}/claude/statusline.sh";
-    };
 }
