@@ -15,20 +15,14 @@ in
 {
   # XDG_CONFIG_HOME symlinks
   xdg.configFile =
-    lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
-      # MacOS
-      "ghostty/darwin".source = "${dotfiles}/ghostty/darwin";
-    }
-    // lib.attrsets.optionalAttrs pkgs.stdenv.isLinux {
+    lib.attrsets.optionalAttrs pkgs.stdenv.isLinux {
       # Linux
-      "ghostty/linux".source = "${dotfiles}/ghostty/linux";
       niri.source = "${dotfiles}/niri";
       "DankMaterialShell/settings.json".source = "${dotfiles}/DankMaterialShell/settings.json";
       "DankMaterialShell/wallpapers".source = "${dotfiles}/DankMaterialShell/wallpapers";
     }
     // {
       # All platforms
-      "ghostty/config".source = "${dotfiles}/ghostty/config";
       direnv.source = "${dotfiles}/direnv";
       "starship.toml".source = "${dotfiles}/starship/starship.toml";
       "git/themes.gitconfig".source = "${dotfiles}/git/themes.gitconfig";

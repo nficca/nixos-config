@@ -10,4 +10,6 @@
   ];
 
   programs.k9s.enable = true;
+
+  myModules.ghostty.enable = true;
 }

@@ -2,7 +2,6 @@
   config,
   username,
   pkgs,
-  ghostty,
   ...
 }:
 
@@ -82,11 +81,7 @@
     };
   };
 
-  # Ghostty
-  programs.ghostty = {
-    enable = true;
-    package = ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  };
+  myModules.ghostty.enable = true;
 
   # Firefox
   programs.firefox.enable = true;
