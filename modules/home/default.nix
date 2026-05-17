@@ -7,5 +7,6 @@
     ./neovim.nix
     ./obs.nix
     ./starship.nix
+    ./zsh.nix
   ];
 }
