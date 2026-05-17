@@ -10,7 +10,6 @@
 
 {
   imports = [
-    ./aliases
     ./dotfiles
     ./registry
   ];
@@ -82,10 +81,6 @@
     ${pkgs.any-nix-shell}/bin/any-nix-shell zsh | source /dev/stdin
   '';
 
-  # Starship
-  programs.starship.enable = true;
-  programs.starship.enableZshIntegration = true;
-
   # FZF
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
@@ -101,31 +96,6 @@
   programs.zoxide.enable = true;
   programs.zoxide.enableZshIntegration = true;
 
-  # Git
-  programs.git.enable = true;
-  programs.git.lfs.enable = true;
-  programs.git.ignores = [
-    "/.worktrees"
-    "**/.claude/settings.local.json"
-  ];
-  programs.git.settings.user.email = "nicficca@gmail.com";
-  programs.git.settings.user.name = "Nic Ficca";
-  programs.git.settings.init.defaultBranch = "main";
-  programs.git.includes = [ { path = "~/.config/git/themes.gitconfig"; } ];
-
-  # Mergiraf
-  programs.mergiraf.enable = true;
-  programs.mergiraf.enableGitIntegration = true;
-
-  # Delta
-  programs.delta.enable = true;
-  programs.delta.enableGitIntegration = true;
-  programs.delta.options = {
-    # All features are defined in ~/.config/git/themes.gitconfig, which should
-    # be symlinked from share/home/dotfiles/git/themes.gitconfig.
-    features = "weeping-willow";
-  };
-
   # Bat
   programs.bat.enable = true;
   programs.bat.config = {
@@ -133,15 +103,9 @@
     theme = "Coldark-Dark";
   };
 
-  # Github CLI
-  programs.gh.enable = true;
-
-  # Neovim
-  myModules.neovim.enable = true;
-
-  # Claude Code
   myModules.claude-code.enable = true;
-
-  # Direnv
-  programs.direnv.enable = true;
+  myModules.direnv.enable = true;
+  myModules.git.enable = true;
+  myModules.neovim.enable = true;
+  myModules.starship.enable = true;
 }

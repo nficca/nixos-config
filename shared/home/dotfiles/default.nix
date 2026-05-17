@@ -14,18 +14,11 @@ let
 in
 {
   # XDG_CONFIG_HOME symlinks
-  xdg.configFile =
-    lib.attrsets.optionalAttrs pkgs.stdenv.isLinux {
-      # Linux
-      niri.source = "${dotfiles}/niri";
-      "DankMaterialShell/settings.json".source = "${dotfiles}/DankMaterialShell/settings.json";
-      "DankMaterialShell/wallpapers".source = "${dotfiles}/DankMaterialShell/wallpapers";
-    }
-    // {
-      # All platforms
-      direnv.source = "${dotfiles}/direnv";
-      "starship.toml".source = "${dotfiles}/starship/starship.toml";
-      "git/themes.gitconfig".source = "${dotfiles}/git/themes.gitconfig";
-    };
+  xdg.configFile = lib.attrsets.optionalAttrs pkgs.stdenv.isLinux {
+    # Linux
+    niri.source = "${dotfiles}/niri";
+    "DankMaterialShell/settings.json".source = "${dotfiles}/DankMaterialShell/settings.json";
+    "DankMaterialShell/wallpapers".source = "${dotfiles}/DankMaterialShell/wallpapers";
+  };
 
 }
