@@ -11,6 +11,7 @@
     ./obs.nix
     ./shell.nix
     ./starship.nix
+    ./tmux.nix
     ./user-packages.nix
   ];
 }

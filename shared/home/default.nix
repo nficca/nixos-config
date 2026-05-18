@@ -29,10 +29,6 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # tmux
-  programs.tmux.enable = true;
-  programs.tmux.terminal = "xterm-256color";
-
   myModules._1password.enable = true;
   myModules.claude-code.enable = true;
   myModules.dev-tools.enable = true;
@@ -41,5 +37,6 @@
   myModules.neovim.enable = true;
   myModules.shell.enable = true;
   myModules.starship.enable = true;
+  myModules.tmux.enable = true;
   myModules.user-packages.enable = true;
 }
