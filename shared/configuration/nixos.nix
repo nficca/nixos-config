@@ -18,21 +18,7 @@
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
 
-  environment.variables = {
-    EDITOR = "vim";
-  };
-
-  environment.systemPackages = with pkgs; [
-    dua # Disk usage analyzer
-    file # Show the type of a file
-    gcc # GNU compiler collection
-    git # Version control system
-    gnumake # Widely used build automation tool
-    musl # Better libc implementation
-    perf # Linux profiling with performance counters
-    vim # Text editor
-    wget # Network file downloader
-  ];
+  myModules.system-packages.enable = true;
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
