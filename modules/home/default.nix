@@ -2,6 +2,7 @@
   imports = [
     ./_1password.nix
     ./claude-code.nix
+    ./dev-tools.nix
     ./direnv.nix
     ./firefox.nix
     ./ghostty.nix

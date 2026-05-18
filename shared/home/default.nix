@@ -6,7 +6,7 @@
 # configurations here are kept minimal so as not to introduce cross-platform
 # incompatibilities.
 
-{ username, pkgs, ... }:
+{ username, ... }:
 
 {
   imports = [
@@ -26,23 +26,6 @@
 
   home.username = username;
 
-  home.packages = with pkgs; [
-    cmake # Cross-platform build system generator
-
-    ## Common language support packages ##
-    clang-tools
-    cmake-language-server
-    kdePackages.qtdeclarative
-    lua-language-server
-    nil
-    nixfmt
-    prettier
-    ruby-lsp
-    typescript-language-server
-    valgrind
-    vscode-langservers-extracted
-  ];
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -52,6 +35,7 @@
 
   myModules._1password.enable = true;
   myModules.claude-code.enable = true;
+  myModules.dev-tools.enable = true;
   myModules.direnv.enable = true;
   myModules.git.enable = true;
   myModules.neovim.enable = true;
