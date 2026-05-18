@@ -6,7 +6,7 @@
 }:
 
 {
-  options.myModules.shell.enable = lib.mkEnableOption "interactive shell environment: zsh, fzf, zoxide, bat, and any-nix-shell";
+  options.myModules.shell.enable = lib.mkEnableOption "interactive shell environment: zsh, fzf, zoxide, and any-nix-shell";
 
   config = lib.mkIf config.myModules.shell.enable {
     programs.zsh = {
@@ -44,12 +44,6 @@
     programs.zoxide = {
       enable = true;
       enableZshIntegration = true;
-    };
-
-    programs.bat = {
-      enable = true;
-      # bat --list-themes for other options.
-      config.theme = "Coldark-Dark";
     };
   };
 }

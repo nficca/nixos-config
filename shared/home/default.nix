@@ -27,17 +27,7 @@
   home.username = username;
 
   home.packages = with pkgs; [
-    # Modern helper utility for nix commands.
-    # See: https://github.com/nix-community/nh
-    nh
-
     cmake # Cross-platform build system generator
-    jless # JSON viewer
-    jq # Flexible CLI JSON processor
-    lazygit # Terminal UI for git commands
-    pv # Pipeline progress monitoring
-    tree # Depth-indented directory listing
-    xh # Tool for sending HTTP requests
 
     ## Common language support packages ##
     clang-tools
@@ -60,9 +50,6 @@
   programs.tmux.enable = true;
   programs.tmux.terminal = "xterm-256color";
 
-  # Ripgrep
-  programs.ripgrep.enable = true;
-
   myModules._1password.enable = true;
   myModules.claude-code.enable = true;
   myModules.direnv.enable = true;
@@ -70,4 +57,5 @@
   myModules.neovim.enable = true;
   myModules.shell.enable = true;
   myModules.starship.enable = true;
+  myModules.user-packages.enable = true;
 }

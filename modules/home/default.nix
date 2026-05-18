@@ -10,5 +10,6 @@
     ./obs.nix
     ./shell.nix
     ./starship.nix
+    ./user-packages.nix
   ];
 }
