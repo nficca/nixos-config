@@ -10,7 +10,6 @@
     extraGroups = [
       "networkmanager"
       "wheel"
-      "podman"
     ];
     shell = pkgs.zsh;
   };
@@ -19,6 +18,7 @@
   programs.zsh.enableCompletion = true;
 
   myModules.fonts.enable = true;
+  myModules.podman.enable = true;
   myModules.system-packages.enable = true;
 
   # Allow unfree packages
@@ -37,16 +37,6 @@
       mkdir -p /bin
       ln -sf ${pkgs.bash}/bin/bash /bin/bash
     '';
-  };
-
-  # Manage containers, pods, and images with podman.
-  # A drop-in replacement for docker.
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-
-    # Required for containers under podman-compose to be able to communicate
-    defaultNetwork.settings.dns_enabled = true;
   };
 
   # This value determines the NixOS release from which the default

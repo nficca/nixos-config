@@ -40,6 +40,7 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
 
   myModules.obs.enable = true;
+  myModules.podman.compose.enable = true;
 
   # Disable suspend/hibernate on this desktop. The RX 9070 XT has unreliable
   # S3 resume on kernel 6.12 (MODE1 GPU resets, SMU version mismatches), and
