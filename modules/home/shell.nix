@@ -6,9 +6,9 @@
 }:
 
 {
-  options.myModules.zsh.enable = lib.mkEnableOption "zsh with history, autosuggestion, and any-nix-shell integration";
+  options.myModules.shell.enable = lib.mkEnableOption "interactive shell environment: zsh, fzf, zoxide, bat, and any-nix-shell";
 
-  config = lib.mkIf config.myModules.zsh.enable {
+  config = lib.mkIf config.myModules.shell.enable {
     programs.zsh = {
       enable = true;
       autosuggestion.enable = true;
@@ -34,6 +34,22 @@
         # bash.
         ${pkgs.any-nix-shell}/bin/any-nix-shell zsh | source /dev/stdin
       '';
+    };
+
+    programs.fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    programs.zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    programs.bat = {
+      enable = true;
+      # bat --list-themes for other options.
+      config.theme = "Coldark-Dark";
     };
   };
 }

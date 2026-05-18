@@ -57,10 +57,6 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # FZF
-  programs.fzf.enable = true;
-  programs.fzf.enableZshIntegration = true;
-
   # tmux
   programs.tmux.enable = true;
   programs.tmux.terminal = "xterm-256color";
@@ -68,21 +64,10 @@
   # Ripgrep
   programs.ripgrep.enable = true;
 
-  # Zoxide
-  programs.zoxide.enable = true;
-  programs.zoxide.enableZshIntegration = true;
-
-  # Bat
-  programs.bat.enable = true;
-  programs.bat.config = {
-    # bat --list-themes for other options
-    theme = "Coldark-Dark";
-  };
-
   myModules.claude-code.enable = true;
   myModules.direnv.enable = true;
   myModules.git.enable = true;
   myModules.neovim.enable = true;
+  myModules.shell.enable = true;
   myModules.starship.enable = true;
-  myModules.zsh.enable = true;
 }

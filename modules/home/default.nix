@@ -6,7 +6,7 @@
     ./git.nix
     ./neovim.nix
     ./obs.nix
+    ./shell.nix
     ./starship.nix
-    ./zsh.nix
   ];
 }
