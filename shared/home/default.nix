@@ -31,7 +31,6 @@
     # See: https://github.com/nix-community/nh
     nh
 
-    _1password-cli # CLI for 1Password
     cmake # Cross-platform build system generator
     jless # JSON viewer
     jq # Flexible CLI JSON processor
@@ -64,6 +63,7 @@
   # Ripgrep
   programs.ripgrep.enable = true;
 
+  myModules._1password.enable = true;
   myModules.claude-code.enable = true;
   myModules.direnv.enable = true;
   myModules.git.enable = true;

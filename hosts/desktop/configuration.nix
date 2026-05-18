@@ -1,5 +1,4 @@
 {
-  username,
   config,
   pkgs,
   niri,
@@ -187,12 +186,7 @@
   services.mullvad-vpn.enable = true;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
-  # 1Password
-  programs._1password.enable = true;
-  programs._1password-gui = {
-    enable = true;
-    polkitPolicyOwners = [ username ];
-  };
+  myModules._1password.enable = true;
 
   # Install Steam
   # Ideally this would be done via home-manager or otherwise not

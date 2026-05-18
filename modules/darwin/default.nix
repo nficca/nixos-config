@@ -1,6 +1,5 @@
 {
   imports = [
     ./_1password.nix
-    ./obs.nix
   ];
 }

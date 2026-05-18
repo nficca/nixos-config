@@ -5,11 +5,12 @@
     ../../shared/configuration/darwin.nix
   ];
 
+  myModules._1password.enable = true;
+
   homebrew = {
     enable = true;
     user = username;
     casks = [
-      "1password" # Password manager
       "affinity-designer" # Professional graphic design software
       "discord" # Group chat and VoIP application
       "firefox" # Web browser

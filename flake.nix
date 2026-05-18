@@ -147,6 +147,7 @@
           specialArgs = { inherit username; };
           modules = [
             config_module
+            ./modules/darwin
 
             # Configure home-manager as a module so that it is applied
             # whenever system configuration changes are applied.

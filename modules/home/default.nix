@@ -1,5 +1,6 @@
 {
   imports = [
+    ./_1password.nix
     ./claude-code.nix
     ./direnv.nix
     ./ghostty.nix
