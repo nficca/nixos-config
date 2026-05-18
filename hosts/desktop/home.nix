@@ -8,7 +8,6 @@
 {
   imports = [
     ../../shared/home
-    ./firefox-profile-handler.nix
   ];
 
   home.homeDirectory = "/home/${username}";
@@ -82,19 +81,8 @@
   };
 
   myModules.ghostty.enable = true;
-
-  # Firefox
-  programs.firefox.enable = true;
-  xdg.desktopEntries.firefox-work = {
-    name = "Firefox (Work)";
-    exec = "firefox -P work";
-    icon = "firefox";
-    type = "Application";
-    categories = [
-      "Network"
-      "WebBrowser"
-    ];
-  };
+  myModules.firefox.enable = true;
+  myModules.firefox.profileHandler.enable = true;
 
   # Kubernetes CLI
   programs.k9s.enable = true;

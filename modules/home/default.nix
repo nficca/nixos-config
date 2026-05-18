@@ -3,6 +3,7 @@
     ./_1password.nix
     ./claude-code.nix
     ./direnv.nix
+    ./firefox.nix
     ./ghostty.nix
     ./git.nix
     ./neovim.nix

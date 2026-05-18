@@ -6,12 +6,12 @@
   ];
 
   myModules._1password.enable = true;
+  myModules.firefox.enable = true;
 
   homebrew = {
     enable = true;
     user = username;
     casks = [
-      "firefox" # Web browser
       "ghostty" # Platform-native terminal emulator
       "whatsapp" # Messaging and calling
       "notion" # Note-taking and organization tool
