@@ -18,11 +18,8 @@
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
 
+  myModules.fonts.enable = true;
   myModules.system-packages.enable = true;
-
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
