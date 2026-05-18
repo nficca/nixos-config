@@ -31,13 +31,10 @@
     "pipe-operators"
   ];
 
-  # Create /bin/bash symlink for scripts that use #!/bin/bash shebang
-  system.activationScripts.binbash = {
-    text = ''
-      mkdir -p /bin
-      ln -sf ${pkgs.bash}/bin/bash /bin/bash
-    '';
-  };
+  # FUSE-backed /bin and /usr/bin so non-Nix scripts with FHS shebangs like
+  # #!/bin/bash or #!/usr/bin/python3 resolve via the running shell's PATH.
+  # See: https://github.com/Mic92/envfs
+  services.envfs.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
