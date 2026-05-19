@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  niri,
   ...
 }:
 
@@ -97,55 +96,8 @@
   # You can disable this if you're only using the Wayland session.
   # services.xserver.enable = true;
 
-  # DankMaterialShell greeter (replaces ly).
-  # dankgreeter uses greetd internally, bypassing xsession-wrapper entirely,
-  # so the niri systemd-aware patch is not needed here.
-  programs.dank-material-shell.greeter = {
-    enable = true;
-    compositor.name = "niri";
-  };
-
-  # You should enable at least one desktop environment or compositor.
-  #
-  # KDE Plasma is a fully-fledged desktop environment that includes a window
-  # compositor, taskbar, and many more standard applications. It's a good option
-  # to get everything you need out of the box.
-  services.desktopManager.plasma6.enable = false;
-  # Niri is a scrollable-tiling Wayland compositor. It's just the compositor,
-  # so everything else must be installed separately.
-  programs.niri = {
-    enable = true;
-    package = niri.packages.${pkgs.stdenv.hostPlatform.system}.niri;
-  };
-
-  # XDG Desktop Portal provides a D-Bus API that apps use to interact with the
-  # desktop (e.g. file chooser dialogs, "show in folder"). Portal backends
-  # implement this API for specific desktop environments. The config below sets
-  # the preferred backend per portal interface.
-  # See: https://www.mankier.com/5/portals.conf
-  xdg.portal = {
-    extraPortals = [
-      pkgs.kdePackages.xdg-desktop-portal-kde
-      # ScreenCast on niri is delegated to the GNOME portal backend (used by
-      # OBS PipeWire screen capture, browser screen-sharing, etc).
-      # See: https://github.com/YaLTeR/niri/wiki/Important-Software#xdg-desktop-portal
-      pkgs.xdg-desktop-portal-gnome
-    ];
-    config = {
-      niri = {
-        "org.freedesktop.impl.portal.FileChooser" = "kde";
-        "org.freedesktop.impl.portal.ScreenCast" = "gnome";
-      };
-    };
-  };
-
-  # Hint electon apps to use wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  environment.systemPackages = with pkgs; [
-    # Install xwayland-satellite for X11 app support in Niri
-    xwayland-satellite
-  ];
+  myModules.niri.enable = true;
+  myModules.dank-material-shell.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {

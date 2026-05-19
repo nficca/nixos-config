@@ -10,7 +10,6 @@
 
 {
   imports = [
-    ./dotfiles
     ./registry
   ];
 

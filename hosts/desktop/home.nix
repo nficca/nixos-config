@@ -47,17 +47,8 @@
     ]
   );
 
-  # DankMaterialShell desktop environment (shell, launcher, wallpapers, lock, idle).
-  # The home-manager module handles quickshell, the systemd service, and packages.
-  programs.dank-material-shell = {
-    enable = true;
-    systemd.enable = true;
-    # After installing a plugin, it must be manually enabled in
-    # DMS Settings > Plugins.
-    plugins = {
-      calculator.enable = true;
-    };
-  };
+  myModules.niri.enable = true;
+  myModules.dank-material-shell.enable = true;
 
   xdg.mimeApps = {
     enable = true;

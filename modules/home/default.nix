@@ -2,12 +2,14 @@
   imports = [
     ./_1password.nix
     ./claude-code.nix
+    ./dank-material-shell.nix
     ./dev-tools.nix
     ./direnv.nix
     ./firefox.nix
     ./ghostty.nix
     ./git.nix
     ./neovim.nix
+    ./niri.nix
     ./obs.nix
     ./shell.nix
     ./starship.nix
