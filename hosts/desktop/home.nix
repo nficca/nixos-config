@@ -49,6 +49,7 @@
 
   myModules.niri.enable = true;
   myModules.dank-material-shell.enable = true;
+  myModules.nimbalyst.enable = true;
 
   xdg.mimeApps = {
     enable = true;

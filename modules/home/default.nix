@@ -9,6 +9,7 @@
     ./ghostty.nix
     ./git.nix
     ./neovim.nix
+    ./nimbalyst.nix
     ./niri.nix
     ./obs.nix
     ./shell.nix
