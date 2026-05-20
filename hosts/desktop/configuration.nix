@@ -169,7 +169,5 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  # Open ports in the firewall for Dropbox LAN sync
-  networking.firewall.allowedTCPPorts = [ 17500 ];
-  networking.firewall.allowedUDPPorts = [ 17500 ];
+  myModules.dropbox.enable = true;
 }

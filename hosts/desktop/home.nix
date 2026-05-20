@@ -18,7 +18,6 @@
     [
       aseprite # Pixel art editor
       awscli # Unified tool to manage AWS services
-      dropbox # Dropbox client
       grim # Screenshot utility for Wayland
       heaptrack # Heap memory profiler
       kdePackages.kdenlive # Non-linear video editor
@@ -49,6 +48,7 @@
 
   myModules.niri.enable = true;
   myModules.dank-material-shell.enable = true;
+  myModules.dropbox.enable = true;
 
   xdg.mimeApps = {
     enable = true;
@@ -148,17 +148,5 @@
       };
     };
 
-    dropbox = {
-      Unit = {
-        Description = "Dropbox";
-      };
-      Service = {
-        ExecStart = "${pkgs.dropbox}/bin/dropbox";
-        Restart = "on-failure";
-      };
-      Install = {
-        WantedBy = [ "default.target" ];
-      };
-    };
   };
 }

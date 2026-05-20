@@ -5,6 +5,7 @@
     ./dank-material-shell.nix
     ./dev-tools.nix
     ./direnv.nix
+    ./dropbox.nix
     ./firefox.nix
     ./ghostty.nix
     ./git.nix
