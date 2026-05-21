@@ -74,40 +74,10 @@
   myModules.firefox.enable = true;
   myModules.firefox.profileHandler.enable = true;
 
+  myModules.gtk-theme.enable = true;
+
   # Kubernetes CLI
   programs.k9s.enable = true;
-
-  # Cursor theme configuration
-  home.pointerCursor = {
-    gtk.enable = true;
-    x11.enable = true;
-    name = "WhiteSur-cursors";
-    package = pkgs.whitesur-cursors;
-    size = 24;
-  };
-
-  # GTK configuration
-  gtk = {
-    enable = true;
-    theme = {
-      name = "WhiteSur-Dark";
-      package = pkgs.whitesur-gtk-theme;
-    };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-    # Apply the same theme to GTK4 apps. The home-manager default for this
-    # changes to `null` (libadwaita defaults) in stateVersion 26.05.
-    gtk4.theme = config.gtk.theme;
-  };
-
-  # Qt configuration
-  # qt = {
-  #   enable = true;
-  #   platformTheme.name = "qtct";
-  #   style.name = "breeze";
-  # };
 
   # Define user services that should be managed by systemd.
   #

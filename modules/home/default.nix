@@ -9,6 +9,7 @@
     ./firefox.nix
     ./ghostty.nix
     ./git.nix
+    ./gtk-theme.nix
     ./neovim.nix
     ./niri.nix
     ./obs.nix
