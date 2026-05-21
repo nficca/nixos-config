@@ -7,6 +7,7 @@
     ./dropbox.nix
     ./fonts.nix
     ./mullvad.nix
+    ./networkmanager.nix
     ./niri.nix
     ./obs.nix
     ./podman.nix

@@ -11,6 +11,7 @@
     ./git.nix
     ./gtk-theme.nix
     ./neovim.nix
+    ./networkmanager.nix
     ./niri.nix
     ./obs.nix
     ./shell.nix

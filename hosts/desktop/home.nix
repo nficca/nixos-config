@@ -30,7 +30,6 @@
       mpv # Minimalist scriptable video player
       mullvad-browser # Privacy-focused web browser
       nautilus # GNOME file manager
-      networkmanagerapplet # NetworkManager GUI (nm-connection-editor)
       pavucontrol # PulseAudio volume control
       pgcli # Postgres client interface
       playerctl # CLI media player control
@@ -78,45 +77,4 @@
 
   # Kubernetes CLI
   programs.k9s.enable = true;
-
-  # Define user services that should be managed by systemd.
-  #
-  # In home-manager, systemd user services are defined using the same schema as
-  # systemd unit files. That is, the [Unit], [Service], and [Install] sections
-  # in unit files correlate to the attributes of the same name here. Note that
-  # the attributes must follow the same capitalization and naming conventions
-  # used in systemd unit files. More details can be found in the
-  # systemd.service(5) manpage: `man systemd.service`.
-  #
-  # To interact with user-specific systemd services, use the `--user` flag with
-  # the `systemctl` command. For example, to check the status of a user service:
-  #
-  # $ systemctl --user status my-cool-user-service
-  #
-  # To view logs for a specific user service, use `journalctl` with the
-  # `--user-unit` option:
-  #
-  # $ journalctl --user-unit my-cool-user-service
-  #
-  # To list all active user units:
-  #
-  # $ systemctl --user list-units
-  systemd.user.services = {
-    nm-applet = {
-      Unit = {
-        Description = "NetworkManager Applet";
-        After = [ "graphical-session.target" ];
-        PartOf = [ "graphical-session.target" ];
-      };
-      Service = {
-        ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
-        Restart = "on-failure";
-        Environment = "PATH=${pkgs.networkmanagerapplet}/bin";
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-    };
-
-  };
 }
