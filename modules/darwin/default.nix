@@ -4,6 +4,7 @@
     ./firefox.nix
     ./fonts.nix
     ./mullvad.nix
+    ./steam.nix
     ./system-packages.nix
   ];
 }

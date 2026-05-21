@@ -10,6 +10,7 @@
     ./obs.nix
     ./podman.nix
     ./server.nix
+    ./steam.nix
     ./system-packages.nix
   ];
 }
