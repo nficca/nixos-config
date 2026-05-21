@@ -1,17 +1,13 @@
 {
   config,
   lib,
-  options,
   pkgs,
   ...
 }:
 
 let
   cfg = config.myModules.gtk-theme;
-  # home-manager's gtk/pointerCursor options exist on all platforms but only
-  # do anything useful on Linux. Gate on a Linux-only option being declared
-  # so this errors clearly if toggled on Darwin.
-  available = options ? targets.genericLinux;
+  isLinux = pkgs.stdenv.hostPlatform.isLinux;
 in
 {
   options.myModules.gtk-theme.enable = lib.mkEnableOption "WhiteSur-Dark GTK theme with Papirus-Dark icons and WhiteSur cursor for Linux desktop apps";
@@ -20,13 +16,13 @@ in
     {
       assertions = [
         {
-          assertion = !cfg.enable || available;
-          message = "myModules.gtk-theme.enable is set, but home-manager Linux options are not in scope on this platform. The gtk-theme module is Linux-only.";
+          assertion = !cfg.enable || isLinux;
+          message = "myModules.gtk-theme.enable is set on a non-Linux platform. The gtk-theme module is Linux-only.";
         }
       ];
     }
 
-    (lib.mkIf cfg.enable (lib.optionalAttrs available {
+    (lib.mkIf (cfg.enable && isLinux) {
       home.pointerCursor = {
         gtk.enable = true;
         x11.enable = true;
@@ -49,6 +45,6 @@ in
         # changes to `null` (libadwaita defaults) in stateVersion 26.05.
         gtk4.theme = config.gtk.theme;
       };
-    }))
+    })
   ];
 }

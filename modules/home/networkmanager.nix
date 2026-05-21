@@ -1,14 +1,13 @@
 {
   config,
   lib,
-  options,
   pkgs,
   ...
 }:
 
 let
   cfg = config.myModules.networkmanager;
-  available = options ? systemd.user.services;
+  isLinux = pkgs.stdenv.hostPlatform.isLinux;
 in
 {
   options.myModules.networkmanager.applet.enable = lib.mkEnableOption "nm-applet GTK indicator as a systemd user service";
@@ -17,13 +16,13 @@ in
     {
       assertions = [
         {
-          assertion = !cfg.applet.enable || available;
-          message = "myModules.networkmanager.applet.enable is set, but home-manager systemd.user.services is not in scope on this platform. The nm-applet module is Linux-only.";
+          assertion = !cfg.applet.enable || isLinux;
+          message = "myModules.networkmanager.applet.enable is set on a non-Linux platform. The nm-applet module is Linux-only.";
         }
       ];
     }
 
-    (lib.mkIf cfg.applet.enable (lib.optionalAttrs available {
+    (lib.mkIf (cfg.applet.enable && isLinux) {
       home.packages = [ pkgs.networkmanagerapplet ];
 
       systemd.user.services.nm-applet = {
@@ -41,6 +40,6 @@ in
           WantedBy = [ "graphical-session.target" ];
         };
       };
-    }))
+    })
   ];
 }
