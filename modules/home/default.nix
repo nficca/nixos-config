@@ -10,6 +10,7 @@
     ./ghostty.nix
     ./git.nix
     ./gtk-theme.nix
+    ./kubernetes.nix
     ./mpv.nix
     ./neovim.nix
     ./networkmanager.nix

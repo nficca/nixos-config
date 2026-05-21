@@ -22,8 +22,6 @@
       heaptrack # Heap memory profiler
       kdePackages.kdenlive # Non-linear video editor
       kdePackages.ktorrent # BitTorrent client
-      kubectl # Kubernetes CLI
-      kubectx # Fast way to switch between clusters and namespaces in kubectl
       ldtk # 2D level editor
       libnotify # Simple library for testing desktop notifications
       losslesscut-bin # Lossless trim/cut for video/audio (great for OBS captures)
@@ -61,7 +59,5 @@
   myModules.firefox.profileHandler.enable = true;
 
   myModules.gtk-theme.enable = true;
-
-  # Kubernetes CLI
-  programs.k9s.enable = true;
+  myModules.kubernetes.enable = true;
 }
