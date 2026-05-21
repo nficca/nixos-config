@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   ...
 }:
 
@@ -14,15 +13,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Pin to kernel 6.12 to test whether the kernel jump (6.12 → 6.18/6.19)
-  # is causing RX 9070 XT hard freezes.
-  # See: ~/Dropbox/rx-9070-xt-crash-investigation.md
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
-
-  # The following is AMD GPU configuration per
-  # https://nixos.wiki/wiki/AMD_GPU
-  boot.initrd.kernelModules = [ "amdgpu" ];
-
+  myModules.amd-gpu.enable = true;
   myModules.obs.enable = true;
   myModules.podman.compose.enable = true;
 

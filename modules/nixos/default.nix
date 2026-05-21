@@ -1,6 +1,7 @@
 {
   imports = [
     ./_1password.nix
+    ./amd-gpu.nix
     ./audio.nix
     ./bluetooth.nix
     ./dank-material-shell.nix
