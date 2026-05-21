@@ -7,6 +7,7 @@
 
   myModules._1password.enable = true;
   myModules.firefox.enable = true;
+  myModules.mullvad.enable = true;
 
   homebrew = {
     enable = true;
@@ -16,7 +17,6 @@
       "discord" # Group chat and VoIP application
       "folx" # Download manager and torrent client
       "ghostty" # Platform-native terminal emulator
-      "mullvad-vpn" # Privacy-focused VPN
       "steam" # Video game distribution platform
       "whatsapp" # Messaging and calling
     ];

@@ -98,11 +98,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Enable Mullvad VPN; this is a paid private VPN service for personal use.
-  # See: https://mullvad.net/en
-  services.mullvad-vpn.enable = true;
-  services.mullvad-vpn.package = pkgs.mullvad-vpn;
-
+  myModules.mullvad.enable = true;
   myModules._1password.enable = true;
 
   # Install Steam
