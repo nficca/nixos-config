@@ -60,16 +60,7 @@
     variant = "";
   };
 
-  # Enable avahi local network service discovery.
-  # This is useful for things like finding printers.
-  services.avahi.enable = true;
-  services.avahi.nssmdns4 = true;
-  services.avahi.nssmdns6 = true;
-  services.avahi.openFirewall = true;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
+  myModules.printing.enable = true;
   myModules.audio.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).

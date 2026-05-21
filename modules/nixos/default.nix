@@ -12,6 +12,7 @@
     ./niri.nix
     ./obs.nix
     ./podman.nix
+    ./printing.nix
     ./server.nix
     ./steam.nix
     ./system-packages.nix
