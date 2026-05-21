@@ -1,31 +1,19 @@
 {
   config,
   lib,
-  options,
   pkgs,
   ...
 }:
 
 let
   cfg = config.myModules.dropbox;
-  # home-manager's systemd.user is Linux-only (Darwin uses launchd), so guard
-  # on the option being declared.
-  available = options ? systemd.user.services;
+  isLinux = pkgs.stdenv.hostPlatform.isLinux;
 in
 {
-  options.myModules.dropbox.enable = lib.mkEnableOption "Dropbox client with autostart via systemd user service";
+  options.myModules.dropbox.enable = lib.mkEnableOption "Cloud sync: native Dropbox with systemd autostart on Linux, Maestral on Darwin";
 
-  config = lib.mkMerge [
-    {
-      assertions = [
-        {
-          assertion = !cfg.enable || available;
-          message = "myModules.dropbox.enable is set, but home-manager systemd.user.services is not in scope on this platform. The dropbox module is Linux-only.";
-        }
-      ];
-    }
-
-    (lib.mkIf cfg.enable (lib.optionalAttrs available {
+  config = lib.mkIf cfg.enable (lib.mkMerge [
+    (lib.mkIf isLinux {
       home.packages = [ pkgs.dropbox ];
 
       systemd.user.services.dropbox = {
@@ -36,6 +24,10 @@ in
         };
         Install.WantedBy = [ "default.target" ];
       };
-    }))
-  ];
+    })
+
+    (lib.mkIf (!isLinux) {
+      home.packages = [ pkgs.maestral ];
+    })
+  ]);
 }

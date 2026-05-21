@@ -1,13 +1,10 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
     ../../shared/home
   ];
 
-  home.packages = with pkgs; [
-    maestral # Dropbox client
-  ];
-
+  myModules.dropbox.enable = true;
   myModules.ghostty.enable = true;
 }
