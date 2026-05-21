@@ -14,21 +14,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Disable USB autosuspend for Bluetooth.
-  #
-  # Sometimes Bluetooth dies while actively using it. The kernel tries an HCI
-  # reset to recover, but it fails and the only fix is a reboot. This param
-  # disables USB autosuspend for the Bluetooth controller - which shouldn't
-  # technically cause this issue, but may somehow be related.
-  #
-  # Verify with: cat /sys/module/btusb/parameters/enable_autosuspend  # should be N
-  #
-  # References:
-  # - Issue: https://github.com/bluez/bluez/issues/1263
-  # - Param docs: https://www.kernelconfig.io/config_bt_hcibtusb_autosuspend
-  # - Kernel source code: https://github.com/torvalds/linux/blob/23b0f90ba871f096474e1c27c3d14f455189d2d9/drivers/bluetooth/btusb.c#L35
-  boot.kernelParams = [ "btusb.enable_autosuspend=0" ];
-
   # Pin to kernel 6.12 to test whether the kernel jump (6.12 → 6.18/6.19)
   # is causing RX 9070 XT hard freezes.
   # See: ~/Dropbox/rx-9070-xt-crash-investigation.md
@@ -63,28 +48,7 @@
   networking.networkmanager.enable = true;
   networking.wireguard.enable = true;
 
-  # Enable bluetooth
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
-
-  # Disable USB autosuspend for Intel Bluetooth adapter (8087:0a2a)
-  #
-  # The kernel param above (btusb.enable_autosuspend=0) disables autosuspend at
-  # the driver level, but the USB subsystem has its own runtime power management
-  # that can still suspend the device. These udev rules disable that by setting:
-  #
-  #   power/autosuspend="-1"  Disable autosuspend delay (-1 = never suspend)
-  #   power/control="on"      Keep device powered on (vs "auto" which allows suspend)
-  #
-  # The vendor/product IDs (8087:0a2a) identify the Intel Bluetooth adapter.
-  # Find yours with: lsusb | grep -i bluetooth
-  #
-  # See: https://www.kernel.org/doc/Documentation/usb/power-management.txt
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="8087", ATTR{idProduct}=="0a2a", ATTR{power/autosuspend}="-1"
-    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="8087", ATTR{idProduct}=="0a2a", ATTR{power/control}="on"
-  '';
+  myModules.bluetooth.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Toronto";

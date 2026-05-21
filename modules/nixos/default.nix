@@ -1,6 +1,7 @@
 {
   imports = [
     ./_1password.nix
+    ./bluetooth.nix
     ./dank-material-shell.nix
     ./dropbox.nix
     ./fonts.nix
