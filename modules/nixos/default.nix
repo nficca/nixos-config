@@ -7,6 +7,7 @@
     ./niri.nix
     ./obs.nix
     ./podman.nix
+    ./server.nix
     ./system-packages.nix
   ];
 }

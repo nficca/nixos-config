@@ -3,7 +3,6 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
-  username,
   pkgs,
   ...
 }:
@@ -14,6 +13,8 @@
     ../../shared/configuration/nixos.nix
     ./nginx.nix
   ];
+
+  myModules.server.enable = true;
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
@@ -64,18 +65,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  # Add ssh key access for the main user.
-  # The key details can be found in 1Password.
-  users.users.${username}.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOgFb4IhrRpB7RLRqgsi9rfVGklEg62FUAtPj+V4Ib+B"
-  ];
-
-  # We need to install terminfo entries to provide terminal emulators
-  # with information about the capablities of the terminal. Since this
-  # host will only be accessed over SSH, it won't include the terminfo
-  # entries that are typically packaged with terminal emulators.
-  environment.enableAllTerminfo = true;
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -83,11 +72,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Run a basic Minecraft server
   services.my-nix-minecraft.servers.vanilla = {
