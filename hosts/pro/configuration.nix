@@ -6,6 +6,7 @@
   ];
 
   myModules._1password.enable = true;
+  myModules.dropbox.enable = true;
   myModules.firefox.enable = true;
 
   homebrew = {

@@ -6,6 +6,7 @@
   ];
 
   myModules._1password.enable = true;
+  myModules.dropbox.enable = true;
   myModules.firefox.enable = true;
   myModules.mullvad.enable = true;
   myModules.steam.enable = true;
