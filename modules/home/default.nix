@@ -13,6 +13,7 @@
     ./gtk-theme.nix
     ./kubernetes.nix
     ./mpv.nix
+    ./mullvad.nix
     ./neovim.nix
     ./networkmanager.nix
     ./niri.nix

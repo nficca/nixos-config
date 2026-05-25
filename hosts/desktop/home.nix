@@ -20,7 +20,6 @@
       heaptrack # Heap memory profiler
       kdePackages.ktorrent # BitTorrent client
       ldtk # 2D level editor
-      mullvad-browser # Privacy-focused web browser
       nautilus # GNOME file manager
       pavucontrol # PulseAudio volume control
       playerctl # CLI media player control
@@ -49,6 +48,7 @@
   myModules.gtk-theme.enable = true;
   myModules.kubernetes.enable = true;
   myModules.aws.enable = true;
+  myModules.mullvad.browser.enable = true;
   myModules.postgres-cli.enable = true;
   myModules.spotify.enable = true;
   myModules.video-editing.enable = true;
