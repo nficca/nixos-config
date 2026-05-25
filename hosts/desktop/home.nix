@@ -27,7 +27,6 @@
       pavucontrol # PulseAudio volume control
       playerctl # CLI media player control
       prismlauncher # Open-source minecraft launcher
-      spotify # Play music from the Spotify music service
       unzip # Extraction utility for zip archives
       vesktop # Alternative Discord client
     ]
@@ -53,5 +52,6 @@
   myModules.kubernetes.enable = true;
   myModules.aws.enable = true;
   myModules.postgres-cli.enable = true;
+  myModules.spotify.enable = true;
   myModules.wayland-tools.enable = true;
 }

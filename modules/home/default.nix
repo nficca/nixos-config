@@ -19,6 +19,7 @@
     ./obs.nix
     ./postgres-cli.nix
     ./shell.nix
+    ./spotify.nix
     ./starship.nix
     ./tmux.nix
     ./user-packages.nix
