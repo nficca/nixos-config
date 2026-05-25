@@ -24,6 +24,7 @@
         vscode-langservers-extracted # HTML/CSS/JSON/ESLint LSPs
       ])
       ++ lib.optionals pkgs.stdenv.isLinux (with pkgs; [
+        heaptrack # Heap memory profiler
         # valgrind is marked broken on Darwin in nixpkgs.
         valgrind # Memory profiler
       ]);

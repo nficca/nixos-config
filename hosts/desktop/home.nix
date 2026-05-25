@@ -17,14 +17,12 @@
     with pkgs;
     [
       aseprite # Pixel art editor
-      heaptrack # Heap memory profiler
       kdePackages.ktorrent # BitTorrent client
       ldtk # 2D level editor
       nautilus # GNOME file manager
       pavucontrol # PulseAudio volume control
       playerctl # CLI media player control
       prismlauncher # Open-source minecraft launcher
-      unzip # Extraction utility for zip archives
       vesktop # Alternative Discord client
     ]
   );

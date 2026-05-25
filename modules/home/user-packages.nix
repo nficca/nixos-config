@@ -17,6 +17,7 @@
       pv # Pipeline progress monitoring
       ripgrep # Fast recursive grep
       tree # Depth-indented directory listing
+      unzip # Extraction utility for zip archives
       xh # Tool for sending HTTP requests
     ];
 
