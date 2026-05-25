@@ -20,8 +20,6 @@
       kdePackages.ktorrent # BitTorrent client
       ldtk # 2D level editor
       nautilus # GNOME file manager
-      pavucontrol # PulseAudio volume control
-      playerctl # CLI media player control
       prismlauncher # Open-source minecraft launcher
       vesktop # Alternative Discord client
     ]

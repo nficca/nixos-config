@@ -1,6 +1,7 @@
 {
   imports = [
     ./_1password.nix
+    ./audio.nix
     ./aws.nix
     ./claude-code.nix
     ./dank-material-shell.nix

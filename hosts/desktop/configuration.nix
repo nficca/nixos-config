@@ -38,6 +38,7 @@
 
   myModules.printing.enable = true;
   myModules.audio.enable = true;
+  myModules.audio.userTools.enable = true;
 
   myModules.mullvad.enable = true;
   myModules._1password.enable = true;
