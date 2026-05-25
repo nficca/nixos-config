@@ -23,5 +23,6 @@
     ./tmux.nix
     ./user-packages.nix
     ./wayland-tools.nix
+    ./wireguard.nix
   ];
 }

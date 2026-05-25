@@ -30,7 +30,6 @@
       spotify # Play music from the Spotify music service
       unzip # Extraction utility for zip archives
       vesktop # Alternative Discord client
-      wireguard-tools # Tools for WireGuard VPN
     ]
   );
 

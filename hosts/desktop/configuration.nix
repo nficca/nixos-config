@@ -37,7 +37,7 @@
 
   myModules.networkmanager.enable = true;
   myModules.networkmanager.applet.enable = true;
-  networking.wireguard.enable = true;
+  myModules.wireguard.enable = true;
 
   myModules.bluetooth.enable = true;
 

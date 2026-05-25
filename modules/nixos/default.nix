@@ -16,5 +16,6 @@
     ./server.nix
     ./steam.nix
     ./system-packages.nix
+    ./wireguard.nix
   ];
 }
