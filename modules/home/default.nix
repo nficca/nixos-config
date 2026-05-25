@@ -17,6 +17,7 @@
     ./networkmanager.nix
     ./niri.nix
     ./obs.nix
+    ./postgres-cli.nix
     ./shell.nix
     ./starship.nix
     ./tmux.nix

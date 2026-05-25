@@ -27,9 +27,7 @@
       mullvad-browser # Privacy-focused web browser
       nautilus # GNOME file manager
       pavucontrol # PulseAudio volume control
-      pgcli # Postgres client interface
       playerctl # CLI media player control
-      postgresql # Relational database system
       prismlauncher # Open-source minecraft launcher
       slurp # Region selection for Wayland screenshots
       spotify # Play music from the Spotify music service
@@ -59,4 +57,5 @@
   myModules.gtk-theme.enable = true;
   myModules.kubernetes.enable = true;
   myModules.aws.enable = true;
+  myModules.postgres-cli.enable = true;
 }
