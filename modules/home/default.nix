@@ -4,6 +4,7 @@
     ./audio.nix
     ./aws.nix
     ./claude-code.nix
+    ./creative.nix
     ./dank-material-shell.nix
     ./dev-tools.nix
     ./direnv.nix

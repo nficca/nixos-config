@@ -16,9 +16,7 @@
   home.packages = (
     with pkgs;
     [
-      aseprite # Pixel art editor
       kdePackages.ktorrent # BitTorrent client
-      ldtk # 2D level editor
       nautilus # GNOME file manager
       prismlauncher # Open-source minecraft launcher
       vesktop # Alternative Discord client
@@ -44,6 +42,7 @@
   myModules.gtk-theme.enable = true;
   myModules.kubernetes.enable = true;
   myModules.aws.enable = true;
+  myModules.creative.enable = true;
   myModules.mullvad.browser.enable = true;
   myModules.postgres-cli.enable = true;
   myModules.spotify.enable = true;
