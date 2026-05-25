@@ -23,6 +23,7 @@
     ./starship.nix
     ./tmux.nix
     ./user-packages.nix
+    ./video-editing.nix
     ./wayland-tools.nix
     ./wireguard.nix
   ];

@@ -18,10 +18,8 @@
     [
       aseprite # Pixel art editor
       heaptrack # Heap memory profiler
-      kdePackages.kdenlive # Non-linear video editor
       kdePackages.ktorrent # BitTorrent client
       ldtk # 2D level editor
-      losslesscut-bin # Lossless trim/cut for video/audio (great for OBS captures)
       mullvad-browser # Privacy-focused web browser
       nautilus # GNOME file manager
       pavucontrol # PulseAudio volume control
@@ -53,5 +51,6 @@
   myModules.aws.enable = true;
   myModules.postgres-cli.enable = true;
   myModules.spotify.enable = true;
+  myModules.video-editing.enable = true;
   myModules.wayland-tools.enable = true;
 }
