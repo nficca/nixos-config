@@ -10,24 +10,28 @@ let
 in
 {
   options.myModules.creative = {
-    gameArt.enable = lib.mkEnableOption "Game art tooling: aseprite (pixel art editor) and ldtk (2D level editor)";
-    videoEditing.enable = lib.mkEnableOption "Video editing tools: kdenlive (non-linear editor) and losslesscut-bin (lossless trim/cut for capture review)";
+    aseprite.enable = lib.mkEnableOption "aseprite (pixel art editor)";
+    ldtk.enable = lib.mkEnableOption "ldtk (2D level editor)";
+    kdenlive.enable = lib.mkEnableOption "kdenlive (non-linear video editor)";
+    losslesscut.enable = lib.mkEnableOption "losslesscut (lossless trim/cut for video/audio, often used on capture review)";
     obs.enable = lib.mkEnableOption "OBS Studio with PipeWire audio capture and VAAPI plugins (system-level v4l2loopback for the virtual camera is driven by the NixOS counterpart)";
   };
 
   config = lib.mkMerge [
-    (lib.mkIf cfg.gameArt.enable {
-      home.packages = with pkgs; [
-        aseprite
-        ldtk
-      ];
+    (lib.mkIf cfg.aseprite.enable {
+      home.packages = [ pkgs.aseprite ];
     })
 
-    (lib.mkIf cfg.videoEditing.enable {
-      home.packages = with pkgs; [
-        kdePackages.kdenlive
-        losslesscut-bin
-      ];
+    (lib.mkIf cfg.ldtk.enable {
+      home.packages = [ pkgs.ldtk ];
+    })
+
+    (lib.mkIf cfg.kdenlive.enable {
+      home.packages = [ pkgs.kdePackages.kdenlive ];
+    })
+
+    (lib.mkIf cfg.losslesscut.enable {
+      home.packages = [ pkgs.losslesscut-bin ];
     })
 
     # OBS Studio. Screen capture goes through the PipeWire screencast portal

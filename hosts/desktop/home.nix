@@ -42,8 +42,10 @@
   myModules.gtk-theme.enable = true;
   myModules.kubernetes.enable = true;
   myModules.aws.enable = true;
-  myModules.creative.gameArt.enable = true;
-  myModules.creative.videoEditing.enable = true;
+  myModules.creative.aseprite.enable = true;
+  myModules.creative.ldtk.enable = true;
+  myModules.creative.kdenlive.enable = true;
+  myModules.creative.losslesscut.enable = true;
   myModules.mullvad.browser.enable = true;
   myModules.postgres-cli.enable = true;
   myModules.spotify.enable = true;
