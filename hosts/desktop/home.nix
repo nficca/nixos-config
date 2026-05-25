@@ -17,7 +17,6 @@
     with pkgs;
     [
       aseprite # Pixel art editor
-      awscli # Unified tool to manage AWS services
       grim # Screenshot utility for Wayland
       heaptrack # Heap memory profiler
       kdePackages.kdenlive # Non-linear video editor
@@ -32,7 +31,6 @@
       playerctl # CLI media player control
       postgresql # Relational database system
       prismlauncher # Open-source minecraft launcher
-      saml2aws # CLI tool for getting AWS creds via SAML IDP
       slurp # Region selection for Wayland screenshots
       spotify # Play music from the Spotify music service
       unzip # Extraction utility for zip archives
@@ -60,4 +58,5 @@
 
   myModules.gtk-theme.enable = true;
   myModules.kubernetes.enable = true;
+  myModules.aws.enable = true;
 }

@@ -1,6 +1,7 @@
 {
   imports = [
     ./_1password.nix
+    ./aws.nix
     ./claude-code.nix
     ./dank-material-shell.nix
     ./dev-tools.nix
