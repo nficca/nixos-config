@@ -5,10 +5,13 @@
   ...
 }:
 
+let
+  cfg = config.myModules.creative;
+in
 {
-  options.myModules.obs.enable = lib.mkEnableOption "OBS Studio (v4l2loopback virtual camera at the system level, programs.obs-studio in home-manager)";
+  options.myModules.creative.obs.enable = lib.mkEnableOption "OBS Studio: v4l2loopback virtual camera at the system level plus programs.obs-studio in home-manager";
 
-  config = lib.mkIf config.myModules.obs.enable {
+  config = lib.mkIf cfg.obs.enable {
     # v4l2loopback for OBS Studio's virtual camera. Exposes a /dev/video device
     # that OBS can write to, which apps like Zoom/Meet/Discord/Firefox then see
     # as a regular webcam. exclusive_caps=1 is required for Chromium-based apps
@@ -21,6 +24,6 @@
     '';
 
     # Fan out to the home-manager side so a single toggle drives both layers.
-    home-manager.users.${username}.myModules.obs.enable = true;
+    home-manager.users.${username}.myModules.creative.obs.enable = true;
   };
 }

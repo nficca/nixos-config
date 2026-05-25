@@ -4,13 +4,13 @@
     ./amd-gpu.nix
     ./audio.nix
     ./bluetooth.nix
+    ./creative.nix
     ./dank-material-shell.nix
     ./dropbox.nix
     ./fonts.nix
     ./mullvad.nix
     ./networkmanager.nix
     ./niri.nix
-    ./obs.nix
     ./podman.nix
     ./printing.nix
     ./server.nix

@@ -19,14 +19,12 @@
     ./neovim.nix
     ./networkmanager.nix
     ./niri.nix
-    ./obs.nix
     ./postgres-cli.nix
     ./shell.nix
     ./spotify.nix
     ./starship.nix
     ./tmux.nix
     ./user-packages.nix
-    ./video-editing.nix
     ./wayland-tools.nix
     ./wireguard.nix
   ];

@@ -14,7 +14,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   myModules.amd-gpu.enable = true;
-  myModules.obs.enable = true;
+  myModules.creative.obs.enable = true;
   myModules.podman.compose.enable = true;
 
   networking.hostName = "desktop";
