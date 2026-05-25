@@ -22,5 +22,6 @@
     ./starship.nix
     ./tmux.nix
     ./user-packages.nix
+    ./wayland-tools.nix
   ];
 }
