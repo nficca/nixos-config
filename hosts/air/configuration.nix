@@ -1,4 +1,4 @@
-{ username, ... }:
+{ ... }:
 
 {
   imports = [
@@ -15,9 +15,4 @@
   myModules.mullvad.enable = true;
   myModules.steam.enable = true;
   myModules.whatsapp.enable = true;
-
-  homebrew = {
-    enable = true;
-    user = username;
-  };
 }

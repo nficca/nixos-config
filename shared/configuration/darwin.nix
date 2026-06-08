@@ -18,6 +18,12 @@
   myModules.fonts.enable = true;
   myModules.system-packages.enable = true;
 
+  # Casks are contributed by individual myModules.<name> darwin modules.
+  homebrew = {
+    enable = true;
+    user = username;
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 

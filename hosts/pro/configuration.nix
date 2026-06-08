@@ -1,4 +1,4 @@
-{ username, ... }:
+{ ... }:
 
 {
   imports = [
@@ -11,9 +11,4 @@
   myModules.ghostty.enable = true;
   myModules.notion.enable = true;
   myModules.whatsapp.enable = true;
-
-  homebrew = {
-    enable = true;
-    user = username;
-  };
 }
