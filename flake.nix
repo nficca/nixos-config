@@ -59,8 +59,15 @@
 
     # DankMaterialShell — integrated desktop environment (greeter, shell, launcher,
     # wallpapers, lock screen, idle management).
+    #
+    # Pinned to a post-stable main commit because DMS stable (v1.4.6 / eb5afcd,
+    # 2026-04-29) predates niri removing the `keep-max-bpc-unchanged` debug
+    # option; DMS's embedded greeter niri config still emits it on stable and
+    # niri 26.04 rejects it (greeter fails to start). The fix landed on DMS
+    # main in 5ceb908 (2026-05-29). Move back to `/stable` once the next stable
+    # release includes that commit.
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
+      url = "github:AvengeMedia/DankMaterialShell/d08c7c5e5528133d84aac80f34935931ae3423c9";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
