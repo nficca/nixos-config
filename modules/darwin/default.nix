@@ -12,7 +12,6 @@
     ./notion.nix
     ./spotify.nix
     ./steam.nix
-    ./system-packages.nix
     ./whatsapp.nix
   ];
 }

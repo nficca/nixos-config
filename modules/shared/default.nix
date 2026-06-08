@@ -13,6 +13,7 @@
     ./registry.nix
     ./shell.nix
     ./starship.nix
+    ./system-packages.nix
     ./tmux.nix
     ./user-packages.nix
   ];

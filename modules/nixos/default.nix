@@ -22,7 +22,6 @@
     ./server.nix
     ./spotify.nix
     ./steam.nix
-    ./system-packages.nix
     ./vesktop.nix
     ./wayland-tools.nix
     ./wireguard.nix
