@@ -1,4 +1,5 @@
 {
+  username,
   pkgs,
   ...
 }:
@@ -6,20 +7,47 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../shared/configuration/nixos.nix
     ./nginx.nix
   ];
 
-  myModules.server.enable = true;
-  myModules.networkmanager.enable = true;
+  networking.hostName = "hetzner";
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
 
-  networking.hostName = "hetzner";
+  users.users."${username}" = {
+    isNormalUser = true;
+    description = "Nic";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    shell = pkgs.zsh;
+  };
+
+  programs.zsh.enable = true;
+  programs.zsh.enableCompletion = true;
+
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+    "pipe-operators"
+  ];
+
+  # FUSE-backed /bin and /usr/bin so non-Nix scripts with FHS shebangs like
+  # #!/bin/bash or #!/usr/bin/python3 resolve via the running shell's PATH.
+  # See: https://github.com/Mic92/envfs
+  services.envfs.enable = true;
 
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
+
+  myModules.fonts.enable = true;
+  myModules.networkmanager.enable = true;
+  myModules.podman.enable = true;
+  myModules.server.enable = true;
+  myModules.system-packages.enable = true;
 
   # Run a basic Minecraft server.
   services.my-nix-minecraft.servers.vanilla = {
@@ -36,4 +64,6 @@
       '';
     };
   };
+
+  system.stateVersion = "25.05";
 }
