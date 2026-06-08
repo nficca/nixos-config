@@ -43,12 +43,29 @@
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  home-manager.users.${username} = {
+    home.stateVersion = "25.05";
+    home.username = username;
+    home.homeDirectory = "/home/${username}";
+    programs.home-manager.enable = true;
+  };
+
   myModules = {
+    _1password.cli.enable = true;
+    claude-code.enable = true;
+    dev-tools.enable = true;
+    direnv.enable = true;
     fonts.enable = true;
+    git.enable = true;
+    neovim.enable = true;
     networkmanager.enable = true;
     podman.enable = true;
     server.enable = true;
+    shell.enable = true;
+    starship.enable = true;
     system-packages.enable = true;
+    tmux.enable = true;
+    user-packages.enable = true;
   };
 
   # Run a basic Minecraft server.

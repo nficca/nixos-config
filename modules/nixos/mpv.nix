@@ -2,27 +2,15 @@
   config,
   lib,
   pkgs,
+  username,
   ...
 }:
 
-let
-  cfg = config.myModules.mpv;
-  isLinux = pkgs.stdenv.hostPlatform.isLinux;
-in
 {
-  options.myModules.mpv.enable = lib.mkEnableOption "mpv with xdg mime defaults for common video formats (Linux-only)";
+  options.myModules.mpv.enable = lib.mkEnableOption "mpv with xdg mime defaults for common video formats";
 
-  config = lib.mkMerge [
-    {
-      assertions = [
-        {
-          assertion = !cfg.enable || isLinux;
-          message = "myModules.mpv.enable is set on a non-Linux platform. The mpv module is Linux-only (xdg.mimeApps is freedesktop-specific).";
-        }
-      ];
-    }
-
-    (lib.mkIf (cfg.enable && isLinux) {
+  config = lib.mkIf config.myModules.mpv.enable {
+    home-manager.users.${username} = {
       home.packages = [ pkgs.mpv ];
 
       xdg.mimeApps = {
@@ -43,6 +31,6 @@ in
           "video/mkv" = "mpv.desktop";
         };
       };
-    })
-  ];
+    };
+  };
 }

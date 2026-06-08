@@ -1,0 +1,19 @@
+{
+  imports = [
+    ./aws.nix
+    ./claude-code.nix
+    ./dev-tools.nix
+    ./direnv.nix
+    ./git.nix
+    ./kubernetes.nix
+    ./mullvad-browser.nix
+    ./neovim.nix
+    ./postgres-cli.nix
+    ./prismlauncher.nix
+    ./registry.nix
+    ./shell.nix
+    ./starship.nix
+    ./tmux.nix
+    ./user-packages.nix
+  ];
+}

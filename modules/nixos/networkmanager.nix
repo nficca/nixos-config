@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   username,
   ...
 }:
@@ -11,13 +12,34 @@ in
 {
   options.myModules.networkmanager = {
     enable = lib.mkEnableOption "NetworkManager networking daemon";
-    applet.enable = lib.mkEnableOption "nm-applet GTK indicator as a home-manager systemd user service (requires graphical session)";
+    applet.enable = lib.mkEnableOption "nm-applet GTK indicator as a systemd user service (requires graphical session)";
   };
 
-  config = lib.mkIf cfg.enable {
-    networking.networkmanager.enable = true;
+  config = lib.mkMerge [
+    (lib.mkIf cfg.enable {
+      networking.networkmanager.enable = true;
+    })
 
-    # Fan out to the home-manager side so the applet toggle drives both layers.
-    home-manager.users.${username}.myModules.networkmanager.applet.enable = cfg.applet.enable;
-  };
+    (lib.mkIf cfg.applet.enable {
+      home-manager.users.${username} = {
+        home.packages = [ pkgs.networkmanagerapplet ];
+
+        systemd.user.services.nm-applet = {
+          Unit = {
+            Description = "NetworkManager Applet";
+            After = [ "graphical-session.target" ];
+            PartOf = [ "graphical-session.target" ];
+          };
+          Service = {
+            ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+            Restart = "on-failure";
+            Environment = "PATH=${pkgs.networkmanagerapplet}/bin";
+          };
+          Install = {
+            WantedBy = [ "graphical-session.target" ];
+          };
+        };
+      };
+    })
+  ];
 }

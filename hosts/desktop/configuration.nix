@@ -52,25 +52,60 @@
   # Run unpatched dynamic binaries on NixOS.
   programs.nix-ld.enable = true;
 
+  home-manager.users.${username} = {
+    home.stateVersion = "25.05";
+    home.username = username;
+    programs.home-manager.enable = true;
+  };
+
   myModules = {
-    _1password.enable = true;
+    _1password.cli.enable = true;
+    _1password.app.enable = true;
     amd-gpu.enable = true;
     audio.enable = true;
     audio.userTools.enable = true;
+    aws.enable = true;
     bluetooth.enable = true;
+    claude-code.enable = true;
+    creative.aseprite.enable = true;
+    creative.kdenlive.enable = true;
+    creative.ldtk.enable = true;
+    creative.losslesscut.enable = true;
     creative.obs.enable = true;
     dank-material-shell.enable = true;
+    dev-tools.enable = true;
+    direnv.enable = true;
     dropbox.enable = true;
+    firefox.enable = true;
+    firefox.profileHandler.enable = true;
     fonts.enable = true;
+    ghostty.enable = true;
+    git.enable = true;
+    gtk-theme.enable = true;
+    ktorrent.enable = true;
+    kubernetes.enable = true;
+    mpv.enable = true;
     mullvad.enable = true;
+    mullvad-browser.enable = true;
+    nautilus.enable = true;
+    neovim.enable = true;
     networkmanager.enable = true;
     networkmanager.applet.enable = true;
     niri.enable = true;
     podman.enable = true;
     podman.compose.enable = true;
+    postgres-cli.enable = true;
     printing.enable = true;
+    prismlauncher.enable = true;
+    shell.enable = true;
+    spotify.enable = true;
+    starship.enable = true;
     steam.enable = true;
     system-packages.enable = true;
+    tmux.enable = true;
+    user-packages.enable = true;
+    vesktop.enable = true;
+    wayland-tools.enable = true;
     wireguard.enable = true;
   };
 

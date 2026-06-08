@@ -23,18 +23,34 @@
     user = username;
   };
 
+  home-manager.users.${username} = {
+    home.stateVersion = "25.05";
+    home.username = username;
+    programs.home-manager.enable = true;
+  };
+
   myModules = {
-    _1password.enable = true;
+    _1password.cli.enable = true;
+    _1password.app.enable = true;
     affinity-designer.enable = true;
+    claude-code.enable = true;
+    dev-tools.enable = true;
+    direnv.enable = true;
     discord.enable = true;
     dropbox.enable = true;
     firefox.enable = true;
     folx.enable = true;
     fonts.enable = true;
     ghostty.enable = true;
+    git.enable = true;
     mullvad.enable = true;
+    neovim.enable = true;
+    shell.enable = true;
+    starship.enable = true;
     steam.enable = true;
     system-packages.enable = true;
+    tmux.enable = true;
+    user-packages.enable = true;
     whatsapp.enable = true;
   };
 

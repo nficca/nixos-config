@@ -7,15 +7,24 @@
     ./creative.nix
     ./dank-material-shell.nix
     ./dropbox.nix
+    ./firefox.nix
     ./fonts.nix
+    ./ghostty.nix
+    ./gtk-theme.nix
+    ./ktorrent.nix
+    ./mpv.nix
     ./mullvad.nix
+    ./nautilus.nix
     ./networkmanager.nix
     ./niri.nix
     ./podman.nix
     ./printing.nix
     ./server.nix
+    ./spotify.nix
     ./steam.nix
     ./system-packages.nix
+    ./vesktop.nix
+    ./wayland-tools.nix
     ./wireguard.nix
   ];
 }

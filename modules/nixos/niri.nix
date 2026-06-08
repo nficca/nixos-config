@@ -2,12 +2,13 @@
   config,
   lib,
   pkgs,
+  username,
   niri,
   ...
 }:
 
 {
-  options.myModules.niri.enable = lib.mkEnableOption "niri scrollable-tiling Wayland compositor";
+  options.myModules.niri.enable = lib.mkEnableOption "niri scrollable-tiling Wayland compositor (system service plus user dotfiles)";
 
   config = lib.mkIf config.myModules.niri.enable {
     programs.niri = {
@@ -42,5 +43,15 @@
     # niri is not a wlroots compositor, so xwayland-satellite provides X11 app
     # support for clients that don't speak Wayland.
     environment.systemPackages = [ pkgs.xwayland-satellite ];
+
+    home-manager.users.${username} =
+      { config, ... }:
+      let
+        dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/niri";
+      in
+      {
+        xdg.configFile.niri.source =
+          config.lib.file.mkOutOfStoreSymlink dotfiles;
+      };
   };
 }

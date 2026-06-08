@@ -99,73 +99,65 @@
       username = "nic";
 
       mkNixos =
-        {
-          config_module,
-          home_module,
-        }:
+        { config_module }:
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit username niri; };
+          specialArgs = {
+            inherit
+              username
+              niri
+              ghostty
+              dev-flakes
+              ;
+          };
           modules = [
             config_module
             ./modules/nixos
+            ./modules/shared
 
             dms.nixosModules.greeter
             my-nix-minecraft.nixosModules.default
 
             # Configure home-manager as a module so that it is applied
-            # whenever system configuration changes are applied.
+            # whenever system configuration changes are applied. Modules in
+            # ./modules/shared run at the system layer and write into
+            # `home-manager.users.${username}` from there; only third-party
+            # home-manager modules need to be imported at the HM scope.
             home-manager.nixosModules.home-manager
             {
-              home-manager.extraSpecialArgs = {
-                inherit
-                  username
-                  dev-flakes
-                  ghostty
-                  ;
-              };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users."${username}" = {
-                imports = [
-                  home_module
-                  ./modules/home
-                  dms.homeModules.default
-                  dms-plugin-registry.homeModules.default
-                ];
-              };
+              home-manager.users."${username}".imports = [
+                dms.homeModules.default
+                dms-plugin-registry.homeModules.default
+              ];
             }
           ];
         };
 
       mkDarwin =
-        {
-          config_module,
-          home_module,
-        }:
+        { config_module }:
         nix-darwin.lib.darwinSystem {
-          specialArgs = { inherit username; };
+          specialArgs = {
+            inherit
+              username
+              ghostty
+              dev-flakes
+              ;
+          };
           modules = [
             config_module
             ./modules/darwin
+            ./modules/shared
 
             # Configure home-manager as a module so that it is applied
-            # whenever system configuration changes are applied.
-            # The additional benefit of this is that we can share some
-            # home-manager configuration between NixOS and Darwin.
+            # whenever system configuration changes are applied. Modules in
+            # ./modules/shared run at the system layer and write into
+            # `home-manager.users.${username}` from there.
             home-manager.darwinModules.home-manager
             {
-              home-manager = {
-                extraSpecialArgs = { inherit username dev-flakes; };
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users."${username}" = {
-                  imports = [
-                    home_module
-                    ./modules/home
-                  ];
-                };
-              };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
             }
 
             # We use nix-homebrew to install and manage homebrew itself.
@@ -204,24 +196,20 @@
       nixosConfigurations = {
         "desktop" = mkNixos {
           config_module = ./hosts/desktop/configuration.nix;
-          home_module = ./hosts/desktop/home.nix;
         };
 
         "hetzner" = mkNixos {
           config_module = ./hosts/hetzner/configuration.nix;
-          home_module = ./hosts/hetzner/home.nix;
         };
       };
 
       darwinConfigurations = {
         "Nics-MacBook-Air" = mkDarwin {
           config_module = ./hosts/air/configuration.nix;
-          home_module = ./hosts/air/home.nix;
         };
 
         "Nics-MacBook-Pro" = mkDarwin {
           config_module = ./hosts/pro/configuration.nix;
-          home_module = ./hosts/pro/home.nix;
         };
       };
     };

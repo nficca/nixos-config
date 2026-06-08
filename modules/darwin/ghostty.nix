@@ -1,16 +1,28 @@
 {
   config,
   lib,
+  username,
   ...
 }:
 
 {
-  options.myModules.ghostty.enable = lib.mkEnableOption "Ghostty terminal emulator via homebrew cask (the home-manager myModules.ghostty.enable manages config files)";
+  options.myModules.ghostty.enable = lib.mkEnableOption "Ghostty terminal emulator via homebrew cask with user config";
 
-  # The home-manager ghostty module ships dotfiles for both Linux and Darwin,
-  # but on Darwin the application itself comes from the homebrew cask because
-  # nixpkgs GUI apps don't integrate with Launchpad, Dock, and Spotlight.
+  # On Darwin, ghostty is installed via homebrew cask because nixpkgs GUI
+  # apps don't integrate with Launchpad, Dock, and Spotlight.
   config = lib.mkIf config.myModules.ghostty.enable {
     homebrew.casks = [ "ghostty" ];
+
+    home-manager.users.${username} =
+      { config, ... }:
+      let
+        dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/ghostty";
+      in
+      {
+        xdg.configFile."ghostty/config".source =
+          config.lib.file.mkOutOfStoreSymlink "${dotfiles}/config";
+        xdg.configFile."ghostty/darwin".source =
+          config.lib.file.mkOutOfStoreSymlink "${dotfiles}/darwin";
+      };
   };
 }

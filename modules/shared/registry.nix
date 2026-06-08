@@ -7,14 +7,14 @@
 # ```
 # dev-flakes
 # ├── haskell
-# │   ├── flake.lock
-# │   └── flake.nix
+# │   ├── flake.lock
+# │   └── flake.nix
 # ├── node
-# │   ├── flake.lock
-# │   └── flake.nix
+# │   ├── flake.lock
+# │   └── flake.nix
 # ├── rust
-# │   ├── flake.lock
-# │   └── flake.nix
+# │   ├── flake.lock
+# │   └── flake.nix
 # ...
 # ```
 #
@@ -25,7 +25,7 @@
 # Where the `flake-name` is the name of the sub-directory in `dev-flakes`
 # containing the flake.
 
-{ lib, dev-flakes ? null, ... }:
+{ lib, username, dev-flakes ? null, ... }:
 
 let
   # All immediate entries in the dev-flakes input directory.
@@ -51,5 +51,5 @@ let
   };
 in
 {
-  nix.registry = lib.genAttrs flakes mkEntry;
+  home-manager.users.${username}.nix.registry = lib.genAttrs flakes mkEntry;
 }

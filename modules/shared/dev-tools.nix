@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  username,
   ...
 }:
 
@@ -9,7 +10,7 @@
   options.myModules.dev-tools.enable = lib.mkEnableOption "language servers, formatters, and build tools";
 
   config = lib.mkIf config.myModules.dev-tools.enable {
-    home.packages =
+    home-manager.users.${username}.home.packages =
       (with pkgs; [
         cmake # Cross-platform build system generator
         clang-tools # clangd LSP + clang-format

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  username,
   ...
 }:
 
@@ -37,7 +38,7 @@ let
 in
 {
   options.myModules.firefox = {
-    enable = lib.mkEnableOption "Firefox browser with a work-profile launcher";
+    enable = lib.mkEnableOption "Firefox browser via nixpkgs with a work-profile launcher";
 
     profileHandler.enable = lib.mkEnableOption ''
       a URL handler that opens links in the most recently focused Firefox profile.
@@ -47,38 +48,42 @@ in
 
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
-      programs.firefox.enable = true;
+      home-manager.users.${username} = {
+        programs.firefox.enable = true;
 
-      xdg.desktopEntries.firefox-work = {
-        name = "Firefox (Work)";
-        exec = "firefox -P work";
-        icon = "firefox";
-        type = "Application";
-        categories = [
-          "Network"
-          "WebBrowser"
-        ];
+        xdg.desktopEntries.firefox-work = {
+          name = "Firefox (Work)";
+          exec = "firefox -P work";
+          icon = "firefox";
+          type = "Application";
+          categories = [
+            "Network"
+            "WebBrowser"
+          ];
+        };
       };
     })
 
     (lib.mkIf cfg.profileHandler.enable {
-      xdg.mimeApps = {
-        enable = true;
-        defaultApplications = {
-          "x-scheme-handler/http" = "firefox-profile-handler.desktop";
-          "x-scheme-handler/https" = "firefox-profile-handler.desktop";
+      home-manager.users.${username} = {
+        xdg.mimeApps = {
+          enable = true;
+          defaultApplications = {
+            "x-scheme-handler/http" = "firefox-profile-handler.desktop";
+            "x-scheme-handler/https" = "firefox-profile-handler.desktop";
+          };
         };
-      };
 
-      xdg.desktopEntries.firefox-profile-handler = {
-        name = "Firefox Profile Handler";
-        exec = "${firefox-profile-handler}/bin/firefox-profile-handler %u";
-        type = "Application";
-        noDisplay = true;
-        mimeType = [
-          "x-scheme-handler/http"
-          "x-scheme-handler/https"
-        ];
+        xdg.desktopEntries.firefox-profile-handler = {
+          name = "Firefox Profile Handler";
+          exec = "${firefox-profile-handler}/bin/firefox-profile-handler %u";
+          type = "Application";
+          noDisplay = true;
+          mimeType = [
+            "x-scheme-handler/http"
+            "x-scheme-handler/https"
+          ];
+        };
       };
     })
   ];
