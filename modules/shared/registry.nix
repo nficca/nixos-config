@@ -25,9 +25,17 @@
 # Where the `flake-name` is the name of the sub-directory in `dev-flakes`
 # containing the flake.
 
-{ lib, username, dev-flakes ? null, ... }:
+{
+  config,
+  lib,
+  username,
+  dev-flakes ? null,
+  ...
+}:
 
 let
+  cfg = config.myModules.registry;
+
   # All immediate entries in the dev-flakes input directory.
   # If dev-flakes is not available (e.g., during bootstrap), use empty set.
   entries = if dev-flakes != null then builtins.readDir dev-flakes else {};
@@ -51,5 +59,9 @@ let
   };
 in
 {
-  home-manager.users.${username}.nix.registry = lib.genAttrs flakes mkEntry;
+  options.myModules.registry.enable = lib.mkEnableOption "user-level flakes registry built from the dev-flakes input";
+
+  config = lib.mkIf cfg.enable {
+    home-manager.users.${username}.nix.registry = lib.genAttrs flakes mkEntry;
+  };
 }

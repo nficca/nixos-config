@@ -45,6 +45,7 @@
     git.enable = true;
     mullvad.enable = true;
     neovim.enable = true;
+    registry.enable = true;
     shell.enable = true;
     starship.enable = true;
     steam.enable = true;

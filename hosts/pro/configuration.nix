@@ -43,6 +43,7 @@
     kubernetes.enable = true;
     neovim.enable = true;
     notion.enable = true;
+    registry.enable = true;
     shell.enable = true;
     starship.enable = true;
     system-packages.enable = true;

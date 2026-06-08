@@ -97,6 +97,7 @@
     postgres-cli.enable = true;
     printing.enable = true;
     prismlauncher.enable = true;
+    registry.enable = true;
     shell.enable = true;
     spotify.enable = true;
     starship.enable = true;
