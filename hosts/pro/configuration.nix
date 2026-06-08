@@ -9,13 +9,11 @@
   myModules.dropbox.enable = true;
   myModules.firefox.enable = true;
   myModules.ghostty.enable = true;
+  myModules.notion.enable = true;
   myModules.whatsapp.enable = true;
 
   homebrew = {
     enable = true;
     user = username;
-    casks = [
-      "notion" # Note-taking and organization tool
-    ];
   };
 }
