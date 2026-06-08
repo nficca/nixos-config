@@ -23,14 +23,16 @@
     user = username;
   };
 
-  myModules._1password.enable = true;
-  myModules.dropbox.enable = true;
-  myModules.firefox.enable = true;
-  myModules.fonts.enable = true;
-  myModules.ghostty.enable = true;
-  myModules.notion.enable = true;
-  myModules.system-packages.enable = true;
-  myModules.whatsapp.enable = true;
+  myModules = {
+    _1password.enable = true;
+    dropbox.enable = true;
+    firefox.enable = true;
+    fonts.enable = true;
+    ghostty.enable = true;
+    notion.enable = true;
+    system-packages.enable = true;
+    whatsapp.enable = true;
+  };
 
   # TODO: Set Git commit hash for darwin-version.
   system.configurationRevision = null;

@@ -43,11 +43,13 @@
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  myModules.fonts.enable = true;
-  myModules.networkmanager.enable = true;
-  myModules.podman.enable = true;
-  myModules.server.enable = true;
-  myModules.system-packages.enable = true;
+  myModules = {
+    fonts.enable = true;
+    networkmanager.enable = true;
+    podman.enable = true;
+    server.enable = true;
+    system-packages.enable = true;
+  };
 
   # Run a basic Minecraft server.
   services.my-nix-minecraft.servers.vanilla = {

@@ -52,25 +52,27 @@
   # Run unpatched dynamic binaries on NixOS.
   programs.nix-ld.enable = true;
 
-  myModules._1password.enable = true;
-  myModules.amd-gpu.enable = true;
-  myModules.audio.enable = true;
-  myModules.audio.userTools.enable = true;
-  myModules.bluetooth.enable = true;
-  myModules.creative.obs.enable = true;
-  myModules.dank-material-shell.enable = true;
-  myModules.dropbox.enable = true;
-  myModules.fonts.enable = true;
-  myModules.mullvad.enable = true;
-  myModules.networkmanager.enable = true;
-  myModules.networkmanager.applet.enable = true;
-  myModules.niri.enable = true;
-  myModules.podman.enable = true;
-  myModules.podman.compose.enable = true;
-  myModules.printing.enable = true;
-  myModules.steam.enable = true;
-  myModules.system-packages.enable = true;
-  myModules.wireguard.enable = true;
+  myModules = {
+    _1password.enable = true;
+    amd-gpu.enable = true;
+    audio.enable = true;
+    audio.userTools.enable = true;
+    bluetooth.enable = true;
+    creative.obs.enable = true;
+    dank-material-shell.enable = true;
+    dropbox.enable = true;
+    fonts.enable = true;
+    mullvad.enable = true;
+    networkmanager.enable = true;
+    networkmanager.applet.enable = true;
+    niri.enable = true;
+    podman.enable = true;
+    podman.compose.enable = true;
+    printing.enable = true;
+    steam.enable = true;
+    system-packages.enable = true;
+    wireguard.enable = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

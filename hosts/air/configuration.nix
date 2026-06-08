@@ -23,18 +23,20 @@
     user = username;
   };
 
-  myModules._1password.enable = true;
-  myModules.affinity-designer.enable = true;
-  myModules.discord.enable = true;
-  myModules.dropbox.enable = true;
-  myModules.firefox.enable = true;
-  myModules.folx.enable = true;
-  myModules.fonts.enable = true;
-  myModules.ghostty.enable = true;
-  myModules.mullvad.enable = true;
-  myModules.steam.enable = true;
-  myModules.system-packages.enable = true;
-  myModules.whatsapp.enable = true;
+  myModules = {
+    _1password.enable = true;
+    affinity-designer.enable = true;
+    discord.enable = true;
+    dropbox.enable = true;
+    firefox.enable = true;
+    folx.enable = true;
+    fonts.enable = true;
+    ghostty.enable = true;
+    mullvad.enable = true;
+    steam.enable = true;
+    system-packages.enable = true;
+    whatsapp.enable = true;
+  };
 
   # TODO: Set Git commit hash for darwin-version.
   system.configurationRevision = null;
