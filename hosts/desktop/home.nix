@@ -12,28 +12,14 @@
 
   home.homeDirectory = "/home/${username}";
 
-  # Install packages
-  home.packages = (
-    with pkgs;
-    [
-      kdePackages.ktorrent # BitTorrent client
-      nautilus # GNOME file manager
-      prismlauncher # Open-source minecraft launcher
-      vesktop # Alternative Discord client
-    ]
-  );
-
   myModules.niri.enable = true;
   myModules.dank-material-shell.enable = true;
   myModules.dropbox.enable = true;
+  myModules.ktorrent.enable = true;
   myModules.mpv.enable = true;
-
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "inode/directory" = "org.gnome.Nautilus.desktop";
-    };
-  };
+  myModules.nautilus.enable = true;
+  myModules.prismlauncher.enable = true;
+  myModules.vesktop.enable = true;
 
   myModules.ghostty.enable = true;
   myModules.firefox.enable = true;

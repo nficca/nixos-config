@@ -14,17 +14,21 @@
     ./git.nix
     ./gtk-theme.nix
     ./kubernetes.nix
+    ./ktorrent.nix
     ./mpv.nix
     ./mullvad.nix
+    ./nautilus.nix
     ./neovim.nix
     ./networkmanager.nix
     ./niri.nix
     ./postgres-cli.nix
+    ./prismlauncher.nix
     ./shell.nix
     ./spotify.nix
     ./starship.nix
     ./tmux.nix
     ./user-packages.nix
+    ./vesktop.nix
     ./wayland-tools.nix
     ./wireguard.nix
   ];
