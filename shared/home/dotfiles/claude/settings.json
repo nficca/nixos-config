@@ -16,13 +16,20 @@
     "clangd-lsp@claude-plugins-official": true,
     "slack@claude-plugins-official": true,
     "sre-tools@fossa-claude-skills": true,
-    "analysis-tools@fossa-claude-skills": true
+    "analysis-tools@fossa-claude-skills": true,
+    "general@nficca-plugins": true
   },
   "extraKnownMarketplaces": {
     "fossa-claude-skills": {
       "source": {
         "source": "github",
         "repo": "fossas/claude-skills"
+      }
+    },
+    "nficca-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "nficca/claude-plugin"
       }
     }
   },
