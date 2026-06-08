@@ -2,6 +2,7 @@
   config,
   lib,
   username,
+  mkRepoSymlink,
   ...
 }:
 
@@ -22,9 +23,6 @@ in
   config = lib.mkIf cfg.enable {
     home-manager.users.${username} =
       { config, ... }:
-      let
-        dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/git";
-      in
       {
         programs.git = {
           enable = true;
@@ -71,7 +69,7 @@ in
         };
 
         xdg.configFile."git/themes.gitconfig".source =
-          config.lib.file.mkOutOfStoreSymlink "${dotfiles}/themes.gitconfig";
+          mkRepoSymlink config "dotfiles/git/themes.gitconfig";
       };
   };
 }

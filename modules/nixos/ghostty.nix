@@ -3,6 +3,7 @@
   lib,
   pkgs,
   username,
+  mkRepoSymlink,
   ghostty,
   ...
 }:
@@ -16,9 +17,6 @@
   config = lib.mkIf config.myModules.ghostty.enable {
     home-manager.users.${username} =
       { config, ... }:
-      let
-        dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/ghostty";
-      in
       {
         programs.ghostty = {
           enable = true;
@@ -26,9 +24,9 @@
         };
 
         xdg.configFile."ghostty/config".source =
-          config.lib.file.mkOutOfStoreSymlink "${dotfiles}/config";
+          mkRepoSymlink config "dotfiles/ghostty/config";
         xdg.configFile."ghostty/linux".source =
-          config.lib.file.mkOutOfStoreSymlink "${dotfiles}/linux";
+          mkRepoSymlink config "dotfiles/ghostty/linux";
       };
   };
 }

@@ -2,6 +2,7 @@
   config,
   lib,
   username,
+  mkRepoSymlink,
   ...
 }:
 
@@ -14,9 +15,6 @@ in
   config = lib.mkIf cfg.enable {
     home-manager.users.${username} =
       { config, ... }:
-      let
-        dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/starship";
-      in
       {
         programs.starship = {
           enable = true;
@@ -24,7 +22,7 @@ in
         };
 
         xdg.configFile."starship.toml".source =
-          config.lib.file.mkOutOfStoreSymlink "${dotfiles}/starship.toml";
+          mkRepoSymlink config "dotfiles/starship/starship.toml";
       };
   };
 }

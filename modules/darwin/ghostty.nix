@@ -2,6 +2,7 @@
   config,
   lib,
   username,
+  mkRepoSymlink,
   ...
 }:
 
@@ -15,14 +16,11 @@
 
     home-manager.users.${username} =
       { config, ... }:
-      let
-        dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/ghostty";
-      in
       {
         xdg.configFile."ghostty/config".source =
-          config.lib.file.mkOutOfStoreSymlink "${dotfiles}/config";
+          mkRepoSymlink config "dotfiles/ghostty/config";
         xdg.configFile."ghostty/darwin".source =
-          config.lib.file.mkOutOfStoreSymlink "${dotfiles}/darwin";
+          mkRepoSymlink config "dotfiles/ghostty/darwin";
       };
   };
 }

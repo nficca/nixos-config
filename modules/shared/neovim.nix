@@ -3,6 +3,7 @@
   lib,
   pkgs,
   username,
+  mkRepoSymlink,
   ...
 }:
 
@@ -44,8 +45,7 @@ in
           ];
         };
 
-        xdg.configFile.nvim.source = config.lib.file.mkOutOfStoreSymlink
-          "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/nvim";
+        xdg.configFile.nvim.source = mkRepoSymlink config "dotfiles/nvim";
       };
   };
 }

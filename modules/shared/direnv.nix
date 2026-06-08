@@ -2,6 +2,7 @@
   config,
   lib,
   username,
+  mkRepoSymlink,
   ...
 }:
 
@@ -14,14 +15,10 @@ in
   config = lib.mkIf cfg.enable {
     home-manager.users.${username} =
       { config, ... }:
-      let
-        dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/direnv";
-      in
       {
         programs.direnv.enable = true;
 
-        xdg.configFile.direnv.source =
-          config.lib.file.mkOutOfStoreSymlink dotfiles;
+        xdg.configFile.direnv.source = mkRepoSymlink config "dotfiles/direnv";
       };
   };
 }

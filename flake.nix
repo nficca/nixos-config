@@ -98,6 +98,14 @@
       # My username is always "nic" on all systems.
       username = "nic";
 
+      # Helper for declaring out-of-store symlinks rooted at this repo's
+      # checkout, so dotfiles can be edited in place without rebuilding.
+      # Takes the home-manager-scope `config` (for home.homeDirectory and
+      # lib.file.mkOutOfStoreSymlink) and a path relative to the repo root.
+      mkRepoSymlink = hmConfig: repoSubpath:
+        hmConfig.lib.file.mkOutOfStoreSymlink
+          "${hmConfig.home.homeDirectory}/dev/nficca/nixos-config/${repoSubpath}";
+
       mkNixos =
         { config_module }:
         nixpkgs.lib.nixosSystem {
@@ -105,6 +113,7 @@
           specialArgs = {
             inherit
               username
+              mkRepoSymlink
               niri
               ghostty
               dev-flakes
@@ -141,6 +150,7 @@
           specialArgs = {
             inherit
               username
+              mkRepoSymlink
               ghostty
               dev-flakes
               ;

@@ -2,6 +2,7 @@
   config,
   lib,
   username,
+  mkRepoSymlink,
   ...
 }:
 
@@ -21,9 +22,6 @@ in
 
     home-manager.users.${username} =
       { config, ... }:
-      let
-        dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/DankMaterialShell";
-      in
       {
         # The home-manager module handles quickshell, the systemd service, and packages.
         # After installing a plugin, it must be manually enabled in DMS Settings > Plugins.
@@ -34,9 +32,9 @@ in
         };
 
         xdg.configFile."DankMaterialShell/settings.json".source =
-          config.lib.file.mkOutOfStoreSymlink "${dotfiles}/settings.json";
+          mkRepoSymlink config "dotfiles/DankMaterialShell/settings.json";
         xdg.configFile."DankMaterialShell/wallpapers".source =
-          config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wallpapers";
+          mkRepoSymlink config "dotfiles/DankMaterialShell/wallpapers";
       };
   };
 }

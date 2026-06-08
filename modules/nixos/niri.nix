@@ -3,6 +3,7 @@
   lib,
   pkgs,
   username,
+  mkRepoSymlink,
   niri,
   ...
 }:
@@ -46,12 +47,8 @@
 
     home-manager.users.${username} =
       { config, ... }:
-      let
-        dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/niri";
-      in
       {
-        xdg.configFile.niri.source =
-          config.lib.file.mkOutOfStoreSymlink dotfiles;
+        xdg.configFile.niri.source = mkRepoSymlink config "dotfiles/niri";
       };
   };
 }

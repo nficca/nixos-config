@@ -3,6 +3,7 @@
   lib,
   pkgs,
   username,
+  mkRepoSymlink,
   ...
 }:
 
@@ -15,16 +16,13 @@ in
   config = lib.mkIf cfg.enable {
     home-manager.users.${username} =
       { config, ... }:
-      let
-        dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/claude";
-      in
       {
         home.packages = [ pkgs.claude-code ];
 
         home.file.".claude/settings.json".source =
-          config.lib.file.mkOutOfStoreSymlink "${dotfiles}/settings.json";
+          mkRepoSymlink config "dotfiles/claude/settings.json";
         home.file.".claude/statusline.sh".source =
-          config.lib.file.mkOutOfStoreSymlink "${dotfiles}/statusline.sh";
+          mkRepoSymlink config "dotfiles/claude/statusline.sh";
       };
   };
 }
