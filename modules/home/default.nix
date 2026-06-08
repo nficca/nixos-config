@@ -23,6 +23,7 @@
     ./niri.nix
     ./postgres-cli.nix
     ./prismlauncher.nix
+    ./registry.nix
     ./shell.nix
     ./spotify.nix
     ./starship.nix
