@@ -38,6 +38,6 @@
     };
 
     xdg.configFile.nvim.source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/dev/nficca/nixos-config/shared/home/dotfiles/nvim";
+      "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/nvim";
   };
 }

@@ -5,7 +5,7 @@
 }:
 
 let
-  dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/shared/home/dotfiles/starship";
+  dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/starship";
 in
 {
   options.myModules.starship.enable = lib.mkEnableOption "Starship prompt with zsh integration";

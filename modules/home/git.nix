@@ -5,7 +5,7 @@
 }:
 
 let
-  dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/shared/home/dotfiles/git";
+  dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/git";
 in
 {
   options.myModules.git = {

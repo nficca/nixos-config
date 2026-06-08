@@ -7,7 +7,7 @@
 }:
 
 let
-  dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/shared/home/dotfiles/ghostty";
+  dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/ghostty";
 in
 {
   options.myModules.ghostty.enable = lib.mkEnableOption "Ghostty terminal emulator with platform-specific config";

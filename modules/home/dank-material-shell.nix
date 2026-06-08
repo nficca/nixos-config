@@ -10,7 +10,7 @@ let
   # programs.dank-material-shell is declared by dms.homeModules.default, which
   # is only imported into the NixOS home-manager (see flake.nix).
   available = options ? programs.dank-material-shell;
-  dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/shared/home/dotfiles/DankMaterialShell";
+  dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/DankMaterialShell";
 in
 {
   options.myModules.dank-material-shell.enable = lib.mkEnableOption "DankMaterialShell desktop shell (launcher, wallpapers, lock, idle)";

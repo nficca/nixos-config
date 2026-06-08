@@ -5,7 +5,7 @@
 }:
 
 let
-  dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/shared/home/dotfiles/direnv";
+  dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/direnv";
 in
 {
   options.myModules.direnv.enable = lib.mkEnableOption "direnv with config";

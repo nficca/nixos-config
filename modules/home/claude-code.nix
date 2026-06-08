@@ -6,7 +6,7 @@
 }:
 
 let
-  dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/shared/home/dotfiles/claude";
+  dotfiles = "${config.home.homeDirectory}/dev/nficca/nixos-config/dotfiles/claude";
 in
 {
   options.myModules.claude-code.enable = lib.mkEnableOption "Claude Code CLI with user settings and statusline";
