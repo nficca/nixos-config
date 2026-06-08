@@ -59,25 +59,27 @@
   };
 
   myModules = {
-    _1password.cli.enable = true;
-    _1password.app.enable = true;
+    _1password = {
+      cli.enable = true;
+      app.enable = true;
+    };
     amd-gpu.enable = true;
-    audio.enable = true;
-    audio.userTools.enable = true;
+    audio = {
+      enable = true;
+      userTools.enable = true;
+    };
     aws.enable = true;
     bluetooth.enable = true;
     claude-code.enable = true;
     creative.aseprite.enable = true;
-    creative.kdenlive.enable = true;
-    creative.ldtk.enable = true;
-    creative.losslesscut.enable = true;
-    creative.obs.enable = true;
     dank-material-shell.enable = true;
     dev-tools.enable = true;
     direnv.enable = true;
     dropbox.enable = true;
-    firefox.enable = true;
-    firefox.profileHandler.enable = true;
+    firefox = {
+      enable = true;
+      profileHandler.enable = true;
+    };
     fonts.enable = true;
     ghostty.enable = true;
     git.enable = true;
@@ -89,11 +91,15 @@
     mullvad-browser.enable = true;
     nautilus.enable = true;
     neovim.enable = true;
-    networkmanager.enable = true;
-    networkmanager.applet.enable = true;
+    networkmanager = {
+      enable = true;
+      applet.enable = true;
+    };
     niri.enable = true;
-    podman.enable = true;
-    podman.compose.enable = true;
+    podman = {
+      enable = true;
+      compose.enable = true;
+    };
     postgres-cli.enable = true;
     printing.enable = true;
     prismlauncher.enable = true;
