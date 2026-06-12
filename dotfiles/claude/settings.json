@@ -30,9 +30,10 @@
       "source": {
         "source": "github",
         "repo": "nficca/claude-plugin"
-      }
+      },
+      "autoUpdate": true
     }
   },
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "editorMode": "vim"
 }
