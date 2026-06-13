@@ -48,20 +48,29 @@ in
 
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
-      home-manager.users.${username} = {
-        programs.firefox.enable = true;
+      home-manager.users.${username} =
+        { config, ... }:
+        {
+          programs.firefox = {
+            enable = true;
+            # Adopt the stateVersion 26.05 default ahead of the bump. Profile
+            # data was moved from ~/.mozilla/firefox to this path by hand;
+            # Firefox (147+) reads the XDG path when ~/.mozilla/firefox is
+            # absent, regardless of the wrapper's MOZ_LEGACY_PROFILES=1.
+            configPath = "${config.xdg.configHome}/mozilla/firefox";
+          };
 
-        xdg.desktopEntries.firefox-work = {
-          name = "Firefox (Work)";
-          exec = "firefox -P work";
-          icon = "firefox";
-          type = "Application";
-          categories = [
-            "Network"
-            "WebBrowser"
-          ];
+          xdg.desktopEntries.firefox-work = {
+            name = "Firefox (Work)";
+            exec = "firefox -P work";
+            icon = "firefox";
+            type = "Application";
+            categories = [
+              "Network"
+              "WebBrowser"
+            ];
+          };
         };
-      };
     })
 
     (lib.mkIf cfg.profileHandler.enable {
