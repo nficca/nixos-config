@@ -32,7 +32,7 @@
   myModules = {
     _1password.cli.enable = true;
     _1password.app.enable = true;
-    affinity-designer.enable = true;
+    affinity-designer.enable = false;
     claude-code.enable = true;
     dev-tools.enable = true;
     direnv.enable = true;
@@ -48,11 +48,11 @@
     registry.enable = true;
     shell.enable = true;
     starship.enable = true;
-    steam.enable = true;
+    steam.enable = false;
     system-packages.enable = true;
     tmux.enable = true;
     user-packages.enable = true;
-    whatsapp.enable = true;
+    whatsapp.enable = false;
   };
 
   # TODO: Set Git commit hash for darwin-version.
