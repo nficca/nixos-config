@@ -12,6 +12,7 @@ return {
       defaults = {
         layout_strategy = "vertical",
         layout_config = {
+          preview_cutoff = 20,
           prompt_position = "top",
           mirror = true,
           height = 0.9,
