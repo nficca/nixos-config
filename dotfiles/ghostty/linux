@@ -1,5 +1,5 @@
 # This file contains Ghostty configuration that is
 # specific to Linux systems.
 
-font-size = 12
+font-size = 14
 gtk-titlebar = false
