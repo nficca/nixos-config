@@ -4,7 +4,6 @@
   pkgs,
   username,
   mkRepoSymlink,
-  niri,
   ...
 }:
 
@@ -14,7 +13,6 @@
   config = lib.mkIf config.myModules.niri.enable {
     programs.niri = {
       enable = true;
-      package = niri.packages.${pkgs.stdenv.hostPlatform.system}.niri;
     };
 
     # XDG Desktop Portal provides a D-Bus API that apps use to interact with the

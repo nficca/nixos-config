@@ -42,14 +42,6 @@
       flake = false;
     };
 
-    # Scrollable-tiling Wayland compositor.
-    niri = {
-      url = "github:niri-wm/niri";
-      inputs.nixpkgs.follows = "nixpkgs";
-      # https://github.com/niri-wm/niri/blob/2dc6f4482c4eeed75ea8b133d89cad8658d38429/flake.nix#L8-L9
-      inputs.rust-overlay.follows = "";
-    };
-
     # DankMaterialShell — integrated desktop environment (greeter, shell, launcher,
     # wallpapers, lock screen, idle management).
     #
@@ -87,7 +79,6 @@
       homebrew-core,
       homebrew-cask,
       dev-flakes,
-      niri,
       dms,
       dms-plugin-registry,
       my-nix-minecraft,
@@ -113,7 +104,6 @@
             inherit
               username
               mkRepoSymlink
-              niri
               dev-flakes
               ;
           };
