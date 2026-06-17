@@ -57,6 +57,14 @@ in
             # data was moved from ~/.mozilla/firefox to this path by hand;
             # Firefox (147+) reads the XDG path when ~/.mozilla/firefox is
             # absent, regardless of the wrapper's MOZ_LEGACY_PROFILES=1.
+            #
+            # Gotcha: if ~/.mozilla/firefox reappears (a profile migration or a
+            # stray launch can recreate it), Firefox prefers that legacy root
+            # and ignores these XDG profiles. Symptom is that clicked links open
+            # in a brand-new window under a throwaway profile instead of joining
+            # an existing window, while already-open windows (started before the
+            # legacy root returned) look fine. Fix by removing ~/.mozilla/firefox;
+            # the real profiles here are untouched.
             configPath = "${config.xdg.configHome}/mozilla/firefox";
           };
 
