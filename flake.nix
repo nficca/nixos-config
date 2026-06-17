@@ -42,13 +42,6 @@
       flake = false;
     };
 
-    # GPU-accelerated terminal emulator.
-    # Ghostty is slow to release new versions in nixpkgs, so we use the flake
-    # to build from main and get timely protocol support (e.g. ext-background-effect-v1).
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
-
     # Scrollable-tiling Wayland compositor.
     niri = {
       url = "github:niri-wm/niri";
@@ -94,7 +87,6 @@
       homebrew-core,
       homebrew-cask,
       dev-flakes,
-      ghostty,
       niri,
       dms,
       dms-plugin-registry,
@@ -122,7 +114,6 @@
               username
               mkRepoSymlink
               niri
-              ghostty
               dev-flakes
               ;
           };
@@ -158,7 +149,6 @@
             inherit
               username
               mkRepoSymlink
-              ghostty
               dev-flakes
               ;
           };
