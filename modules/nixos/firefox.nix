@@ -55,22 +55,21 @@ in
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       home-manager.users.${username} =
-        { config, ... }:
+        { ... }:
         {
           programs.firefox = {
             enable = true;
-            # Store profiles under the XDG path (Home Manager's 26.05 default,
-            # set explicitly to silence the pre-26.05 deprecation warning).
-            # Firefox uses ~/.mozilla/firefox instead whenever that directory
-            # exists and shadows these profiles, so if it ever reappears, delete
-            # it. The real profiles here are untouched.
-            configPath = "${config.xdg.configHome}/mozilla/firefox";
+            # Keep profiles at the legacy ~/.mozilla/firefox path. Firefox's crash
+            # reporter and telemetry write under ~/.mozilla/firefox unconditionally
+            # (and 1Password's native-messaging host lives in ~/.mozilla), so that
+            # directory keeps reappearing. If the profiles live anywhere else, the
+            # resurrected legacy root shadows them and Firefox shows the profile
+            # selector instead of the default profile. Co-locating the profiles here
+            # makes that impossible. An explicit configPath also silences Home
+            # Manager's 26.05 default-path-change warning.
+            configPath = ".mozilla/firefox";
 
-            # Declared so Home Manager rewrites profiles.ini on every rebuild.
-            # That keeps Firefox's Selectable Profile Service from grouping
-            # these profiles behind a startup selector, since it cannot persist
-            # its StoreID into a file we regenerate.
-            # https://firefox-source-docs.mozilla.org/toolkit/profile/index.html
+            # Declare the default and work profiles; Home Manager owns profiles.ini.
             profiles = {
               default = {
                 id = 0;
