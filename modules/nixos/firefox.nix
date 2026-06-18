@@ -1,3 +1,7 @@
+# Per-user Firefox via Home Manager with two declarative profiles (default
+# and work) and an optional niri-aware link handler. Extensions and browsing
+# data come from Firefox Sync rather than this module, so a fresh machine only
+# needs a Sync sign-in per profile.
 {
   config,
   lib,
@@ -13,6 +17,8 @@ let
     name = "firefox-profile-handler";
     runtimeInputs = [ pkgs.jq ];
     text = ''
+      # Open links in whichever profile you used last: ask niri for the most
+      # recently focused Firefox window and reuse the `-P` it was launched with.
       URL="''${1:-}"
       FIREFOX_ARGS=()
 
@@ -38,7 +44,7 @@ let
 in
 {
   options.myModules.firefox = {
-    enable = lib.mkEnableOption "Firefox browser via nixpkgs with a work-profile launcher";
+    enable = lib.mkEnableOption "Firefox via Home Manager with declarative default and work profiles";
 
     profileHandler.enable = lib.mkEnableOption ''
       a URL handler that opens links in the most recently focused Firefox profile.
@@ -53,19 +59,43 @@ in
         {
           programs.firefox = {
             enable = true;
-            # Adopt the stateVersion 26.05 default ahead of the bump. Profile
-            # data was moved from ~/.mozilla/firefox to this path by hand;
-            # Firefox (147+) reads the XDG path when ~/.mozilla/firefox is
-            # absent, regardless of the wrapper's MOZ_LEGACY_PROFILES=1.
-            #
-            # Gotcha: if ~/.mozilla/firefox reappears (a profile migration or a
-            # stray launch can recreate it), Firefox prefers that legacy root
-            # and ignores these XDG profiles. Symptom is that clicked links open
-            # in a brand-new window under a throwaway profile instead of joining
-            # an existing window, while already-open windows (started before the
-            # legacy root returned) look fine. Fix by removing ~/.mozilla/firefox;
-            # the real profiles here are untouched.
+            # Store profiles under the XDG path (Home Manager's 26.05 default,
+            # set explicitly to silence the pre-26.05 deprecation warning).
+            # Firefox uses ~/.mozilla/firefox instead whenever that directory
+            # exists and shadows these profiles, so if it ever reappears, delete
+            # it. The real profiles here are untouched.
             configPath = "${config.xdg.configHome}/mozilla/firefox";
+
+            # Declared so Home Manager rewrites profiles.ini on every rebuild.
+            # That keeps Firefox's Selectable Profile Service from grouping
+            # these profiles behind a startup selector, since it cannot persist
+            # its StoreID into a file we regenerate.
+            # https://firefox-source-docs.mozilla.org/toolkit/profile/index.html
+            profiles = {
+              default = {
+                id = 0;
+                path = "default";
+                isDefault = true;
+              };
+              work = {
+                id = 1;
+                path = "work";
+              };
+            };
+          };
+
+          # Pin the app launcher to the default profile; bare `firefox` is not
+          # deterministic with more than one profile. `--name firefox` sets the
+          # wayland app-id that the niri window rules key on.
+          xdg.desktopEntries.firefox = {
+            name = "Firefox";
+            exec = "firefox -P default --name firefox %U";
+            icon = "firefox";
+            type = "Application";
+            categories = [
+              "Network"
+              "WebBrowser"
+            ];
           };
 
           xdg.desktopEntries.firefox-work = {
