@@ -33,3 +33,32 @@ Fallback if the CLI is unreachable: `sudo systemctl stop mullvad-daemon`.
 There is no NixOS option for `lockdown-mode`; it lives in
 `/etc/mullvad-vpn/settings.json` and is daemon-managed. Keep it off
 imperatively; verify after any `mullvad-vpn` package bump.
+
+## saml2aws session-persistence gotcha
+
+The FOSSA EKS login (`aws-login`, wrapping `saml2aws login ... --browser-type
+firefox` under `steam-run`) drives a Playwright Firefox, not your real profile.
+It avoids re-entering Google email/password/OTP on every 4-hour AWS credential
+refresh by persisting the browser session to `~/.aws/saml2aws/storageState.json`
+and reloading it on the next run.
+
+**Fingerprint:**
+- Every `saml2aws login` forces a full Google re-auth, even minutes after a
+  successful one, instead of refreshing silently
+- saml2aws logs `Error saving storage state` (easy to miss in its output)
+
+**Cause:** saml2aws writes `storageState.json` but never creates the
+`~/.aws/saml2aws/` directory, and Playwright's `StorageState()` write fails
+silently when the parent is missing. With no directory the session is discarded
+every run and each login starts cold.
+
+**Diagnose:**
+
+```
+ls -la ~/.aws/saml2aws/storageState.json
+```
+
+**Fix:** ensure the directory exists. The `aws-login` wrapper runs
+`mkdir -p ~/.aws/saml2aws` on every invocation, so this stays fixed as long as
+you log in via `aws-login`; the trap only resurfaces on a fresh machine or if
+the directory gets removed.
