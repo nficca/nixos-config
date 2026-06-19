@@ -71,7 +71,10 @@
     aws.enable = true;
     bluetooth.enable = true;
     claude-code.enable = true;
-    creative.aseprite.enable = true;
+    creative = {
+      aseprite.enable = true;
+      ldtk.enable = true;
+    };
     dank-material-shell.enable = true;
     dev-tools.enable = true;
     direnv.enable = true;
