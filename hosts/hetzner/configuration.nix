@@ -70,7 +70,7 @@
 
   # Run a basic Minecraft server.
   services.my-nix-minecraft.servers.vanilla = {
-    enable = true;
+    enable = false;
     symlinks = {
       "world/datapacks" = pkgs.runCommand "datapacks" {} ''
         mkdir -p $out
