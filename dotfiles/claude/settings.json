@@ -35,5 +35,6 @@
     }
   },
   "effortLevel": "xhigh",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "tui": "fullscreen"
 }
