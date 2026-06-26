@@ -41,6 +41,7 @@ in
               markdown_inline
               nix
               qmljs
+              ron
               ruby
               rust
               typescript

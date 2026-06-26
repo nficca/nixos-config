@@ -20,6 +20,7 @@
         nil # Nix LSP
         nixfmt # Nix formatter
         prettier # JS/TS/CSS/HTML/JSON/YAML formatter
+        ron-lsp # RON (Rusty Object Notation) LSP
         ruby-lsp
         typescript-language-server
         vscode-langservers-extracted # HTML/CSS/JSON/ESLint LSPs

@@ -64,6 +64,14 @@ return {
       cmd = { "qmlls", "-E" }
     })
 
+    -- ron-lsp ships no built-in nvim-lspconfig entry, so define it in full.
+    -- See: https://github.com/jasonjmcghee/ron-lsp
+    vim.lsp.config("ron_lsp", {
+      cmd = { "ron-lsp" },
+      filetypes = { "ron" },
+      root_markers = { "Cargo.toml", ".git" },
+    })
+
     vim.lsp.enable({
       "clangd",
       "cmake",
@@ -76,6 +84,7 @@ return {
       "lua_ls",
       "nil_ls",
       "qmlls",
+      "ron_lsp",
       "ruby_lsp",
       "rust_analyzer",
       "ts_ls",
