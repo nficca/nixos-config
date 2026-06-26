@@ -1,5 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
+  dependencies = { "b0o/schemastore.nvim" },
   config = function()
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -70,6 +71,23 @@ return {
       cmd = { "ron-lsp" },
       filetypes = { "ron" },
       root_markers = { "Cargo.toml", ".git" },
+    })
+
+    -- JSON Schema support. The SchemaStore catalog auto-associates common
+    -- files (package.json, tsconfig.json, GitHub Actions, etc.) with their
+    -- schemas from schemastore.org.
+    --
+    -- For per-project schemas, add a `$schema` key to the JSON file itself;
+    -- jsonls resolves it relative to the file, so a local schema works:
+    --   { "$schema": "./schemas/foo.schema.json", ... }
+    -- An inline `$schema` overrides the catalog for that file.
+    vim.lsp.config("jsonls", {
+      settings = {
+        json = {
+          schemas = require("schemastore").json.schemas(),
+          validate = { enable = true },
+        },
+      },
     })
 
     vim.lsp.enable({

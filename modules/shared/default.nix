@@ -2,7 +2,7 @@
   imports = [
     ./aws.nix
     ./claude-code.nix
-    ./dev-tools.nix
+    ./dev-tools
     ./direnv.nix
     ./git.nix
     ./kubernetes.nix
