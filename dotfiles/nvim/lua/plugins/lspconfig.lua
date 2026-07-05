@@ -94,6 +94,7 @@ return {
       "clangd",
       "cmake",
       "cssls",
+      "denols",
       "eslint",
       "golangci_lint_ls",
       "gopls",
