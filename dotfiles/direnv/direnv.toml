@@ -1,2 +1,8 @@
 [global]
 load_dotenv = true
+
+# Auto-trust .envrc under my own project namespace so `denv` needs no manual
+# `direnv allow`. Scoped to ~/dev/nficca, not all of ~/dev, so committed .envrc
+# in cloned and work repos still require an explicit allow before they run.
+[whitelist]
+prefix = ["/home/nic/dev/nficca", "/Users/nic/dev/nficca"]

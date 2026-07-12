@@ -6,3 +6,8 @@
 # See this issue for more details:
 # https://github.com/NixOS/nixpkgs/issues/12665
 result
+
+# While ~/.config/direnv is still the old whole-dir symlink into this repo,
+# switching to the nix-direnv config can drop its generated stdlib file in here.
+# It belongs in the nix store, not the repo.
+/dotfiles/direnv/lib/hm-nix-direnv.sh

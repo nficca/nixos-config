@@ -30,6 +30,9 @@ in
           ignores = [
             "/.worktrees"
             "**/.claude/settings.local.json"
+            # denv keeps the flake dev-shell command in .direnv/.flake-env, so
+            # ignoring only .direnv leaves real .env/.envrc files tracked.
+            ".direnv/"
           ];
           settings.user.email = "nicficca@gmail.com";
           settings.user.name = "Nic Ficca";

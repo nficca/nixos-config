@@ -35,6 +35,23 @@
           # that commands like `nix-shell` and `nix develop` will use zsh instead of
           # bash.
           ${pkgs.any-nix-shell}/bin/any-nix-shell zsh | source /dev/stdin
+
+          # Enable a flake dev-shell for the current project without committing
+          # anything: the `use flake` line goes into gitignored .direnv/.flake-env,
+          # never into a tracked .env/.envrc. Pass a command to override the
+          # default, e.g. `denv 'use flake fossa'` for a flake registry entry.
+          denv() {
+            # direnv needs a .env/.envrc present to activate; create an empty .env
+            # when the repo ships neither. It is not gitignored, so it will show
+            # as untracked.
+            if [[ ! -e .envrc && ! -e .env ]]; then
+              : > .env
+              print -r -- "denv: created empty .env as a direnv trigger"
+            fi
+            mkdir -p .direnv
+            print -r -- "''${1:-use flake}" > .direnv/.flake-env
+            direnv allow
+          }
         '';
       };
 
