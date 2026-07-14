@@ -33,6 +33,7 @@ in
         cmake # Cross-platform build system generator
         clang-tools # clangd LSP + clang-format
         cmake-language-server
+        hunk # Terminal diff viewer for agentic changesets
         kdePackages.qtdeclarative # QML language tooling
         lua-language-server
         nil # Nix LSP
