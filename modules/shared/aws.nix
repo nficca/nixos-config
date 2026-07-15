@@ -7,6 +7,12 @@
 }:
 
 let
+  # steam-run's FHS ships GTK4 but not GTK3, while saml2aws's Playwright-downloaded
+  # Firefox (the ubuntu20.04 fallback build) is linked against libgtk-3.so.0 and
+  # fails to load XPCOM without it. Add gtk3 to the FHS library set explicitly.
+  # https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/st/steam/package.nix
+  steam-run-gtk3 = (pkgs.steam.override { extraLibraries = p: [ p.gtk3 ]; }).run;
+
   # One-shot wrapper for the FOSSA EKS/SAML login.
   #
   # steam-run supplies the FHS environment that saml2aws's Playwright-downloaded
@@ -20,7 +26,7 @@ let
   # https://github.com/Versent/saml2aws/blob/v2.36.19/pkg/provider/browser/browser.go
   aws-login = pkgs.writeShellScriptBin "aws-login" ''
     mkdir -p "$HOME/.aws/saml2aws"
-    exec ${pkgs.steam-run}/bin/steam-run ${pkgs.saml2aws}/bin/saml2aws login \
+    exec ${steam-run-gtk3}/bin/steam-run ${pkgs.saml2aws}/bin/saml2aws login \
       --profile root \
       --region us-west-2 \
       --disable-keychain \
