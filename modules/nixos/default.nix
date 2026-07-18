@@ -25,5 +25,6 @@
     ./vesktop.nix
     ./wayland-tools.nix
     ./wireguard.nix
+    ./xbox-controller.nix
   ];
 }

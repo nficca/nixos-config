@@ -117,6 +117,7 @@
     vesktop.enable = true;
     wayland-tools.enable = true;
     wireguard.enable = true;
+    xbox-controller.enable = true;
   };
 
   # This value determines the NixOS release from which the default
