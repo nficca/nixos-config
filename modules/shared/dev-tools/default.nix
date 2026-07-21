@@ -16,7 +16,6 @@
         clang-tools # clangd LSP + clang-format
         cmake-language-server
         hunk # Terminal diff viewer for agentic changesets
-        herdr # Agent multiplexer that lives in your terminal
         kdePackages.qtdeclarative # QML language tooling
         lua-language-server
         nil # Nix LSP

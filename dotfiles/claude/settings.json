@@ -3,52 +3,38 @@
     "commit": "",
     "pr": ""
   },
-  "editorMode": "vim",
-  "effortLevel": "xhigh",
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "refreshInterval": 10
+  },
   "enabledPlugins": {
-    "analysis-tools@fossa-claude-skills": true,
-    "clangd-lsp@claude-plugins-official": true,
-    "general@nficca-plugins": true,
-    "gopls-lsp@claude-plugins-official": true,
-    "lua-lsp@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "clangd-lsp@claude-plugins-official": true,
     "slack@claude-plugins-official": true,
     "sre-tools@fossa-claude-skills": true,
-    "typescript-lsp@claude-plugins-official": true
+    "analysis-tools@fossa-claude-skills": true,
+    "general@nficca-plugins": true
   },
   "extraKnownMarketplaces": {
     "fossa-claude-skills": {
       "source": {
-        "repo": "fossas/claude-skills",
-        "source": "github"
+        "source": "github",
+        "repo": "fossas/claude-skills"
       }
     },
     "nficca-plugins": {
-      "autoUpdate": true,
       "source": {
-        "repo": "nficca/claude-plugin",
-        "source": "github"
-      }
+        "source": "github",
+        "repo": "nficca/claude-plugin"
+      },
+      "autoUpdate": true
     }
   },
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "command": "bash '/home/nic/.claude/hooks/herdr-agent-state.sh' session",
-            "timeout": 10,
-            "type": "command"
-          }
-        ],
-        "matcher": "*"
-      }
-    ]
-  },
-  "statusLine": {
-    "command": "~/.claude/statusline.sh",
-    "refreshInterval": 10,
-    "type": "command"
-  },
+  "effortLevel": "xhigh",
+  "editorMode": "vim",
   "tui": "fullscreen"
 }
