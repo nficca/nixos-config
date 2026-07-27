@@ -3,6 +3,9 @@
     "commit": "",
     "pr": ""
   },
+  "env": {
+    "CLAUDE_CODE_PLUGIN_PREFER_HTTPS": "1"
+  },
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh",
