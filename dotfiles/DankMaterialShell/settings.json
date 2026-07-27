@@ -27,7 +27,6 @@
   "mangoTrackpadNaturalScrolling": true,
   "firstDayOfWeek": -1,
   "showWeekNumber": false,
-  "use24HourClock": false,
   "showSeconds": true,
   "padHours12Hour": false,
   "useFahrenheit": false,
@@ -296,11 +295,6 @@
   "fadeToDpmsEnabled": true,
   "fadeToDpmsGracePeriod": 5,
   "launchPrefix": "",
-  "brightnessDevicePins": {},
-  "wifiNetworkPins": {},
-  "bluetoothDevicePins": {},
-  "audioInputDevicePins": {},
-  "audioOutputDevicePins": {},
   "gtkThemingEnabled": false,
   "qtThemingEnabled": false,
   "syncModeWithPortal": true,
@@ -392,7 +386,6 @@
   "maxFprintTries": 15,
   "enableU2f": false,
   "u2fMode": "or",
-  "lockScreenActiveMonitor": "all",
   "lockScreenInactiveColor": "#000000",
   "lockScreenNotificationMode": 1,
   "lockScreenVideoEnabled": false,
@@ -661,5 +654,6 @@
   "frameLauncherEmergeSide": "bottom",
   "frameLauncherArcExtender": false,
   "frameMode": "connected",
-  "configVersion": 11
+  "configVersion": 13,
+  "clockFormat": "12h"
 }
