@@ -355,6 +355,13 @@ window-rule {
     open-floating true
 }
 
+// Steam notifications should be in the bottom-right.
+window-rule {
+    match app-id="steam" title="^notification"
+    open-floating true
+    default-floating-position x=8 y=8 relative-to="bottom-right"
+}
+
 // The bluetooth manager that pops up when clicking the blueman icon in the tray
 // should be floating and stick to the top right area.
 window-rule {
