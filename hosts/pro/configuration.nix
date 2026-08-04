@@ -47,6 +47,7 @@
     shell.enable = true;
     starship.enable = true;
     system-packages.enable = true;
+    tailscale.enable = true;
     tmux.enable = true;
     user-packages.enable = true;
     whatsapp.enable = true;

@@ -19,9 +19,10 @@
     ./niri.nix
     ./podman.nix
     ./printing.nix
-    ./server.nix
     ./spotify.nix
+    ./ssh.nix
     ./steam.nix
+    ./tailscale.nix
     ./vesktop.nix
     ./wayland-tools.nix
     ./wireguard.nix

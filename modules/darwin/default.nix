@@ -12,6 +12,7 @@
     ./notion.nix
     ./spotify.nix
     ./steam.nix
+    ./tailscale.nix
     ./whatsapp.nix
   ];
 }

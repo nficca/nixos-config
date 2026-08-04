@@ -109,9 +109,14 @@
     registry.enable = true;
     shell.enable = true;
     spotify.enable = true;
+    ssh = {
+      enable = true;
+      openFirewall = false;
+    };
     starship.enable = true;
     steam.enable = true;
     system-packages.enable = true;
+    tailscale.enable = true;
     tmux.enable = true;
     user-packages.enable = true;
     vesktop.enable = true;

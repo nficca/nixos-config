@@ -60,8 +60,8 @@
     neovim.enable = true;
     networkmanager.enable = true;
     podman.enable = true;
-    server.enable = true;
     shell.enable = true;
+    ssh.enable = true;
     starship.enable = true;
     system-packages.enable = true;
     tmux.enable = true;
