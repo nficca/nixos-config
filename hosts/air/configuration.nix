@@ -51,6 +51,7 @@
     steam.enable = false;
     system-packages.enable = true;
     tmux.enable = true;
+    tailscale.enable = true;
     user-packages.enable = true;
     whatsapp.enable = false;
   };
