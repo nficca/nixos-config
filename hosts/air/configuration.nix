@@ -43,6 +43,7 @@
     fonts.enable = true;
     ghostty.enable = true;
     git.enable = true;
+    herdr.enable = true;
     mullvad.enable = true;
     neovim.enable = true;
     registry.enable = true;

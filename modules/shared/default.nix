@@ -5,6 +5,7 @@
     ./dev-tools
     ./direnv.nix
     ./git.nix
+    ./herdr.nix
     ./kubernetes.nix
     ./mullvad-browser.nix
     ./neovim.nix

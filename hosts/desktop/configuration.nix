@@ -87,6 +87,7 @@
     ghostty.enable = true;
     git.enable = true;
     gtk-theme.enable = true;
+    herdr.enable = true;
     ktorrent.enable = true;
     kubernetes.enable = true;
     mpv.enable = true;

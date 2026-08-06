@@ -40,6 +40,7 @@
     fonts.enable = true;
     ghostty.enable = true;
     git.enable = true;
+    herdr.enable = true;
     kubernetes.enable = true;
     neovim.enable = true;
     notion.enable = true;

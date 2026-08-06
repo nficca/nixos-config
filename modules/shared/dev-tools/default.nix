@@ -15,7 +15,6 @@
         cmake # Cross-platform build system generator
         clang-tools # clangd LSP + clang-format
         cmake-language-server
-        herdr # Agent multiplexer that lives in your terminal
         hunk # Terminal diff viewer for agentic changesets
         kdePackages.qtdeclarative # QML language tooling
         lua-language-server

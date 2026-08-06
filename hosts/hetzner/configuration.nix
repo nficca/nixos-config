@@ -57,6 +57,7 @@
     direnv.enable = true;
     fonts.enable = true;
     git.enable = true;
+    herdr.enable = true;
     neovim.enable = true;
     networkmanager.enable = true;
     podman.enable = true;
