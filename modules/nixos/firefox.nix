@@ -15,12 +15,26 @@ let
 
   firefox-profile-handler = pkgs.writeShellApplication {
     name = "firefox-profile-handler";
-    runtimeInputs = [ pkgs.jq ];
+    # Take niri from the compositor's own package: `niri msg` and the running
+    # compositor have to agree on the IPC schema.
+    runtimeInputs = [
+      pkgs.jq
+      config.programs.niri.package
+    ];
     text = ''
       # Open links in whichever profile you used last: ask niri for the most
       # recently focused Firefox window and reuse the `-P` it was launched with.
       URL="''${1:-}"
       FIREFOX_ARGS=()
+
+      # Replace a stale inherited NIRI_SOCKET with the live one. The variable
+      # comes from the process that opened the link, which may predate the
+      # current niri session; without this the query below fails and the link
+      # lands in the default profile no matter which one was focused.
+      if [ ! -S "''${NIRI_SOCKET:-}" ]; then
+        NIRI_SOCKET=$(find "/run/user/$(id -u)" -maxdepth 1 -type s -name 'niri.*.sock' 2>/dev/null | head -n1)
+        export NIRI_SOCKET
+      fi
 
       if LAST_PID=$(niri msg -j windows 2>/dev/null \
         | jq -r '
@@ -35,6 +49,12 @@ let
             FIREFOX_ARGS+=(-P "$PROFILE")
           fi
         fi
+      fi
+
+      # With no `-P`, firefox opens the default profile, so a failed lookup is
+      # invisible. Log it (`journalctl --user`).
+      if [ ''${#FIREFOX_ARGS[@]} -eq 0 ]; then
+        echo "firefox-profile-handler: could not determine the last-focused profile, using default" >&2
       fi
 
       [ -n "$URL" ] && FIREFOX_ARGS+=("$URL")
