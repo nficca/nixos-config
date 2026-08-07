@@ -120,7 +120,7 @@
     tailscale.enable = true;
     tmux.enable = true;
     user-packages.enable = true;
-    vesktop.enable = true;
+    discord.enable = true;
     wayland-tools.enable = true;
     wireguard.enable = true;
     xbox-controller.enable = true;

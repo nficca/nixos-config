@@ -23,7 +23,7 @@
     ./ssh.nix
     ./steam.nix
     ./tailscale.nix
-    ./vesktop.nix
+    ./discord.nix
     ./wayland-tools.nix
     ./wireguard.nix
     ./xbox-controller.nix
