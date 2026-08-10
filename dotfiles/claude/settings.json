@@ -20,7 +20,8 @@
     "slack@claude-plugins-official": true,
     "sre-tools@fossa-claude-skills": true,
     "analysis-tools@fossa-claude-skills": true,
-    "general@nficca-plugins": true
+    "general@nficca-plugins": true,
+    "fossa@nficca-plugins": true
   },
   "extraKnownMarketplaces": {
     "fossa-claude-skills": {
@@ -37,6 +38,13 @@
       "autoUpdate": true
     }
   },
+  "permissions": {
+    "additionalDirectories": [
+      "/home/nic/dev/fossas",
+      "/home/nic/dev/nficca/fossa-tickets"
+    ]
+  },
+  "autoMemoryDirectory": "~/.claude/memory",
   "effortLevel": "xhigh",
   "editorMode": "vim",
   "tui": "fullscreen"
