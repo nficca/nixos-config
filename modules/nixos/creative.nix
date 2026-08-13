@@ -8,6 +8,27 @@
 
 let
   cfg = config.myModules.creative;
+
+  # fmt 12.2 no longer exposes fmt::format through fmt/core.h.
+  # https://github.com/NixOS/nixpkgs/issues/552132
+  #
+  # Fixed on nixpkgs master but not yet in nixpkgs-unstable:
+  # https://github.com/NixOS/nixpkgs/pull/552085
+  #
+  # The warning is a recheck prompt. If a newer aseprite still needs this,
+  # bump the version in the condition.
+  aseprite =
+    lib.warnIf
+      (pkgs.aseprite.version != "1.3.18.1" || lib.hasInfix "fmt/format.h" pkgs.aseprite.postPatch)
+      "recheck whether the aseprite fmt override in modules/nixos/creative.nix is still needed"
+      (
+        pkgs.aseprite.overrideAttrs (old: {
+          postPatch = old.postPatch + ''
+            substituteInPlace src/app/i18n/strings.h \
+              --replace-fail '"fmt/core.h"' '"fmt/format.h"'
+          '';
+        })
+      );
 in
 {
   options.myModules.creative = {
@@ -20,7 +41,7 @@ in
 
   config = lib.mkMerge [
     (lib.mkIf cfg.aseprite.enable {
-      home-manager.users.${username}.home.packages = [ pkgs.aseprite ];
+      home-manager.users.${username}.home.packages = [ aseprite ];
     })
 
     (lib.mkIf cfg.ldtk.enable {
