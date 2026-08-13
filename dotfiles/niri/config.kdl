@@ -359,6 +359,7 @@ window-rule {
 window-rule {
     match app-id="steam" title="^notification"
     open-floating true
+    open-focused false
     default-floating-position x=8 y=8 relative-to="bottom-right"
 }
 
