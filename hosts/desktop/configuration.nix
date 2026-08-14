@@ -122,6 +122,7 @@
     tmux.enable = true;
     user-packages.enable = true;
     discord.enable = true;
+    voxtype.enable = true;
     wayland-tools.enable = true;
     wireguard.enable = true;
     xbox-controller.enable = true;

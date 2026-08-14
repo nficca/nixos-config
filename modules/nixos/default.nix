@@ -24,6 +24,7 @@
     ./steam.nix
     ./tailscale.nix
     ./discord.nix
+    ./voxtype.nix
     ./wayland-tools.nix
     ./wireguard.nix
     ./xbox-controller.nix
