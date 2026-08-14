@@ -9,6 +9,7 @@
     ./kubernetes.nix
     ./mullvad-browser.nix
     ./neovim.nix
+    ./opencode.nix
     ./postgres-cli.nix
     ./prismlauncher.nix
     ./registry.nix

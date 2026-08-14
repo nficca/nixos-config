@@ -100,6 +100,7 @@
       applet.enable = true;
     };
     niri.enable = true;
+    opencode.enable = true;
     podman = {
       enable = true;
       compose.enable = true;
