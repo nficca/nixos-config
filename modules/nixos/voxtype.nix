@@ -14,12 +14,6 @@ in
   options.myModules.voxtype.enable = lib.mkEnableOption "voxtype push-to-talk voice typing daemon (Vulkan-accelerated whisper)";
 
   config = lib.mkIf config.myModules.voxtype.enable {
-    # voxtype watches /dev/input directly for its push-to-talk key, which needs
-    # the input group. That evdev listener is also what makes hold-to-talk
-    # possible under niri, which has no key-release binds.
-    # See: https://github.com/niri-wm/niri/blob/main/docs/wiki/Configuration:-Key-Bindings.md
-    users.users.${username}.extraGroups = [ "input" ];
-
     home-manager.users.${username} =
       { config, ... }:
       {

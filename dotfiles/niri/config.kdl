@@ -424,6 +424,8 @@ binds {
     Mod+D hotkey-overlay-title="Run an Application: DMS Spotlight" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: DMS" { spawn "dms" "ipc" "call" "lock" "lock"; }
 
+    Scroll_Lock repeat=false hotkey-overlay-title="Toggle Voice Typing: voxtype" { spawn "voxtype" "record" "toggle"; }
+
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
