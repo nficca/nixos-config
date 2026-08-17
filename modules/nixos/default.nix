@@ -7,6 +7,7 @@
     ./creative.nix
     ./dank-material-shell.nix
     ./dropbox.nix
+    ./earlyoom.nix
     ./firefox.nix
     ./fonts.nix
     ./ghostty.nix
@@ -28,5 +29,6 @@
     ./wayland-tools.nix
     ./wireguard.nix
     ./xbox-controller.nix
+    ./zram.nix
   ];
 }

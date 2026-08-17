@@ -79,6 +79,7 @@
     dev-tools.enable = true;
     direnv.enable = true;
     dropbox.enable = true;
+    earlyoom.enable = true;
     firefox = {
       enable = true;
       profileHandler.enable = true;
@@ -126,6 +127,7 @@
     wayland-tools.enable = true;
     wireguard.enable = true;
     xbox-controller.enable = true;
+    zram.enable = true;
   };
 
   # This value determines the NixOS release from which the default
