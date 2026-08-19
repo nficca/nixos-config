@@ -65,7 +65,6 @@
     ssh.enable = true;
     starship.enable = true;
     system-packages.enable = true;
-    tmux.enable = true;
     user-packages.enable = true;
   };
 
