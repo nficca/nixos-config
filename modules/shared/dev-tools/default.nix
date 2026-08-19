@@ -26,7 +26,7 @@
         typescript-language-server
         vscode-langservers-extracted # HTML/CSS/JSON/ESLint LSPs
       ])
-      ++ lib.optionals pkgs.stdenv.isLinux (
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux (
         with pkgs;
         [
           heaptrack # Heap memory profiler

@@ -19,7 +19,7 @@
         vim # Text editor
         wget # Network file downloader
       ])
-      ++ lib.optionals pkgs.stdenv.isLinux (with pkgs; [
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux (with pkgs; [
         file # Show the type of a file
         gcc # GNU compiler collection
         musl # Better libc implementation
