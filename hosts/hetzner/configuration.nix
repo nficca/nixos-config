@@ -40,6 +40,11 @@
   # See: https://github.com/Mic92/envfs
   services.envfs.enable = true;
 
+  # journald's default cap is 10% of the disk, more log than this box needs.
+  services.journald.extraConfig = ''
+    SystemMaxUse=500M
+  '';
+
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
 
