@@ -67,7 +67,8 @@ in
     enable = lib.mkEnableOption "Firefox via Home Manager with declarative default and work profiles";
 
     profileHandler.enable = lib.mkEnableOption ''
-      a URL handler that opens links in the most recently focused Firefox profile.
+      a handler that opens links and local HTML files in the most recently
+      focused Firefox profile.
       Requires niri as the compositor (uses `niri msg` to query window focus).
     '';
   };
@@ -105,7 +106,10 @@ in
 
           # Pin the app launcher to the default profile; bare `firefox` is not
           # deterministic with more than one profile. `--name firefox` sets the
-          # wayland app-id that the niri window rules key on.
+          # wayland app-id that the niri window rules key on. This entry shadows
+          # the one shipped in the firefox package, so it has to repeat that
+          # entry's mime types or Firefox stops counting as a handler for web
+          # content and drops out of every "open with" list.
           xdg.desktopEntries.firefox = {
             name = "Firefox";
             exec = "firefox -P default --name firefox %U";
@@ -114,6 +118,14 @@ in
             categories = [
               "Network"
               "WebBrowser"
+            ];
+            mimeType = [
+              "text/html"
+              "text/xml"
+              "application/xhtml+xml"
+              "application/vnd.mozilla.xul+xml"
+              "x-scheme-handler/http"
+              "x-scheme-handler/https"
             ];
           };
 
@@ -137,6 +149,8 @@ in
           defaultApplications = {
             "x-scheme-handler/http" = "firefox-profile-handler.desktop";
             "x-scheme-handler/https" = "firefox-profile-handler.desktop";
+            "text/html" = "firefox-profile-handler.desktop";
+            "application/xhtml+xml" = "firefox-profile-handler.desktop";
           };
         };
 
@@ -148,6 +162,8 @@ in
           mimeType = [
             "x-scheme-handler/http"
             "x-scheme-handler/https"
+            "text/html"
+            "application/xhtml+xml"
           ];
         };
       };
