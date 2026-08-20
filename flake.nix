@@ -61,6 +61,12 @@
       url = "git+ssh://git@github.com/nficca/my-nix-minecraft.git?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # My web app for planning which films to see at TIFF.
+    tiff-planner = {
+      url = "git+ssh://git@github.com/nficca/tiff-planner.git?ref=main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -75,6 +81,7 @@
       dms,
       dms-plugin-registry,
       my-nix-minecraft,
+      tiff-planner,
       ...
     }:
     let
@@ -107,6 +114,7 @@
 
             dms.nixosModules.greeter
             my-nix-minecraft.nixosModules.default
+            tiff-planner.nixosModules.default
 
             # Configure home-manager as a module so that it is applied
             # whenever system configuration changes are applied. Modules in

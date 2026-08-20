@@ -89,5 +89,17 @@
     };
   };
 
+  # Listens on loopback; nginx.nix answers publicly. The environmentFile has to
+  # exist on the box before a rebuild, or the unit fails to start.
+  services.tiff-planner = {
+    enable = true;
+    baseUrl = "https://tiff.nicficca.com";
+    smtpHost = "smtp.resend.com";
+    smtpUsername = "resend";
+    mailFrom = "TIFF planner <noreply@tiff.nicficca.com>";
+    mailReplyTo = "nicficca@gmail.com";
+    environmentFile = "/var/lib/secrets/tiff-planner.env";
+  };
+
   system.stateVersion = "25.05";
 }
