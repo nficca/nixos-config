@@ -24,3 +24,15 @@ rows = [
 
 [ui.toast]
 delivery = "herdr"
+
+[keys]
+focus_pane_left = ["prefix+h", "ctrl+alt+h", "ctrl+alt+left"]
+focus_pane_down = ["prefix+j", "ctrl+alt+j", "ctrl+alt+down"]
+focus_pane_up = ["prefix+k", "ctrl+alt+k", "ctrl+alt+up"]
+focus_pane_right = ["prefix+l", "ctrl+alt+l", "ctrl+alt+right"]
+previous_tab = ["prefix+p", "ctrl+alt+["]
+next_tab = ["prefix+n", "ctrl+alt+]"]
+new_tab = ["prefix+c", "ctrl+alt+c"]
+split_vertical = ["prefix+v", "ctrl+alt+d"]
+split_horizontal = ["prefix+minus", "ctrl+alt+shift+d"]
+zoom = ["prefix+z", "ctrl+alt+z"]
