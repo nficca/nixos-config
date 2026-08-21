@@ -65,6 +65,19 @@ return {
       cmd = { "qmlls", "-E" }
     })
 
+    -- nvim-lspconfig's default filetypes for hls are { "haskell", "lhaskell" };
+    -- setting this key replaces rather than extends that default, so cabal
+    -- must be listed alongside the other two to pick up .cabal files.
+    vim.lsp.config("hls", {
+      filetypes = { "haskell", "lhaskell", "cabal" },
+      settings = {
+        haskell = {
+          formattingProvider = "fourmolu",
+          cabalFormattingProvider = "cabal-fmt",
+        },
+      },
+    })
+
     -- ron-lsp ships no built-in nvim-lspconfig entry, so define it in full.
     -- See: https://github.com/jasonjmcghee/ron-lsp
     vim.lsp.config("ron_lsp", {
@@ -98,6 +111,7 @@ return {
       "eslint",
       "golangci_lint_ls",
       "gopls",
+      "hls",
       "html",
       "jsonls",
       "lua_ls",

@@ -33,6 +33,7 @@ in
               cpp
               css
               go
+              haskell
               html
               javascript
               json
