@@ -378,11 +378,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1787188598,
-        "narHash": "sha256-GzGHW2Qt/qiDgMXpNwTUheY/oIWw+DhtJyUsoG2H8JI=",
+        "lastModified": 1787406588,
+        "narHash": "sha256-jSlwkXvq5EaDOQBn2rW3TrDVy2c7Curz+N8UTNu6ASU=",
         "ref": "main",
-        "rev": "21dd5d4f201e867c79683cb6058e51249005380f",
-        "revCount": 67,
+        "rev": "8af697669281751192b99b1ab2f27e46bbde0ffd",
+        "revCount": 70,
         "type": "git",
         "url": "ssh://git@github.com/nficca/tiff-planner.git"
       },
